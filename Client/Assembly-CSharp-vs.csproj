@@ -5,7 +5,7 @@
 	<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
 	<ProductVersion>10.0.20506</ProductVersion>
 	<SchemaVersion>2.0</SchemaVersion>
-	<ProjectGuid>{EE0FF2BC-E1AA-E065-B058-C2B9EA0CF3D9}</ProjectGuid>
+	<ProjectGuid>{12F44184-A422-5F27-22E6-507969043F15}</ProjectGuid>
 	<OutputType>Library</OutputType>
 	<AppDesignerFolder>Properties</AppDesignerFolder>
 	<RootNamespace></RootNamespace>
@@ -47,20 +47,21 @@
      <Compile Include="Assets\Scripts\AssetBundleLoader.cs" />
      <Compile Include="Assets\Scripts\BundleLoader.cs" />
      <Compile Include="Assets\Scripts\CameraFreeMove.cs" />
+     <Compile Include="Assets\Scripts\ItemSelect.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
      <Compile Include="Assets\Scripts\ObjectLabel.cs" />
+     <Compile Include="Assets\Scripts\SpawnCubes.cs" />
      <Compile Include="Assets\Scripts\StartTextClicked.cs" />
      <Compile Include="Assets\Scripts\StopTextClicked.cs" />
      <Compile Include="Assets\Scripts\guiTextOnMouseOver.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
-     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass-vs.csproj">
-      <Project>{5D9759CB-22BF-6472-7278-FA4A2A13BCE9}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
+      <Project>{079D398E-4AFC-CD7E-7881-F923D075EBD1}</Project>      <Name>Assembly-CSharp-firstpass-vs</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

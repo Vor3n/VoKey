@@ -1,0 +1,20 @@
+Trying to change property 'svn:ignore'
+but the local property value conflicts with the incoming change.
+Local property value:
+Library
+*.user
+*.suo
+Temp
+obj
+*.userprefs
+*.pidb
+
+Incoming property value:
+Library
+*.user
+*.suo
+Temp
+obj
+*.userprefs
+*.pidb
+
