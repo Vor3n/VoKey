@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b751a39dc2b2db14896ec8af95a36c15, type: 3}
   m_Name: 
-  level: level1
+  level: FindItems
 --- !u!132 &692912225
 GUIText:
   m_ObjectHideFlags: 0
