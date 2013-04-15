@@ -49,7 +49,9 @@
      <Compile Include="Assets\Scripts\CameraFreeMove.cs" />
      <Compile Include="Assets\Scripts\ItemSelect.cs" />
      <Compile Include="Assets\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\MouseOvers.cs" />
      <Compile Include="Assets\Scripts\ObjectLabel.cs" />
+     <Compile Include="Assets\Scripts\ObjectiveList.cs" />
      <Compile Include="Assets\Scripts\SpawnCubes.cs" />
      <Compile Include="Assets\Scripts\StartTextClicked.cs" />
      <Compile Include="Assets\Scripts\StopTextClicked.cs" />
