@@ -18,7 +18,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_0_1;UNITY_4_0;UNITY_STANDALONE_WIN;ENABLE_PROFILER;UNITY_EDITOR;UNITY_TEAM_LICENSE</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_IMAGEEFFECTS;ENABLE_WEBCAM;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_NETWORK;ENABLE_MONO;ENABLE_PHYSICS;ENABLE_TERRAIN;ENABLE_CACHING;ENABLE_SUBSTANCE;ENABLE_GENERICS;ENABLE_CLOTH;ENABLE_MOVIES;ENABLE_AUDIO;ENABLE_WWW;ENABLE_SHADOWS;ENABLE_DUCK_TYPING;UNITY_4_1_0;UNITY_4_1;ENABLE_PROFILER;UNITY_EDITOR;UNITY_TEAM_LICENSE</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -44,18 +44,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AssetBundleLoader.cs" />
-     <Compile Include="Assets\Scripts\BundleLoader.cs" />
-     <Compile Include="Assets\Scripts\CameraFreeMove.cs" />
-     <Compile Include="Assets\Scripts\ItemSelect.cs" />
-     <Compile Include="Assets\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\Assets\AssetBundleLoader.cs" />
+     <Compile Include="Assets\Scripts\Assets\BundleLoader.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraFreeMove.cs" />
+     <Compile Include="Assets\Scripts\Camera\MouseLook.cs" />
+     <Compile Include="Assets\Scripts\Findable\FindableAnimation.cs" />
+     <Compile Include="Assets\Scripts\Interface\CreateObjectiveList.cs" />
+     <Compile Include="Assets\Scripts\Menu\GuiTextOnMouseOver.cs" />
+     <Compile Include="Assets\Scripts\Menu\StartTextClicked.cs" />
+     <Compile Include="Assets\Scripts\Menu\StopTextClicked.cs" />
      <Compile Include="Assets\Scripts\MouseOvers.cs" />
      <Compile Include="Assets\Scripts\ObjectLabel.cs" />
-     <Compile Include="Assets\Scripts\ObjectiveList.cs" />
-     <Compile Include="Assets\Scripts\SpawnCubes.cs" />
-     <Compile Include="Assets\Scripts\StartTextClicked.cs" />
-     <Compile Include="Assets\Scripts\StopTextClicked.cs" />
-     <Compile Include="Assets\Scripts\guiTextOnMouseOver.cs" />
+     <Compile Include="Assets\Scripts\Room\SpawnCubes.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
