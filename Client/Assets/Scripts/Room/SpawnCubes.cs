@@ -55,9 +55,9 @@ public class SpawnCubes : MonoBehaviour
 				cube.AddComponent<Animation> ();
 				
 				
-				AnimationClip clips = Resources.Load("myanim", typeof (AnimationClip)) as AnimationClip;
+				AnimationClip clips = Resources.Load("FindableClicked", typeof (AnimationClip)) as AnimationClip;
 				if ( ! clips){
-					Debug.LogError("The Clip 'myanim' could not be loaded as AnimationClip");
+                    Debug.LogError("The Clip 'FindableClicked' could not be loaded as AnimationClip");
 				}
 				else {
 					cube.animation.AddClip(clips, clips.name);
