@@ -42,20 +42,20 @@ public class AddRowButtonPress : MonoBehaviour {
 				cube.transform.position = new Vector3 (offset, 2, zoffset);
 
 				// Add the itembehaviour script
-				cube.AddComponent<ItemSelect> ();
+                cube.AddComponent<FindableAnimaton>();
 				cube.AddComponent<Animation> ();
 				
 				
-				AnimationClip clips = Resources.Load("myanim", typeof (AnimationClip)) as AnimationClip;
+				AnimationClip clips = Resources.Load("FindableClicked", typeof (AnimationClip)) as AnimationClip;
 				if ( ! clips){
-					Debug.LogError("The Clip 'myanim' could not be loaded as AnimationClip");
+                    Debug.LogError("The Clip 'FindableClicked' could not be loaded as AnimationClip");
 				}
 				else {
 					cube.animation.AddClip(clips, clips.name);
 					Debug.Log("Added clip to cube");
 				}
-				
-				ItemSelect currentItem = cube.GetComponent<ItemSelect>();
+
+                FindableAnimaton currentItem = cube.GetComponent<FindableAnimaton>();
 				currentItem.findable = true;
 				
 			}
