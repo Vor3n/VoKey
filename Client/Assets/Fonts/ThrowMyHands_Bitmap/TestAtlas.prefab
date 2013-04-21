@@ -93,24 +93,6 @@ MonoBehaviour:
     paddingRight: .00392156886
     paddingTop: 0
     paddingBottom: .79020977
-  - name: slicebox 1
-    outer:
-      serializedVersion: 2
-      x: 903
-      y: 962
-      width: 62
-      height: 62
-    inner:
-      serializedVersion: 2
-      x: 913
-      y: 972
-      width: 42
-      height: 42
-    rotated: 0
-    paddingLeft: .0161290318
-    paddingRight: .0161290318
-    paddingTop: .0161290318
-    paddingBottom: .0161290318
   - name: throwyourpng_48_0
     outer:
       serializedVersion: 2
@@ -129,6 +111,42 @@ MonoBehaviour:
     paddingRight: .00195694715
     paddingTop: 0
     paddingBottom: .753424644
+  - name: slicebox_2
+    outer:
+      serializedVersion: 2
+      x: 903
+      y: 899
+      width: 62
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 913
+      y: 909
+      width: 42
+      height: 42
+    rotated: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: slicebox 1
+    outer:
+      serializedVersion: 2
+      x: 903
+      y: 962
+      width: 62
+      height: 62
+    inner:
+      serializedVersion: 2
+      x: 913
+      y: 972
+      width: 42
+      height: 42
+    rotated: 0
+    paddingLeft: .0161290318
+    paddingRight: .0161290318
+    paddingTop: .0161290318
+    paddingBottom: .0161290318
   mCoordinates: 0
   mPixelSize: 1
   mReplacement: {fileID: 0}
