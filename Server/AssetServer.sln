@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetServer", "AssetServer\AssetServer.csproj", "{756A6462-9C11-422F-9A79-C44C975E4E10}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AssetServerGui", "AssetServerGui\AssetServerGui.csproj", "{42114632-7DEA-4290-8253-B53B45189197}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{756A6462-9C11-422F-9A79-C44C975E4E10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756A6462-9C11-422F-9A79-C44C975E4E10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756A6462-9C11-422F-9A79-C44C975E4E10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756A6462-9C11-422F-9A79-C44C975E4E10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{42114632-7DEA-4290-8253-B53B45189197}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{42114632-7DEA-4290-8253-B53B45189197}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{42114632-7DEA-4290-8253-B53B45189197}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{42114632-7DEA-4290-8253-B53B45189197}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
