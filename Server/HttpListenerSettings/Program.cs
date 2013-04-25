@@ -11,7 +11,6 @@ namespace HttpListenerSettings
         static void Main(string[] _args)
         {
             args = _args;
-            Console.WriteLine("number of arguments: " + args.Length);
             if (args.Length == 1)
             {
                 bool validNumber = int.TryParse(args[0], out port);
@@ -46,6 +45,9 @@ namespace HttpListenerSettings
             
         }
 
+        /// <summary>
+        /// Prints the usage of this tool and then exits the program using Environment.Exit(0).
+        /// </summary>
         private static void printUsageAndExit()
         {
             Console.WriteLine("HttpListenerSettingsTool v1.0.0.1" + Environment.NewLine + 
@@ -57,6 +59,9 @@ namespace HttpListenerSettings
             Environment.Exit(0);
         }
 
+        /// <summary>
+        /// Asks the user for permission and then indicates whether the user wants to elevate the tool.
+        /// </summary>
         private static bool UserWantsElevation 
         {
             get
@@ -67,6 +72,10 @@ namespace HttpListenerSettings
             }
         }
 
+        /// <summary>
+        /// Runs the netsh command to add a listener to a port.
+        /// </summary>
+        /// <param name="port"></param>
         private static void setNetShHttpListeningPort(int port)
         {
             string command = "http add urlacl url=http://+:" + port + "/ user=" + Environment.GetEnvironmentVariable("USERNAME");
@@ -78,6 +87,10 @@ namespace HttpListenerSettings
             Console.WriteLine("Ran command: " + command);
         }
 
+        /// <summary>
+        /// Runs the netsh command to remove a listener from a port.
+        /// </summary>
+        /// <param name="port"></param>
         private static void removeNetShHttpListeningPort(int port)
         {
             string command = "http delete urlacl url=http://+:" + port + "/";
@@ -89,6 +102,9 @@ namespace HttpListenerSettings
             Console.WriteLine("Ran command: " + command);
         }
 
+        /// <summary>
+        /// Indicates whether the program is running elevated.
+        /// </summary>
         private static bool IsElevated
         {
             get
@@ -99,6 +115,9 @@ namespace HttpListenerSettings
             }
         }
 
+        /// <summary>
+        /// Elevates the currently running program by restarting it with verb = "runas"
+        /// </summary>
         private static void Elevate()
         {
             string s;
