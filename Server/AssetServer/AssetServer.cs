@@ -1,11 +1,9 @@
 ﻿using AssetServer.Entities;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.Configuration;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace AssetServer
 {
@@ -38,7 +36,7 @@ namespace AssetServer
 
         public void Start()
         {
-            ws = new WebServer(SendResponse, "http://localhost:8080/index/");
+            ws = new WebServer(SendResponse, "http://+:8080/");
             ws.Run();
         }
         /// <summary>
@@ -76,7 +74,12 @@ namespace AssetServer
                     case "rooms":
                         return Encoding.UTF8.GetBytes(getInstance().serializeAllRooms());
                     default:
-                        return Encoding.UTF8.GetBytes(string.Format("<HTML><BODY>File Not Found<br>" + DateTime.Now.ToShortTimeString() + " {0}</BODY></HTML>", DateTime.Now));
+                        Guid g;
+                        if (Guid.TryParseExact(requestPieces[requestPieces.Length - 1], ConfigurationManager.AppSettings["GuidFormatForWebService"], out g))
+                        {
+                              
+                        }
+                        return Encoding.UTF8.GetBytes(string.Format("<HTML><BODY>File not found or invalid GUID specified.<br></BODY></HTML>"));
                 }
                
             }
