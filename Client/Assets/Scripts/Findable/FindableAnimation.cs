@@ -35,7 +35,7 @@ public class FindableAnimaton : MonoBehaviour
 			}
 		}
 		if ( readyToAnim){
-			animation.Play("FindableClicked");
+			animation.Play("myanim");
 			readyToAnim = false;
 		}
 	}

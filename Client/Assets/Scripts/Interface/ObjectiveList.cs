@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class CreateObjectiveList : MonoBehaviour {
+public class ObjectiveList : MonoBehaviour {
 	
-	private GUIText[] TextList;
+	private UILabel[] TextList;
 	public string Header;
 	public int HeaderSize;
 	public int ObjectiveSize;
@@ -14,7 +14,7 @@ public class CreateObjectiveList : MonoBehaviour {
 	
 	public string[] Objectives;
 
-	public Font font;
+	public UIFont font;
 	
 	
 	// Use this for initialization
@@ -25,13 +25,14 @@ public class CreateObjectiveList : MonoBehaviour {
 		
 		GameObject go = new GameObject("ListHeader");
 		
-    	GUIText GTHeader =  (GUIText)go.AddComponent(typeof(GUIText));
+    	UILabel GTHeader =  (UILabel)go.AddComponent(typeof(UILabel));
     	GTHeader.text = Header;
 		GTHeader.transform.parent = this.transform;
 		GTHeader.font = font;
+		GTHeader.depth = 3;
 		
-		GTHeader.transform.localPosition = new Vector3(0f, 1.29f, 1f);
-		GTHeader.fontSize = HeaderSize;
+		GTHeader.transform.localPosition = new Vector3(100f, -50f, 1f);
+		GTHeader.transform.localScale = new Vector3( HeaderSize , HeaderSize , 0);
 		
 		 string []Objectivess = new string[10];
 		Objectivess[0] = "Never";
@@ -65,7 +66,7 @@ public class CreateObjectiveList : MonoBehaviour {
 	{
 		
 		Objectives = ItemsToFind;
-		TextList = new GUIText[Objectives.Length];
+		TextList = new UILabel[Objectives.Length];
 		CreateTexts();
 		
 	}
@@ -77,7 +78,7 @@ public class CreateObjectiveList : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateTexts();
-		Debug.Log("" + RemoveItem("You"));
+		//Debug.Log("" + RemoveItem("You"));
 		
 	}
 	
@@ -91,14 +92,14 @@ public class CreateObjectiveList : MonoBehaviour {
 		{
 			GameObject go = new GameObject(i + "Item");
 		
-    		GUIText GTHeader =  (GUIText)go.AddComponent(typeof(GUIText));
+    		UILabel GTHeader =  (UILabel)go.AddComponent(typeof(UILabel));
 			GTHeader.transform.parent = this.transform;
 			GTHeader.font = font;
-		
+			GTHeader.depth = 3;
 	    	float yPos = StartY + (-i * VerticalGap);
-			GTHeader.transform.localPosition = new Vector3(0f, yPos, 1f);
-			GTHeader.fontSize = ObjectiveSize;
-		
+			GTHeader.transform.localPosition = new Vector3(100f, yPos, 1f);
+			
+		GTHeader.transform.localScale = new Vector3( ObjectiveSize , ObjectiveSize , 0);
 			TextList[i] = GTHeader;
 		}
 		
@@ -119,7 +120,7 @@ public class CreateObjectiveList : MonoBehaviour {
 				text = "";	
 			}
 				
-			GUIText GT = TextList[i];
+			UILabel GT = TextList[i];
 			GT.text = text;
 			
 		}
