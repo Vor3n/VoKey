@@ -77,7 +77,7 @@ public class CreateObjectiveList : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		UpdateTexts();
-		Debug.Log("" + RemoveItem("You"));
+		//Debug.Log("" + RemoveItem("You"));
 		
 	}
 	
