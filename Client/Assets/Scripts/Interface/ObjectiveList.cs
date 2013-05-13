@@ -19,10 +19,6 @@ public class ObjectiveList : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
-		
-		
-		
 		GameObject go = new GameObject("ListHeader");
 		
     	UILabel GTHeader =  (UILabel)go.AddComponent(typeof(UILabel));

@@ -32,22 +32,10 @@ public class CreateObjectiveList : MonoBehaviour {
 		
 		GTHeader.transform.localPosition = new Vector3(0f, 1.29f, 1f);
 		GTHeader.fontSize = HeaderSize;
-		
-		 string []Objectivess = new string[10];
-		Objectivess[0] = "Never";
-		Objectivess[1] = "Gonna";
-		Objectivess[2] = "Give";
-		Objectivess[3] = "You";
-		Objectivess[4] = "Up";
-		Objectivess[5] = "nEver";
-		Objectivess[6] = "GoNNa";
-		Objectivess[7] = "Let";
-		Objectivess[8] = "U";
-		Objectivess[9] = "Down";
-		
-		Init(Objectivess);
-		
-	
+
+        if (Objectives == null)
+            throw new UnityException("No items in the list!");
+		else Init(Objectives);
 	}
 	
 	void OnGUI(){
@@ -90,10 +78,11 @@ public class CreateObjectiveList : MonoBehaviour {
 		for (int i =0; i< AmountToDisplay; i++)
 		{
 			GameObject go = new GameObject(i + "Item");
-		
+            go.layer = LayerMask.NameToLayer("NGUI");
     		GUIText GTHeader =  (GUIText)go.AddComponent(typeof(GUIText));
 			GTHeader.transform.parent = this.transform;
 			GTHeader.font = font;
+            
 		
 	    	float yPos = StartY + (-i * VerticalGap);
 			GTHeader.transform.localPosition = new Vector3(0f, yPos, 1f);
