@@ -2,39 +2,31 @@ using UnityEngine;
 using System.Collections;
 
 public class CreateObjectiveList : MonoBehaviour {
-	
-	private GUIText[] TextList;
+
+    private UILabel[] TextList;
 	public string Header;
-	public int HeaderSize;
-	public int ObjectiveSize;
-	public float StartY = 1f;
 	public float VerticalGap = 0.5f;
 	public int AmountToDisplay = 5;
-	
-	
+    public Vector2 textOffset = Vector2.one;
+    public UIFont HeaderFont;
+    public UIFont ListItemFont;
+    private int itemDepthIndex = 10;
 	public string[] Objectives;
-
-	public Font font;
 	
 	
 	// Use this for initialization
 	void Start () {
-		
-		
-		
-		
 		GameObject go = new GameObject("ListHeader");
-		
-    	GUIText GTHeader =  (GUIText)go.AddComponent(typeof(GUIText));
-    	GTHeader.text = Header;
-		GTHeader.transform.parent = this.transform;
-		GTHeader.font = font;
-		
-		GTHeader.transform.localPosition = new Vector3(0f, 1.29f, 1f);
-		GTHeader.fontSize = HeaderSize;
-
-        if (Objectives == null)
-            throw new UnityException("No items in the list!");
+        go.layer = LayerMask.NameToLayer("NGUI");
+        UILabel objectivesListHeaderLabel = (UILabel)go.AddComponent(typeof(UILabel));
+        objectivesListHeaderLabel.pivot = UIWidget.Pivot.TopLeft;
+        objectivesListHeaderLabel.depth = itemDepthIndex - 1;
+    	objectivesListHeaderLabel.text = Header;
+		objectivesListHeaderLabel.transform.parent = this.transform;
+        objectivesListHeaderLabel.font = HeaderFont;
+		objectivesListHeaderLabel.transform.localPosition = new Vector3(textOffset.x, 1.29f, 1f);
+        objectivesListHeaderLabel.MakePixelPerfect();
+        if (Objectives == null) throw new UnityException("No items in the list!");
 		else Init(Objectives);
 	}
 	
@@ -53,9 +45,9 @@ public class CreateObjectiveList : MonoBehaviour {
 	{
 		
 		Objectives = ItemsToFind;
-		TextList = new GUIText[Objectives.Length];
+        TextList = new UILabel[Objectives.Length];
 		CreateTexts();
-		
+        
 	}
 	
 	
@@ -74,23 +66,22 @@ public class CreateObjectiveList : MonoBehaviour {
 	/// AmountToDisplay
 	/// </summary>
 	public void CreateTexts(){
-		
 		for (int i =0; i< AmountToDisplay; i++)
 		{
 			GameObject go = new GameObject(i + "Item");
             go.layer = LayerMask.NameToLayer("NGUI");
-    		GUIText GTHeader =  (GUIText)go.AddComponent(typeof(GUIText));
+            UILabel GTHeader = (UILabel)go.AddComponent(typeof(UILabel));
+
+            GTHeader.pivot = UIWidget.Pivot.TopLeft;
 			GTHeader.transform.parent = this.transform;
-			GTHeader.font = font;
+            GTHeader.font = ListItemFont;
             
-		
-	    	float yPos = StartY + (-i * VerticalGap);
-			GTHeader.transform.localPosition = new Vector3(0f, yPos, 1f);
-			GTHeader.fontSize = ObjectiveSize;
-		
+	    	float yPos = textOffset.y + (-i * VerticalGap);
+			GTHeader.transform.localPosition = new Vector3(textOffset.x, yPos, 1f);
+            
+            GTHeader.MakePixelPerfect();
 			TextList[i] = GTHeader;
 		}
-		
 	}
 	
 	
@@ -107,10 +98,11 @@ public class CreateObjectiveList : MonoBehaviour {
 			}catch{
 				text = "";	
 			}
-				
-			GUIText GT = TextList[i];
+
+            UILabel GT = TextList[i];
 			GT.text = text;
-			
+            GT.MakePixelPerfect();
+            GT.depth = itemDepthIndex + i;
 		}
 	}
 	
@@ -134,7 +126,6 @@ public class CreateObjectiveList : MonoBehaviour {
 			{
 				if(Objectives[i] == ItemName )
 				{ 
-					
 					continue;
 				}
 				TempObjectives[y] = Objectives[i];
