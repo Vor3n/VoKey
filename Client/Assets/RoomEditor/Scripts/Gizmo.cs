@@ -24,7 +24,7 @@ public class Gizmo : MonoBehaviour
         ArrowX.AddComponent<MeshCollider>();
         ArrowX.AddComponent<HighLightArrow>();
         ArrowX.AddComponent<MoveObject>();
-
+		ArrowX.GetComponent<MoveObject>().Axis = MoveDirection.X;
         pos = new Vector3(0, 2.5f, 0);
         Object arrY = Instantiate(ArrowPrefab, pos, Quaternion.identity);
         ArrowY = (GameObject)arrY;
@@ -33,7 +33,8 @@ public class Gizmo : MonoBehaviour
         ArrowY.renderer.material.color = Color.green;
         ArrowY.AddComponent<MeshCollider>();
         ArrowY.AddComponent<HighLightArrow>();
-
+		ArrowY.AddComponent<MoveObject>();
+		ArrowY.GetComponent<MoveObject>().Axis = MoveDirection.Y;
         pos = new Vector3(0, 0, -2.5f);
         Object arrZ = Instantiate(ArrowPrefab, pos, Quaternion.identity);
         ArrowZ = (GameObject)arrZ;
@@ -42,7 +43,8 @@ public class Gizmo : MonoBehaviour
         ArrowZ.renderer.material.color = Color.blue;
         ArrowZ.AddComponent<MeshCollider>();
         ArrowZ.AddComponent<HighLightArrow>();
-
+		ArrowZ.AddComponent<MoveObject>();
+		ArrowZ.GetComponent<MoveObject>().Axis = MoveDirection.Z;
         Exists = true;
 
         Hide();
