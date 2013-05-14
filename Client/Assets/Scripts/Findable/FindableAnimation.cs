@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FindableAnimation : MonoBehaviour
 {
-	
+	public string Name;
 	public bool findable = false;
 	
 	private bool found = false;
@@ -43,12 +43,15 @@ public class FindableAnimation : MonoBehaviour
 	void OnMouseUpAsButton ()
 	{
 		if ( findable ){
-			found = true;
+			GameObject ItemList = GameObject.Find("ItemList");
+		if(ItemList.GetComponent<CreateObjectiveList>().RemoveItem(Name)){
+			UnityEngine.Object.Destroy(this.GetComponent<Rigidbody>());
 			//start moving the object to the startpoint of the animation
 			startPoint = transform.position;
 			startTime = Time.time;
 			//start moving
 			moveToAnim = true;
+			}
 		}
 	}
 	

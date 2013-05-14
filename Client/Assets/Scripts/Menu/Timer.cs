@@ -3,8 +3,8 @@ using System.Collections;
 
 public class Timer : MonoBehaviour {
 	
-	UILabel Label;
-	public float time = 0;
+	public UILabel Label;
+	
 	public bool TimeUp =false;
 	public string TimeString;
 	public bool Running=false;
@@ -20,6 +20,7 @@ public class Timer : MonoBehaviour {
 	
 	void Start(){
 		if(Label== null){
+			
 			Label = (UILabel) GetComponent<UILabel>();	
 		}
 		
@@ -29,12 +30,12 @@ public class Timer : MonoBehaviour {
     {
 		if(Running){
 		if(TimeUp){
-    		time += Time.deltaTime;
+    		GameData.time += Time.deltaTime;
 		}else{
-			time -= Time.deltaTime;	
+			GameData.time -= Time.deltaTime;	
 		}
 		
-		int Seconds = (int) Mathf.RoundToInt(time);
+		int Seconds = (int) Mathf.RoundToInt(GameData.time);
 		TimeString = TimeFormat(Seconds);
 		}
 		Label.text = TimeString;
