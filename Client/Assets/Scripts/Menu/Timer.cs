@@ -42,7 +42,7 @@ public class Timer : MonoBehaviour {
 		
     }
 	
-	private string TimeFormat(int seconds){
+	public static string TimeFormat(int seconds){
 		
         int min = 0;
         int sec = seconds;

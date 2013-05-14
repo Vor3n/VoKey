@@ -57,6 +57,9 @@ public class GameData : MonoBehaviour {
 		Debug.Log("Game ends");
 		Ended = true;
 		GetComponent<Timer>().Running = false;
-		
+		var GO = GameObject.Find("EndGamePanel");
+		GO.GetComponent<UIPanel>().enabled = true;
+		int Seconds = (int) Mathf.RoundToInt(GameData.time);
+		GameObject.Find ("TimeTaken").GetComponent<UILabel>().text = "Time " + Timer.TimeFormat(Seconds) ;
 	}
 }
