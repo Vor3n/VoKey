@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class FindableAnimaton : MonoBehaviour
+public class FindableAnimation : MonoBehaviour
 {
 	
 	public bool findable = false;

@@ -42,7 +42,7 @@ public class AddRowButtonPress : MonoBehaviour {
 				cube.transform.position = new Vector3 (offset, 2, zoffset);
 
 				// Add the itembehaviour script
-                cube.AddComponent<FindableAnimaton>();
+                cube.AddComponent<FindableAnimation>();
 				cube.AddComponent<Animation> ();
 				
 				
@@ -55,7 +55,7 @@ public class AddRowButtonPress : MonoBehaviour {
 					Debug.Log("Added clip to cube");
 				}
 
-                FindableAnimaton currentItem = cube.GetComponent<FindableAnimaton>();
+                FindableAnimation currentItem = cube.GetComponent<FindableAnimation>();
 				currentItem.findable = true;
 				
 			}
