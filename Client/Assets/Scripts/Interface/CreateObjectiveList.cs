@@ -66,7 +66,7 @@ public class CreateObjectiveList : MonoBehaviour {
 	/// AmountToDisplay
 	/// </summary>
 	public void CreateTexts(){
-		for (int i =0; i< AmountToDisplay; i++)
+		for (int i =0; i< AmountToDisplay && i < TextList.Length - 1; i++)
 		{
 			GameObject go = new GameObject(i + "Item");
             go.layer = LayerMask.NameToLayer("NGUI");
@@ -91,7 +91,8 @@ public class CreateObjectiveList : MonoBehaviour {
 	public void UpdateTexts()
 	{
 	    if(TextList == null) return;
-		for(int i = 0; i < AmountToDisplay; i++){
+        for (int i = 0; i < AmountToDisplay && i < TextList.Length - 1; i++)
+        {
 			string text;
 			try{
 			 text = Objectives[i];
