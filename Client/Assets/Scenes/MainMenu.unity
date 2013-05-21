@@ -27,7 +27,7 @@ RenderSettings:
   m_SpotCookie: {fileID: 0}
   m_ObjectHideFlags: 0
 --- !u!127 &3
-LevelGameManager:
+GameManager:
   m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
@@ -1208,7 +1208,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 189971358}
   - 114: {fileID: 189971359}
-  - 114: {fileID: 189971360}
   m_Layer: 0
   m_Name: Plant_0
   m_TagString: Untagged
@@ -1240,17 +1239,7 @@ MonoBehaviour:
   url: http://files.flixite.com/unity/deliciousPlant.bin
   version: 0
   position: {x: 0, y: 0, z: 0}
---- !u!114 &189971360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189971357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 204fbbc3687cef7428caa99d92c47785, type: 3}
-  m_Name: 
-  Obj: {fileID: 189971357}
+  instantiateMainAsset: 1
 --- !u!1 &495920236
 GameObject:
   m_ObjectHideFlags: 0

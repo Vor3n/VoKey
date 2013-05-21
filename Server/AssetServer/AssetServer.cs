@@ -1,12 +1,13 @@
-﻿using AssetServer.Entities;
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Net;
 using System.Text;
+using System.Xml;
 
 namespace AssetServer
 {
+    [System.Serializable]
     public class AssetServer
     {
         private static AssetServer myInstance;
@@ -36,7 +37,7 @@ namespace AssetServer
 
         public void Start()
         {
-            ws = new WebServer(SendResponse, "http://+:8080/");
+            ws = new WebServer(SendResponse, "http://+:80/");
             ws.Run();
         }
         /// <summary>
@@ -50,10 +51,13 @@ namespace AssetServer
         public string serializeAllRooms()
         {
             string s = "";
+            //XmlDocument d = Room.Serialize(RoomList);
+          
             foreach (Room r in RoomList)
             {
-                s += r.Serialize(r).InnerXml.ToString() + "\n";
+                s += Room.ToXml(r);//.InnerXml.ToString() + "\n";
             }
+            //return d.DocumentElement.ToString();
             return s;
         }
 

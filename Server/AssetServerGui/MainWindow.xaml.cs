@@ -1,19 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using AssetServer.Entities;
-using System.Collections.ObjectModel;
 
 namespace AssetServerGui
 {
@@ -52,15 +39,15 @@ namespace AssetServerGui
         {
             var lb = sender as ListBox;
             var selectedRoom = lb.SelectedItem as Room;
-            FindableObjectsListBox.ItemsSource = selectedRoom.objects;
+            FindableObjectsListBox.ItemsSource = selectedRoom.containedObjects;
         }
 
         private void addItemButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedRoom != null)
             {
-                FindableObject newObject = new FindableObject(findableObjectTextBox.Text.ToString());
-                SelectedRoom.Add(newObject);
+                FindableObject newObject = new FindableObject();
+                //SelectedRoom.Add(newObject);
                 findableObjectTextBox.Clear();
                 findableObjectTextBox.Focus();
             }
@@ -69,10 +56,22 @@ namespace AssetServerGui
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            /*foreach (Room r in assetServer.RoomList)
+            {
+                Console.Write(Room.Serialize(r));//.InnerXml.ToString());
+            }*/
+            string s = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n";
+            //XmlDocument d = RoomList[0].Serialize(RoomList);
+
             foreach (Room r in assetServer.RoomList)
             {
-                Console.Write(r.Serialize(r).InnerXml.ToString());
+                string temp = "KAK";//Room.Serialize(r);
+                if (temp.Contains("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n"))
+                    temp = temp.Substring(temp.IndexOf("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n") + "<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n".Length);
+                s += temp + "\r\n";
             }
+
+            Console.WriteLine(s);
         }
 
         private void startWebserverButton_Click(object sender, RoutedEventArgs e)

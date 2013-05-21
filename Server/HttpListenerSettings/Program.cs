@@ -18,7 +18,7 @@ namespace HttpListenerSettings
                     Console.WriteLine("Invalid port specified: " + args[0]);
                     printUsageAndExit();
                 }
-                if (IsElevated) setNetShHttpListeningPort(8080);
+                if (IsElevated) setNetShHttpListeningPort(port);
                 else
                 {
                     if (UserWantsElevation) Elevate();
