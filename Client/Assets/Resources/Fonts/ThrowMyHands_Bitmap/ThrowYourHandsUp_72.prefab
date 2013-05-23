@@ -49,7 +49,7 @@ MonoBehaviour:
     mBase: 50
     mWidth: 512
     mHeight: 512
-    mSpriteName: throwyourpng_72_0
+    mSpriteName: 
     mSaved:
     - index: 32
       x: 26
@@ -1623,7 +1623,7 @@ MonoBehaviour:
       kerning: 
   mSpacingX: 0
   mSpacingY: 0
-  mAtlas: {fileID: 0}
+  mAtlas: {fileID: 11400000, guid: 55ce01a736d850d4ea0dee01b839d70f, type: 2}
   mReplacement: {fileID: 0}
   mPixelSize: 1
   mSymbols: []

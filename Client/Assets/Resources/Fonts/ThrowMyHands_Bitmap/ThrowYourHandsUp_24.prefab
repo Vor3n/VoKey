@@ -40,10 +40,10 @@ MonoBehaviour:
   mMat: {fileID: 2100000, guid: 77d7b4e0fd6bb5b4d99e36e2b4d38a0c, type: 2}
   mUVRect:
     serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+    x: .25
+    y: .5625
+    width: .25
+    height: .125
   mFont:
     mSize: 23
     mBase: 16
@@ -1623,7 +1623,7 @@ MonoBehaviour:
       kerning: 
   mSpacingX: 0
   mSpacingY: 0
-  mAtlas: {fileID: 0}
+  mAtlas: {fileID: 11400000, guid: 55ce01a736d850d4ea0dee01b839d70f, type: 2}
   mReplacement: {fileID: 0}
   mPixelSize: 1
   mSymbols: []

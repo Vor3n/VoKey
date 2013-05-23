@@ -4138,7 +4138,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1083694493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -280.261536, y: 1.04571533, z: 0}
+  m_LocalPosition: {x: -281, y: 2, z: 0}
   m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
@@ -4772,8 +4772,8 @@ MonoBehaviour:
   VerticalGap: 25
   AmountToDisplay: 5
   textOffset: {x: 20, y: -35}
-  HeaderFont: {fileID: 0}
-  ListItemFont: {fileID: 0}
+  HeaderFont: {fileID: 11400000, guid: 4d357aa4fae864e46b20b06e85a062e6, type: 2}
+  ListItemFont: {fileID: 11400000, guid: 4d357aa4fae864e46b20b06e85a062e6, type: 2}
   Objectives:
   - Dice
   - Key
@@ -6115,7 +6115,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1736639802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 382.745056, y: 1.04571533, z: 0}
+  m_LocalPosition: {x: 382, y: 2, z: 0}
   m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
