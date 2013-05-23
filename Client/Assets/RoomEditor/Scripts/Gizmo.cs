@@ -21,7 +21,9 @@ public class Gizmo : MonoBehaviour
         ArrowX.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         ArrowX.transform.Rotate(0, 270, 0);
         ArrowX.renderer.material.color = Color.red;
-        ArrowX.AddComponent<MeshCollider>();
+		ArrowX.layer= 9;
+        var x = ArrowX.AddComponent<MeshCollider>();
+		x.isTrigger = true;
         ArrowX.AddComponent<HighLightArrow>();
         ArrowX.AddComponent<MoveObject>();
 		ArrowX.GetComponent<MoveObject>().Axis = MoveDirection.X;
@@ -31,7 +33,9 @@ public class Gizmo : MonoBehaviour
         ArrowY.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         ArrowY.transform.Rotate(90, 0, 0);
         ArrowY.renderer.material.color = Color.green;
-        ArrowY.AddComponent<MeshCollider>();
+        x = ArrowY.AddComponent<MeshCollider>();
+		x.isTrigger = true;
+		ArrowY.layer= 9;
         ArrowY.AddComponent<HighLightArrow>();
 		ArrowY.AddComponent<MoveObject>();
 		ArrowY.GetComponent<MoveObject>().Axis = MoveDirection.Y;
@@ -41,7 +45,9 @@ public class Gizmo : MonoBehaviour
         ArrowZ.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
         ArrowZ.transform.Rotate(0, 0, 0);
         ArrowZ.renderer.material.color = Color.blue;
-        ArrowZ.AddComponent<MeshCollider>();
+        x = ArrowZ.AddComponent<MeshCollider>();
+		x.isTrigger = true;
+		ArrowZ.layer= 9;
         ArrowZ.AddComponent<HighLightArrow>();
 		ArrowZ.AddComponent<MoveObject>();
 		ArrowZ.GetComponent<MoveObject>().Axis = MoveDirection.Z;
