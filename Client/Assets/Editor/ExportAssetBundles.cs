@@ -5,17 +5,38 @@
 
 using UnityEngine;
 using UnityEditor;
+[InitializeOnLoad]
 public class ExportAssetBundles
 {
-    [MenuItem("Assets/Build AssetBundle From Selection - Track dependencies")]
+	static ExportAssetBundles()
+    {
+        Debug.Log("ExportAssetBundles is ready");
+    }
+	
+    [MenuItem("Assets/Build AssetBundle From Selection - Track dependencies - Vokey")]
     static void ExportResource()
     {
         // Bring up save panel
-        string path = EditorUtility.SaveFilePanel("Save Resource", "", "New Resource", "unity3d");
+        string path = EditorUtility.SaveFilePanel("Save Resource Bundle", "", "AssetBundle", "bin");
+		Debug.Log ("path: " + path);
+		string folder = path.Substring(0, path.LastIndexOf(System.IO.Path.DirectorySeparatorChar));
         if (path.Length != 0)
         {
             // Build the resource file from the active selection.
             Object[] selection = Selection.GetFiltered(typeof(Object), SelectionMode.DeepAssets);
+			VokeyAssetBundle vab = VokeyAssetBundle.FromObjectsArray(selection);
+			string[] pathParts = path.Split (System.IO.Path.DirectorySeparatorChar);
+			string pathWithExtension = pathParts[pathParts.Length - 1];
+			string filename = pathWithExtension.Substring(0, pathWithExtension.LastIndexOf('.'));
+			
+			/*foreach (object asset in selection) {
+				string assetPath = AssetDatabase.GetAssetPath((UnityEngine.Object) asset);
+			}*/
+			using (System.IO.StreamWriter file = new System.IO.StreamWriter(folder + "vab_" + filename + ".xml", true))
+            {
+                file.Write(VokeyAssetBundle.ToXml(vab));
+            }
+
             BuildPipeline.BuildAssetBundle(Selection.activeObject, selection, path, BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets);
             Selection.objects = selection;
         }
@@ -24,7 +45,7 @@ public class ExportAssetBundles
     static void ExportResourceNoTrack()
     {
         // Bring up save panel
-        string path = EditorUtility.SaveFilePanel("Save Resource", "", "New Resource", "unity3d");
+        string path = EditorUtility.SaveFilePanel("Save Resource", "", "New Resource", "bin");
         if (path.Length != 0)
         {
             // Build the resource file from the active selection.

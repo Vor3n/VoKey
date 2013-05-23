@@ -66,6 +66,8 @@ public class Room {
     public Room(string name)
     {
         containedObjects = new List<FindableObject>();
+		id = System.Guid.NewGuid();
+		
         this.name = name;
     }
 

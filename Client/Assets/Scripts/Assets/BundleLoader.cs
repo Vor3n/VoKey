@@ -27,16 +27,16 @@ public class BundleLoader : MonoBehaviour{
             Room r = new Room(roomName);
             int i = 0;
             float p = 0;
-            foreach (Object o in loadedObjects)
+            foreach (VokeyAsset o in ab.objects)
             {
                 if (o.GetType() == typeof(GameObject))
                 {
                     //Debug.Log("" + i + ": " + o.name);
-                    r.AddGameObject((GameObject)o, new Vector3(p++, 0f, 0f));
+                    //r.AddGameObject(o.resource, new Vector3(p++, 0f, 0f));
                 }
                 i++;
             }
-            using (System.IO.StreamWriter file = new System.IO.StreamWriter(roomName + ".xml", true))
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter("room_" + roomName + ".xml", true))
             {
                 file.Write(Room.ToXml(r));
             }

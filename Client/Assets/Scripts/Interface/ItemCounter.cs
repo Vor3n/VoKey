@@ -20,6 +20,7 @@ public class ItemCounter : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		GameData.ItemsFound = GameData.ItemsToFind - ItemList.Objectives.Length;
-		Label.text = GameData.ItemsFound + "/" + GameData.ItemsToFind;
+		if(Label != null)
+			Label.text = GameData.ItemsFound + "/" + GameData.ItemsToFind;
 	}
 }
