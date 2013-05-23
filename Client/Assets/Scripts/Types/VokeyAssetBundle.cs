@@ -11,15 +11,30 @@ using System.Xml.Serialization;
 public class VokeyAssetBundle
 {
     [XmlAttribute("Name")]
+	/// <summary>
+	/// The name.
+	/// </summary>
     public string name;
     [XmlAttribute("ModelId")]
+	/// <summary>
+	/// The model identifier.
+	/// </summary>
     public System.Guid modelId;
     [XmlAttribute("Resource Urls")]
+	/// <summary>
+	/// The resource URL.
+	/// </summary>
     public System.Uri resourceUrl;
-
+	
+	/// <summary>
+	/// The list of objects inside of this VokeyAssetBundle.
+	/// </summary>
     public List<VokeyAsset> objects;
     public List<string> ids;
-
+	
+	/// <summary>
+	/// Initializes a new instance of the <see cref="VokeyAssetBundle"/> class.
+	/// </summary>
     public VokeyAssetBundle()
     {
         objects = new List<VokeyAsset>();
@@ -39,7 +54,16 @@ public class VokeyAssetBundle
         x.Serialize(xw, ab);
         return sb.ToString();
     }
-
+	
+	/// <summary>
+	/// Froms the bundle.
+	/// </summary>
+	/// <returns>
+	/// The bundle.
+	/// </returns>
+	/// <param name='contents'>
+	/// Contents.
+	/// </param>
     public static VokeyAssetBundle FromBundle(UnityEngine.Object[] contents)
     {
         VokeyAssetBundle a = new VokeyAssetBundle();

@@ -5,9 +5,15 @@ using System.Xml.Serialization;
 [System.Serializable]
 public class FindableObject {
     [XmlAttribute("Friendly Name")]
+	/// <summary>
+	/// The friendly name for the FindableObject
+	/// </summary>
     public string friendlyName;
 
     [XmlAttribute("Id")]
+	/// <summary>
+	/// The identifier.
+	/// </summary>
     public System.Guid id;
 
     /// <summary>
@@ -19,12 +25,24 @@ public class FindableObject {
     }
 
     [XmlAttribute("Position")]
+	/// <summary>
+	/// The position.
+	/// </summary>
     public Vector3 position;
     [XmlAttribute("Scale")]
+	/// <summary>
+	/// The scale.
+	/// </summary>
     public Vector3 scale;
     [XmlAttribute("Rotation")]
+	/// <summary>
+	/// The rotation.
+	/// </summary>
     public Quaternion rotation;
     [XmlAttribute("LinkedObject")]
+	/// <summary>
+	/// The game object identifier.
+	/// </summary>
     public System.Guid GameObjectId;
 
     /// <summary>

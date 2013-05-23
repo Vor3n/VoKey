@@ -11,18 +11,36 @@ public class Room {
     public static System.Type t = typeof(Room);
 
     [XmlAttribute("Name")]
+	/// <summary>
+	/// The name.
+	/// </summary>
     public string name;
 
     [XmlAttribute("Description")]
+	/// <summary>
+	/// The description.
+	/// </summary>
     public string description;
 
     [XmlAttribute("Id")]
+	/// <summary>
+	/// The identifier.
+	/// </summary>
     public System.Guid id;
 
     [XmlArrayAttribute("FindableObjects"), System.Xml.Serialization.XmlArrayItem(typeof(FindableObject))]
+	/// <summary>
+	/// The contained FindableObjects.
+	/// </summary>
     public List<FindableObject> containedObjects;
 
     [XmlIgnore]
+	/// <summary>
+	/// Gets the number of objects.
+	/// </summary>
+	/// <value>
+	/// The number of objects.
+	/// </value>
     public int NumberOfObjects
     {
         get
@@ -30,12 +48,21 @@ public class Room {
             return containedObjects.Count;
         }
     }
-
+	
+	/// <summary>
+	/// Initializes a new instance of the <see cref="Room"/> class.
+	/// </summary>
     public Room()
     {
 
     }
-
+	
+	/// <summary>
+	/// Initializes a new instance of the <see cref="Room"/> class.
+	/// </summary>
+	/// <param name='name'>
+	/// Name of the room to create.
+	/// </param>
     public Room(string name)
     {
         containedObjects = new List<FindableObject>();
