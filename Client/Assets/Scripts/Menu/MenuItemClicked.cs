@@ -90,6 +90,16 @@ public class MenuItemClicked : MonoBehaviour {
 			
 		}
 		
+		if (item == Item.ShowClasses)
+		{
+			
+		}
+		
+		if (item == Item.ShowOtherRooms)
+		{
+			
+		}
+		
 		if (item == Item.ShowRooms)
 		{
 			
