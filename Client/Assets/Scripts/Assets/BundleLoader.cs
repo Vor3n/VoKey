@@ -22,7 +22,6 @@ public class BundleLoader : MonoBehaviour{
             }
             Object[] loadedObjects = assetBundle.LoadAll();
             VokeyAssetBundle ab = VokeyAssetBundle.FromBundle(loadedObjects);
-            ab.resourceUrl = new System.Uri(url);
 
             Room r = new Room(roomName);
             int i = 0;

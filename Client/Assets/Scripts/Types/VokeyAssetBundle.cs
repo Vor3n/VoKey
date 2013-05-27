@@ -19,7 +19,6 @@ public class VokeyAssetBundle
 	/// The model identifier.
 	/// </summary>
     public System.Guid modelId;
-	[XmlAttribute("Resource Urls")]
 	
 	/// <summary>
 	/// The resource URL.
