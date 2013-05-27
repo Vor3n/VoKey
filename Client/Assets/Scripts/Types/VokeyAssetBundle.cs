@@ -4,6 +4,7 @@ using System.Text;
 using System.Xml;
 using System;
 using System.Xml.Serialization;
+using System.IO;
 
 [System.Serializable]
 [XmlRoot("VokeyAssetBundle")]
@@ -143,5 +144,25 @@ public class VokeyAssetBundle
 		}
 		return a;
 	}
+	
+	static public string SerializeToXML(List<VokeyAssetBundle> assetList)
+	{
+		var serializer = new XmlSerializer(typeof(List<VokeyAssetBundle>));
+		string utf8;
+        using (StringWriter writer = new Utf8StringWriter())
+        {
+            serializer.Serialize(writer, assetList);
+            utf8 = writer.ToString();
+        }
+		return utf8;
+	}
+	
+	public class Utf8StringWriter : StringWriter
+    {
+        public override Encoding Encoding
+        {
+            get { return Encoding.UTF8; }
+        }
+    }
 
 }
