@@ -1,5 +1,4 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Xml;
@@ -21,11 +20,12 @@ public class VokeyAssetBundle
 	/// </summary>
     public System.Guid modelId;
 	[XmlAttribute("Resource Urls")]
+	
 	/// <summary>
 	/// The resource URL.
 	/// </summary>
-	[XmlIgnore]
-    public System.Uri resourceUrl;
+	[XmlAttribute("Resource Filename")]
+    public string resourceFilename;
 	
 	/// <summary>
 	/// The list of objects inside of this VokeyAssetBundle.
@@ -70,6 +70,23 @@ public class VokeyAssetBundle
 	}
 	
 	/// <summary>
+	/// Gets an array of Object that are from the specified type
+	/// </summary>
+	/// <returns>
+	/// The game object array by type.
+	/// </returns>
+	/// <param name='type'>
+	/// Type of objects to get.
+	/// </param>
+	public VokeyAsset[] GetObjectArrayByType(string type){
+		List<VokeyAsset> resultObjects = new List<VokeyAsset>();
+		foreach(VokeyAsset va in objects){
+			if(va.ObjectType.Equals(type)) resultObjects.Add (va);
+		}
+		return resultObjects.ToArray();
+	}
+	
+	/// <summary>
 	/// Serializes a room to Xml
 	/// </summary>
 	/// <param name="r"></param>
@@ -110,6 +127,15 @@ public class VokeyAssetBundle
 		return a;
 	}
 	
+	/// <summary>
+	/// Froms the VokeyAssetBundle from an objects array.
+	/// </summary>
+	/// <returns>
+	/// The VokeyAssetBundle formed from the objects array.
+	/// </returns>
+	/// <param name='contents'>
+	/// Contents.
+	/// </param>
 	public static VokeyAssetBundle FromObjectsArray(UnityEngine.Object[] contents){
 		VokeyAssetBundle a = new VokeyAssetBundle ();
 

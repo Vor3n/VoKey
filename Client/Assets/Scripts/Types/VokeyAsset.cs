@@ -15,6 +15,9 @@ public class VokeyAsset {
 	[XmlAttribute("Hash")]
     public int hashString;
 	
+	[XmlAttribute("Type")]
+	public string ObjectType = "";
+	
 	/// <summary>
 	/// Froms the asset from a GameObject.
 	/// </summary>
@@ -30,28 +33,16 @@ public class VokeyAsset {
 		va.resource = bj;
 		va.name = bj.name;
 		va.hashString = va.GetHashCode();
-		Debug.Log ("Object Hash: " + va.hashString);
+		va.ObjectType = bj.GetType().ToString();
         return va;
     }
 	
-	
 	/// <summary>
-    /// Calculates the lenght in bytes of an object 
-    /// and returns the size 
-    /// </summary>
-    /// <param name="TestObject"></param>
-    /// <returns></returns>
-    private int GetObjectSize(object TestObject)
-    {
-        /*BinaryFormatter bf = new BinaryFormatter();
-        MemoryStream ms = new MemoryStream();
-        byte[] Array;
-        bf.Serialize(ms, TestObject);
-        Array = ms.ToArray();
-        return Array.Length;*/
-		return Marshal.SizeOf(TestObject); 
-    }
-	
+	/// Serves as a hash function for a <see cref="VokeyAsset"/> object.
+	/// </summary>
+	/// <returns>
+	/// A hash code for this instance that is suitable for use in hashing algorithms and data structures such as a hash table.
+	/// </returns>
 	public override int GetHashCode()
 	{
 	    unchecked
@@ -59,9 +50,7 @@ public class VokeyAsset {
 	        int result = (name != null ? name.GetHashCode() : 0);
 	        result = (result*397) ^ (resource.name != null ? resource.name.GetHashCode() : 0);
 			result = (result*397) ^ (resource != null ? resource.GetType().ToString().GetHashCode() : 0);
-	        //result = (result*397) ^ (resource != null ? GetObjectSize(resource) : 0);
 	        return result;
 	    }
 	}
-	
 }

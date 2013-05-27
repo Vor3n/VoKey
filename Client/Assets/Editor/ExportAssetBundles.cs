@@ -19,7 +19,8 @@ public class ExportAssetBundles
         // Bring up save panel
         string path = EditorUtility.SaveFilePanel("Save Resource Bundle", "", "AssetBundle", "bin");
 		Debug.Log ("path: " + path);
-		string folder = path.Substring(0, path.LastIndexOf(System.IO.Path.DirectorySeparatorChar));
+		string folder = path.Substring(0, path.LastIndexOf(System.IO.Path.DirectorySeparatorChar) + 1);
+		Debug.Log ("folder: " + folder);
         if (path.Length != 0)
         {
             // Build the resource file from the active selection.
@@ -28,10 +29,7 @@ public class ExportAssetBundles
 			string[] pathParts = path.Split (System.IO.Path.DirectorySeparatorChar);
 			string pathWithExtension = pathParts[pathParts.Length - 1];
 			string filename = pathWithExtension.Substring(0, pathWithExtension.LastIndexOf('.'));
-			
-			/*foreach (object asset in selection) {
-				string assetPath = AssetDatabase.GetAssetPath((UnityEngine.Object) asset);
-			}*/
+			vab.resourceFilename = filename + ".bin";
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter(folder + "vab_" + filename + ".xml", true))
             {
                 file.Write(VokeyAssetBundle.ToXml(vab));
