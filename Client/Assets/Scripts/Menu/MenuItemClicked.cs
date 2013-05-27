@@ -8,6 +8,10 @@ public class MenuItemClicked : MonoBehaviour {
 		ShowAssignment,
 		EditOwnRoom,
 		ShowOtherRooms,
+		ShowClasses,
+		ShowRooms,
+		ShowStudentResults,
+		ShowStudents,
 		Logout,
 		Quit,
 		CHANGEME,
@@ -22,19 +26,48 @@ public class MenuItemClicked : MonoBehaviour {
 		{
 			
 		}
+		
 		if (item == Item.ShowAssignment)
 		{
 			
 		}
+		
 		if (item == Item.Logout)
 		{
 			
 		}
+		
 		if (item == Item.Quit)
 		{
 			
 		}
+		
 		if (item == Item.ShowOtherRooms)
+		{
+			
+		}
+		
+		if (item == Item.ShowClasses)
+		{
+			
+		}
+		
+		if (item == Item.ShowOtherRooms)
+		{
+			
+		}
+		
+		if (item == Item.ShowRooms)
+		{
+			
+		}
+		
+		if (item == Item.ShowStudentResults)
+		{
+			
+		}
+		
+		if (item == Item.ShowStudents)
 		{
 			
 		}
