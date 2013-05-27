@@ -145,7 +145,7 @@ public class VokeyAssetBundle
 		return a;
 	}
 	
-	static public string SerializeToXML(List<VokeyAssetBundle> assetList)
+	public static string SerializeToXML(List<VokeyAssetBundle> assetList)
 	{
 		var serializer = new XmlSerializer(typeof(List<VokeyAssetBundle>));
 		string utf8;
@@ -155,6 +155,14 @@ public class VokeyAssetBundle
             utf8 = writer.ToString();
         }
 		return utf8;
+	}
+	
+	public static VokeyAssetBundle FromXml(string pathname){
+		XmlSerializer deserializer = new XmlSerializer(typeof(VokeyAssetBundle));
+		TextReader textReader = new StreamReader(pathname);
+		VokeyAssetBundle vab = (VokeyAssetBundle)deserializer.Deserialize(textReader);
+		textReader.Close();
+		return vab;
 	}
 	
 	public class Utf8StringWriter : StringWriter
