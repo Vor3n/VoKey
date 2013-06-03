@@ -161,6 +161,9 @@ public class VokeyAssetBundle
 		XmlSerializer deserializer = new XmlSerializer(typeof(VokeyAssetBundle));
 		TextReader textReader = new StreamReader(pathname);
 		VokeyAssetBundle vab = (VokeyAssetBundle)deserializer.Deserialize(textReader);
+		string s = Path.GetFileName (pathname);
+		s = s.Substring (s.IndexOf ("vab_") + "_vab".Length);
+		vab.name = s.Replace ("xml", "bin");
 		textReader.Close();
 		return vab;
 	}

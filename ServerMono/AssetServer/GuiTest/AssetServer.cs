@@ -59,7 +59,12 @@ namespace Vokey
 			scanForAssetsWorker.DoWork += ScanForAssetsWorkerWork;
 			//scanForAssetsWorker.
 		}
-		
+
+		/// <summary>
+		/// Makes the AssetServer Scan for Assets (this is a event handler)
+		/// </summary>
+		/// <param name="sender">Sender.</param>
+		/// <param name="e">E.</param>
 		void ScanForAssetsWorkerWork (object sender, DoWorkEventArgs e)
 		{
 			scanForAssets ();
@@ -75,6 +80,10 @@ namespace Vokey
 			ws.Run ();
 		}
 
+		/// <summary>
+		/// Handles the ws log message.
+		/// </summary>
+		/// <param name="obj">Object.</param>
 		void HandleWsLogMessage (string obj)
 		{
 			Log (obj);
@@ -100,6 +109,10 @@ namespace Vokey
 			
 		}
 
+		/// <summary>
+		/// Serializes all rooms.
+		/// </summary>
+		/// <returns>The all rooms.</returns>
 		public string serializeAllRooms ()
 		{
 			string s = "";
@@ -112,63 +125,178 @@ namespace Vokey
 			//return d.DocumentElement.ToString();
 			return s;
 		}
-		
+
+		/// <summary>
+		/// Sends a standard response.
+		/// </summary>
+		/// <param name="request">Request.</param>
+		/// <param name="content">Content.</param>
 		public void sendStandardResponse (HttpListenerContext request, byte[] content)
 		{
 			request.Response.ContentLength64 = content.Length;
 			request.Response.OutputStream.Write (content, 0, content.Length);
 		}
-		
+
+		/// <summary>
+		/// Sends a file and uses the provided content type.
+		/// </summary>
+		/// <param name="request">Request.</param>
+		/// <param name="contentType">Content type.</param>
+		/// <param name="data">Data.</param>
+		public void sendFileWithContentType(HttpListenerContext request, string contentType, byte[] data){
+			request.Response.ContentType = contentType;
+			request.Response.ContentLength64 = data.Length;
+			request.Response.OutputStream.Write (data, 0, data.Length);
+		}
+
+		/// <summary>
+		/// Handles a file request.
+		/// </summary>
+		/// <param name="request">Request.</param>
+		/// <param name="filename">Filename.</param>
+		public void handleFileRequest(HttpListenerContext request, string filename){
+			getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (string.Format ("<HTML><BODY>Vokey Server<br>" + DateTime.Now.ToShortTimeString () + " {0}</BODY></HTML>", DateTime.Now)));
+		}
+
+		/// <summary>
+		/// Handles an unknown request.
+		/// </summary>
+		/// <param name="request">Request.</param>
+		public void handleUnknownRequest(HttpListenerContext request){
+			getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (string.Format ("<HTML><BODY>Vokey Server<br>" + DateTime.Now.ToShortTimeString () + " {0}</BODY></HTML>", DateTime.Now)));
+		}
+
+		/// <summary>
+		/// Sends the text response.
+		/// </summary>
+		/// <param name="request">Request.</param>
+		/// <param name="message">Message.</param>
+		public void sendTextResponse(HttpListenerContext request, string message){
+			getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (string.Format ("<HTML><BODY>Vokey Server<br>" + DateTime.Now.ToShortTimeString () + " {0}<br />" + message + "</BODY></HTML>", DateTime.Now)));
+		}
+
+		/// <summary>
+		/// Returns whether the argument handleable.
+		/// </summary>
+		/// <returns><c>true</c>, if argument was handable , <c>false</c> otherwise.</returns>
+		/// <param name="argument">Argument.</param>
+		public static bool argumentHandleable(string argument){
+			if (argument == "rooms" || argument == "assetbundles" || argument == "houses" || argument == "file" || argument == "favicon.ico"){
+				return true;
+			}
+			return false;
+		}
+
+		public static bool isLastInArguments(string[] arguments, string item){
+			int length = arguments.Length;
+			int count = 1;
+			foreach (string s in arguments) {
+				if (s == item)
+					return (count == length);
+				count++;
+			}
+			throw new Exception ("Item not in array");
+		}
+
+		public void getAssetListAndReturnToHttpClient(HttpListenerContext request){
+			List<VokeyAssetBundle> tempList = new List<VokeyAssetBundle> ();
+			byte[] returnBytes;
+			foreach (VokeyAssetBundle vab in getInstance().assetBundles) {
+				tempList.Add (vab); 
+			}
+			try {
+				returnBytes = Encoding.UTF8.GetBytes (VokeyAssetBundle.SerializeToXML (tempList));
+			} catch (Exception e) {
+				Console.WriteLine (e.GetBaseException ());
+				returnBytes = Encoding.UTF8.GetBytes ("No data in response");
+			}
+			getInstance ().sendStandardResponse (request, returnBytes);
+		}
+
+		/// <summary>
+		/// Sends the response.
+		/// </summary>
+		/// <returns>The response.</returns>
+		/// <param name="request">Request.</param>
 		public static byte[] SendResponse (HttpListenerContext request)
 		{
 			string requestUri = request.Request.Url.ToString ();
 			string[] requestPieces = requestUri.Split ('/');
+			string handleableAction;
+			string handleableActionParameter;
+
 			getInstance ().Log ("Got a request!" + requestUri + "pieces:" + requestPieces [requestPieces.Length - 1]);
 
+			for (int i = 0; i < requestPieces.Length; i++) {
+				if (argumentHandleable (requestPieces[i])) {
+					handleableAction = requestPieces [i];
+					getInstance ().Log ("Handling the following action: " + handleableAction);
+					if (!isLastInArguments(requestPieces, requestPieces[i])) {
+						switch (handleableAction) {
+						case "assetbundles":
+							if (requestUri.LastIndexOf ('/') == requestUri.Length - 1) {
+								getInstance().getAssetListAndReturnToHttpClient (request);
+							}
+						byte[] output;
+						MemoryStream ms = new MemoryStream ();
+							try {
+								using (FileStream fileStream = File.OpenRead("AssetBundles" + Path.DirectorySeparatorChar + requestPieces [i + 1]))
+								{
+									ms.SetLength(fileStream.Length);
+									fileStream.Read(ms.GetBuffer(), 0, (int)fileStream.Length);
+								}
+								getInstance ().sendFileWithContentType (request, "application/octet-stream", ms.ToArray ());
+
+							} catch (Exception e){
+								getInstance ().sendTextResponse (request, "Unknown file: " + requestPieces [i + 1]);
+								Console.WriteLine (e.GetBaseException());
+							}
+							break;
+						}
+						//We want a specific resource
+					} else {
+						//This means we want a list or favicon.ico
+						switch (handleableAction) {
+						case "rooms":
+							getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (getInstance ().serializeAllRooms ()));
+							break;
+						case "favicon.ico":
+							byte[] output;
+							MemoryStream ms = null;
+							try {
+								ms = new MemoryStream ();
+								System.Drawing.Image img = System.Drawing.Image.FromFile ("AssetBundles/favicon.ico");
+								img.Save (ms, System.Drawing.Imaging.ImageFormat.Gif);
+							} catch {
+							}
+							getInstance ().sendFileWithContentType (request, "image/vnd.microsoft.icon", ms.ToArray ());
+							break;
+						case "assetbundles":
+							getInstance().getAssetListAndReturnToHttpClient (request);
+							break;
+						}
+					}
+				}
+			}
+			request.Response.OutputStream.Close ();
+			/*
+
 			if (requestUri.Contains (".html") || requestUri [requestUri.Length - 1] == '/') {
-				getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (string.Format ("<HTML><BODY>Vokey Server<br>" + DateTime.Now.ToShortTimeString () + " {0}</BODY></HTML>", DateTime.Now)));
+				getInstance ().handleFileRequest ();
 			} else {
 				switch (requestPieces [requestPieces.Length - 1]) {
-				case "rooms":
-					getInstance ().sendStandardResponse (request, Encoding.UTF8.GetBytes (getInstance ().serializeAllRooms ()));
-					break;
-				case "assetbundles":
-					List<VokeyAssetBundle> tempList = new List<VokeyAssetBundle> ();
-					byte[] returnBytes;
-					foreach (VokeyAssetBundle vab in getInstance().assetBundles) {
-						tempList.Add (vab); 
-					}
-					try {
-						returnBytes = Encoding.UTF8.GetBytes (VokeyAssetBundle.SerializeToXML (tempList));
-					} catch (Exception e) {
-						Console.WriteLine (e.GetBaseException ());
-						returnBytes = Encoding.UTF8.GetBytes ("No data in response");
-					}
-					getInstance ().sendStandardResponse (request, returnBytes);
-					break;
-				case "favicon.ico":
-					byte[] output;
-					MemoryStream ms = null;
-					try {
-						ms = new MemoryStream ();
-						System.Drawing.Image i = System.Drawing.Image.FromFile ("AssetBundles/favicon.ico");
-						i.Save (ms, System.Drawing.Imaging.ImageFormat.Gif);
-					} catch { }
-					output = ms.ToArray();
-					request.Response.ContentType = "image/vnd.microsoft.icon";
-					request.Response.ContentLength64 = output.Length;
-					request.Response.OutputStream.Write (output, 0, output.Length);
-					break;
+
+				
 				default:
-                        /*if (Guid.TryParseExact(requestPieces[requestPieces.Length - 1], ConfigurationManager.AppSettings["GuidFormatForWebService"], out g))
+                       */ /*if (Guid.TryParseExact(requestPieces[requestPieces.Length - 1], ConfigurationManager.AppSettings["GuidFormatForWebService"], out g))
                         {
                               
-                        }*/
+                        }*//*
 					getInstance().sendStandardResponse (request, Encoding.UTF8.GetBytes (string.Format ("<HTML><BODY>File not found or invalid GUID specified.<br></BODY></HTML>")));
 					break;
 				}
                
-			}
+			}*/
 
             return new byte[] { 0x20 };
 		}
