@@ -48,8 +48,8 @@ public class VokeyAsset {
 	    unchecked
 	    {
 	        int result = (name != null ? name.GetHashCode() : 0);
-	        result = (result*397) ^ (resource.name != null ? resource.name.GetHashCode() : 0);
-			result = (result*397) ^ (resource != null ? resource.GetType().ToString().GetHashCode() : 0);
+			result = (result*397) ^ (ObjectType != null ? ObjectType.GetHashCode() : 0);
+	        result = (result*397) ^ (name != null ? name.GetHashCode() : 0);
 	        return result;
 	    }
 	}
