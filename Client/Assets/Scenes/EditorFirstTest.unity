@@ -98,7 +98,7 @@ Transform:
   m_GameObject: {fileID: 33229325}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.837513, y: 0, z: 0}
-  m_LocalScale: {x: .00402414473, y: .00402414473, z: .00402414473}
+  m_LocalScale: {x: .00372439483, y: .00372439483, z: .00372439483}
   m_Children:
   - {fileID: 475407057}
   m_Father: {fileID: 0}
@@ -343,6 +343,7 @@ GameObject:
   - 23: {fileID: 134833316}
   - 65: {fileID: 134833322}
   - 114: {fileID: 134833315}
+  - 54: {fileID: 134833319}
   m_Layer: 0
   m_Name: Pizza
   m_TagString: Untagged
@@ -363,7 +364,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!23 &134833316
 Renderer:
   m_ObjectHideFlags: 0
@@ -402,6 +403,21 @@ Transform:
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: .11260289}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!54 &134833319
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 134833314}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!65 &134833322
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -931,6 +947,7 @@ GameObject:
   - 95: {fileID: 278312266}
   - 65: {fileID: 278312269}
   - 114: {fileID: 278312267}
+  - 54: {fileID: 278312268}
   m_Layer: 0
   m_Name: ship
   m_TagString: Untagged
@@ -945,7 +962,7 @@ Transform:
   m_PrefabInternal: {fileID: 908409022}
   m_GameObject: {fileID: 278312264}
   m_LocalRotation: {x: 0, y: .795933247, z: 0, w: .605384469}
-  m_LocalPosition: {x: .868245482, y: 2.62433648, z: -4.84636545}
+  m_LocalPosition: {x: .868245482, y: 4.37767458, z: -4.84636545}
   m_LocalScale: {x: .199359059, y: .199359059, z: .199359059}
   m_Children:
   - {fileID: 397862308}
@@ -981,7 +998,22 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
+--- !u!54 &278312268
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 278312264}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!65 &278312269
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -990,7 +1022,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 908409022}
   m_GameObject: {fileID: 278312264}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 7.69999981, y: 7.57000017, z: 7.86000013}
@@ -1005,6 +1037,7 @@ GameObject:
   - 4: {fileID: 298966153}
   - 64: {fileID: 298966154}
   - 114: {fileID: 298966155}
+  - 54: {fileID: 298966156}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -1051,7 +1084,22 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
+--- !u!54 &298966156
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298966152}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &304223002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1178,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 308386833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.500164032, y: -248.000061, z: 0}
+  m_LocalPosition: {x: -.499612808, y: -268.000061, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 45613879}
@@ -1210,6 +1258,7 @@ GameObject:
   - 4: {fileID: 325621897}
   - 65: {fileID: 325621899}
   - 114: {fileID: 325621896}
+  - 54: {fileID: 325621898}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -1230,7 +1279,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!4 &325621897
 Transform:
   m_ObjectHideFlags: 0
@@ -1243,6 +1292,21 @@ Transform:
   m_Children:
   - {fileID: 542568624}
   m_Father: {fileID: 0}
+--- !u!54 &325621898
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325621895}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!65 &325621899
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1525,9 +1589,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 340047268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aecd8cc6c3c94862ac189aa913b2312, type: 3}
+  m_Script: {fileID: 11500000, guid: 36d0ee29b006a7c4f8618b021ec19153, type: 3}
   m_Name: 
-  zoffset: -2
 --- !u!1 &352203224
 GameObject:
   m_ObjectHideFlags: 0
@@ -2085,7 +2148,7 @@ Transform:
   m_GameObject: {fileID: 520448234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 762, y: 37.1000023, z: 1}
+  m_LocalScale: {x: 736, y: 37.1000023, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
 --- !u!114 &520448236
@@ -2300,7 +2363,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 600662952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.500164032, y: 0, z: 0}
+  m_LocalPosition: {x: -.499612808, y: 0, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 1493955373}
@@ -2404,6 +2467,7 @@ GameObject:
   - 23: {fileID: 676326071}
   - 135: {fileID: 676326074}
   - 114: {fileID: 676326070}
+  - 54: {fileID: 676326075}
   m_Layer: 0
   m_Name: easter_egg
   m_TagString: Untagged
@@ -2424,7 +2488,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!23 &676326071
 Renderer:
   m_ObjectHideFlags: 0
@@ -2476,6 +2540,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: .405000061
   m_Center: {x: -3.97927635e-16, y: -6.25848973e-09, z: .105000019}
+--- !u!54 &676326075
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 676326069}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &688765356
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,7 +2634,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714008823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -381.500214, y: 248.999969, z: 0}
+  m_LocalPosition: {x: -368.500519, y: 268.999969, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 957729390}
@@ -3226,7 +3305,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.62433648
+      value: 4.37767458
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalPosition.z
@@ -3250,7 +3329,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11100000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
@@ -3269,7 +3348,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.07237482
+      value: 4.42896318
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalPosition.y
@@ -3277,7 +3356,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -3.72893786
+      value: -3.71876025
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalRotation.x
@@ -3285,7 +3364,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: .704449356
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalRotation.z
@@ -3293,7 +3372,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: .709754348
       objectReference: {fileID: 0}
     - target: {fileID: 6500000, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
       propertyPath: m_Size.z
@@ -3887,6 +3966,7 @@ GameObject:
   - 111: {fileID: 1069515871}
   - 65: {fileID: 1069515873}
   - 114: {fileID: 1069515872}
+  - 54: {fileID: 1069515874}
   m_Layer: 0
   m_Name: VideoCamera
   m_TagString: Untagged
@@ -3963,7 +4043,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!65 &1069515873
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3977,6 +4057,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: .100000001, z: 0}
+--- !u!54 &1069515874
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1069515868}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1083694493
 GameObject:
   m_ObjectHideFlags: 0
@@ -4001,7 +4096,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1083694493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -273.999939, y: 1.00006104, z: 0}
+  m_LocalPosition: {x: -265.000671, y: 1.00006104, z: 0}
   m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
@@ -4602,7 +4697,7 @@ Transform:
   m_GameObject: {fileID: 1225457490}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 150, y: 462.209991, z: 1}
+  m_LocalScale: {x: 150, y: 499.410004, z: 1}
   m_Children: []
   m_Father: {fileID: 957729390}
 --- !u!114 &1225457492
@@ -4736,7 +4831,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341231746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.500164032, y: 248.999969, z: 0}
+  m_LocalPosition: {x: -.499612808, y: 268.999969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1023899524}
@@ -5340,7 +5435,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!23 &1549724669
 Renderer:
@@ -5406,7 +5501,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!1 &1560656720
 GameObject:
   m_ObjectHideFlags: 0
@@ -6391,6 +6486,83 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+--- !u!1 &1870028626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1870028631}
+  - 33: {fileID: 1870028630}
+  - 135: {fileID: 1870028629}
+  - 23: {fileID: 1870028628}
+  - 114: {fileID: 1870028627}
+  m_Layer: 0
+  m_Name: Sphere
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1870028627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870028626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645e5479eec2ff8498d596bdb8ace12b, type: 3}
+  m_Name: 
+--- !u!23 &1870028628
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870028626}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: 61e7fe1dace78c74ab19f4f7bc556c0c, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!135 &1870028629
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870028626}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: .5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1870028630
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870028626}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1870028631
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1870028626}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0656666756, y: 5.11800003, z: .252401352}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1875964984
 GameObject:
   m_ObjectHideFlags: 0
@@ -6896,6 +7068,7 @@ GameObject:
   - 23: {fileID: 1998461778}
   - 114: {fileID: 1998461781}
   - 65: {fileID: 1998461777}
+  - 54: {fileID: 1998461782}
   m_Layer: 0
   m_Name: hourglass
   m_TagString: Untagged
@@ -6967,7 +7140,22 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .100000001
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
+--- !u!54 &1998461782
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1998461776}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &2030905251
 GameObject:
   m_ObjectHideFlags: 0
@@ -7146,8 +7334,8 @@ Transform:
   m_PrefabParentObject: {fileID: 400004, guid: ba7b5dfc48a733f4789baf5976833ab6, type: 2}
   m_PrefabInternal: {fileID: 926616804}
   m_GameObject: {fileID: 2054003461}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.07237482, y: 3.12729406, z: -3.72893786}
+  m_LocalRotation: {x: 0, y: .704449356, z: 0, w: .709754348}
+  m_LocalPosition: {x: 4.42896318, y: 3.12729406, z: -3.71876025}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1622502822}
@@ -7179,7 +7367,7 @@ MonoBehaviour:
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
   desiredPositionChanged: 0
   distanceThreshold: .200000003
-  DFDP: {x: 0, y: 0, z: 0}
+  DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!54 &2054003465
 Rigidbody:
   m_ObjectHideFlags: 0

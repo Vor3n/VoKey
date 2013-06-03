@@ -71,21 +71,29 @@ public class SelectMovable : MonoBehaviour
     {
     }
 	
+	public void StopPlease(){
+		
+		rigidbody.Sleep();
+		rigidbody.velocity = rigidbody.velocity *-1;
+	}
+	
 	void FixedUpdate(){
-		//if(desiredPositionChanged && transform.rigidbody != null){
+		var x = DistanceFromDesiredPosition;
 		if(desiredPositionChanged){
-			Debug.Log ("Moving stuff");
-			Vector3 toMove = DistanceFromDesiredPosition;
-			
-			rigidbody.velocity = new Vector3 (-DistanceFromDesiredPosition.x, -DistanceFromDesiredPosition.y, -DistanceFromDesiredPosition.z);
-			
 			if(axisAreWithinThreshold()){
 				Debug.Log ("Values are within threshold AND the desired position WAS changed. Now stopping this madness.");
 				desiredPositionChanged = false;
+				DesiredPosition = this.transform.position;
 				rigidbody.velocity = new Vector3(0, 0, 0);
 				rigidbody.Sleep();
 				
+			}else{
+			Debug.Log ("Moving stuff");
+			Vector3 toMove = DistanceFromDesiredPosition;
+			
+			rigidbody.velocity = new Vector3 (DistanceFromDesiredPosition.x, DistanceFromDesiredPosition.y, DistanceFromDesiredPosition.z);
 			}
+			
 		}
 	}
 	

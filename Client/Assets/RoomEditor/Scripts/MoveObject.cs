@@ -39,7 +39,7 @@ public class MoveObject : MonoBehaviour
 	/// <summary>
 	/// The real mouse position. This variable is assigned to by Input.mousePosition.
 	/// </summary>
-	private Vector3 realMousePosition;
+	 Vector3 realMousePosition;
 	/// <summary>
 	/// Gets or sets the mouse position with a fixed z-value.
 	/// </summary>
@@ -55,6 +55,20 @@ public class MoveObject : MonoBehaviour
 		}
 	}
 	
+	/// <summary>
+	/// Gets or sets the W pmouse position.
+	/// </summary>
+	/// <value>
+	/// Mouse WorldPoint
+	/// </value>
+	public Vector3 RealmousePosition {
+		get {
+			
+			return Camera.main.ScreenToWorldPoint (mousePosition);
+		}
+		set{
+		}
+	}
 	// Use this for initialization
 	void Start ()
 	{
@@ -73,120 +87,47 @@ public class MoveObject : MonoBehaviour
 	
 	void OnMouseDown ()
 	{
+	Debug.Log("MOUSEDOWN");
 		//screenPoint = Camera.main.WorldToScreenPoint(Variables.Selected.transform.position);
      	mousePosition = Input.mousePosition;
 		screenPoint = Camera.main.ScreenToWorldPoint (mousePosition);
 		offset = Variables.Selected.transform.position - Camera.main.ScreenToWorldPoint (mousePosition);
 	}
+	
+	
      
 	void OnMouseUp ()
 	{
+		SelectMovable other = (SelectMovable) Variables.Selected.GetComponent(typeof(SelectMovable));
 		//screenPoint = Camera.main.WorldToScreenPoint(Variables.Selected.transform.position);
 		Variables.Selected.rigidbody.Sleep ();
-  
+  		other.DesiredPosition = Variables.Selected.transform.position;
+		other.desiredPositionChanged = false;
 	}
 
 	void OnMouseDrag ()
 	{
 		Vector3 curScreenPoint = mousePosition;
      	
+		
 		DesiredPosition = Camera.main.ScreenToWorldPoint (curScreenPoint) + offset;
+		//Debug.Log("xdes: " + DesiredPosition.x + "	
 		Difference = DesiredPosition - ObjectPosition;
 		SelectMovable other = (SelectMovable) Variables.Selected.GetComponent(typeof(SelectMovable));
 		if (MoveDirection.Y == Axis) {
-			//Variables.Selected.transform.position = new Vector3(this.transform.position.x,  curPosition.y  ,this.transform.position.z);
-			//Variables.Selected.rigidbody.AddRelativeForce (new Vector3 (0, -Difference.y, 0)); //
-			other.DesiredPosition = (new Vector3(ObjectPosition.x, DesiredPosition.y, ObjectPosition.z)); 
+			
+			other.DesiredPosition = (new Vector3(ObjectPosition.x, -DesiredPosition.y, ObjectPosition.z)); 
 		} else if (MoveDirection.Z == Axis) {
-			//Variables.Selected.transform.position = new Vector3(this.transform.position.x,   this.transform.position.y, curPosition.y);	
-			//Variables.Selected.rigidbody.AddRelativeForce (new Vector3 (0, 0, -Difference.z));
-			other.DesiredPosition = (new Vector3(ObjectPosition.x, ObjectPosition.y, DesiredPosition.z));
+			
+			other.DesiredPosition = (new Vector3(ObjectPosition.x, ObjectPosition.y, -DesiredPosition.z));
 		} else {
-			//Variables.Selected.transform.position = new Vector3(curPosition.x,  this.transform.position.y  ,this.transform.position.z);	
-			//Variables.Selected.rigidbody.AddRelativeForce (new Vector3 (-Difference.x, 0, 0));
-			other.DesiredPosition = (new Vector3(DesiredPosition.x, ObjectPosition.y, ObjectPosition.z));
+		
+			other.DesiredPosition = (new Vector3(-DesiredPosition.x, ObjectPosition.y, ObjectPosition.z));
 		}	
 		
 		
 	}
 		
-	/*
-		//Debug.Log("DRAG");
-        Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
-     
-    	Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint) + offset;
-		MoveDir =  screenPoint -Camera.main.ScreenToWorldPoint( new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-		
-		
-		float speed = MoveSpeed;
-		if(MoveDirection.Y == Axis){
-			//Variables.Selected.transform.position = new Vector3(this.transform.position.x,  curPosition.y  ,this.transform.position.z);
-			if(MoveDir.y >0){
-					speed = -1*speed;
-			}
-			  Variables.Selected.rigidbody.AddRelativeForce(new Vector3(0,speed,0));
-		}else if (MoveDirection.Z == Axis){
-			if(MoveDir.z <0){
-					speed = -1*speed;
-			}
-			//Variables.Selected.transform.position = new Vector3(this.transform.position.x,   this.transform.position.y, curPosition.y);	
-			
-			Variables.Selected.rigidbody.AddRelativeForce(new Vector3(0,0,speed));
-		}else{
-			if(MoveDir.x <0){
-					speed = -1*speed;
-			}
-			//Variables.Selected.transform.position = new Vector3(curPosition.x,  this.transform.position.y  ,this.transform.position.z);	
-			 
-			Variables.Selected.rigidbody.AddRelativeForce(new Vector3(speed,0,0));
-		}	
-		
-		screenPoint = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
-	}
-	
-	
-	// Update is called once per frame
-	/*void OnMouseDown(){
-		//Debug.Log("Click");
-		if(MoveDirection.Y == Axis){
-					//Move Y Axis
-				 	//Variables.Selected.transform.position = new Vector3(this.transform.position.x,  Input.mousePosition.y * MoveSpeed  ,this.transform.position.z);			
-					oldPos = Input.mousePosition.y;
-				}else if (MoveDirection.Z == Axis){
-				// Move Z Axis
-				 	//Variables.Selected.transform.position = new Vector3(this.transform.position.x, this.transform.position.y,Input.mousePosition.y* MoveSpeed );
-					oldPos = Input.mousePosition.y;
-				
-				}else{
-				//Move X Axis
-				 //Variables.Selected.transform.position = new Vector3(this.transform.position.x +((Input.mousePosition.x-oldPos) * MoveSpeed),this.transform.position.y, this.transform.position.z);
-					oldPos = Input.mousePosition.x;
-				}
-	}
-	
-	
-	void  OnMouseDrag () {
-		if (Variables.Selected != null)			
-        {
-					if(MoveDirection.Y == Axis){
-					//Move Y Axis
-				 	Variables.Selected.transform.position = new Vector3(this.transform.position.x,  Input.mousePosition.y * MoveSpeed  ,this.transform.position.z);			
-					oldPos = Input.mousePosition.y;
-				}else if (MoveDirection.Z == Axis){
-				// Move Z Axis
-				 	Variables.Selected.transform.position = new Vector3(this.transform.position.x, this.transform.position.y,Input.mousePosition.y* MoveSpeed );
-					oldPos = Input.mousePosition.y;
-				
-				}else{
-				//Move X Axis
-				 Variables.Selected.transform.position = new Vector3(this.transform.position.x +((Input.mousePosition.x-oldPos) * MoveSpeed),this.transform.position.y, this.transform.position.z);
-					oldPos = Input.mousePosition.x;
-				}
-			
-		}
-		
-	}*/
 
-  
     
 }
