@@ -4,6 +4,7 @@ using System.Collections;
 public class LoadStreet : MonoBehaviour
 {
     public GameObject HousePrefab;
+    public UIAtlas Atlas;
 
     // Use this for initialization
     void Start()
@@ -32,7 +33,10 @@ public class LoadStreet : MonoBehaviour
             // Assign a student name to the house
             house.AddComponent<MeshCollider>();
             house.AddComponent<OpenRoom>();
-            house.GetComponent<OpenRoom>().Room = Street.studentNames[i];
+            house.GetComponent<OpenRoom>().Owner = Street.studentNames[i];
+            house.GetComponent<OpenRoom>().Atlas = Atlas;
+
+            Street.houseList.Add(house);
         }
     }
 }

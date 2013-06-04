@@ -5,34 +5,61 @@ using System.Collections.Generic;
 public class OpenRoom : MonoBehaviour
 {
     Color[] InitialColors;
-    public string Room;
-    bool showLabel = false;
+    public string Owner;
+    public bool ShowLabel
+    {
+        get
+        {
+            return showLabel;
+        }
+        set
+        {
+            showLabel = value;
+            Debug.Log("ShowLabel Changed to:[" + value + "]");
+        }
+    }
+    private bool showLabel = false;
     List<string> menuItems = new List<string>();
     public GameObject ButtonPrefab;
+    public UIAtlas Atlas;
+    private UIPanel listRoot;
+    private UIPanel labelRoot;
 
     // Use this for initialization
     void Start()
     {
+        listRoot = ((GameObject)GameObject.Find("Root")).GetComponent<UIPanel>();
+        labelRoot = ((GameObject)GameObject.Find("LabelRoot")).GetComponent<UIPanel>();
         InitialColors = new Color[gameObject.renderer.materials.Length];
+
+        labelRoot.alpha = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void OnGUI()
-    {
-        if (showLabel)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GUI.Label(new Rect(Screen.width/2-50, Screen.height/4, 100, 20), Room + "'s House");
+            // Restore Meshcolliders
+            foreach (GameObject go in Street.houseList)
+            {
+                MeshCollider mc = go.GetComponent<MeshCollider>();
+                if (mc == null)
+                {
+                    go.AddComponent<MeshCollider>();
+                }
+            }
+
+            listRoot.alpha = 0;
+            labelRoot.alpha = 0;
         }
     }
 
     void OnMouseEnter()
     {
-        showLabel = true;
+        UILabel label = ((GameObject)GameObject.Find("OwnerLabel")).GetComponent<UILabel>();
+        label.text = Owner;
+        labelRoot.alpha = 1;
 
         for (int i = 0; i < gameObject.renderer.materials.Length; i++)
         {
@@ -43,7 +70,10 @@ public class OpenRoom : MonoBehaviour
 
     void OnMouseExit()
     {
-        showLabel = false;
+        if (listRoot.alpha == 0)
+        {
+            labelRoot.alpha = 0;
+        }
 
         for (int i = 0; i < gameObject.renderer.materials.Length; i++)
         {
@@ -58,35 +88,48 @@ public class OpenRoom : MonoBehaviour
 
         // Create Room List
         CreateRoomList(null);
-
-        // Show menu with rooms
-        Street.RoomMenuPanel.alpha = 1f;
     }
 
     void CreateRoomList(List<Room> roomList)
     {
+        GameObject listObject = (GameObject)GameObject.Find("RoomList");
+        UIPopupList list = listObject.GetComponent<UIPopupList>();
+
+        // Remove street colliders to avoid triggering house onclick through the menu
+        foreach (GameObject go in Street.houseList)
+        {
+            MeshCollider mc = go.GetComponent<MeshCollider>();
+            if (mc != null)
+            {
+                Object.Destroy(mc);
+            }
+        }
+
+        // Clear menu
+        list.items.Clear();
+        menuItems.Clear();
+
+        menuItems.Add("Kitchen");
+        menuItems.Add("Bedroom");
+        menuItems.Add("Living Room");
+        menuItems.Add("Hall");
+
+        foreach (string item in menuItems)
+        {
+            list.items.Add(item);
+        }
+
         // Read Rooms belonging to student
-        menuItems.Add("test entry");
-        menuItems.Add("test entry");
-        menuItems.Add("test entry");
-        menuItems.Add("test entry");
-
-        // Resize the panel
-        // TODO: Paging if there are too many rooms
-        GameObject panel = (GameObject)GameObject.Find("RoomMenuSprite");
-        //panel.transform.localScale = new Vector3(200, 45 * menuItems.Count, 1);
-
-        // Add Buttons
-        GameObject ButtonPrefab = (GameObject)Resources.Load("Prefabs/RoomMenuPrefab", typeof(GameObject));
         /*
-        for(int i = 0; i < 1; i++) {
-            UIButton go = (UIButton)Instantiate(ButtonPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            //go.transform.position = new Vector3(panel.transform.position.x + 10, panel.transform.position.y + (25 * i), 0);
-            Debug.Log("Position: " + go.transform.position);
-            go.transform.localScale = new Vector3(0.002f, 0.002f, 0.002f);
-        } */
+        foreach (Room room in roomList)
+        {
+            list.items.Add(room.name);
+        }*/
 
-        UIPopupList list = panel.AddComponent<UIPopupList>();
-        list.items.Add("test");
+        list.highlightColor = Color.blue + Color.cyan;
+        list.selection = "Please choose a room..";
+
+        
+        listRoot.alpha = 1;
     }
 }
