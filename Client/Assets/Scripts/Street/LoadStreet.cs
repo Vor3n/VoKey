@@ -32,10 +32,10 @@ public class LoadStreet : MonoBehaviour
 			house.AddComponent<OpenRoom> ();
 			house.GetComponent<OpenRoom> ().Room = Street.studentNames [i];
 			
-			ChangeHouseColor (house, "WaLL", new Color (0.3f, 0.3f, 0.0f));
-			ChangeHouseColor (house, "Door", new Color (1.0f, 0.5f, 0.0f));
-			ChangeHouseColor (house, "roof", new Color (123, 0.0f, 1.0f));
-			ChangeHouseColor (house, "windows", new Color (0.5f, 0.5f, 255, 1.0f));
+			ChangeHousePartColor (house, "WaLL", new Color (0.3f, 0.3f, 0.0f));
+			ChangeHousePartColor (house, "Door", new Color (1.0f, 0.5f, 0.0f));
+			ChangeHousePartColor (house, "roof", new Color (123, 0.0f, 1.0f));
+			ChangeHousePartColor (house, "windows", new Color (0.5f, 0.5f, 255, 1.0f));
 		}
 	}
 	
