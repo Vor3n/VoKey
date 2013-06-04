@@ -4,6 +4,7 @@ using System.Collections;
 public class LoadStreet : MonoBehaviour
 {
 	public GameObject HousePrefab;
+    public UIAtlas Atlas;
 
 	// Use this for initialization
 	void Start ()
@@ -31,6 +32,9 @@ public class LoadStreet : MonoBehaviour
 			house.AddComponent<MeshCollider> ();
 			house.AddComponent<OpenRoom> ();
 			house.GetComponent<OpenRoom> ().Room = Street.studentNames [i];
+            house.GetComponent<OpenRoom>().Atlas = Atlas;
+
+            Street.houseList.Add(house);
 			
 			ChangeHousePartColor (house, "WaLL", new Color (0.3f, 0.3f, 0.0f));
 			ChangeHousePartColor (house, "Door", new Color (1.0f, 0.5f, 0.0f));
