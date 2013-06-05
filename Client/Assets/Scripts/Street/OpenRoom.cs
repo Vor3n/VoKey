@@ -28,7 +28,7 @@ public class OpenRoom : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        listRoot = ((GameObject)GameObject.Find("Root")).GetComponent<UIPanel>();
+        listRoot = ((GameObject)GameObject.Find("MenuRoot")).GetComponent<UIPanel>();
         labelRoot = ((GameObject)GameObject.Find("LabelRoot")).GetComponent<UIPanel>();
         InitialColors = new Color[gameObject.renderer.materials.Length];
 
@@ -58,7 +58,7 @@ public class OpenRoom : MonoBehaviour
     void OnMouseEnter()
     {
         UILabel label = ((GameObject)GameObject.Find("OwnerLabel")).GetComponent<UILabel>();
-        label.text = Owner;
+        label.text = Owner + "'s House";
         labelRoot.alpha = 1;
 
         for (int i = 0; i < gameObject.renderer.materials.Length; i++)
