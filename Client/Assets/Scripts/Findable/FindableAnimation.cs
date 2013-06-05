@@ -25,11 +25,11 @@ public class FindableAnimation : MonoBehaviour
 				soundAvailable = true;
 			}
 			else{
-				Debug.LogError("There is no audio clip attached to the AudioSource on Findable: " + this.name);
+				Debug.LogWarning("There is no audio clip attached to the AudioSource on Findable: " + this.name);
 			}
 		}
 		else{
-			Debug.LogError("There is no AudioSource component attached on the Finable : " + this.name);
+			Debug.LogWarning("There is no AudioSource component attached on the Finable : " + this.name);
 		}
 	}
 	

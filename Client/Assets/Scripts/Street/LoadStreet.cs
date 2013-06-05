@@ -31,7 +31,7 @@ public class LoadStreet : MonoBehaviour
 			// Assign a student name to the house
 			house.AddComponent<MeshCollider> ();
 			house.AddComponent<OpenRoom> ();
-			house.GetComponent<OpenRoom> ().Room = Street.studentNames [i];
+			house.GetComponent<OpenRoom> ().Owner = Street.studentNames [i];
             house.GetComponent<OpenRoom>().Atlas = Atlas;
 
             Street.houseList.Add(house);
