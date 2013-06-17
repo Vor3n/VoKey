@@ -1,0 +1,46 @@
+using System;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace GuiTest
+{
+	public static class EncryptionUtilities
+	{
+		public static string GenerateSaltedSHA1(string plainTextString)
+		{
+			HashAlgorithm algorithm = new SHA1Managed();
+			byte[] saltBytes = {0x12, 0xb2, 0x72, 0x81};
+			var plainTextBytes = Encoding.ASCII.GetBytes(plainTextString);
+
+			var plainTextWithSaltBytes = AppendByteArray(plainTextBytes, saltBytes);
+			var saltedSHA1Bytes = algorithm.ComputeHash(plainTextWithSaltBytes);
+			var saltedSHA1WithAppendedSaltBytes = AppendByteArray(saltedSHA1Bytes, saltBytes);
+
+			return Convert.ToBase64String(saltedSHA1WithAppendedSaltBytes);
+		} 
+
+
+		private static byte[] GenerateSalt(int saltSize)
+		{
+			var rng = new RNGCryptoServiceProvider();
+			var buff = new byte[saltSize];
+			rng.GetBytes(buff);
+			return buff; 
+		}
+
+		private static byte[] AppendByteArray(byte[] byteArray1, byte[] byteArray2)
+		{
+			var byteArrayResult =
+				new byte[byteArray1.Length + byteArray2.Length];
+
+			for (var i = 0; i < byteArray1.Length; i++)
+				byteArrayResult[i] = byteArray1[i];
+			for (var i = 0; i < byteArray2.Length; i++)
+				byteArrayResult[byteArray1.Length + i] = byteArray2[i];
+
+			return byteArrayResult;
+		}
+
+	}
+}
+
