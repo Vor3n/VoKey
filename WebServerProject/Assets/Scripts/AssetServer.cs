@@ -20,7 +20,7 @@ namespace Vokey
 						}
 				}
 
-				public static string AssetRoot = "/Users/flix/WebServerProject";
+		public static string AssetRoot = "";
 				public static string[] acceptableCommands = {"rooms", "assetbundles", "login", "houses", "file", "favicon.ico"};
 		private static AssetServer myInstance;
 
@@ -79,6 +79,9 @@ namespace Vokey
 			scanForAssetsWorker = new BackgroundWorker ();
 			scanForAssetsWorker.DoWork += ScanForAssetsWorkerWork;
 			readUserData ();
+			string fullPath = System.Reflection.Assembly.GetAssembly (typeof(AssetServer)).Location;
+			AssetRoot = Path.GetDirectoryName (fullPath) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
+
 			//scanForAssetsWorker.
 		}
 
@@ -138,11 +141,10 @@ namespace Vokey
 		/// </summary>
 		public void scanForAssets ()
 		{
-			string fullPath = System.Reflection.Assembly.GetAssembly (typeof(AssetServer)).Location;
+
 			int numBefore = assetBundles.Count;
-			string theDirectory = Path.GetDirectoryName (fullPath) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
-			Log ("location to scan: " + theDirectory);
-			string[] xmlBundleMetaFiles = Directory.GetFiles (theDirectory + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
+			Log ("location to scan: " + AssetRoot);
+			string[] xmlBundleMetaFiles = Directory.GetFiles (AssetRoot + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
 			foreach (string s in xmlBundleMetaFiles) {
 				VokeyAssetBundle vob = VokeyAssetBundle.FromXml (s);
 				if (!assetBundles.Contains (vob))
