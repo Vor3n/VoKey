@@ -140,9 +140,9 @@ namespace Vokey
 		{
 			string fullPath = System.Reflection.Assembly.GetAssembly (typeof(AssetServer)).Location;
 			int numBefore = assetBundles.Count;
-			string theDirectory = Path.GetDirectoryName (fullPath);
-			Log ("location to scan: " + AssetRoot);
-			string[] xmlBundleMetaFiles = Directory.GetFiles (AssetRoot + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
+			string theDirectory = Path.GetDirectoryName (fullPath) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
+			Log ("location to scan: " + theDirectory);
+			string[] xmlBundleMetaFiles = Directory.GetFiles (theDirectory + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
 			foreach (string s in xmlBundleMetaFiles) {
 				VokeyAssetBundle vob = VokeyAssetBundle.FromXml (s);
 				if (!assetBundles.Contains (vob))
