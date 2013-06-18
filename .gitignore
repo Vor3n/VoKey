@@ -1,3 +1,6 @@
+Server/AssetServerGui/bin/
+Server/HttpListenerSettings/bin/
+Server/AssetServer/bin/
 Library
 *.user
 *.suo
@@ -45,3 +48,6 @@ previews
 Icon?
 ehthumbs.db
 Thumbs.db
+Client/Assets/NGUI/Examples/
+Client/Assets/NGUI/Examples.meta
+Client/.xml
