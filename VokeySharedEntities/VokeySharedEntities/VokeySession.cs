@@ -6,6 +6,11 @@ namespace VokeySharedEntities
 	public class VokeySession
 	{
 		public static int sessionTimeout = 3600;
+		public bool isValid {
+			get {
+				return (DateTime.Now < SessionEnd);
+			}
+		}
 		private User user;
 		public DateTime SessionStart;
 		public DateTime SessionEnd {
@@ -24,10 +29,6 @@ namespace VokeySharedEntities
 		{
 			user = u;
 			SessionStart = DateTime.Now;
-		}
-
-		public static bool isValid(VokeySession v){
-			return (DateTime.Now < v.SessionEnd);
 		}
 	}
 }

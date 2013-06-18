@@ -110,6 +110,23 @@ public class Room {
         containedObjects.Add(new FindableObject(g.name, theObject));
     }
 
+	/// <summary>
+	/// Serializes a list of Rooms to XML.
+	/// </summary>
+	/// <returns>The xml representation of the list of rooms</returns>
+	/// <param name="roomsList">Rooms list.</param>
+	public static string SerializeToXML(List<Room> roomsList)
+	{
+		var serializer = new XmlSerializer(typeof(List<Room>));
+		string utf8;
+        using (StringWriter writer = new VokeyAssetBundle.Utf8StringWriter())
+        {
+            serializer.Serialize(writer, roomsList);
+            utf8 = writer.ToString();
+        }
+		return utf8;
+	}
+
     /// <summary>
     /// Serializes a room to Xml
     /// </summary>

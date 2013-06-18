@@ -5,8 +5,23 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
+
+
 namespace Thisiswhytheinternetexists {
 	public static class HashStatics {
+	
+			public static IEnumerable<KeyValuePair<string, string>> AsKVP(
+			this NameValueCollection source
+			)
+		{
+			return source.AllKeys.SelectMany(
+				source.GetValues,
+				(k, v) => new KeyValuePair<string, string>(k, v));
+		}
+
 		public static String GenerateKey(object sourceObject){
 	        String hashString;
 	
