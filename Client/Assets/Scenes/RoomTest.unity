@@ -1167,7 +1167,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 308386833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.999834061, y: -247.5, z: 0}
+  m_LocalPosition: {x: -.499849319, y: -247.5, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 45613879}
@@ -2306,7 +2306,7 @@ Transform:
   m_GameObject: {fileID: 520448234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 757, y: 37.1000023, z: 1}
+  m_LocalScale: {x: 756, y: 37.1000023, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
 --- !u!114 &520448236
@@ -2768,7 +2768,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 600662952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0002079, y: 0, z: 0}
+  m_LocalPosition: {x: -.499849319, y: .5, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 624967130}
@@ -3171,7 +3171,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 714008823}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -379, y: 248.999969, z: 0}
+  m_LocalPosition: {x: -378.499664, y: 248.500061, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 957729390}
@@ -5534,7 +5534,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1341231746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.0002079, y: 248.999969, z: 0}
+  m_LocalPosition: {x: -.499849319, y: 248.500061, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1023899524}
@@ -5838,7 +5838,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1414672601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .5, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children: []
   m_Father: {fileID: 1962000770}
@@ -5858,7 +5858,7 @@ MonoBehaviour:
   mPivot: 4
   mDepth: 1
   mFont: {fileID: 11400000, guid: 4d357aa4fae864e46b20b06e85a062e6, type: 2}
-  mText: Show Other Room
+  mText: Go To Town
   mMaxLineWidth: 0
   mEncoding: 1
   mMaxLineCount: 0
@@ -7052,7 +7052,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1736639802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 371.000122, y: 1.00006104, z: 0}
+  m_LocalPosition: {x: 370.000061, y: 1.00006104, z: 0}
   m_LocalScale: {x: 28, y: 28, z: 1}
   m_Children: []
   m_Father: {fileID: 45613879}
@@ -8080,7 +8080,7 @@ GameObject:
   - 114: {fileID: 1962000771}
   - 114: {fileID: 1962000776}
   m_Layer: 8
-  m_Name: ShowOtherRoomButton
+  m_Name: GoToTownButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

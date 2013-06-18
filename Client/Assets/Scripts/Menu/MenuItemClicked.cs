@@ -7,7 +7,7 @@ public class MenuItemClicked : MonoBehaviour {
 	{
 		ShowAssignment,
 		EditOwnRoom,
-		ShowOtherRooms,
+		GoToTown,
 		ShowClasses,
 		ShowRooms,
 		ShowStudentResults,
@@ -21,7 +21,6 @@ public class MenuItemClicked : MonoBehaviour {
 	}
 	
 	public Item item = Item.CHANGEME;
-	
 
 	void OnClick ()
 	{
@@ -35,35 +34,57 @@ public class MenuItemClicked : MonoBehaviour {
 			
 		}
 		
+		//LOGIN
 		if (item == Item.Login)
 		{
 			GameObject usernamelabel = GameObject.Find("UsernameLabel");
 			UILabel UIusernamelabel = (UILabel)usernamelabel.GetComponent("UILabel");
 			string username = UIusernamelabel.text;
+			
 			GameObject passwordlabel = GameObject.Find("PasswordLabel");
 			UILabel UIpasswordlabel = (UILabel)passwordlabel.GetComponent("UILabel");
 			string password = UIpasswordlabel.text;
-			//do real check here
-			if (password == "student" && username == "student")
+			
+			Login login = new Login(username,password);
+			StartCoroutine(login.startLogin());
+			float elapsedTime = 0.0f;
+			while(!login.isDone)
 			{
-				Application.LoadLevel("RoomTest");
+				elapsedTime += Time.deltaTime;
+				if (elapsedTime >= 2.0f) break;
 			}
-			else if (password == "teach" && username == "teach")
+			
+			
+			Debug.Log("DOREQUEST");
+			DoRequest dr = new DoRequest("assetbundles");
+			StartCoroutine(dr.Request());
+			Debug.Log("DONEREQUEST");
+			elapsedTime = 0.0f;
+			while (!dr.isDone)
 			{
-				Application.LoadLevel("TeacherMenu");
-			}
-			else
-			{
-				Debug.LogError("ELSE EMPTY");
+				elapsedTime += Time.deltaTime;
+				if (elapsedTime >= 2.0f) break;
 			}
 		}
 		
+		//LOGOUT CLICKED
 		if (item == Item.Logout)
 		{
+
 			GameObject surepanel = GameObject.Find("LogoutSurePanel");
 			surepanel.GetComponent<UIPanel>().alpha = 1f;
-			GameObject teachmenu = GameObject.Find("TeacherMainMenu");
-			teachmenu.GetComponent<UIPanel>().alpha = 0f;
+			try
+			{
+				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
+				teachmenu.GetComponent<UIPanel>().alpha = 0f;
+			}
+			catch {}
+			try
+			{
+				GameObject studentmenu = GameObject.Find("StudentMainMenu");
+				studentmenu.GetComponent<UIPanel>().alpha = 0f;
+			}
+			catch {}
 		}
 		
 		if (item == Item.Quit)
@@ -71,17 +92,12 @@ public class MenuItemClicked : MonoBehaviour {
 			Application.Quit();
 		}
 		
-		if (item == Item.ShowOtherRooms)
+		if (item == Item.GoToTown)
 		{
 
 		}
 		
 		if (item == Item.ShowClasses)
-		{
-			
-		}
-		
-		if (item == Item.ShowOtherRooms)
 		{
 			
 		}
