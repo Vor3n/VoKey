@@ -83,6 +83,8 @@ public class OpenRoom : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
+        Debug.Log("Creating Menu");
+
         // Get List of Rooms for Student
         // TODO
 
@@ -127,7 +129,7 @@ public class OpenRoom : MonoBehaviour
         }*/
 
         list.highlightColor = Color.blue + Color.cyan;
-        list.selection = "Please choose a room..";
+        list.selection = "Choose room..";
 
         
         listRoot.alpha = 1;

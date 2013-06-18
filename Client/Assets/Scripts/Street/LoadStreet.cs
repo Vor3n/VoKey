@@ -9,6 +9,7 @@ public class LoadStreet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        // Create the streets
 		CreateSingleStreet (Street.StartingCoordinates);
 
 		// onhover for the houses, each shows a name from array, when array is empty, further houses are 'free'
