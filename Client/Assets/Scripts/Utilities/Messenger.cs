@@ -182,6 +182,30 @@ static internal class Messenger {
         OnListenerAdding(eventType, handler);
         eventTable[eventType] = (Callback<T, U, V>)eventTable[eventType] + handler;
     }
+	
+		//No parameters
+    static public void AddListener(VokeyMessage eventType, Callback handler) {
+        OnListenerAdding(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback)eventTable[eventType.ToString()] + handler;
+    }
+ 
+	//Single parameter
+	static public void AddListener<T>(VokeyMessage eventType, Callback<T> handler) {
+        OnListenerAdding(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T>)eventTable[eventType.ToString()] + handler;
+    }
+ 
+	//Two parameters
+	static public void AddListener<T, U>(VokeyMessage eventType, Callback<T, U> handler) {
+        OnListenerAdding(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T, U>)eventTable[eventType.ToString()] + handler;
+    }
+ 
+	//Three parameters
+	static public void AddListener<T, U, V>(VokeyMessage eventType, Callback<T, U, V> handler) {
+        OnListenerAdding(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T, U, V>)eventTable[eventType.ToString()] + handler;
+    }
 	#endregion
  
 	#region RemoveListener
@@ -212,6 +236,35 @@ static internal class Messenger {
         eventTable[eventType] = (Callback<T, U, V>)eventTable[eventType] - handler;
         OnListenerRemoved(eventType);
     }
+	
+		//No parameters
+    static public void RemoveListener(VokeyMessage eventType, Callback handler) {
+        OnListenerRemoving(eventType.ToString(), handler);   
+        eventTable[eventType.ToString()] = (Callback)eventTable[eventType.ToString()] - handler;
+        OnListenerRemoved(eventType.ToString());
+    }
+ 
+	//Single parameter
+	static public void RemoveListener<T>(VokeyMessage eventType, Callback<T> handler) {
+        OnListenerRemoving(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T>)eventTable[eventType.ToString()] - handler;
+        OnListenerRemoved(eventType.ToString());
+    }
+ 
+	//Two parameters
+	static public void RemoveListener<T, U>(VokeyMessage eventType, Callback<T, U> handler) {
+        OnListenerRemoving(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T, U>)eventTable[eventType.ToString()] - handler;
+        OnListenerRemoved(eventType.ToString());
+    }
+ 
+	//Three parameters
+	static public void RemoveListener<T, U, V>(VokeyMessage eventType, Callback<T, U, V> handler) {
+        OnListenerRemoving(eventType.ToString(), handler);
+        eventTable[eventType.ToString()] = (Callback<T, U, V>)eventTable[eventType.ToString()] - handler;
+        OnListenerRemoved(eventType.ToString());
+    }
+    
 	#endregion
  
 	#region Broadcast
@@ -290,9 +343,18 @@ static internal class Messenger {
             }
         }
     }
+	
+	static public void Broadcast(VokeyMessage vm){
+		Broadcast (vm.ToString());
+	}
+	
+	static public void Broadcast(VokeyMessage vm, string message){
+		Broadcast (vm.ToString (), message);
+	}
+	
 	#endregion
 }
- 
+
 //This manager will ensure that the messenger's eventTable will be cleaned up upon loading of a new level.
 public sealed class MessengerHelper : MonoBehaviour {
 	void Awake ()

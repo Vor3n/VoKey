@@ -17,6 +17,7 @@ public class DoRequest : MonoBehaviour {
 
 	public IEnumerator Request()
 	{
+		isDone = false;
 		Debug.Log("STARTING REQUEST");
 		float elapsedTime = 0.0f;
 		Debug.Log("SENDING THING");
@@ -25,7 +26,6 @@ public class DoRequest : MonoBehaviour {
 		Hashtable htbl = new Hashtable();
 		htbl.Add("Session", GlobalSettings.SessionID);
 		htbl.Add("Content-Type", "text/html");
-		
 		
 		www = new WWW(url, b, htbl);
 		while(!www.isDone)
