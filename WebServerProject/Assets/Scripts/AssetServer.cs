@@ -96,8 +96,6 @@ namespace Vokey
             readUserData();
             string fullPath = System.Reflection.Assembly.GetAssembly(typeof(AssetServer)).Location;
             AssetRoot = Path.GetDirectoryName(fullPath) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
- 
-            //scanForAssetsWorker.
         }
  
         /// <summary>
@@ -112,10 +110,13 @@ namespace Vokey
  
         void readUserData()
         {
-            Users.Add(new User("pascal", "pascal", UserType.Teacher));
+        	User pascal = new User("pascal", "pascal", UserType.Student);
+            Users.Add(pascal);
             Users.Add(new User("student", "student", UserType.Student));
             Users.Add(new User("teacher", "teacher", UserType.Teacher));
             Users.Add(new User("dylan", "dylan", UserType.Teacher));
+            
+            //House h = new House(pascal);
             
             Room r = new Room("Duncan's Living Room");
             Room r2 = new Room("Chillroom");
@@ -423,13 +424,6 @@ namespace Vokey
             }
             return null;
         }
- 
-        /*public static void honden(HttpRequestType type){
-        System.Net.HttpWebRequest wortel = new HttpWebRequest("");
-        //wortel.RequestUri = GlobalSettings.serverURL;
-        wortel.Method = type.ToString();
- 
-        }*/
  
         /// <summary>
         /// Sends the response.
