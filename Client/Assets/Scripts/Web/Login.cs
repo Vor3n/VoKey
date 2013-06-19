@@ -42,7 +42,6 @@ public class Login{
 		
 		if (www.responseHeaders.TryGetValue("SESSION", out output))
 		{
-			Debug.Log ("How many times do I get here?");
 			Messenger.Broadcast (VokeyMessage.LOGIN_OK, output);
 		} else {
 			Messenger.Broadcast (VokeyMessage.LOGIN_FAIL, "We got no session in the reply. User probably entered an incorrect username and/or password.");
