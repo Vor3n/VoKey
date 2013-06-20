@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Xml.Serialization;
 
+namespace VokeySharedEntities
+{
 [System.Serializable]
 public class FindableObject {
     [XmlAttribute("Friendly Name")]
@@ -56,4 +58,5 @@ public class FindableObject {
         rotation = originalInstance.transform.localRotation;
         GameObjectId = new System.Guid(originalInstance.name);
     }
+}
 }

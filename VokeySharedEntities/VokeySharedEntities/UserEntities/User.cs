@@ -2,28 +2,46 @@ using System;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using VokeySharedEntities;
 
 namespace GuiTest
 {
-	public enum UserType {
-		Student,
-		Teacher
-	}
-
 	[System.Serializable]
 	public class User
 	{
-		[XmlAttribute("Name")]
-		public string Name {
+		public enum UserType {
+			[XmlEnum(Name = "Student")]
+			Student,
+			[XmlEnum(Name = "Teacher")]
+			Teacher
+		}
+	
+		[XmlElement("FullName")]
+		public string FullName {
 			get;
 			set;
 		}
+		
+		[XmlAttribute("Username")]
+    	public string username;
 
 		[XmlAttribute("UserType")]
 		public UserType type;
 
-		[XmlAttribute("PasswordHash")]
+		[XmlElement("PasswordHash")]
 		public string PasswordHash {
+			get;
+			set;
+		}
+
+		[XmlAttribute("Town")]
+		public Guid townGuid {
+			get;
+			set;
+		}
+
+		[XmlElement("House")]
+		public House userHouse{
 			get;
 			set;
 		}
@@ -41,6 +59,10 @@ namespace GuiTest
 		public void setPassword(string password){
 			PasswordHash = EncryptionUtilities.GenerateSaltedSHA1 (password);
 		}
+		
+		public User()
+		{
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="GuiTest.User"/> class.
@@ -52,8 +74,26 @@ namespace GuiTest
 			userGuid = Guid.NewGuid ();
 			type = userType;
 			setPassword (password);
-			Name = username;
+			FullName = username;
+			this.username = username;
+			userHouse = new House(this);
 		}
+		
+		/// <summary>
+		/// Initializes a new instance of the <see cref="GuiTest.User"/> class.
+		/// </summary>
+		/// <param name="username">Username.</param>
+		/// <param name="password">Password.</param>
+		public User (string username, string password, string fullName, UserType userType)
+		{
+			userGuid = Guid.NewGuid ();
+			type = userType;
+			setPassword (password);
+			this.username = username;
+			FullName = fullName;
+			userHouse = new House(this);
+		}
+
 
 		public static string SerializeToXML(List<User> userList)
 		{

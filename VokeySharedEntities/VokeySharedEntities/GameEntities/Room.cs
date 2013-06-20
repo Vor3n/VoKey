@@ -1,15 +1,14 @@
-using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
+using UnityEngine;
 using System.Xml;
 using System.Text;
 using System.IO;
 
+namespace VokeySharedEntities
+{
 [System.Serializable]
 public class Room {
-    public static System.Type t = typeof(Room);
-
     [XmlAttribute("Name")]
 	/// <summary>
 	/// The name.
@@ -115,7 +114,7 @@ public class Room {
 	/// </summary>
 	/// <returns>The xml representation of the list of rooms</returns>
 	/// <param name="roomsList">Rooms list.</param>
-	public static string SerializeToXML(List<Room> roomsList)
+	/*public static string SerializeToXML(List<Room> roomsList)
 	{
 		var serializer = new XmlSerializer(typeof(List<Room>));
 		string utf8;
@@ -125,7 +124,7 @@ public class Room {
             utf8 = writer.ToString();
         }
 		return utf8;
-	}
+	}*/
 
     /// <summary>
     /// Serializes a room to Xml
@@ -156,4 +155,5 @@ public class Room {
         }
         return r;
     }
+}
 }

@@ -1,6 +1,9 @@
 using UnityEngine;
 using System.Collections;
 using Vokey;
+using VokeySharedEntities;
+using System.Collections.Generic;
+using GuiTest;
 
 public class ServerScript : MonoBehaviour
 {
