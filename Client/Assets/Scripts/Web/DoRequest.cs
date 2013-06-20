@@ -36,6 +36,7 @@ public class DoRequest : MonoBehaviour {
 		}
 		isDone = www.isDone;
 		response = www.text;
+		Messenger.Broadcast (VokeyMessage.LOGIN_OK, response);
 		Debug.Log("2e request done: " + response);
     }
 }

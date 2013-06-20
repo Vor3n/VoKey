@@ -3100,7 +3100,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1513750897}
-  - 114: {fileID: 1513750899}
+  - 114: {fileID: 1513750898}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -3119,7 +3119,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1513750899
+--- !u!114 &1513750898
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3127,7 +3127,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1513750896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4918cfa4dfdae084aa398e671ebcf8b9, type: 3}
+  m_Script: {fileID: 11500000, guid: b0ac4a51135efa24eae0f22db4857811, type: 3}
   m_Name: 
   ServerURL: http://192.168.1.114:8080/
 --- !u!1 &1583056651
