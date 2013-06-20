@@ -9,6 +9,7 @@ public class LoadStreet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+        // Create the streets
 		CreateSingleStreet (Street.StartingCoordinates);
 
 		// onhover for the houses, each shows a name from array, when array is empty, further houses are 'free'
@@ -30,9 +31,9 @@ public class LoadStreet : MonoBehaviour
 
 			// Assign a student name to the house
 			house.AddComponent<MeshCollider> ();
-			house.AddComponent<OpenRoom> ();
-            house.GetComponent<OpenRoom>().Owner = Street.studentNames[i];
-            house.GetComponent<OpenRoom>().Atlas = Atlas;
+			house.AddComponent<StreetHouse> ();
+            house.GetComponent<StreetHouse>().Owner = Street.studentNames[i];
+            house.GetComponent<StreetHouse>().Atlas = Atlas;
 
             Street.houseList.Add(house);
 			
