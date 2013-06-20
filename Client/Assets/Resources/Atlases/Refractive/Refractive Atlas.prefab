@@ -43,7 +43,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
   m_Name: 
-  material: {fileID: 2100000, guid: e76d0bdab6849b94aa507497bbb96687, type: 2}
+  material: {fileID: 2100000, guid: 8ee1f1f660250214a8192bea0dfcb4b3, type: 2}
   sprites:
   - name: Dark
     outer:
