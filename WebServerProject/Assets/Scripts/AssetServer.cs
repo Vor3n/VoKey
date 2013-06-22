@@ -675,8 +675,6 @@ namespace Vokey
 
             try
             {
-                String s = null;
-                s.Contains("OHAI");
                 if (!isLastInArguments(requestPieces, getInstance().getFirstHandlableAction(request)))
                 {
                     getInstance().Log("Complex request: " + request.Request.Url.ToString());
