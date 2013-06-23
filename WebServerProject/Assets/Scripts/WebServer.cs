@@ -82,12 +82,10 @@ namespace Vokey
                                                                                       }
                                                                                       catch
                                                                                       {
-                                                                                          Console.WriteLine("NEVAR");
                                                                                       } // suppress any exceptions
                                                                                       finally
                                                                                       {
                                                                                           // always close the stream
-                                                                                          Console.WriteLine("NEVARTWO");
                                                                                           try
                                                                                           {
                                                                                               ctx.Response.OutputStream.Close();
