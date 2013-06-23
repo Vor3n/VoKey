@@ -23,10 +23,8 @@ namespace AssemblyCSharp
         /// <param name="content">Content.</param>
         public static void sendStandardResponse(HttpListenerContext request, byte[] content, int requestCode)
         {
-            Console.WriteLine("sendStandardResponse start");
             request.Response.ContentLength64 = content.Length;
             request.Response.OutputStream.Write(content, 0, content.Length);
-            Console.WriteLine("sendStandardResponse stop");
         }
 
         /// <summary>
@@ -36,11 +34,9 @@ namespace AssemblyCSharp
         /// <param name="content">Content.</param>
         public static void sendStandardResponse(HttpListenerContext request, string text, int requestCode)
         {
-            Console.WriteLine("sendStandardResponse start");
             byte[] content = Encoding.UTF8.GetBytes(text);
             request.Response.ContentLength64 = content.Length;
             request.Response.OutputStream.Write(content, 0, content.Length);
-            Console.WriteLine("sendStandardResponse stop");
         }
 
         public static void appendSessionHeaderToResponse(HttpListenerContext hlc, string sessionHash)
@@ -55,11 +51,9 @@ namespace AssemblyCSharp
         /// <param name="data">Data.</param>
         public static void sendFileWithContentType(HttpListenerContext request, string contentType, byte[] data)
         {
-            Console.WriteLine("sendFileWithContentType start");
             request.Response.ContentType = contentType;
             request.Response.ContentLength64 = data.Length;
             request.Response.OutputStream.Write(data, 0, data.Length);
-            Console.WriteLine("sendFileWithContentType stop");
         }
 
         /// <summary>
@@ -104,10 +98,12 @@ namespace AssemblyCSharp
         public static void handleServerException(HttpListenerContext request, Exception e)
         {
             string data = "<HTML>" +
-                "<HEAD><TITLE>Vokey Server</TITLE></HEAD>" +
+            "<HEAD><TITLE>Vokey Server</TITLE></HEAD>" +
             "<BODY>I regret to inform you that your request caused the server to cry like a little girl. " +
-            "Details about what went wrong between you two are the following: <br />Base Exception:<br />{0}<br /><br />Message:<br />{1}</BODY></HTML>";
-            data = string.Format(data, e.GetBaseException().ToString(), e.Message);
+            "Details about what went wrong between you two are the following: <br /><h2>Message:</h2>{1}<h2>Base Exception:</h2>{0}<br /></BODY></HTML>";
+            string formattedException = e.GetBaseException().ToString().Replace(" at ", " <br />at ");
+            formattedException = formattedException.Replace(" in ", " <br />in ");
+            data = string.Format(data, formattedException, e.Message);
             sendStandardResponse(request, Encoding.UTF8.GetBytes(data), 500);
         }
 

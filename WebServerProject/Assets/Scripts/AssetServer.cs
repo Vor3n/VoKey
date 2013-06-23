@@ -28,17 +28,9 @@ namespace Vokey
         }
 
         public static string AssetRoot = "";
-        public static string[] acceptableCommands = {
-						"assetbundles",
-						"login",
-						"town",
-						"street",
-						"house",
-						"room",
-						"file",
-						"user",
-						"favicon.ico"
-				};
+
+        public Dictionary<string, Type> handlers;
+
         private static AssetServer myInstance;
 
         public static AssetServer getInstance()
@@ -76,6 +68,16 @@ namespace Vokey
             }
         }
 
+        public List<VokeyAssetBundle> AssetBundles
+        {
+            get
+            {
+                if (assetBundles == null)
+                    assetBundles = new List<VokeyAssetBundle>();
+                return assetBundles;
+            }
+        }
+
         [XmlArray("Users")]
         [XmlArrayItem("User")]
         public List<User> Users
@@ -106,15 +108,47 @@ namespace Vokey
         public AssetServer()
         {
             myInstance = this;
+            AssetRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(AssetServer)).Location) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
+            handlers = new Dictionary<string, Type>();
+
+            addHandlersForType(new SessionHandler(null));
+            addHandlersForType(new AssetBundleHandler(null));
+            addHandlersForType(new TownHandler(null));
+            addHandlersForType(new WelcomeHandler(null));
+
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
             sessions = new VokeySessionContainer();
             scanForAssetsWorker = new BackgroundWorker();
             scanForAssetsWorker.DoWork += ScanForAssetsWorkerWork;
             readUserData();
-            string fullPath = System.Reflection.Assembly.GetAssembly(typeof(AssetServer)).Location;
-            AssetRoot = Path.GetDirectoryName(fullPath) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
+
         }
+
+        /// <summary>
+        /// Adds the actions that the provided RequestHandler can add to the list of Handlable Requests.
+        /// </summary>
+        /// <param name="rh"></param>
+        public void addHandlersForType(RequestHandler rh)
+        {
+            var type = rh.GetType();
+            foreach (string s in rh.handlableCommands)
+            {
+                handlers.Add(s, type);
+            }
+        }
+
+        /// <summary>
+        /// Creates a RequestHandler
+        /// </summary>
+        /// <param name="theType">The type of RequestHandler to create</param>
+        /// <param name="context">The Request to handle</param>
+        /// <returns></returns>
+        public RequestHandler createHandler(Type theType, HttpListenerContext context)
+        {
+            return (RequestHandler)Activator.CreateInstance(theType, context);
+        }
+
         /// <summary>
         /// Makes the AssetServer Scan for Assets (this is a event handler)
         /// </summary>
@@ -204,10 +238,8 @@ namespace Vokey
                 VokeyAssetBundle vob = VokeyAssetBundle.FromXml(s);
                 if (!assetBundles.Contains(vob))
                     assetBundles.Add(vob);
-
             }
             Log("Number of assets in the bundle after scan: " + assetBundles.Count + "before was: " + numBefore);
-
         }
 
 
@@ -258,57 +290,14 @@ namespace Vokey
             return null;
         }
 
-        /// <summary>
-        /// Handles a file request.
-        /// </summary>
-        /// <param name="request">Request.</param>
-        /// <param name="filename">Filename.</param>
-        public void handleFileRequest(HttpListenerContext request, string filename)
+        public VokeySession getSession(string hash)
         {
-            HttpFunctions.sendStandardResponse(request, Encoding.UTF8.GetBytes(string.Format("<HTML><HEAD><TITLE>Vokey Server</TITLE></HEAD><BODY>" + DateTime.Now.ToShortTimeString() + " {0}</BODY></HTML>", DateTime.Now)));
+            return sessions.getSession(hash);
         }
 
-        public Dictionary<string, string> getPostDataFromRequest(HttpListenerContext hlc)
+        public string CreateVokeySession(User u)
         {
-            Dictionary<string, string> formData = new Dictionary<string, string>();
-            if (hlc.Request.HasEntityBody)
-            {
-
-                System.IO.Stream body = hlc.Request.InputStream;
-                System.Text.Encoding encoding = hlc.Request.ContentEncoding;
-                System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
-
-                if (hlc.Request.ContentType.ToLower() == "application/x-www-form-urlencoded")
-                {
-                    string s = reader.ReadToEnd();
-                    string[] pairs = s.Split('&');
-                    for (int x = 0; x < pairs.Length; x++)
-                    {
-                        string[] item = pairs[x].Split('=');
-                        formData.Add(item[0], item[1]);
-                        //UnityEngine.Debug.Log ("Form data: " + item[0] + " = " + item[1]);
-                    }
-                }
-                else
-                {
-                    foreach (string s in hlc.Request.Headers)
-                    {
-                        //UnityEngine.Debug.Log ("Request data: " + s + " = " + hlc.Request.Headers[s]);
-                        formData.Add(s, hlc.Request.Headers[s]);
-                    }
-                }
-
-                body.Close();
-                reader.Close();
-
-            }
-            else
-            {
-
-                formData = null;
-            }
-            return formData;
-
+            return sessions.CreateVokeySession(u);
         }
 
         /// <summary>
@@ -318,7 +307,7 @@ namespace Vokey
         /// <param name="argument">Argument.</param>
         public static bool argumentHandleable(string argument)
         {
-            return (argument == "user" || argument == "room" || argument == "assetbundles" || argument == "town" || argument == "street" || argument == "login" || argument == "house" || argument == "file" || argument == "favicon.ico");
+            return getInstance().handlers.ContainsKey(argument);
         }
 
         public static bool isLastInArguments(string[] arguments, string item)
@@ -333,78 +322,6 @@ namespace Vokey
             }
             Console.WriteLine("SMACK SOMEONE WITH AN ERASER. THERE IS SOMETHING VERY WRONG.");
             return false;
-        }
-
-        public void handleSimpleRequest(HttpListenerContext hlc, Dictionary<string, string> formData, VokeySession vs)
-        {
-            string requestUri = hlc.Request.Url.ToString();
-            string[] requestPieces = requestUri.Split('/');
-            //This means we want a list or favicon.ico
-            switch (getFirstHandlableAction(hlc))
-            {
-                case "town":
-                    hlc.returnXmlStringToClient(getInstance().TownList.ToXml());
-                    break;
-                case "favicon.ico":
-                    MemoryStream ms = null;
-                    try
-                    {
-                        using (FileStream fileStream = File.OpenRead(AssetRoot + Path.DirectorySeparatorChar + "AssetBundles/favicon.ico"))
-                        {
-                            ms.SetLength(fileStream.Length);
-                            fileStream.Read(ms.GetBuffer(), 0, (int)fileStream.Length);
-                        }
-                        //System.Drawing.Image img = System.Drawing.Image.FromFile ("AssetBundles/favicon.ico");
-                        //img.Save (ms, System.Drawing.Imaging.ImageFormat.Gif);
-                    }
-                    catch
-                    {
-                    }
-                    HttpFunctions.sendFileWithContentType(hlc, "image/vnd.microsoft.icon", ms.ToArray());
-                    break;
-                case "houses":
-
-                    //getInstance ().getAssetListAndReturnToHttpClient (hlc);
-                    break;
-                case "assetbundles":
-                    hlc.returnXmlStringToClient(assetBundles.ToXml());
-                    break;
-                case "user":
-                    HttpFunctions.sendTextResponse(hlc, "Only teachers may request a list of users!", 403);
-                    break;
-                case "login":
-                    if (formData.ContainsKey("username") && formData.ContainsKey("password"))
-                    {
-                        string username = null, password = null;
-                        formData.TryGetValue("username", out username);
-                        formData.TryGetValue("password", out password);
-                        User u = getInstance().TryLogin(username, password);
-                        if (u != null)
-                        {
-                            string s = getInstance().sessions.CreateVokeySession(u);
-                            HttpFunctions.appendSessionHeaderToResponse(hlc, s);
-                            HttpFunctions.sendTextResponse(hlc, "OK");
-                        }
-                        else
-                        {
-                            HttpFunctions.sendTextResponse(hlc, "JE LOGIN IS INVALIDE", 403);
-                        }
-                    }
-                    HttpFunctions.sendTextResponse(hlc, "JIJ BENT INVALIDE", 403);
-                    break;
-                case "logout":
-                    if (formData.ContainsKey("session"))
-                    {
-                        string sessionHash = null;
-                        formData.TryGetValue("session", out sessionHash);
-                        VokeySession v = getInstance().sessions.getSession(sessionHash);
-                        //v.InvalidateSession ();
-                    }
-                    break;
-                default:
-                    HttpFunctions.sendTextResponse(hlc, "Resource not found. Welcome to reality.", 404);
-                    break;
-            }
         }
 
         public void handleComplexRequest(HttpListenerContext hlc, Dictionary<string, string> formData, VokeySession vs)
@@ -464,21 +381,6 @@ namespace Vokey
                             }
                             break;
                     }
-                    break;
-                case "room":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the room is the owner
-                            //put room
-                            //return ok
-                            break;
-                        case "GET":
-                            //lookup room in collection
-                            break;
-                    }
-
-
                     break;
                 case "house":
                     switch (hlc.Request.HttpMethod)
@@ -610,9 +512,9 @@ namespace Vokey
         /// <returns><c>true</c>, if login was correct, <c>false</c> otherwise.</returns>
         /// <param name="username">Username.</param>
         /// <param name="password">Password.</param>
-        public User TryLogin(string username, string password)
+        public static User TryLogin(string username, string password)
         {
-            foreach (Town t in TownList)
+            foreach (Town t in AssetServer.getInstance().TownList)
             {
                 if (t.ContainsUser(username))
                 {
@@ -626,7 +528,7 @@ namespace Vokey
                 }
             }
 
-            foreach (User u in Users)
+            foreach (User u in AssetServer.getInstance().Users)
             {
                 if (u.username == username)
                 {
@@ -653,37 +555,21 @@ namespace Vokey
         {
             string requestUri = request.Request.Url.ToString();
             string[] requestPieces = requestUri.Split('/');
-            string session = "";
-            VokeySession vs = null;
-            Dictionary<string, string> formData = getInstance().getPostDataFromRequest(request);
-
-            if (formData != null && formData.ContainsKey("Session"))
-            {
-                formData.TryGetValue("Session", out session);
-                vs = getInstance().sessions.getSession(session);
-                if (vs != null)
-                {
-                    getInstance().Log("Session ID: " + vs.SessionHash);
-                    vs.heartBeat();
-                }
-
-            }
-            else
-            {
-                getInstance().Log("No session or form data provided");
-            }
+            AssetServer instance = getInstance();
 
             try
             {
-                if (!isLastInArguments(requestPieces, getInstance().getFirstHandlableAction(request)))
+                String firstHandlableAction = instance.getFirstHandlableAction(request);
+                if (instance.handlers.ContainsKey(firstHandlableAction))
                 {
-                    getInstance().Log("Complex request: " + request.Request.Url.ToString());
-                    getInstance().handleComplexRequest(request, formData, vs);
+                    Type typeOfHandler = null;
+                    instance.handlers.TryGetValue(firstHandlableAction, out typeOfHandler);
+                    RequestHandler r = instance.createHandler(typeOfHandler, request);
+                    r.handleRequest();
                 }
                 else
                 {
-                    getInstance().Log("Simple request: " + request.Request.Url.ToString());
-                    getInstance().handleSimpleRequest(request, formData, vs);
+                    throw new Exception("No handler defined for the action: " + firstHandlableAction);
                 }
             }
             catch (Exception e)
