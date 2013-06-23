@@ -10,13 +10,13 @@ namespace VokeySharedEntities
 		
 		public bool IsTeacher {
 			get {
-				return (user.type == User.UserType.Teacher);
+				return (_user.type == User.UserType.Teacher);
 			}
 		}
 		
 		public bool IsStudent {
 			get {
-				return (user.type == User.UserType.Student);
+				return (_user.type == User.UserType.Student);
 			}
 		}
 		
@@ -31,7 +31,13 @@ namespace VokeySharedEntities
 			SessionStart.AddMinutes(30);
 		}
 		
-		private User user;
+		public User User{
+			get {
+				return _user;
+			}
+		}
+		
+		private User _user;
 		public DateTime SessionStart;
 		public DateTime SessionEnd {
 			get {
@@ -41,13 +47,13 @@ namespace VokeySharedEntities
 
 		public string SessionHash {
 			get {
-				return EncryptionUtilities.GenerateSaltedSHA1("" + SessionStart.ToString () + user.username);
+				return EncryptionUtilities.GenerateSaltedSHA1("" + SessionStart.ToString () + _user.username);
 			}
 		}
 
 		public VokeySession (User u)
 		{
-			user = u;
+			_user = u;
 			SessionStart = DateTime.Now;
 		}
 		
