@@ -18,7 +18,7 @@ namespace VokeySharedEntities
 			return utf8;
 		}
 		
-		public static List<T> FromXml<T>(T arg1, string xml){
+		public static List<T> FromXml<T>(string xml){
 			var serializer = new XmlSerializer(typeof(T));
 			List<T> deserializedList;
 	        using (StringReader reader = new StringReader(xml))
