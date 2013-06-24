@@ -28,7 +28,7 @@ namespace VokeySharedEntities
 		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public static T FromXml<T>(string xml)
 		{
-			return (T)new XmlSerializer(typeof(T)).Deserialize(new StreamReader(xml));
+			return (T)new XmlSerializer(typeof(T)).Deserialize(new StringReader(xml));
 		}
 		
 		/// <summary>
