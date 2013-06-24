@@ -80,7 +80,7 @@ public class ItemManager : MonoBehaviour {
 		WWW www;
 		Debug.Log("SENDING FORM");
 		
-		www = new WWW(url + "/assetbundles" );
+	www = new WWW(url + "/assetbundle" );
 		while(!www.isDone)
 		{
 			elapsedTime += Time.deltaTime;

@@ -54,7 +54,7 @@ public class MenuItemClicked : MonoBehaviour {
 				if (elapsedTime >= 2.0f) break;
 			}
 		}
-		
+		if(item == Item.Logout)
 		//LOGOUT CLICKED
 		{
 			GameObject usernamelabel = GameObject.Find("UsernameLabel");
@@ -76,7 +76,7 @@ public class MenuItemClicked : MonoBehaviour {
 			{
 				Debug.LogError("ELSE EMPTY");
 			}
-		}
+		
 
 			GameObject surepanel = GameObject.Find("LogoutSurePanel");
 			surepanel.GetComponent<UIPanel>().alpha = 1f;
@@ -114,10 +114,7 @@ public class MenuItemClicked : MonoBehaviour {
 			
 		}
 		
-		if (item == Item.ShowOtherRooms)
-		{
-			
-		}
+	
 		
 		if (item == Item.ShowRooms)
 		{
