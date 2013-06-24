@@ -115,6 +115,7 @@ namespace Vokey
             addHandlersForType(new AssetBundleHandler(null));
             addHandlersForType(new TownHandler(null));
             addHandlersForType(new WelcomeHandler(null));
+            addHandlersForType(new StreetHandler(null));
 
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
@@ -122,6 +123,7 @@ namespace Vokey
             scanForAssetsWorker = new BackgroundWorker();
             scanForAssetsWorker.DoWork += ScanForAssetsWorkerWork;
             readUserData();
+            scanForAssets();
 
         }
 
@@ -177,6 +179,8 @@ namespace Vokey
             t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Teacher));
             t1.addUser(new User("Daniel", "Plopjes", User.UserType.Teacher));
             t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
+            t1.addUser(new User("student", "student", User.UserType.Student));
+            t1.addUser(new User("teacher", "teacher", User.UserType.Teacher));
             t1.addStreet(new Street("Flevolaan", Street.StreetType.Residential));
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
             t1.addStreet(s);
@@ -184,8 +188,7 @@ namespace Vokey
 
             User pascal = new User("pascal", "pascal", User.UserType.Teacher);
             Users.Add(pascal);
-            Users.Add(new User("student", "student", User.UserType.Student));
-            Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
+
             Users.Add(new User("dylan", "dylan", User.UserType.Teacher));
 
             //Room r = new Room("Duncan's Living Room");
@@ -285,7 +288,7 @@ namespace Vokey
             foreach (Town t in TownList)
             {
                 foreach (Street s in t.getShoppingStreets()) foreach (House h in s.houses) if (h.id == houseId) return h;
-                foreach (Street s in t.getPupilStreets()) foreach (House h in s.houses) if (h.id == houseId) return h;
+                foreach (Street s in t.pupilStreets) foreach (House h in s.houses) if (h.id == houseId) return h;
             }
             return null;
         }

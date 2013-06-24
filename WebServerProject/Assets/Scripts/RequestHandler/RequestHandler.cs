@@ -74,7 +74,7 @@ public class RequestHandler {
         }
     }
 
-    protected Dictionary<string, string> Headers;
+    protected Dictionary<string, string> Headers = null;
 
     protected HttpListenerContext context;
 
@@ -83,20 +83,25 @@ public class RequestHandler {
     /// </summary>
     /// <param name="hlc">The HttpListenerContext to handle</param>
     /// <param name="commands">The commands that this handler is able to process.</param>
-    public RequestHandler(HttpListenerContext hlc, string[] commands)
-    {
-        Dictionary<string, string> headerData = null;
-        if(hlc != null) GetHeadersFromRequest(hlc.Request);
-        string sessId = null;
-        if (headerData != null && headerData.ContainsKey("Session"))
-        {
-            headerData.TryGetValue("Session", out sessId);
-            session = AssetServer.getInstance().getSession(sessId);
-            if (session != null)
-            {
-                session.heartBeat();
-            }
+    public RequestHandler (HttpListenerContext hlc, string[] commands)
+		{
+				if (hlc != null) {
+						context = hlc;
+						Headers = GetHeadersFromRequest (hlc.Request);
+						string sessId = null;
+						if (Headers != null && Headers.ContainsKey ("Session")) {
+								Headers.TryGetValue ("Session", out sessId);
+								session = AssetServer.getInstance ().getSession (sessId);
+	            
+								if (session != null) {
+										UnityEngine.Debug.Log ("Client authenticated using session " + session.SessionHash);
+										session.heartBeat ();
+								}
+						} else {
+						UnityEngine.Debug.Log ("No session provided with reuest");
+						}
         }
+        
 
         if (_handlableCommandsList == null)
         {
@@ -104,11 +109,7 @@ public class RequestHandler {
             _handlableCommandsList.AddRange(commands);
         }
 
-        if (hlc != null)
-        {
-            context = hlc;
-            Headers = GetHeadersFromRequest(hlc.Request);
-        }
+
     }
 
     /// <summary>
