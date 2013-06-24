@@ -18,15 +18,14 @@ public class GameControllerScript : MonoBehaviour {
 	void LoginHandler(string sessionId, User.UserType usertype){
 		GlobalSettings.SessionID = sessionId;
 		GlobalSettings.usertype = usertype;
-		int i = 0;
-		switch(i)
+		switch(GlobalSettings.usertype)
 		{
 			//student
-			case 1:
+			case User.UserType.Student:
 				Application.LoadLevel("StreetTest");
 			break;
 			//docent
-			case 2:
+			case User.UserType.Teacher:
 				Application.LoadLevel("TeachMenu");
 			break;
 			default:

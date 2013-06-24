@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VokeySharedEntities;
 
 public class Street : MonoBehaviour {
     public static List<string> studentNames = new List<string>();
