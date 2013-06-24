@@ -182,7 +182,7 @@ namespace Vokey
             t1.addStreet(s);
             TownList.Add(t1);
 
-            User pascal = new User("pascal", "pascal", User.UserType.Student);
+            User pascal = new User("pascal", "pascal", User.UserType.Teacher);
             Users.Add(pascal);
             Users.Add(new User("student", "student", User.UserType.Student));
             Users.Add(new User("teacher", "teacher", User.UserType.Teacher));

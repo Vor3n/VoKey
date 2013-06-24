@@ -74,20 +74,19 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
---- !u!1 &1191324920
+--- !u!1 &809293777
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1191324925}
-  - 20: {fileID: 1191324924}
-  - 92: {fileID: 1191324923}
-  - 124: {fileID: 1191324922}
-  - 81: {fileID: 1191324921}
-  - 114: {fileID: 1191324926}
-  - 114: {fileID: 1191324927}
+  - 4: {fileID: 809293782}
+  - 20: {fileID: 809293781}
+  - 92: {fileID: 809293780}
+  - 124: {fileID: 809293779}
+  - 81: {fileID: 809293778}
+  - 114: {fileID: 809293783}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -95,33 +94,33 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1191324921
+--- !u!81 &809293778
 AudioListener:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_Enabled: 1
---- !u!124 &1191324922
+--- !u!124 &809293779
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_Enabled: 1
---- !u!92 &1191324923
+--- !u!92 &809293780
 Behaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_Enabled: 1
---- !u!20 &1191324924
+--- !u!20 &809293781
 Camera:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
@@ -144,51 +143,24 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_HDR: 0
---- !u!4 &1191324925
+--- !u!4 &809293782
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
---- !u!114 &1191324926
+--- !u!114 &809293783
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
+  m_GameObject: {fileID: 809293777}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae6714634ed0845049cde903c489f693, type: 3}
   m_Name: 
---- !u!114 &1191324927
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1191324920}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 442d2cfb38928cf4fa6404fe547d5299, type: 3}
-  m_Name: 
-  includeFile: Plugins\CSI\CSharpInterpreter_Include.txt
-  includeAsset: {fileID: 0}
-  queuedAsset: {fileID: 0}
-  maxHistorySize: 100
-  maxOutputSize: 15250
-  showInteractiveGUI: 1
-  showOutputText: 1
-  showOutputAsEditorSelection: 1
-  showTooltipText: 1
-  leftMargin: NaN
-  topMargin: NaN
-  rightMargin: NaN
-  bottomMargin: NaN
-  toolboxWidth: 45
-  splitterFraction: 75
-  maxOutputLineWidth: 32000
-  maxOutputLineCount: 80

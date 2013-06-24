@@ -20,6 +20,18 @@ namespace VokeySharedEntities
 		}
 		
 		/// <summary>
+		/// Forms an item of the specified type form it's serialized form.
+		/// </summary>
+		/// <returns>The xml.</returns>
+		/// <param name="arg1">Arg1.</param>
+		/// <param name="xml">Xml.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
+		public static T FromXml<T>(string xml)
+		{
+			return (T)new XmlSerializer(typeof(T)).Deserialize(new StreamReader(xml));
+		}
+		
+		/// <summary>
 		/// Serializes a Room to XML
 		/// </summary>
 		/// <returns>The xml.</returns>

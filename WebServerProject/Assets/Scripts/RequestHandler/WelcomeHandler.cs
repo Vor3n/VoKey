@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using Vokey;
+using VokeySharedEntities;
 
 public class WelcomeHandler : RequestHandler
 {
@@ -25,6 +26,8 @@ public class WelcomeHandler : RequestHandler
         {
             availableActions += "<li><a href=\"" + s + "\">View " + getPlural(s) + "</a></li>";
         }
+        
+        Room r;
         HttpFunctions.sendTextResponse(context, responseBegin + availableActions + responseEnd, 404);
     }
 
