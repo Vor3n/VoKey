@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+using GuiTest;
 
 public class Login{
 	
@@ -39,10 +41,14 @@ public class Login{
 		
 		isDone = www.isDone;
 		string output;
+		string usertype;
+		foreach(string key in www.responseHeaders.Keys){
+			Debug.Log("Key: " + key + " Value: " + www.responseHeaders[key] );
+		}
 		
-		if (www.responseHeaders.TryGetValue("SESSION", out output))
+		if (www.responseHeaders.TryGetValue("SESSION", out output) && www.responseHeaders.TryGetValue("USERTYPE", out usertype))
 		{
-			Messenger.Broadcast (VokeyMessage.LOGIN_OK, output);
+			Messenger.Broadcast (VokeyMessage.LOGIN_OK, output, (User.UserType)Enum.Parse(typeof(User.UserType), usertype));
 		} else {
 			Messenger.Broadcast (VokeyMessage.LOGIN_FAIL, "We got no session in the reply. User probably entered an incorrect username and/or password.");
 		}

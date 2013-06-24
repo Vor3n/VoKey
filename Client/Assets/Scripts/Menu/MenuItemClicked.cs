@@ -53,18 +53,6 @@ public class MenuItemClicked : MonoBehaviour {
 				elapsedTime += Time.deltaTime;
 				if (elapsedTime >= 2.0f) break;
 			}
-			
-			
-			Debug.Log("DOREQUEST");
-			DoRequest dr = new DoRequest("assetbundles");
-			StartCoroutine(dr.Request());
-			Debug.Log("DONEREQUEST");
-			elapsedTime = 0.0f;
-			while (!dr.isDone)
-			{
-				elapsedTime += Time.deltaTime;
-				if (elapsedTime >= 2.0f) break;
-			}
 		}
 		
 		//LOGOUT CLICKED
