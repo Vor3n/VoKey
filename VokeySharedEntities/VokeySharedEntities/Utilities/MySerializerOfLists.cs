@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Xml.Serialization;
+using System.Xml;
 
 namespace VokeySharedEntities
 {
@@ -19,7 +20,17 @@ namespace VokeySharedEntities
 		}
 		
 		public static List<T> FromXml<T>(string xml){
-			var serializer = new XmlSerializer(typeof(T));
+			/*string rootElementName = "";
+			using (XmlReader reader = XmlReader.Create(new StringReader(xml))) {
+			    while (reader.Read()) {
+			      // first element is the root element
+			      if (reader.NodeType == XmlNodeType.Element) {
+			        rootElementName = reader.Name;
+			        break;
+			      }
+			    }
+			  }*/
+			var serializer = new XmlSerializer(typeof(List<T>));
 			List<T> deserializedList;
 	        using (StringReader reader = new StringReader(xml))
 	        {
