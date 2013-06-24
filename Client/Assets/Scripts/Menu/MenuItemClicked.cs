@@ -54,10 +54,29 @@ public class MenuItemClicked : MonoBehaviour {
 				if (elapsedTime >= 2.0f) break;
 			}
 		}
-		
+		if(item == Item.Logout)
 		//LOGOUT CLICKED
-		if (item == Item.Logout)
 		{
+			GameObject usernamelabel = GameObject.Find("UsernameLabel");
+			UILabel UIusernamelabel = (UILabel)usernamelabel.GetComponent("UILabel");
+			string username = UIusernamelabel.text;
+			GameObject passwordlabel = GameObject.Find("PasswordLabel");
+			UILabel UIpasswordlabel = (UILabel)passwordlabel.GetComponent("UILabel");
+			string password = UIpasswordlabel.text;
+			//do real check here
+			if (password == "student" && username == "student")
+			{
+				Application.LoadLevel("RoomTest");
+			}
+			else if (password == "teach" && username == "teach")
+			{
+				Application.LoadLevel("TeacherMenu");
+			}
+			else
+			{
+				Debug.LogError("ELSE EMPTY");
+			}
+		
 
 			GameObject surepanel = GameObject.Find("LogoutSurePanel");
 			surepanel.GetComponent<UIPanel>().alpha = 1f;
@@ -87,8 +106,15 @@ public class MenuItemClicked : MonoBehaviour {
 		
 		if (item == Item.ShowClasses)
 		{
+
+		}
+		
+		if (item == Item.ShowClasses)
+		{
 			
 		}
+		
+	
 		
 		if (item == Item.ShowRooms)
 		{
