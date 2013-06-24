@@ -347,9 +347,14 @@ static internal class Messenger {
 	static public void Broadcast(VokeyMessage vm){
 		Broadcast (vm.ToString());
 	}
-	
-	static public void Broadcast(VokeyMessage vm, string message){
-		Broadcast (vm.ToString (), message);
+	static public void Broadcast<T>(VokeyMessage vm, T arg1){
+		Broadcast (vm.ToString (), arg1);
+	}
+	static public void Broadcast<T, U>(VokeyMessage vm, T arg1, U arg2){
+		Broadcast (vm.ToString (), arg1, arg2);
+	}	
+	static public void Broadcast<T, U, V>(VokeyMessage vm, T arg1, U arg2, V arg3){
+		Broadcast (vm.ToString (), arg1, arg2, arg3);
 	}
 	
 	#endregion
