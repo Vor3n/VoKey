@@ -188,9 +188,9 @@ namespace Vokey
             Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
             Users.Add(new User("dylan", "dylan", User.UserType.Teacher));
 
-            Room r = new Room("Duncan's Living Room");
-            Room r2 = new Room("Chillroom");
-            Room r3 = new Room("Pascal's werkkamer");
+            //Room r = new Room("Duncan's Living Room");
+            //Room r2 = new Room("Chillroom");
+            //Room r3 = new Room("Pascal's werkkamer");
         }
         /// <summary>
         /// Adds the user.

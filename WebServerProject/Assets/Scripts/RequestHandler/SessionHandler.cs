@@ -34,7 +34,9 @@ public class SessionHandler : RequestHandler {
                         if (u != null)
                         {
                             string s = AssetServer.getInstance().CreateVokeySession(u);
-                            HttpFunctions.appendSessionHeaderToResponse(context, s);
+                            UnityEngine.Debug.Log("Session created: " + s);
+                            HttpFunctions.addSessionHeaderToResponse(context, s);
+                            HttpFunctions.addHeaderToResponse(context, "UserType", u.type.ToString());
                             HttpFunctions.sendTextResponse(context, "OK");
                         }
                         else

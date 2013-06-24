@@ -39,9 +39,14 @@ namespace AssemblyCSharp
             request.Response.OutputStream.Write(content, 0, content.Length);
         }
 
-        public static void appendSessionHeaderToResponse(HttpListenerContext hlc, string sessionHash)
+        public static void addSessionHeaderToResponse(HttpListenerContext hlc, string sessionHash)
         {
-            hlc.Response.AppendHeader("session", sessionHash);
+            addHeaderToResponse(hlc, "session", sessionHash);
+        }
+        
+        public static void addHeaderToResponse(HttpListenerContext hlc, string key, string value)
+        {
+            hlc.Response.AppendHeader(key, value);
         }
         /// <summary>
         /// Sends a file and uses the provided content type.
