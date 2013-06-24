@@ -2,9 +2,11 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 public class ItemManager : MonoBehaviour {
 	public InitializeItem Item;
 	public UIGrid Grid;
+	public string URL;
 	
 	public Dictionary<string, string> ItemList;
 	List<GameObject> Children;
@@ -13,18 +15,11 @@ public class ItemManager : MonoBehaviour {
 	void Start () {
 		Children = new List<GameObject>();
 		ItemList = new Dictionary<string, string>();
-		ItemList.Add("Harv", "1111");
-		ItemList.Add("Barf", "1111");
-		ItemList.Add("Clardf", "1111");
-		ItemList.Add("Narf", "1111");
-		ItemList.Add("Blarf", "1111");
-		ItemList.Add("Garf", "1111");
-		ItemList.Add("Iarf", "1111");
-		ItemList.Add("Rarf", "1111");
-		ItemList.Add("Quarf", "1111");
-		ItemList.Add("Parf", "1111");
+		
 	
 		CreateItems(ItemList);
+		  StartCoroutine(RetrieveItems(URL));
+   		
 	}
 	
 	// Update is called once per frame
@@ -45,7 +40,11 @@ public class ItemManager : MonoBehaviour {
 			obj.name = IT.Key;
 			Children.Add(obj);
 		}
-		
+		try{
+			this.gameObject.GetComponent<SpringPanel>().enabled = true;
+			this.gameObject.GetComponent<SpringPanel>().target = new Vector3(0,-13,0);
+		}
+		catch{}
 		Grid.repositionNow = true;
 	}
 	
@@ -71,7 +70,46 @@ public class ItemManager : MonoBehaviour {
 		}else{
 			CreateItems(ItemList);			
 		}
+		
 		Grid.repositionNow = true;
 		
+	}
+	
+	public IEnumerator RetrieveItems(string url){
+		float elapsedTime = 0.0f;
+		WWW www;
+		Debug.Log("SENDING FORM");
+		
+		www = new WWW(url + "/assetbundles" );
+		while(!www.isDone)
+		{
+			elapsedTime += Time.deltaTime;
+			if (elapsedTime >= 1.9f) break;
+			yield return www;
+		}
+		//isDone = www.isDone;
+		//response = www.responseHeaders;
+		
+		//Debug.Log("hoi"+www.text);		
+		XmlDocument xml = new XmlDocument();
+		xml.LoadXml(www.text);
+		XmlNodeList List =  xml.SelectNodes("//ArrayOfVokeyAssetBundle/VokeyAssetBundle/VokeyAssets/VokeyAsset");
+		foreach( XmlNode XN in List){
+			//Debug.Log("" + XN.Attributes["Name"].Value);	
+			if(XN.Attributes["Type"].Value == "UnityEngine.GameObject"){
+				Debug.Log("" + XN.Attributes["Name"].Value);
+				ItemList.Add(XN.Attributes["Name"].Value, XN.Attributes["Hash"].Value);
+	
+			}
+		}
+		CreateItems(ItemList);
+		//return "";
+			
+		/*string output;
+		if (www.responseHeaders.TryGetValue("SESSION", out output))
+		{
+			GlobalSettings.SessionID = output;
+			Debug.Log("SESSIONID: " + GlobalSettings.SessionID);
+		}*/
 	}
 }
