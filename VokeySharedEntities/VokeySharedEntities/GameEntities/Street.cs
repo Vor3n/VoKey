@@ -35,10 +35,12 @@ namespace VokeySharedEntities
     
     public Street()
 		{
+		houses = new List<House>();
 		}
     
     public Street(string name, StreetType type)
 		{
+		houses = new List<House>();
 		this.name = name;
 		this.type = type;
 		id = Guid.NewGuid();

@@ -29,12 +29,47 @@ namespace VokeySharedEntities
 	/// </summary>
     public List<Street> streets;
     
-    public List<Street> getPupilStreets()
+    public List<Street> getFilledStreets()
 	{
 		List<Street> result = new List<Street>();
-		
 		return result;
 	}
+	
+	private List<Street> _pupStreets = null;
+	
+	[XmlIgnore]
+	public List<Street> pupilStreets {
+		get {
+			if(_pupStreets == null) {
+				_pupStreets = new List<Street> ();
+				foreach (Street s in streets) {
+					if(s.type == Street.StreetType.Residential) {
+						_pupStreets.Add (s);
+					}
+				}
+				foreach (User p in pupils) {
+					addPupilToFirstAvaliableStreet (p);
+				}
+			}
+			return _pupStreets;
+		}
+		set {
+			_pupStreets = value;
+		}
+	}
+	
+	public void addPupilToFirstAvaliableStreet(User pupil)
+		{
+			foreach (Street s in _pupStreets) {
+				if(s.type == Street.StreetType.Residential) {
+					if(s.houses.Count < 10) {
+						s.addHouse(pupil.userHouse);
+						return;
+					}
+				}
+			}
+			UnityEngine.Debug.LogError("No streets available to stuff pupils in!");
+		}
 	
 	public Town()
 		{
@@ -56,7 +91,6 @@ namespace VokeySharedEntities
 	public List<Street> getShoppingStreets()
 	{
 		List<Street> result = new List<Street>();
-		
 		return result;
 	}
 		
@@ -76,6 +110,31 @@ namespace VokeySharedEntities
     	u.townGuid = id;
     	pupils.Add (u);
 	}
+	
+		public bool ContainsStreet(Guid id)
+		{
+			foreach (Street s in streets) {
+				if(s.id == id) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public Street getStreet(Guid id)
+		{
+			foreach (Street s in pupilStreets) {
+				if(s.id == id) {
+					return s;
+				}
+			}
+			/*foreach (Street s in pupilStreets) {
+				if(s.id == id) {
+					return s;
+				}
+			}*/
+			throw new Exception("The specified street is not found in this town.");
+		}
 	
 	public bool ContainsUser(string username)
 		{
