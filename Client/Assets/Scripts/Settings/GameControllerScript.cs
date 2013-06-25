@@ -19,8 +19,8 @@ public class GameControllerScript : MonoBehaviour {
 	
 	void LoginHandler(string sessionId, User.UserType usertype){
 		GlobalSettings.SessionID = sessionId;
-		GlobalSettings.usertype = usertype;
-		switch(GlobalSettings.usertype)
+		GlobalSettings.UserType = usertype;
+		switch(GlobalSettings.UserType)
 		{
 			//student
 			case User.UserType.Student:
@@ -34,6 +34,7 @@ public class GameControllerScript : MonoBehaviour {
 			break;
 		}
 		//GetAssetBundlesFromServer();
+		GetAssetBundlesFromServer();
 	}
 	
 	void LoginFailHandler(string message){
