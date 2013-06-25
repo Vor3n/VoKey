@@ -57,7 +57,7 @@ public class FindableObject {
         scale = originalInstance.transform.localScale;
         rotation = originalInstance.transform.localRotation;
         GameObjectId = new System.Guid(originalInstance.name);
-        id = System.Guid.NewGuid().ToString("D");
+        id = System.Guid.NewGuid();
     }
 }
 }

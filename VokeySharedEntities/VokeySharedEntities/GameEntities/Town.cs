@@ -31,8 +31,10 @@ namespace VokeySharedEntities
     
     public List<Street> getFilledStreets()
 	{
-		List<Street> result = new List<Street>();
-		return result;
+		List<Street> total = new List<Street>();
+		total.AddRange (_residentialStreets);
+		total.AddRange(_educationalStreets);
+		return total;
 	}
 	
 	private List<Street> _residentialStreets = null;
@@ -92,26 +94,20 @@ namespace VokeySharedEntities
 		}
 	
 	public Town()
-		{
-		}
+	{
+	}
 	
 	/// <summary>
 	/// Initializes a new instance of the <see cref="VokeySharedEntities.Town"/> class.
 	/// </summary>
 	/// <param name="townName">Town name.</param>
 	/// <param name="classroomName">Classroom name.</param>
-	public Town(string townName, string classroomName){
+	public Town(string townName, string classroomName) {
 		pupils =  new List<User>();
 		streets = new List<Street>();
 		id = Guid.NewGuid();
 		this.classroomName = classroomName;
 		this.name = townName;
-	}
-	
-	public List<Street> getShoppingStreets()
-	{
-		List<Street> result = new List<Street>();
-		return result;
 	}
 		
     /// <summary>
@@ -157,11 +153,11 @@ namespace VokeySharedEntities
 					UnityEngine.Debug.Log (s.id + " does not match " + id);
 				}
 			}
-			/*foreach (Street s in pupilStreets) {
+			foreach (Street s in educationalStreets) {
 				if(s.id == id) {
 					return s;
 				}
-			}*/
+			}
 			throw new Exception("The specified street is not found in this town.");
 		}
 	
