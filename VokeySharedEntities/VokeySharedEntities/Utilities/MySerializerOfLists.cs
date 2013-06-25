@@ -8,6 +8,12 @@ namespace VokeySharedEntities
 {
 	public static class MySerializerOfLists
 	{
+		/// <summary>
+		/// Tos the xml.
+		/// </summary>
+		/// <returns>The xml.</returns>
+		/// <param name="items">Items.</param>
+		/// <typeparam name="T">The 1st type parameter.</typeparam>
 		public static string ToXml<T>(this List<T> items){
 			var serializer = new XmlSerializer(items.GetType());
 			string utf8;
@@ -19,6 +25,12 @@ namespace VokeySharedEntities
 			return utf8;
 		}
 		
+		/// <summary>
+		/// Deserialises a list of Objects of Type T.
+		/// </summary>
+		/// <returns>The xml.</returns>
+		/// <param name="xml">Xml.</param>
+		/// <typeparam name="T">The deserialised item.</typeparam>
 		public static List<T> FromXml<T>(string xml){
 			/*string rootElementName = "";
 			using (XmlReader reader = XmlReader.Create(new StringReader(xml))) {

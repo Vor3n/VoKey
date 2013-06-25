@@ -35,32 +35,52 @@ namespace VokeySharedEntities
 		return result;
 	}
 	
-	private List<Street> _pupStreets = null;
+	private List<Street> _residentialStreets = null;
 	
 	[XmlIgnore]
-	public List<Street> pupilStreets {
+	public List<Street> residentialStreets {
 		get {
-			if(_pupStreets == null) {
-				_pupStreets = new List<Street> ();
+			if(_residentialStreets == null) {
+				_residentialStreets = new List<Street> ();
 				foreach (Street s in streets) {
 					if(s.type == Street.StreetType.Residential) {
-						_pupStreets.Add (s);
+						_residentialStreets.Add (s);
 					}
 				}
 				foreach (User p in pupils) {
 					addPupilToFirstAvaliableStreet (p);
 				}
 			}
-			return _pupStreets;
+			return _residentialStreets;
 		}
 		set {
-			_pupStreets = value;
+			_residentialStreets = value;
+		}
+	}
+	
+	private List<Street> _educationalStreets = null;
+	
+	[XmlIgnore]
+	public List<Street> educationalStreets {
+		get {
+			if(_educationalStreets == null) {
+				_educationalStreets = new List<Street> ();
+				foreach (Street s in streets) {
+					if(s.type == Street.StreetType.Educational) {
+						_educationalStreets.Add (s);
+					}
+				}
+			}
+			return _educationalStreets;
+		}
+		set {
+			_educationalStreets = value;
 		}
 	}
 	
 	public void addPupilToFirstAvaliableStreet(User pupil)
 		{
-			foreach (Street s in _pupStreets) {
+			foreach (Street s in _residentialStreets) {
 				if(s.type == Street.StreetType.Residential) {
 					if(s.houses.Count < 10) {
 						s.addHouse(pupil.userHouse);
@@ -98,8 +118,15 @@ namespace VokeySharedEntities
     /// Adds the street.
     /// </summary>
     /// <param name="s">S.</param>
-    public void addStreet(Street s){
-    	streets.Add (s);
+    public void addStreet(Street s)
+		{
+			if(s.type == Street.StreetType.Educational) {
+				streets.Add (s);
+				educationalStreets.Add (s);
+			} else {
+				streets.Add (s);
+				residentialStreets.Add (s);
+			}
 	}
 	
 	    /// <summary>
@@ -123,9 +150,11 @@ namespace VokeySharedEntities
 		
 		public Street getStreet(Guid id)
 		{
-			foreach (Street s in pupilStreets) {
+			foreach (Street s in residentialStreets) {
 				if(s.id == id) {
 					return s;
+				} else {
+					UnityEngine.Debug.Log (s.id + " does not match " + id);
 				}
 			}
 			/*foreach (Street s in pupilStreets) {
