@@ -82,15 +82,15 @@ namespace VokeySharedEntities
 	
 	public void addPupilToFirstAvaliableStreet(User pupil)
 		{
-			foreach (Street s in _residentialStreets) {
+			foreach (Street s in residentialStreets) {
 				if(s.type == Street.StreetType.Residential) {
 					if(s.houses.Count < 10) {
-						s.addHouse(pupil.userHouse);
+						s.addHouse (pupil.userHouse);
 						return;
 					}
 				}
 			}
-			UnityEngine.Debug.LogError("No streets available to stuff pupils in!");
+			UnityEngine.Debug.LogError("No streets available to stuff pupils in! Number of streets: " + residentialStreets.Count);
 		}
 	
 	public Town()
@@ -118,10 +118,10 @@ namespace VokeySharedEntities
 		{
 			if(s.type == Street.StreetType.Educational) {
 				streets.Add (s);
-				educationalStreets.Add (s);
+				if(_educationalStreets != null) educationalStreets.Add (s);
 			} else {
 				streets.Add (s);
-				residentialStreets.Add (s);
+				if(_residentialStreets != null) residentialStreets.Add (s);
 			}
 	}
 	

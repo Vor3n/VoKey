@@ -98,7 +98,6 @@ namespace Vokey
             {
                 LogMessage(DateTime.Now.ToLongTimeString() + ": " + message);
             }
-
         }
 
         private List<VokeyAssetBundle> assetBundles;
@@ -164,32 +163,39 @@ namespace Vokey
         void readUserData()
         {
             Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-
+			s.addHouse(new House("Baka", "Store to buy bakas"));
+			
             Town t = new Town("Lazytown", "TIV4A");
-            t.addUser(new User("Felix", "Felix", "Felix Mann", User.UserType.Student));
-            t.addUser(new User("KimJongUn", "cd1001", "Kim Jong Un", User.UserType.Student));
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
             t.addStreet(new Street("Rubenslaan", Street.StreetType.Residential));
             t.addStreet(s);
+            
+            t.addUser(new User("Felix", "Felix", "Felix Mann", User.UserType.Student));
+            t.addUser(new User("KimJongUn", "cd1001", "Kim Jong Un", User.UserType.Student));
+
             TownList.Add(t);
 
             Town t1 = new Town("BossTown", "TIV4B");
-            t1.addUser(new User("LeovM", "leooo", "Leo van Moergestel", User.UserType.Teacher));
-            t1.addUser(new User("MartenWensink", "mw", "Marten Wensink", User.UserType.Teacher));
-            t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Teacher));
-            t1.addUser(new User("Daniel", "Plopjes", User.UserType.Teacher));
-            t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
-            t1.addUser(new User("student", "student", User.UserType.Student));
-            t1.addUser(new User("teacher", "teacher", User.UserType.Teacher));
             t1.addStreet(new Street("Flevolaan", Street.StreetType.Residential));
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
             t1.addStreet(s);
+            
+            t1.addUser(new User("LeovM", "leooo", "Leo van Moergestel", User.UserType.Student));
+            t1.addUser(new User("MartenWensink", "mw", "Marten Wensink", User.UserType.Student));
+            t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Student));
+            t1.addUser(new User("dylan", "dylan", "Dylan Snel", User.UserType.Student));
+            t1.addUser(new User("duncan", "duncan", "Duncan Jenkins", User.UserType.Student));
+            t1.addUser(new User("Daniel", "Plopjes", User.UserType.Student));
+            t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
+            t1.addUser(new User("student", "student", User.UserType.Student));
+            t1.addUser(new User("alex", "student", "Alexander Streng", User.UserType.Student));
+            t1.addUser(new User("rscheefh", "student", "Roy Scheefhals", User.UserType.Student));
+            t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
+
             TownList.Add(t1);
-
-            User pascal = new User("pascal", "pascal", User.UserType.Teacher);
-            Users.Add(pascal);
-
-            Users.Add(new User("dylan", "dylan", User.UserType.Teacher));
+            
+            Users.Add (new User("teacher", "teacher", User.UserType.Teacher));
+            Users.Add(new User("pascal", "pascal", User.UserType.Teacher));
 
             //Room r = new Room("Duncan's Living Room");
             //Room r2 = new Room("Chillroom");
@@ -279,16 +285,6 @@ namespace Vokey
             foreach (User u in Users)
             {
                 if (u.username == username) return u;
-            }
-            return null;
-        }
-
-        public House getHouseByHouseGuid(Guid houseId)
-        {
-            foreach (Town t in TownList)
-            {
-                foreach (Street s in t.getShoppingStreets()) foreach (House h in s.houses) if (h.id == houseId) return h;
-                foreach (Street s in t.educationalStreets) foreach (House h in s.houses) if (h.id == houseId) return h;
             }
             return null;
         }
@@ -386,35 +382,7 @@ namespace Vokey
                             break;
                     }
                     break;
-                case "house":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            if (requestUri.EndsWith("/") || requestUri.EndsWith("list") || requestUri.EndsWith("list/"))
-                            {
-                                //IF STREET PROVIDED RETURN ALL HOUSES IN THE STREET
-                                //IF NO STREET PROVIDED RETURN ALL HOUSES IN TOWN
-                            }
-                            else
-                            {
-                                House h = null;
-                                try
-                                {
-                                    h = getInstance().getHouseByHouseGuid(new Guid(splitArrayFromHandlableAction(requestUri)[1]));
-                                }
-                                catch { }
-                                if (h != null) HttpFunctions.returnXmlStringToHttpClient(hlc, h.ToXml());
-                                else HttpFunctions.sendStandardResponse(hlc, "GUID NOT FOUND", 404);
-                            }
-                            break;
-                    }
-
-                    break;
+              
                 case "user":
                     switch (hlc.Request.HttpMethod)
                     {
@@ -466,22 +434,6 @@ namespace Vokey
                     }
 
                     break;
-                case "street":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            //lookup street in collection
-                            break;
-                        case "POST":
-                            //update street in collection
-                            break;
-                    }
-                    break;
                 default:
                     HttpFunctions.sendTextResponse(hlc, "Resource not found. Welcome to reality.<br />Available actions are:<br /><ul><li><a href=\"town\">View towns</a></li><li><a href=\"user\">View users</a></li></ul>", 404);
                     break;
@@ -500,7 +452,6 @@ namespace Vokey
         public string[] splitArrayFromHandlableAction(string arguments)
         {
             string[] requestPieces = arguments.Split('/');
-            UnityEngine.Debug.Log("Split into " + requestPieces.Length + " pieces.");
             List<string> actionPieces = new List<string>();
             int begin = 0;
             for (; begin < requestPieces.Length; begin++)

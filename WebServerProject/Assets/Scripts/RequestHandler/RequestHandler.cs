@@ -19,6 +19,18 @@ public class RequestHandler {
             return _handlableCommandsList;
         }
     }
+    
+    public string Content {
+				get {
+				    	if(context != null){
+				    	    System.IO.Stream body = context.Request.InputStream;
+					        System.Text.Encoding encoding = context.Request.ContentEncoding;
+					        System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
+							return reader.ReadToEnd();
+					   	}
+					   	return "";
+				}
+    }
 
     protected VokeySession session = null;
 
@@ -50,7 +62,6 @@ public class RequestHandler {
     public string[] splitArrayFromHandlableAction(string arguments)
     {
         string[] requestPieces = arguments.Split('/');
-        UnityEngine.Debug.Log("Split into " + requestPieces.Length + " pieces.");
         List<string> actionPieces = new List<string>();
         int begin = 0;
         for (; begin < requestPieces.Length; begin++)
