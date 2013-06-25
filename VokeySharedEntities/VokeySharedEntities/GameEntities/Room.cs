@@ -108,52 +108,5 @@ public class Room {
         theObject.name = System.Guid.NewGuid().ToString("D");
         containedObjects.Add(new FindableObject(theObject.name, theObject));
     }
-
-	/// <summary>
-	/// Serializes a list of Rooms to XML.
-	/// </summary>
-	/// <returns>The xml representation of the list of rooms</returns>
-	/// <param name="roomsList">Rooms list.</param>
-	/*public static string SerializeToXML(List<Room> roomsList)
-	{
-		var serializer = new XmlSerializer(typeof(List<Room>));
-		string utf8;
-        using (StringWriter writer = new VokeyAssetBundle.Utf8StringWriter())
-        {
-            serializer.Serialize(writer, roomsList);
-            utf8 = writer.ToString();
-        }
-		return utf8;
-	}*/
-
-    /// <summary>
-    /// Serializes a room to Xml
-    /// </summary>
-    /// <param name="r"></param>
-    /// <returns></returns>
-    public static string ToXml(Room r)
-    {
-        System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(r.GetType());
-        StringBuilder sb = new StringBuilder();
-        XmlWriter xw = XmlWriter.Create(sb);
-        x.Serialize(xw, r);
-        return sb.ToString();
-    }
-
-    /// <summary>
-    /// Instantiates a room from Xml
-    /// </summary>
-    /// <param name="d"></param>
-    /// <returns></returns>
-    public static Room FromXml(XmlDocument d)
-    {
-        Room r;
-        using (XmlReader reader = XmlReader.Create(new StringReader(d.InnerXml)))
-        {
-            reader.MoveToContent();
-            r = (Room)new XmlSerializer(typeof(Room)).Deserialize(reader);
-        }
-        return r;
-    }
 }
 }
