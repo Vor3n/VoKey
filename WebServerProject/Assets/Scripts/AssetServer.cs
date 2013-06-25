@@ -288,7 +288,7 @@ namespace Vokey
             foreach (Town t in TownList)
             {
                 foreach (Street s in t.getShoppingStreets()) foreach (House h in s.houses) if (h.id == houseId) return h;
-                foreach (Street s in t.pupilStreets) foreach (House h in s.houses) if (h.id == houseId) return h;
+                foreach (Street s in t.educationalStreets) foreach (House h in s.houses) if (h.id == houseId) return h;
             }
             return null;
         }
@@ -340,6 +340,7 @@ namespace Vokey
                         case "PUT":
                             StreamReader reader = new StreamReader(hlc.Request.InputStream);
                             String inputContent = reader.ReadToEnd();
+                            UnityEngine.Debug.Log("Got input data to put. " + inputContent);
 
                             if (vs != null && vs.isValid)
                             {
@@ -556,10 +557,7 @@ namespace Vokey
         /// <param name="request">Request.</param>
         public static byte[] SendResponse(HttpListenerContext request)
         {
-            string requestUri = request.Request.Url.ToString();
-            string[] requestPieces = requestUri.Split('/');
             AssetServer instance = getInstance();
-
             try
             {
                 String firstHandlableAction = instance.getFirstHandlableAction(request);

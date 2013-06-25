@@ -30,12 +30,6 @@ public class ServerScript : MonoBehaviour
         Debug.Log(obj);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     void OnGUI()
     {
         if (GUI.Button(new Rect(10, 10, 120, 20), StartStopButtonText))
@@ -44,9 +38,9 @@ public class ServerScript : MonoBehaviour
             else
                 ws.Start();
 
-        if (GUI.Button(new Rect(130, 10, 130, 20), "Scan for assets"))
+        if (GUI.Button(new Rect(130, 10, 130, 20), "Ik doe niks"))
         {
-            ws.scanForAssets();
+			UnityEngine.Debug.Log ("KNOPJEDRUK");
         }
     }
 }

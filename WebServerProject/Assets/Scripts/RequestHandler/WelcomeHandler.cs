@@ -27,7 +27,6 @@ public class WelcomeHandler : RequestHandler
             availableActions += "<li><a href=\"" + s + "\">View " + getPlural(s) + "</a></li>";
         }
         
-        Room r;
         HttpFunctions.sendTextResponse(context, responseBegin + availableActions + responseEnd, 404);
     }
 
