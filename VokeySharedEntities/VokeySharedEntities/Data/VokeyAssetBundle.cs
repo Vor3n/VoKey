@@ -119,9 +119,7 @@ public class VokeyAssetBundle
 				VokeyAsset va = new VokeyAsset();
 				va.resource = o;
 				a.objects.Add (va);
-			} else {
-				UnityEngine.Debug.Log ("Object is nog a GameObject " + o.GetType().ToString());
-			}
+			} 
 		}
 		return a;
 	}
