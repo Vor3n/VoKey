@@ -22,10 +22,6 @@ public class ItemManager : MonoBehaviour {
    		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 	
 	void CreateItems(Dictionary<string,string> Items){
 		
@@ -36,8 +32,8 @@ public class ItemManager : MonoBehaviour {
 			obj.transform.parent = Grid.gameObject.transform;
 			obj.transform.localScale = new Vector3(1,1,1);
 			obj.SetActive(true);
-			obj.GetComponent<InitializeItem>().InitialiseItem(IT.Key,IT.Value);
-			obj.name = IT.Key;
+			obj.GetComponent<InitializeItem>().InitialiseItem(IT.Value,IT.Key);
+			obj.name = IT.Value;
 			Children.Add(obj);
 		}
 		try{
@@ -98,7 +94,8 @@ public class ItemManager : MonoBehaviour {
 			//Debug.Log("" + XN.Attributes["Name"].Value);	
 			if(XN.Attributes["Type"].Value == "UnityEngine.GameObject"){
 				Debug.Log("" + XN.Attributes["Name"].Value);
-				ItemList.Add(XN.Attributes["Name"].Value, XN.Attributes["Hash"].Value);
+				ItemList.Add( XN.Attributes["Hash"].Value,XN.Attributes["Name"].Value);
+				
 	
 			}
 		}

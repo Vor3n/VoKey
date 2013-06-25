@@ -106,7 +106,7 @@ public class Room {
         Quaternion rot = theObject.transform.rotation;
         theObject.transform.rotation = rot * Quaternion.Euler(rotation.x, rotation.y, rotation.z);
         theObject.name = System.Guid.NewGuid().ToString("D");
-        containedObjects.Add(new FindableObject(g.name, theObject));
+        containedObjects.Add(new FindableObject(theObject.name, theObject));
     }
 
 	/// <summary>
