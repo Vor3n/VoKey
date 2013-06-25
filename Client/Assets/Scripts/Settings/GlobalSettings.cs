@@ -29,7 +29,7 @@ public static class GlobalSettings{
 				PlayerPrefs.SetString("SessionID", value);
 		}
 	}
-	public static User.UserType usertype
+	public static User.UserType UserType
 	{
 		get
 		{

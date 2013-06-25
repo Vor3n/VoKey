@@ -42,9 +42,10 @@ public class Login{
 		isDone = www.isDone;
 		string output;
 		string usertype;
+        /*
 		foreach(string key in www.responseHeaders.Keys){
 			Debug.Log("Key: " + key + " Value: " + www.responseHeaders[key] );
-		}
+		}*/
 		
 		if (www.responseHeaders.TryGetValue("SESSION", out output) && www.responseHeaders.TryGetValue("USERTYPE", out usertype))
 		{
