@@ -5,6 +5,19 @@ using GuiTest;
 public class GameControllerScript : MonoBehaviour {
 	
 	public string ServerURL;
+    public static string RoomToOpen
+    {
+        get
+        {
+            return roomToOpen;
+        }
+        set
+        {
+            Debug.Log("Room to open changed to: " + RoomToOpen);
+            roomToOpen = value;
+        }
+    }
+    private static string roomToOpen = string.Empty;
 	
 	// Use this for initialization
 	void Start () {

@@ -21,31 +21,34 @@ public class LoadStreet : MonoBehaviour
 
         // Get town object
         town = GetVokeyObject<Town>("town");
-        Debug.Log("Town: " + town.name + ", ID: " + town.id);
-        int counter = 0;
-        foreach (VokeySharedEntities.Street s in town.streets)
+        if (town != null)
         {
-            if (counter++ == 2) break;
-            Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
-            VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
-            Street.Streets.Add(street);
-        }
+            //Debug.Log("Town: " + town.name + ", ID: " + town.id);
+            int counter = 0;
+            foreach (VokeySharedEntities.Street s in town.streets)
+            {
+                if (counter++ == 2) break;
+                Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
+                VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
+                Street.Streets.Add(street);
+            }
 
-        // foreach street contained in town object
-        for (int i = 0; i < Street.Streets.Count; i++)
-        {
-            // Create road
-            GameObject road = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            road.transform.position = roadPosition;
-            road.transform.localScale = new Vector3(5, 1, 200);
-            road.name = "Road";
-            MeshRenderer mr = road.GetComponent<MeshRenderer>();
-            mr.material = Resources.Load("Materials/Concrete_Block_8x8_Gray_") as Material;
+            // foreach street contained in town object
+            for (int i = 0; i < Street.Streets.Count; i++)
+            {
+                // Create road
+                GameObject road = GameObject.CreatePrimitive(PrimitiveType.Plane);
+                road.transform.position = roadPosition;
+                road.transform.localScale = new Vector3(5, 1, 200);
+                road.name = "Road";
+                MeshRenderer mr = road.GetComponent<MeshRenderer>();
+                mr.material = Resources.Load("Materials/Concrete_Block_8x8_Gray_") as Material;
 
-            // Create the streets
-            CreateSingleStreet(streetPosition, Street.Streets[i].houses);
-            streetPosition.x -= Street.StreetIncrement;
-            roadPosition.x -= Street.StreetIncrement;
+                // Create the streets
+                CreateSingleStreet(streetPosition, Street.Streets[i].houses);
+                streetPosition.x -= Street.StreetIncrement;
+                roadPosition.x -= Street.StreetIncrement;
+            }
         }
     }
 
@@ -91,7 +94,8 @@ public class LoadStreet : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(response.error))
             {
-                Messenger.Broadcast(VokeyMessage.REQUEST_FAIL, response.error);
+                //Messenger.Broadcast(VokeyMessage.REQUEST_FAIL, response.error);
+                return;
             }
         }
 
@@ -102,19 +106,19 @@ public class LoadStreet : MonoBehaviour
 
     void CreateSingleStreet(Vector3 StartingCoordinates, List<House> Houses)
     {
-        Debug.Log("Creating a Street with " + Houses.Count + " Houses");
+        //Debug.Log("Creating a Street with " + Houses.Count + " Houses");
         Quaternion rot = Quaternion.Euler(new Vector3(-90, -90, 0));
         for (int i = 0; i < Houses.Count; i++)
         {
             GameObject house = (GameObject)Instantiate(HousePrefab, StartingCoordinates + new Vector3(0, 0, i * Street.HouseIncrement), rot);
             house.name = Houses[i].name;
-            Debug.Log("House @ " + house.transform.position);
+            //Debug.Log("House @ " + house.transform.position);
 
             // Assign a student name to the house
             house.AddComponent<MeshCollider>();
             house.AddComponent<StreetHouse>();
-            house.GetComponent<StreetHouse>().Owner = Houses[i].name;
             house.GetComponent<StreetHouse>().Atlas = Atlas;
+            house.GetComponent<StreetHouse>().House = Houses[i];
 
             Street.HouseList.Add(house);
 

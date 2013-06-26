@@ -19,6 +19,10 @@ public class OpenRoom : MonoBehaviour
 
     void OnClick()
     {
-        Debug.Log("HAI: " + i++);
+        // Get the list
+        GameObject listObject = (GameObject)GameObject.Find("RoomList");
+        UIPopupList list = listObject.GetComponent<UIPopupList>();
+
+        Debug.Log("HAI: " + list.selection); // Find out which index we currently have selected
     }
 }
