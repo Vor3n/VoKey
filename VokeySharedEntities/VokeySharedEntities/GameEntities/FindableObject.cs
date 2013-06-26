@@ -66,7 +66,7 @@ public class FindableObject {
     }
 
     [XmlAttribute("Position")]
-    private SerializableVector3 _position;
+    public SerializableVector3 _position;
 
     [XmlIgnore]
     /// <summary>
@@ -87,7 +87,7 @@ public class FindableObject {
         }
     }
     [XmlAttribute("Scale")]
-    private SerializableVector3 _scale;
+    public SerializableVector3 _scale;
 
     [XmlIgnore]
 	/// <summary>
@@ -107,11 +107,11 @@ public class FindableObject {
             _rotation.y = value.y;
             _rotation.z = value.z;
         }
-		}
+	}
 		
 		
 	[XmlAttribute("Rotation")]	
-	private SerializableQuaternion _rotation;
+	public SerializableQuaternion _rotation;
     [XmlAttribute("LinkedObject")]
 	/// <summary>
 	/// The game object identifier.
