@@ -20,7 +20,7 @@ public class DynamicContentHandler : RequestHandler
 		hrp.AddElementToHead(new CssLinkElement("../file/Welloe.css"));
 		Table t = new Table();
 		t.addRow (new TableRow("tableheader", new TableCell("Name"), new TableCell("Username"), new TableCell("Awesomeness"))); 
-		t.addRow (new TableRow(new TableCell("Adolf"), new TableCell("Fuhrer"), new TableCell("Nein"))); 
+		t.addRow (new TableRow(new TableCell("Adolf"), new TableCell("Jantje"), new TableCell("Nein"))); 
 		t.addRow (new TableRow(new TableCell("Felix"), new TableCell("Mann"), new TableCell("Ja"))); 
 		t.addRow (new TableRow(new TableCell("Pascal"), new TableCell("Schotman"), new TableCell("Ja"))); 
 		t.addRow (new TableRow(new TableCell("Dylan"), new TableCell("Snel"), new TableCell("Ja"))); 
