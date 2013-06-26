@@ -42,12 +42,9 @@ namespace Vokey
 
         public enum HttpRequestType
         {
-            POST
-,
-            GET
-,
-            DELETE
-,
+            POST,
+            GET,
+            DELETE,
             PUT
         }
 
@@ -115,7 +112,8 @@ namespace Vokey
             addHandlersForType(new TownHandler(null));
             addHandlersForType(new WelcomeHandler(null));
             addHandlersForType(new StreetHandler(null));
-
+            addHandlersForType(new RoomHandler(null));
+            addHandlersForType(new FileHandler(null));
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
             sessions = new VokeySessionContainer();
@@ -163,13 +161,13 @@ namespace Vokey
         void readUserData()
         {
             Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-			s.addHouse(new House("Baka", "Store to buy bakas"));
-			
+            s.addHouse(new House("Baka", "Store to buy bakas"));
+
             Town t = new Town("Lazytown", "TIV4A");
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
             t.addStreet(new Street("Rubenslaan", Street.StreetType.Residential));
             t.addStreet(s);
-            
+
             t.addUser(new User("Felix", "Felix", "Felix Mann", User.UserType.Student));
             t.addUser(new User("KimJongUn", "cd1001", "Kim Jong Un", User.UserType.Student));
 
@@ -179,7 +177,7 @@ namespace Vokey
             t1.addStreet(new Street("Flevolaan", Street.StreetType.Residential));
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
             t1.addStreet(s);
-            
+
             t1.addUser(new User("LeovM", "leooo", "Leo van Moergestel", User.UserType.Student));
             t1.addUser(new User("MartenWensink", "mw", "Marten Wensink", User.UserType.Student));
             t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Student));
@@ -193,8 +191,8 @@ namespace Vokey
             t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
 
             TownList.Add(t1);
-            
-            Users.Add (new User("teacher", "teacher", User.UserType.Teacher));
+
+            Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
             Users.Add(new User("pascal", "pascal", User.UserType.Teacher));
 
             //Room r = new Room("Duncan's Living Room");
@@ -257,6 +255,15 @@ namespace Vokey
             foreach (Town t in TownList) if (t.id == id) return t;
             return null;
         }
+        
+        public Guid townClassNameExists (string townClassName)
+		{
+		    foreach (Town t in TownList)
+            {
+				if(t.classroomName == townClassName) return t.id;
+            }
+            return Guid.Empty;
+		}
 
         public User getUser(Guid id)
         {
@@ -276,6 +283,21 @@ namespace Vokey
             return null;
         }
 
+        public Street getStreet(Guid id)
+        {
+            foreach (Town t in TownList)
+            {
+                foreach (Street sim in t.getFilledStreets())
+                {
+                    if (sim.id == id)
+                    {
+                        return sim;
+                    }
+                }
+            }
+            throw new Exception("Invalid street specified!");
+        }
+
         public User getUser(string username)
         {
             foreach (Town t in TownList)
@@ -293,7 +315,19 @@ namespace Vokey
         {
             return sessions.getSession(hash);
         }
-
+   
+		public void Delete<T> (Guid g)
+		{
+			switch (typeof(T).ToString ()) {
+				case "Town":
+				case "VokeySharedEntities.Town":
+					TownList.Remove (getTown(g));
+				break;
+			default:
+				throw new Exception("Deleting " + typeof(T).ToString () + " is not yet supported.");
+			}
+		}
+		
         public string CreateVokeySession(User u)
         {
             return sessions.CreateVokeySession(u);
@@ -323,124 +357,7 @@ namespace Vokey
             return false;
         }
 
-        public void handleComplexRequest(HttpListenerContext hlc, Dictionary<string, string> formData, VokeySession vs)
-        {
-            string requestUri = hlc.Request.Url.ToString();
-            string handleableAction = getFirstHandlableAction(hlc);
-            getInstance().Log("Handleable Action: " + handleableAction);
-            switch (handleableAction)
-            {
-                case "assetbundles":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            StreamReader reader = new StreamReader(hlc.Request.InputStream);
-                            String inputContent = reader.ReadToEnd();
-                            UnityEngine.Debug.Log("Got input data to put. " + inputContent);
-
-                            if (vs != null && vs.isValid)
-                            {
-                                UnityEngine.Debug.Log("Session is valid! " + vs.SessionHash);
-                            }
-                            else
-                            {
-                                UnityEngine.Debug.Log("Session is invalid :(! " + vs.SessionHash);
-                            }
-                            //check if we are teacher
-                            //check if it exist
-                            //store
-                            //return id
-                            break;
-                        case "GET":
-                            if (requestUri.EndsWith("/") || requestUri.EndsWith("list") || requestUri.EndsWith("list/"))
-                            {
-                                hlc.returnXmlStringToClient(getInstance().assetBundles.ToXml());
-                            }
-                            else if (requestUri.EndsWith("/file"))
-                            {
-                                MemoryStream ms = new MemoryStream();
-                                try
-                                {
-                                    using (FileStream fileStream = File.OpenRead(AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + getInstance().splitArrayFromHandlableAction(requestUri)[1]))
-                                    {
-                                        ms.SetLength(fileStream.Length);
-                                        fileStream.Read(ms.GetBuffer(), 0, (int)fileStream.Length);
-                                    }
-                                    HttpFunctions.sendFileWithContentType(hlc, "application/octet-stream", ms.ToArray());
-
-                                }
-                                catch (Exception e)
-                                {
-                                    HttpFunctions.sendTextResponse(hlc, "Unknown file: " + splitArrayFromHandlableAction(requestUri)[1]);
-                                    Console.WriteLine(e.GetBaseException());
-                                }
-                            }
-                            else if (requestUri.EndsWith("/xml"))
-                            {
-                                UnityEngine.Debug.Log("Return XML to Client");
-                            }
-                            break;
-                    }
-                    break;
-              
-                case "user":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            string requestString = splitArrayFromHandlableAction(requestUri)[1];
-                            User u = null;
-                            try
-                            {
-                                if (requestString.Length == 36)
-                                {
-                                    u = getInstance().getUser(new Guid(requestString));
-                                }
-                                else
-                                {
-                                    u = getInstance().getUser(requestString);
-                                }
-                            }
-                            catch { }
-
-                            if (u != null) HttpFunctions.returnXmlStringToHttpClient(hlc, u.ToXml());
-                            else HttpFunctions.sendStandardResponse(hlc, "GUID OR USERNAME NOT FOUND", 404);
-                            break;
-                    }
-
-                    break;
-                case "town":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            Town t = null;
-                            try
-                            {
-                                t = getInstance().getTown(new Guid(splitArrayFromHandlableAction(requestUri)[1]));
-                            }
-                            catch { }
-                            if (t != null) HttpFunctions.returnXmlStringToHttpClient(hlc, t.ToXml());
-                            else HttpFunctions.sendStandardResponse(hlc, "TOWN NOT FOUND", 404);
-                            break;
-                    }
-
-                    break;
-                default:
-                    HttpFunctions.sendTextResponse(hlc, "Resource not found. Welcome to reality.<br />Available actions are:<br /><ul><li><a href=\"town\">View towns</a></li><li><a href=\"user\">View users</a></li></ul>", 404);
-                    break;
-            }
-
-            //We want a specific resource
-        }
+        
 
         public string getFirstHandlableAction(HttpListenerContext hlc)
         {

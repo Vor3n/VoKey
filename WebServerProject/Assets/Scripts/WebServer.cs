@@ -95,7 +95,9 @@ namespace Vokey
                                                                                   }, _listener.GetContext());
                                                  }
                                              }
-                                             catch { } // suppress any exceptions
+                                             catch (Exception e){
+                                             	UnityEngine.Debug.Log(e.Message + Environment.NewLine +  e.StackTrace);
+                                             } // suppress any exceptions
                                          });
         }
 

@@ -41,7 +41,7 @@ public class SessionHandler : RequestHandler {
                         }
                         else
                         {
-                            HttpFunctions.sendTextResponse(context, "JE LOGIN IS INVALIDE", 403);
+                            HttpFunctions.sendTextResponse(context, "INVALID CREDENTIALS", 403);
                         }
                     }
                 }
@@ -63,7 +63,7 @@ public class SessionHandler : RequestHandler {
                 }
                 else
                 {
-                    throw new Exception("Tried to invalidate a session that is already invalid.");
+                    HttpFunctions.sendTextResponse(context, "INVALID SESSION ID", 403);
                 }
                 break;
             case "session":

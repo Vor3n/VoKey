@@ -8,28 +8,34 @@ using VokeySharedEntities;
 /// <summary>
 /// A requestHandler is an object that handles an incoming request by generating a response and returning this to a HttpClient.
 /// </summary>
-public class RequestHandler {
+public class RequestHandler
+{
     private List<string> _handlableCommandsList;
     /// <summary>
     /// The actions that this handler is able to process.
     /// </summary>
-    public List<string> handlableCommands {
-        get {
+    public List<string> handlableCommands
+    {
+        get
+        {
             if (_handlableCommandsList == null) _handlableCommandsList = new List<string>();
             return _handlableCommandsList;
         }
     }
-    
-    public string Content {
-				get {
-				    	if(context != null){
-				    	    System.IO.Stream body = context.Request.InputStream;
-					        System.Text.Encoding encoding = context.Request.ContentEncoding;
-					        System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
-							return reader.ReadToEnd();
-					   	}
-					   	return "";
-				}
+
+    public string Content
+    {
+        get
+        {
+            if (context != null)
+            {
+                System.IO.Stream body = context.Request.InputStream;
+                System.Text.Encoding encoding = context.Request.ContentEncoding;
+                System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
+                return reader.ReadToEnd();
+            }
+            return "";
+        }
     }
 
     protected VokeySession session = null;
@@ -94,25 +100,30 @@ public class RequestHandler {
     /// </summary>
     /// <param name="hlc">The HttpListenerContext to handle</param>
     /// <param name="commands">The commands that this handler is able to process.</param>
-    public RequestHandler (HttpListenerContext hlc, string[] commands)
-		{
-				if (hlc != null) {
-						context = hlc;
-						Headers = GetHeadersFromRequest (hlc.Request);
-						string sessId = null;
-						if (Headers != null && Headers.ContainsKey ("Session")) {
-								Headers.TryGetValue ("Session", out sessId);
-								session = AssetServer.getInstance ().getSession (sessId);
-	            
-								if (session != null) {
-										UnityEngine.Debug.Log ("Client authenticated using session " + session.SessionHash);
-										session.heartBeat ();
-								}
-						} else {
-						UnityEngine.Debug.Log ("No session provided with reuest");
-						}
+    public RequestHandler(HttpListenerContext hlc, string[] commands)
+    {
+        if (hlc != null)
+        {
+            context = hlc;
+            Headers = GetHeadersFromRequest(hlc.Request);
+            string sessId = null;
+            if (Headers != null && Headers.ContainsKey("Session"))
+            {
+                Headers.TryGetValue("Session", out sessId);
+                session = AssetServer.getInstance().getSession(sessId);
+
+                if (session != null)
+                {
+                    UnityEngine.Debug.Log("Client authenticated using session " + session.SessionHash);
+                    session.heartBeat();
+                }
+            }
+            else
+            {
+                UnityEngine.Debug.Log("No session provided with reuest");
+            }
         }
-        
+
 
         if (_handlableCommandsList == null)
         {
@@ -160,7 +171,8 @@ public class RequestHandler {
     /// Handles a simple Http Request (e.g. a request that returns a list of items: http://webservice/employees
     /// </summary>
     /// <param name="action">The action to handle, e.g. employees</param>
-    public virtual void handleSimpleRequest(string action) {
+    public virtual void handleSimpleRequest(string action)
+    {
         throw new System.Exception("Handling Simple Requests not implemented in this class!");
     }
 
@@ -168,7 +180,8 @@ public class RequestHandler {
     /// Handles a simple Http Request (e.g. a request that returns a list of items: http://webservice/employees
     /// </summary>
     /// <param name="action">The action to handle, e.g. employees</param>
-    public virtual void handleComplexRequest(string action) {
+    public virtual void handleComplexRequest(string action)
+    {
         throw new System.Exception("Handling Complex Requests not implemented in this class!");
     }
 
