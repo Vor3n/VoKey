@@ -1,15 +1,11 @@
 using System;
 using System.Net;
 using System.IO;
-using System.Text;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Generic;
 using GuiTest;
 using System.Xml.Serialization;
 using VokeySharedEntities;
-using System.Collections.Specialized;
-using System.Linq;
 using AssemblyCSharp;
 
 namespace Vokey
@@ -185,7 +181,10 @@ namespace Vokey
             t1.addUser(new User("duncan", "duncan", "Duncan Jenkins", User.UserType.Student));
             t1.addUser(new User("Daniel", "Plopjes", User.UserType.Student));
             t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
-            t1.addUser(new User("student", "student", User.UserType.Student));
+            User studentUser = new User("student", "student", User.UserType.Student);
+            studentUser.addAssignment(new Assignment("Demo Assignment", "Find all the objects in the room.", Guid.NewGuid(), new List<Guid>()));
+            t1.addUser(studentUser);
+            
             t1.addUser(new User("alex", "student", "Alexander Streng", User.UserType.Student));
             t1.addUser(new User("rscheefh", "student", "Roy Scheefhals", User.UserType.Student));
             t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
@@ -356,8 +355,6 @@ namespace Vokey
             Console.WriteLine("SMACK SOMEONE WITH AN ERASER. THERE IS SOMETHING VERY WRONG.");
             return false;
         }
-
-        
 
         public string getFirstHandlableAction(HttpListenerContext hlc)
         {
