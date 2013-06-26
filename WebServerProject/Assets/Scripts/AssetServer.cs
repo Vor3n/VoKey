@@ -115,7 +115,8 @@ namespace Vokey
             addHandlersForType(new TownHandler(null));
             addHandlersForType(new WelcomeHandler(null));
             addHandlersForType(new StreetHandler(null));
-
+            addHandlersForType(new RoomHandler(null));
+            addHandlersForType(new FileHandler(null));
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
             sessions = new VokeySessionContainer();
@@ -163,13 +164,13 @@ namespace Vokey
         void readUserData()
         {
             Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-			s.addHouse(new House("Baka", "Store to buy bakas"));
-			
+            s.addHouse(new House("Baka", "Store to buy bakas"));
+
             Town t = new Town("Lazytown", "TIV4A");
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
             t.addStreet(new Street("Rubenslaan", Street.StreetType.Residential));
             t.addStreet(s);
-            
+
             t.addUser(new User("Felix", "Felix", "Felix Mann", User.UserType.Student));
             t.addUser(new User("KimJongUn", "cd1001", "Kim Jong Un", User.UserType.Student));
 
@@ -179,7 +180,7 @@ namespace Vokey
             t1.addStreet(new Street("Flevolaan", Street.StreetType.Residential));
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
             t1.addStreet(s);
-            
+
             t1.addUser(new User("LeovM", "leooo", "Leo van Moergestel", User.UserType.Student));
             t1.addUser(new User("MartenWensink", "mw", "Marten Wensink", User.UserType.Student));
             t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Student));
@@ -193,8 +194,8 @@ namespace Vokey
             t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
 
             TownList.Add(t1);
-            
-            Users.Add (new User("teacher", "teacher", User.UserType.Teacher));
+
+            Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
             Users.Add(new User("pascal", "pascal", User.UserType.Teacher));
 
             //Room r = new Room("Duncan's Living Room");
@@ -274,6 +275,21 @@ namespace Vokey
                 if (u.userGuid == id) return u;
             }
             return null;
+        }
+
+        public Street getStreet(Guid id)
+        {
+            foreach (Town t in TownList)
+            {
+                foreach (Street sim in t.getFilledStreets())
+                {
+                    if (sim.id == id)
+                    {
+                        return sim;
+                    }
+                }
+            }
+            throw new Exception("Invalid street specified!");
         }
 
         public User getUser(string username)
@@ -382,7 +398,7 @@ namespace Vokey
                             break;
                     }
                     break;
-              
+
                 case "user":
                     switch (hlc.Request.HttpMethod)
                     {

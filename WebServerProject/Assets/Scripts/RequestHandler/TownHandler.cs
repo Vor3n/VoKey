@@ -52,7 +52,7 @@ public class TownHandler : RequestHandler {
 										s.setTown (t);
 										s.handleRequest ();
 								}
-						}else if (splitArrayFromHandlableAction (context.Request.Url.ToString()).Length > 2) {
+						} else if (splitArrayFromHandlableAction (context.Request.Url.ToString()).Length > 2) {
 								if (splitArrayFromHandlableAction (context.Request.Url.ToString()) [1] == "room" 
 										|| splitArrayFromHandlableAction (context.Request.Url.ToString()) [2] == "room") {
 										

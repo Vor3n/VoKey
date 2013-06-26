@@ -9,7 +9,12 @@ public class HouseHandler : RequestHandler
     public HouseHandler(HttpListenerContext hlc)
         : base(hlc, acceptableCommands)
     {
-
+		
     }
+    
+    public override void handleSimpleRequest (string action)
+	{
+		
+	}
 
 }
