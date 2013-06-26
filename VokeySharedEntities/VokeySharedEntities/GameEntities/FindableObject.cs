@@ -7,19 +7,19 @@ namespace VokeySharedEntities
     [System.Serializable]
     public struct SerializableVector3
     {
-        public int x;
-        public int y;
-        public int z;
+        public float x;
+        public float y;
+        public float z;
 
     }
 	
 	 [System.Serializable]
     public struct SerializableQuaternion
     {
-		public int w;
-        public int x;
-        public int y;
-        public int z;
+		public float w;
+        public float x;
+        public float y;
+        public float z;
 
     }
 
@@ -97,7 +97,7 @@ public class FindableObject {
 			
 			 get
         {
-            return new Quaternion(_rotation.w,_rotation.x, _position.y, _position.z);
+            return new UnityEngine.Quaternion(_rotation.w,_rotation.x, _position.y, _position.z);
         }
         set
         {
