@@ -25,7 +25,7 @@ namespace WebCore.HtmlEntities
             parameters.Add("border", "" + width);
         }
 
-        private void setElementTags()
+        public override void setElementTags()
         {
             elementStart = "<table%ARGS%>";
             elementEnd = "</table>";

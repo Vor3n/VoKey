@@ -15,10 +15,10 @@ namespace WebCore.HtmlEntities
             }
         }
 
-        public void setElementTags()
+        public override void setElementTags()
         {
-            base.elementStart = "<tr%REPLACE%>\r\n";
-            base.elementEnd = "</tr>\r\n";
+            elementStart = "<tr%REPLACE%>\r\n";
+            elementEnd = "</tr>\r\n";
         }
 
         /// <summary>
@@ -26,19 +26,16 @@ namespace WebCore.HtmlEntities
         /// </summary>
         public TableRow()
         {
-            setElementTags();
         }
 
         public TableRow(params TableCell[] cells)
         {
-            setElementTags();
             cellList = new List<TableCell>();
             cellList.AddRange(cells);
         }
 
         public TableRow(string cssId, params TableCell[] cells)
         {
-            setElementTags();
             ElementClass = cssId;
             cellList = new List<TableCell>();
             cellList.AddRange(cells);

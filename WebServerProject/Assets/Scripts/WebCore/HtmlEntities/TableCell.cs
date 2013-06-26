@@ -12,7 +12,7 @@ namespace WebCore.HtmlEntities
             set;
         }
 
-        public void setElementTags()
+        public override void setElementTags()
         {
             base.elementStart = "<td%REPLACE%>";
             base.elementEnd = "</td>\r\n";
@@ -20,22 +20,30 @@ namespace WebCore.HtmlEntities
 
         public TableCell()
         {
-            setElementTags();
         }
 
         public TableCell(string content)
         {
-            setElementTags();
             Content = content;
         }
 
         public TableCell(string content, string cssId)
         {
-            setElementTags();
             Content = content;
             ElementId = cssId;
         }
 
+        public TableCell(HtmlDocumentElementBase content)
+        {
+            Content = content.getHtmlRepresentation();
+        }
+
+        public TableCell(HtmlDocumentElementBase content, string cssId)
+        {
+            Content = content.getHtmlRepresentation();
+            ElementId = cssId;
+        }
+        
         public override string getHtmlRepresentation()
         {
             string replacementArgs = "" + (String.IsNullOrEmpty(ElementId) ? "" : " " + ElementId);

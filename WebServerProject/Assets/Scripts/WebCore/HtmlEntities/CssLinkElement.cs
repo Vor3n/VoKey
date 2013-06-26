@@ -18,7 +18,7 @@ namespace WebCore.HtmlEntities
 			set { parameters ["href"] = value; }
 		}
 		
-        private void setElementTags()
+        public override void setElementTags()
         {
             elementStart = "<link %ARGS%";
             elementEnd = "/>";

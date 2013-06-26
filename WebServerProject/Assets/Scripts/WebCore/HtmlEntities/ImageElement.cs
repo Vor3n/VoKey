@@ -7,21 +7,10 @@ namespace WebCore.HtmlEntities
 		{
 				public ImageElement (string source, int width, int height, string alt)
 				{
-					setElementTags();
 					parameters.Add("src", source);
-					parameters.Add("width", "" + width);
-					parameters.Add("height", "" + height);
-					parameters.Add("alt", alt);
-				}
-				
-				public int Width {
-					get { return int.Parse(parameters["width"]); } 
-					set { parameters["width"] = "" + value;  }
-				}
-				
-				public int Height {
-					get { return int.Parse(parameters["height"]); } 
-					set { parameters["height"] = "" + value; }
+					Width = width;
+					Height = height;
+					AltText = alt;
 				}
 				
 				public string Source {
@@ -30,11 +19,11 @@ namespace WebCore.HtmlEntities
 				}
 				
 				public string AltText {
-					get { return parameters ["src"]; } 
-					set { parameters ["src"] = value; }
+					get { return parameters ["alt"]; } 
+					set { parameters ["alt"] = value; }
 				}
 				
-		        private void setElementTags()
+		        public override void setElementTags()
 		        {
 		            elementStart = "<img%ARGS%";
 		            elementEnd = "/>";
