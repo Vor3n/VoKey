@@ -45,7 +45,7 @@ public class BundleLoader : MonoBehaviour
 
             using (System.IO.StreamWriter file = new System.IO.StreamWriter("room_" + roomName + ".xml", true))
             {
-                file.Write(Room.ToXml(r));
+                file.Write(r.ToXml());
             }
 
             //assetBundle.Unload(false);
