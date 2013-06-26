@@ -40,39 +40,55 @@ public class TownHandler : RequestHandler {
 		{
 				AssetServer instance = AssetServer.getInstance ();
 				Town t = null;
+				string[] arguments = splitArrayFromHandlableAction (context.Request.Url.ToString());
 				try {
-						t = instance.getTown (new Guid(splitArrayFromHandlableAction(context.Request.Url.ToString())[1]));
+						t = instance.getTown (new Guid(arguments[1]));
 				} catch {
 				}
 				if (t != null) {
-						if (splitArrayFromHandlableAction (context.Request.Url.ToString()).Length > 2) {
-								if (splitArrayFromHandlableAction (context.Request.Url.ToString()) [1] == "street" 
-										|| splitArrayFromHandlableAction (context.Request.Url.ToString()) [2] == "street") {
+						if (arguments.Length > 2) {
+								if (arguments [1] == "street" || arguments [2] == "street") {
 										StreetHandler s = new StreetHandler (context);
 										s.setTown (t);
 										s.handleRequest ();
 								}
-						} else if (splitArrayFromHandlableAction (context.Request.Url.ToString()).Length > 2) {
-								if (splitArrayFromHandlableAction (context.Request.Url.ToString()) [1] == "room" 
-										|| splitArrayFromHandlableAction (context.Request.Url.ToString()) [2] == "room") {
+						} else if (arguments.Length > 2) {
+								if (arguments [1] == "room" 
+										|| arguments [2] == "room") {
 										
 								}
-						}
-						 else {
+						} else {
 								HttpFunctions.returnXmlStringToHttpClient (context, t.ToXml ());
 						}
 				
-				} else if (splitArrayFromHandlableAction (context.Request.Url.ToString()) [1] == "create") {
-						if (session != null && session.IsTeacher && session.isValid) {
-								t = MySerializerOfItems.FromXml<Town> (Content);
-								instance.TownList.Add (t);
-								UnityEngine.Debug.Log ("New Town: " + t.name);
-								HttpFunctions.sendStandardResponse(context, "OK", 200);
-						} else {
-							HttpFunctions.sendStandardResponse(context, "YOU HAVE NO RIGHTS TO CREATE A TOWN", 403);
-						}
-				} else throw new Exception ("Specified town not found");
+				} else {
+						switch (arguments [1]) {
+						case "create":
+								if (session != null && session.IsTeacher && session.isValid) {
+										t = MySerializerOfItems.FromXml<Town> (Content);
+										instance.TownList.Add (t);
+										UnityEngine.Debug.Log ("New Town: " + t.name);
+										HttpFunctions.sendStandardResponse (context, "OK", 200);
+								} else {
+										HttpFunctions.sendStandardResponse (context, "YOU HAVE NO RIGHTS TO CREATE A TOWN", 403);
+								}
+								throw new Exception ("Specified town not found");
+						case "delete":
+								if (session != null && session.IsTeacher && session.isValid) {
+										t = instance.getTown (new Guid(arguments[2]));
+										if (t != null) {
+												instance.Delete<Town> (new Guid(arguments[2]));
+												HttpFunctions.sendStandardResponse(context, "Town " + arguments[2] + " removed.", 200);
+										}
+								} else {
+									HttpFunctions.sendStandardResponse(context, "YOU HAVE NO RIGHTS TO DELETE A TOWN", 403);
+								}
+								break;
+						default:
+							throw new Exception("Parameter not understood: " + arguments[1]);
+						
+				} 
 		
 		}
     }
-
+}

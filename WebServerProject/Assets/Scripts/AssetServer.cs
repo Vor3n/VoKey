@@ -309,7 +309,19 @@ namespace Vokey
         {
             return sessions.getSession(hash);
         }
-
+   
+		public void Delete<T> (Guid g)
+		{
+			switch (typeof(T).ToString ()) {
+				case "Town":
+				case "VokeySharedEntities.Town":
+					TownList.Remove (getTown(g));
+				break;
+			default:
+				throw new Exception("Deleting " + typeof(T).ToString () + " is not yet supported.");
+			}
+		}
+		
         public string CreateVokeySession(User u)
         {
             return sessions.CreateVokeySession(u);
