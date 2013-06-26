@@ -84,6 +84,9 @@ public class TownHandler : RequestHandler {
 									HttpFunctions.sendStandardResponse(context, "YOU HAVE NO RIGHTS TO DELETE A TOWN", 403);
 								}
 								break;
+								case "count":
+									HttpFunctions.sendStandardResponse(context, "" + instance.TownList.Count, 200);
+								break;
 						default:
 							throw new Exception("Parameter not understood: " + arguments[1]);
 						
