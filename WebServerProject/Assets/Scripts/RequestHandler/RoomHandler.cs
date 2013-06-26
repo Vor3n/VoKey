@@ -33,7 +33,6 @@ public class RoomHandler : RequestHandler
                 UnityEngine.Debug.Log(Content);
                 try
                 {
-
                     AssetServer.getInstance().TownList[0].educationalStreets[0].houses[0].rooms[0] = MySerializerOfItems.FromXml<Room>(Content);
                 }
                 catch (Exception e)
