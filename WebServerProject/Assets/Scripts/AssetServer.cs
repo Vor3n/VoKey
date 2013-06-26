@@ -110,6 +110,8 @@ namespace Vokey
             addHandlersForType(new StreetHandler(null));
             addHandlersForType(new RoomHandler(null));
             addHandlersForType(new FileHandler(null));
+            addHandlersForType (new AssignmentHandler(null));
+            addHandlersForType(new DynamicContentHandler(null));
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
             sessions = new VokeySessionContainer();

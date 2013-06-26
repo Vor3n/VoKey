@@ -1,0 +1,11 @@
+.tableheader {
+ 	background-color:#0099ff;
+}
+
+::-webkit-scrollbar { 
+	display: none; 
+}
+
+body {
+	overflow:hidden;
+}
