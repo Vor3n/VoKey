@@ -6,6 +6,7 @@ using VokeySharedEntities;
 public class Street : MonoBehaviour {
     public static List<string> studentNames = new List<string>();
     public static List<VokeySharedEntities.Street> Streets = new List<VokeySharedEntities.Street>();
+    public static List<Room> currentRooms = null;
     public static List<GameObject> HouseList = new List<GameObject>();
     public static Vector3 StartingCoordinates = new Vector3(1793, 1, 75);
     public static Vector3 RoadCoordinates = new Vector3(1720, 1, 1000);
@@ -54,5 +55,7 @@ public class Street : MonoBehaviour {
 
 
         ListRoot.alpha = 1;
+
+        currentRooms = roomList;
     }
 }

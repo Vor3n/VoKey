@@ -1,11 +1,12 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using VokeySharedEntities;
 
 public class StreetHouse : MonoBehaviour
 {
     Color[] InitialColors;
-    public string Owner;
+    public House House;
     public bool ShowLabel
     {
         get
@@ -57,7 +58,7 @@ public class StreetHouse : MonoBehaviour
     void OnMouseEnter()
     {
         UILabel label = ((GameObject)GameObject.Find("OwnerLabel")).GetComponent<UILabel>();
-        label.text = Owner;
+        label.text = House.name;
         labelRoot.alpha = 1;
 
         for (int i = 0; i < gameObject.renderer.materials.Length; i++)
@@ -84,10 +85,9 @@ public class StreetHouse : MonoBehaviour
     {
         Debug.Log("Creating Menu");
 
-        // Get List of Rooms for Student
-        // TODO
-
         // Create Room List
-        Street.CreateRoomList(null);
+        Street.CreateRoomList(House.rooms);
     }
+
+    
 }
