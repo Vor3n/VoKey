@@ -1,11 +1,13 @@
 using UnityEngine;
 using System.Collections;
 using GuiTest;
+using VokeySharedEntities;
+using System.Collections.Generic;
 
 public class GameControllerScript : MonoBehaviour {
 	
 	public string ServerURL;
-	
+	public List<Town> towns;
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this.gameObject);
@@ -26,22 +28,12 @@ public class GameControllerScript : MonoBehaviour {
 			break;
 			//docent
 			case User.UserType.Teacher:
-				Application.LoadLevel("TeachMenu");
+				Application.LoadLevel("TeacherMenu");
 			break;
 			default:
 			break;
 		}
-		
-		//DO STUFF
-		//LIKE
-		//SET THE HOUSE TO FOCUS ON
-		//BUT ONLY
-		//IF I AM A STUDENT
-		//HAVE A NICE DAY
-		//AND
-		//THIS SCRIPT SHOULDN'T BE HERE.
-		//I'M SORRY.
-		GetAssetBundlesFromServer();
+		//GetAssetBundlesFromServer();
 	}
 	
 	void LoginFailHandler(string message){
@@ -54,7 +46,7 @@ public class GameControllerScript : MonoBehaviour {
 	
 	void GetAssetBundlesFromServer()
 	{
-		DoRequest r = new DoRequest("rooms");
+		WebServiceRequest r = new WebServiceRequest("rooms");
 		StartCoroutine(r.Request());
 		float elapsedTime = 0.0f;
 		while (!r.isDone)

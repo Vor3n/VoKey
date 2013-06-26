@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
-using VokeySharedEntities;
 
 public class MenuItemClicked : MonoBehaviour {
 	
@@ -20,8 +18,6 @@ public class MenuItemClicked : MonoBehaviour {
 		CHANGEME,
 		LogoutYes,
 		LogoutNo,
-		ShowClassesBack,
-		ShowStudentsBack,
 	}
 	
 	public Item item = Item.CHANGEME;
@@ -51,11 +47,40 @@ public class MenuItemClicked : MonoBehaviour {
 			
 			Login login = new Login(username,password);
 			StartCoroutine(login.startLogin());
+			float elapsedTime = 0.0f;
+			while(!login.isDone)
+			{
+				elapsedTime += Time.deltaTime;
+				if (elapsedTime >= 2.0f) break;
+			}
 		}
-		
 		if(item == Item.Logout)
 		//LOGOUT CLICKED
 		{
+<<<<<<< Updated upstream
+			GameObject usernamelabel = GameObject.Find("UsernameLabel");
+			UILabel UIusernamelabel = (UILabel)usernamelabel.GetComponent("UILabel");
+			string username = UIusernamelabel.text;
+			GameObject passwordlabel = GameObject.Find("PasswordLabel");
+			UILabel UIpasswordlabel = (UILabel)passwordlabel.GetComponent("UILabel");
+			string password = UIpasswordlabel.text;
+			//do real check here
+			if (password == "student" && username == "student")
+			{
+				Application.LoadLevel("RoomTest");
+			}
+			else if (password == "teach" && username == "teach")
+			{
+				Application.LoadLevel("TeacherMenu");
+			}
+			else
+			{
+				Debug.LogError("ELSE EMPTY");
+			}
+		
+
+=======
+>>>>>>> Stashed changes
 			GameObject surepanel = GameObject.Find("LogoutSurePanel");
 			surepanel.GetComponent<UIPanel>().alpha = 1f;
 			try
@@ -84,33 +109,24 @@ public class MenuItemClicked : MonoBehaviour {
 		
 		if (item == Item.ShowClasses)
 		{
+<<<<<<< Updated upstream
+
+		}
+		
+		if (item == Item.ShowClasses)
+		{
+=======
 			try
 			{
 				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
 				teachmenu.GetComponent<UIPanel>().alpha = 0f;
-				GameObject classpanel = GameObject.Find("ShowClassesPanel");
-				classpanel.GetComponent<UIPanel>().alpha = 1f;
-				GameObject TownList = GameObject.Find("TownList");
-				TownList.GetComponent<TeacherMenuTowns>().DoStart();
 			}
 			catch {}
+>>>>>>> Stashed changes
+			
 		}
 		
-		
-		
-		if (item == Item.ShowClassesBack)
-		{
-			try
-			{
-				GameObject classpanel = GameObject.Find("ShowClassesPanel");
-				classpanel.GetComponent<UIPanel>().alpha = 0f;
-				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
-				teachmenu.GetComponent<UIPanel>().alpha = 1f;
-				GameObject TownList = GameObject.Find("TownList");
-				TownList.GetComponent<TeacherMenuTowns>().DoClear();
-			}
-			catch {}	
-		}
+	
 		
 		if (item == Item.ShowRooms)
 		{
@@ -124,31 +140,8 @@ public class MenuItemClicked : MonoBehaviour {
 		
 		if (item == Item.ShowStudents)
 		{
-			try
-			{
-				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
-				teachmenu.GetComponent<UIPanel>().alpha = 0f;
-				GameObject studentpanel = GameObject.Find("ShowStudentsPanel");
-				studentpanel.GetComponent<UIPanel>().alpha = 1f;
-				GameObject StudentList = GameObject.Find("StudentList");
-				StudentList.GetComponent<TeacherMenuStudents>().DoStart();
-			}
-			catch {}
+			
 		}	
-		
-		if (item == Item.ShowStudentsBack)
-		{
-			try
-			{
-				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
-				teachmenu.GetComponent<UIPanel>().alpha = 1f;
-				GameObject studentpanel = GameObject.Find("ShowStudentsPanel");
-				studentpanel.GetComponent<UIPanel>().alpha = 0f;
-				GameObject StudentList = GameObject.Find("StudentList");
-				StudentList.GetComponent<TeacherMenuStudents>().DoClear();
-			}
-			catch {}
-		}
 		
 		if (item == Item.LogoutNo)
 		{
