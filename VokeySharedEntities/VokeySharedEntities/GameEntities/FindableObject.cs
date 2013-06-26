@@ -7,8 +7,11 @@ namespace VokeySharedEntities
     [System.Serializable]
     public struct SerializableVector3
     {
+        [XmlAttribute("x")]
         public float x;
+		[XmlAttribute("y")]
         public float y;
+		[XmlAttribute("z")]
         public float z;
 
     }
@@ -16,9 +19,13 @@ namespace VokeySharedEntities
 	 [System.Serializable]
     public struct SerializableQuaternion
     {
+		[XmlAttribute("w")]
 		public float w;
+		[XmlAttribute("x")]
         public float x;
+		[XmlAttribute("y")]
         public float y;
+		[XmlAttribute("z")]
         public float z;
 
     }
