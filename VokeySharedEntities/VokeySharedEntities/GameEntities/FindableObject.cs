@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Xml.Serialization;
 
 namespace VokeySharedEntities
@@ -7,6 +6,7 @@ namespace VokeySharedEntities
     [System.Serializable]
     public class SerializableVector3
     {
+        public SerializableVector3(){}
         [XmlAttribute("x")]
         public float x;
 		[XmlAttribute("y")]
@@ -19,6 +19,7 @@ namespace VokeySharedEntities
 	 [System.Serializable]
     public class SerializableQuaternion
     {
+        public SerializableQuaternion(){}
 		[XmlAttribute("w")]
 		public float w;
 		[XmlAttribute("x")]
@@ -29,6 +30,7 @@ namespace VokeySharedEntities
         public float z;
 
     }
+
 
 
 [System.Serializable]
@@ -72,7 +74,7 @@ public class FindableObject {
         }
     }
 
-    [XmlAttribute("Position")]
+    [XmlElement("Position")]
     public SerializableVector3 _position;
 
     [XmlIgnore]
@@ -93,7 +95,8 @@ public class FindableObject {
             _scale.z = value.z;
         }
     }
-    [XmlAttribute("Scale")]
+    
+    [XmlElement("Scale")]
     public SerializableVector3 _scale;
 
     [XmlIgnore]
@@ -117,7 +120,7 @@ public class FindableObject {
 	}
 		
 		
-	[XmlAttribute("Rotation")]	
+	[XmlElement("Rotation")]	
 	public SerializableQuaternion _rotation;
     [XmlAttribute("LinkedObject")]
 	/// <summary>
