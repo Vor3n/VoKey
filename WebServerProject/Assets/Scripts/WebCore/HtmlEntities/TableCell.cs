@@ -14,7 +14,7 @@ namespace WebCore.HtmlEntities
 
         public override void setElementTags()
         {
-            base.elementStart = "<td%REPLACE%>";
+            base.elementStart = "<td%ARGS%>%CONTENT%";
             base.elementEnd = "</td>\r\n";
         }
 
@@ -24,32 +24,49 @@ namespace WebCore.HtmlEntities
 
         public TableCell(string content)
         {
-            Content = content;
+            InnerText = content;
+        }
+        
+        public int Colspan {
+			get {
+				 if (!parameters.ContainsKey("colspan")) return 1;
+				 else return int.Parse(parameters["colspan"]);
+			}
+			set {
+			    parameters["colspan"] = "" + value;
+			}
         }
 
         public TableCell(string content, string cssId)
         {
-            Content = content;
+            InnerText = content;
             ElementId = cssId;
         }
 
         public TableCell(params HtmlDocumentElementBase[] content)
         {
-        	foreach(HtmlDocumentElementBase obj in content)
-            	Content += obj.getHtmlRepresentation();
+        	InnerElements.AddRange(content);
         }
 
         public TableCell(HtmlDocumentElementBase content, string cssId)
         {
-            Content = content.getHtmlRepresentation();
+            InnerElements.Add (content);
             ElementId = cssId;
         }
         
-        public override string getHtmlRepresentation()
-        {
-            string replacementArgs = "" + (String.IsNullOrEmpty(ElementId) ? "" : " " + ElementId);
-            replacementArgs += (String.IsNullOrEmpty(ElementClass) ? "" : " " + ElementClass);
-            return elementStart.Replace("%REPLACE%", replacementArgs) + Content + elementEnd;
+        public override string getHtmlRepresentation ()
+		{
+			string replacementArgs = "";
+			foreach (KeyValuePair<string, string> kvp in parameters) {
+				Console.WriteLine (kvp.Key);
+				replacementArgs += " " + kvp.Key + "=\"" + kvp.Value + "\"";
+			}
+			string theInnerContent = "";
+			foreach (HtmlDocumentElementBase hdeb in InnerElements) {
+				theInnerContent += hdeb.getHtmlRepresentation();
+			}
+			if(!string.IsNullOrEmpty(InnerText)) theInnerContent += InnerText;
+            return elementStart.Replace("%ARGS%", replacementArgs).Replace("%CONTENT%", theInnerContent) + elementEnd;
         }
     }
 }
