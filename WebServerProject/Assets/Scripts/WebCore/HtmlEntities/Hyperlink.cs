@@ -30,8 +30,6 @@ namespace WebCore.HtmlEntities
 			InnerElements.AddRange(objects);
 		}
 		
-		
-		
 		public string Source {
 			get { return parameters ["href"]; } 
 			set { parameters ["href"] = value; }

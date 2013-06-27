@@ -257,6 +257,12 @@ namespace Vokey
             return null;
         }
         
+        public VokeyAssetBundle getVokeyAssetBundle(Guid id)
+        {
+            foreach (VokeyAssetBundle vab in AssetBundles) if (vab.modelId == id) return vab;
+            return null;
+        }
+        
         public Guid townClassNameExists (string townClassName)
 		{
 		    foreach (Town t in TownList)

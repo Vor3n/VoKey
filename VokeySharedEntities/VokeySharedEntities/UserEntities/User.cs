@@ -105,17 +105,5 @@ namespace GuiTest
             if(assignments == null) assignments = new AssignmentList();
             assignments.Add(a);
         }
-
-		public static string SerializeToXML(List<User> userList)
-		{
-			var serializer = new XmlSerializer(typeof(List<User>));
-			string utf8;
-			using (StringWriter writer = new VokeyAssetBundle.Utf8StringWriter())
-			{
-				serializer.Serialize(writer, userList);
-				utf8 = writer.ToString();
-			}
-			return utf8;
-		}
 	}
 }

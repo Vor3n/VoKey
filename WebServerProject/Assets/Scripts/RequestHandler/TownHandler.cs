@@ -4,6 +4,7 @@ using Vokey;
 using VokeySharedEntities;
 using AssemblyCSharp;
 using System;
+using GuiTest;
 
 public class TownHandler : RequestHandler {
         private static string[] acceptableCommands = { "town" };
@@ -45,16 +46,42 @@ public class TownHandler : RequestHandler {
 				} catch {
 				}
 				if (t != null) {
+						UnityEngine.Debug.Log (context.Request.Url.ToString ());
+						UnityEngine.Debug.Log (Content);
+						
 						if (arguments.Length > 2) {
-								if (arguments [1] == "street" || arguments [2] == "street") {
-										StreetHandler s = new StreetHandler (context);
-										s.setTown (t);
-										s.handleRequest ();
-								}
-						} else if (arguments.Length > 2) {
-								if (arguments [1] == "room" 
-										|| arguments [2] == "room") {
-										
+								switch (arguments [2]) {
+								case "street":
+									StreetHandler s = new StreetHandler (context);
+									s.setTown (t);
+									s.handleRequest ();
+									break;
+								case "room":
+									throw new Exception ("NOT IMPLEMENTED");
+								case "user":
+									if (arguments.Length >= 4) {
+										User sentUser = MySerializerOfItems.FromXml<User>(Content);
+										switch (arguments [3]) {
+											case "create":
+													t.addUser (sentUser);
+													HttpFunctions.sendStandardResponse(context, "OK", 200);
+													break;
+											case "delete":
+													t.removeUser (sentUser.userGuid);
+													HttpFunctions.sendStandardResponse(context, "OK", 200);
+													break;
+											case "update":
+													t.removeUser (sentUser.userGuid);
+													HttpFunctions.sendStandardResponse(context, "OK", 200);
+													t.addUser (sentUser);
+													break;
+											default:
+												throw new Exception("Cannot handle action: " + arguments[3]);
+										}
+									} else {
+										throw new Exception("Not enough parameters");
+									}
+									break;
 								}
 						} else {
 								HttpFunctions.returnXmlStringToHttpClient (context, t.ToXml ());
@@ -65,9 +92,9 @@ public class TownHandler : RequestHandler {
 						case "create":
 								if (session != null && session.IsTeacher && session.isValid) {
 										t = MySerializerOfItems.FromXml<Town> (Content);
+										UnityEngine.Debug.Log(Content);
 										if (instance.townClassNameExists (t.classroomName) == Guid.Empty) {
 												instance.TownList.Add (t);
-												UnityEngine.Debug.Log ("New Town: " + t.name);
 												HttpFunctions.sendStandardResponse (context, "OK", 200);
 												return;
 										} else {
@@ -79,7 +106,25 @@ public class TownHandler : RequestHandler {
 										HttpFunctions.sendStandardResponse (context, "YOU HAVE NO RIGHTS TO CREATE A TOWN", 403);
 										return;
 								}
-								throw new Exception ("Specified town not found");
+						case "update":
+								if (session != null && session.IsTeacher && session.isValid) {
+										t = MySerializerOfItems.FromXml<Town> (Content);
+										if (instance.getTown (t.id) != null) {
+											Town townToUpdate = instance.getTown(instance.townClassNameExists (t.classroomName));
+											instance.TownList.Remove (townToUpdate);
+											instance.TownList.Add (t);
+											UnityEngine.Debug.Log ("Updates Town: " + t.name);
+											HttpFunctions.sendStandardResponse (context, "OK", 200);
+											return;
+										} else {
+											HttpFunctions.sendStandardResponse (context, "TOWN_DOES_NOT_EXIST", 403);
+											return;
+										}
+
+								} else {
+										HttpFunctions.sendStandardResponse (context, "YOU HAVE NO RIGHTS TO UPDATE A TOWN", 403);
+										return;
+								}
 						case "delete":
 								if (session != null && session.IsTeacher && session.isValid) {
 										t = instance.getTown (new Guid(arguments[2]));

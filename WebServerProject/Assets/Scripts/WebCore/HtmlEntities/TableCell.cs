@@ -33,9 +33,10 @@ namespace WebCore.HtmlEntities
             ElementId = cssId;
         }
 
-        public TableCell(HtmlDocumentElementBase content)
+        public TableCell(params HtmlDocumentElementBase[] content)
         {
-            Content = content.getHtmlRepresentation();
+        	foreach(HtmlDocumentElementBase obj in content)
+            	Content += obj.getHtmlRepresentation();
         }
 
         public TableCell(HtmlDocumentElementBase content, string cssId)

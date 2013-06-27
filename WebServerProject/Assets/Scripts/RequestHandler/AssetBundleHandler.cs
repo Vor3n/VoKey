@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Net;
 using VokeySharedEntities;
 using Vokey;
+using System.IO;
+using System;
 
 public class AssetBundleHandler : RequestHandler {
 
@@ -19,4 +21,12 @@ public class AssetBundleHandler : RequestHandler {
     {
         HttpFunctions.returnXmlStringToHttpClient(context, AssetServer.getInstance().AssetBundles.ToXml());
     }
+    
+    public override void handleComplexRequest (string command)
+	{
+        Guid bundle = new Guid(splitArrayFromHandlableAction(context.Request.Url.ToString())[1]);
+        VokeyAssetBundle vab = null;
+        vab = AssetServer.getInstance().getVokeyAssetBundle(bundle);
+        FileHandler.returnFile(context, vab.name, ".bin");
+	}
 }

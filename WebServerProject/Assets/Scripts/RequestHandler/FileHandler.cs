@@ -20,6 +20,7 @@ public class FileHandler : RequestHandler
             extensionMimeTypes.Add(".ico", "image/vnd.microsoft.icon");
             extensionMimeTypes.Add(".css", "text/css");
             extensionMimeTypes.Add(".jpg", "img/jpeg");
+            extensionMimeTypes.Add(".png", "img/png");
             extensionMimeTypes.Add(".js", "text/javascript");
             extensionMimeTypes.Add(".html", "text/html");
         }
@@ -31,7 +32,7 @@ public class FileHandler : RequestHandler
         if (hlc == null) FileHandler.fillDictionary();
     }
 
-	public void returnFile (string filename, string extension)
+	public static void returnFile (HttpListenerContext theContext, string filename, string extension)
 	{
 		string mime = null;
 		MemoryStream ms = new MemoryStream ();
@@ -41,27 +42,27 @@ public class FileHandler : RequestHandler
 				ms.SetLength (fileStream.Length);
 				fileStream.Read (ms.GetBuffer(), 0, (int)fileStream.Length);
 			}
-			HttpFunctions.sendFileWithContentType (context, mime, ms.ToArray ());
-		} catch (IOException e) {
-			HttpFunctions.sendStandardResponse(context, "FILE NOT FOUND", 404);
+			HttpFunctions.sendFileWithContentType (theContext, mime, ms.ToArray ());
+		} catch {
+			UnityEngine.Debug.Log (filename);
+			HttpFunctions.sendStandardResponse(theContext, "FILE NOT FOUND", 404);
 		}
 	}
 
 	public override void handleSimpleRequest (string action)
 	{
 		if (action == "favicon.ico") {
-			returnFile(action, ".ico");
+			returnFile(context, action, ".ico");
 		}
 	}
 
     public override void handleComplexRequest(string action)
     {
-        MemoryStream ms = new MemoryStream();
         string filename = splitArrayFromHandlableAction(context.Request.Url.ToString())[1];
         string extension = filename.Substring(filename.LastIndexOf('.'));
         if (extensionMimeTypes.ContainsKey(extension))
         {
-            returnFile(filename, extension);
+            returnFile(context, filename, extension);
         }
         else
         {

@@ -170,7 +170,23 @@ namespace VokeySharedEntities
 			}
 			return false;
 		}
+        
+        
+            public bool ContainsUser(Guid id)
+        {
+            foreach (User u in pupils) {
+                if(u.userGuid == id) {
+                    return true;
+                }
+            }
+            return false;
+        }
 		
+        /// <summary>
+        /// Gets the user.
+        /// </summary>
+        /// <returns>The user.</returns>
+        /// <param name="username">Username.</param>
 		public User getUser(string username){
 			foreach (User u in pupils) {
 				if(u.username == username) {
@@ -179,7 +195,37 @@ namespace VokeySharedEntities
 			}
 			return null;
 		}
+        
+        /// <summary>
+        /// Removes the user.
+        /// </summary>
+        /// <param name="id">Identifier.</param>
+        public void removeUser(Guid id)
+        {
+            if (ContainsUser(id))
+            {
+                User ux = null;
+                foreach (User u in pupils)
+                {
+                    if (u.userGuid == id)
+                    {
+                        ux = u;
+                    }
+                }
+                pupils.Remove(ux);
+            }
+            else
+            {
+                throw new Exception ("User does not exist");
+            }
+            
+        }
 		
+        /// <summary>
+        /// Gets the user.
+        /// </summary>
+        /// <returns>The user.</returns>
+        /// <param name="userId">User identifier.</param>
 		public User getUser(Guid userId){
 			foreach (User u in pupils) {
 				if(u.userGuid == userId) {

@@ -22,17 +22,19 @@ public class RequestHandler
             return _handlableCommandsList;
         }
     }
-
-    public string Content
-    {
-        get
-        {
-            if (context != null)
-            {
-                System.IO.Stream body = context.Request.InputStream;
+	
+	private string _content = null;
+	
+    public string Content {
+				get {
+						if (context != null) {
+								if (_content == null) {
+								System.IO.Stream body = context.Request.InputStream;
                 System.Text.Encoding encoding = context.Request.ContentEncoding;
                 System.IO.StreamReader reader = new System.IO.StreamReader(body, encoding);
-                return reader.ReadToEnd();
+                _content = reader.ReadToEnd();
+								}
+                return _content;
             }
             return "";
         }

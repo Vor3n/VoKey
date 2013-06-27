@@ -71,27 +71,50 @@ public class DynamicContentHandler : RequestHandler
 						} catch {
 						}
 						if (town != null) {
-								WebCore.HttpResponsePage hrp = new WebCore.HttpResponsePage ("Hallo Wereld.");
-								hrp.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
-								Hyperlink backButton = new Hyperlink("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Back");
-								backButton.ElementClass = "largeUiButton";
-								Hyperlink editButton = new Hyperlink("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Edit");
-								editButton.ElementClass = "largeUiButton";
-								Hyperlink deleteButton = new Hyperlink("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Delete");
-								deleteButton.ElementClass = "largeUiButton";
-								hrp.AddElementToBody(backButton);
-								hrp.AddElementToBody(editButton);
-								hrp.AddElementToBody(deleteButton);
-								//hrp.AddElementToBody(new FormButton("BACK", "Unity.invoke('SwitchCommand', 'ClassView')"));
-								Table t = new Table ();
-								t.addRow (new TableRow(new TableCell("Name"), new TableCell("Username")/*, new TableCell("Assignments to do"), new TableCell("Assignments done")*/)); 
-								foreach (User user in town.pupils) {
-									t.addRow (new TableRow(new TableCell(user.FullName), new TableCell(new Hyperlink("#", "Unity.ShowPupil('" + user.userGuid + "')", user.username))));
-								}
-							hrp.AddElementToBody(t);
-							HttpFunctions.sendStandardResponse(context, hrp.getHtmlRepresentation(), 200);
+							string levelPrefix = "";
+							int numberOfArgs = splitArrayFromHandlableAction (context.Request.Url.ToString()).Length;
+							for (int i = 0; i <= numberOfArgs; i++) {
+								levelPrefix += "../";
+							}
+						WebCore.HttpResponsePage hrp = new WebCore.HttpResponsePage ("Hallo Wereld.");
+						hrp.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
+						hrp.AddElementToHead(new Javascriptlet("var townGuid = \"" + town.id.ToString() + "\""));
+						Hyperlink backButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'DeleteUser')", "Back");
+						backButton.ElementClass = "largeUiButton";
+						Hyperlink editButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Edit");
+						editButton.ElementClass = "largeUiButton";
+						Hyperlink deleteButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Delete");
+						deleteButton.ElementClass = "largeUiButton";
+						ImageElement editUserImageElement = new ImageElement (levelPrefix + "file/user_edit.png", 16, 16, "Edit User");
+						ImageElement deleteUserImageElement = new ImageElement (levelPrefix + "file/user_delete.png", 16, 16, "Remove User");
+						
+						hrp.AddElementToBody (backButton);
+						hrp.AddElementToBody (editButton);
+						hrp.AddElementToBody (deleteButton);
+						//hrp.AddElementToBody(new FormButton("BACK", "Unity.invoke('SwitchCommand', 'ClassView')"));
+						Table t = new Table ();
+						t.addRow (new TableRow(new TableCell("Name"), new TableCell("Username"), new TableCell("Actions")/*, new TableCell("Assignments to do"), new TableCell("Assignments done")*/)); 
+						foreach (User user in town.pupils) {
+							t.addRow (new TableRow(
+							new TableCell(user.FullName), 
+							new TableCell(user.username), 
+							new TableCell(
+								new Hyperlink("#", "Unity.invoke('SwitchCommand', 'ShowUser','" + user.userGuid + "')", editUserImageElement),
+								new Hyperlink("#", "Unity.invoke('SwitchCommand','DeleteUser',townGuid,'" + user.userGuid + "')", deleteUserImageElement)
+							)));
 						}
-					break;
+						hrp.AddElementToBody (t);
+						HttpFunctions.sendStandardResponse (context, hrp.getHtmlRepresentation (), 200);
+					} else {
+			            string myList = "<ul>";
+			            string listEnd = "</ul>";
+			            foreach (Town t in AssetServer.getInstance().TownList)
+			            {
+			                myList += "<li><a href=\"" + t.id + "\">" + t.classroomName + "</a></li>";
+			            }
+			            throw new Exception("No town specified to edit! <br />" + myList + listEnd);        
+					}
+				break;
 		}
 	}
 
