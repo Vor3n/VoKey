@@ -1,1 +1,27 @@
-<?xml version="1.0" encoding="utf-16"?><VokeyAssetBundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ModelId="085499af-1177-4f55-92a7-400693aac3e9" Resource_x0020_Filename="AssetBundle.bin"><VokeyAssets><VokeyAsset Name="giftbox" Hash="-367214648" Type="UnityEngine.GameObject" /><VokeyAsset Name="hourglass" Hash="-1071974464" Type="UnityEngine.GameObject" /><VokeyAsset Name="chair" Hash="1472191944" Type="UnityEngine.GameObject" /><VokeyAsset Name="ship" Hash="-2098794592" Type="UnityEngine.GameObject" /><VokeyAsset Name="Key" Hash="-1012744536" Type="UnityEngine.GameObject" /><VokeyAsset Name="Snowman" Hash="-851558856" Type="UnityEngine.GameObject" /><VokeyAsset Name="easter_egg" Hash="319939712" Type="UnityEngine.GameObject" /><VokeyAsset Name="Dice" Hash="676009112" Type="UnityEngine.GameObject" /><VokeyAsset Name="Fish" Hash="1559558976" Type="UnityEngine.GameObject" /><VokeyAsset Name="Shark" Hash="480322504" Type="UnityEngine.GameObject" /><VokeyAsset Name="pie" Hash="312752352" Type="UnityEngine.GameObject" /><VokeyAsset Name="Pizza" Hash="1819870400" Type="UnityEngine.GameObject" /><VokeyAsset Name="KitchenCounter" Hash="828710464" Type="UnityEngine.GameObject" /><VokeyAsset Name="Wastebin" Hash="2096359064" Type="UnityEngine.GameObject" /><VokeyAsset Name="phone" Hash="1687548656" Type="UnityEngine.GameObject" /><VokeyAsset Name="VideoCamera" Hash="-1340647168" Type="UnityEngine.GameObject" /><VokeyAsset Name="Shell-NEW" Hash="1619419512" Type="UnityEngine.GameObject" /><VokeyAsset Name="TrafficCone" Hash="-327616256" Type="UnityEngine.GameObject" /><VokeyAsset Name="mouse" Hash="-1877452984" Type="UnityEngine.GameObject" /><VokeyAsset Name="tambourine" Hash="2005840528" Type="UnityEngine.GameObject" /><VokeyAsset Name="suitcase" Hash="-171449992" Type="UnityEngine.GameObject" /></VokeyAssets><ids /></VokeyAssetBundle>
+<?xml version="1.0" encoding="utf-8"?>
+<VokeyAssetBundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ModelId="00000000-0000-0000-0000-000000000000" ResourceFilename="AssetBundle.bin">
+  <VokeyAssets>
+    <VokeyAsset Name="easter_egg" Hash="319939712" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="chair" Hash="1472191944" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="KitchenCounter" Hash="828710464" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="mouse" Hash="-1877452984" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Key" Hash="-1012744536" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="TrafficCone" Hash="-327616256" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="tambourine" Hash="2005840528" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="suitcase" Hash="-171449992" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="pie" Hash="312752352" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Shark" Hash="480322504" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Dice" Hash="676009112" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="phone" Hash="1687548656" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="VideoCamera" Hash="-1340647168" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Shell-NEW" Hash="1619419512" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Fish" Hash="1559558976" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="giftbox" Hash="-367214648" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Wastebin" Hash="2096359064" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Snowman" Hash="-851558856" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="hourglass" Hash="-1071974464" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="Pizza" Hash="1819870400" Type="UnityEngine.GameObject" />
+    <VokeyAsset Name="ship" Hash="-2098794592" Type="UnityEngine.GameObject" />
+  </VokeyAssets>
+  <ids />
+</VokeyAssetBundle>

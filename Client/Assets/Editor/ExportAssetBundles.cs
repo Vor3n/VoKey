@@ -5,6 +5,9 @@
 
 using UnityEngine;
 using UnityEditor;
+using VokeySharedEntities;
+
+
 [InitializeOnLoad]
 public class ExportAssetBundles
 {
@@ -32,7 +35,7 @@ public class ExportAssetBundles
 			vab.resourceFilename = filename + ".bin";
 			using (System.IO.StreamWriter file = new System.IO.StreamWriter(folder + "vab_" + filename + ".xml", true))
             {
-                file.Write(VokeyAssetBundle.ToXml(vab));
+                file.Write(vab.ToXml());
             }
 
             BuildPipeline.BuildAssetBundle(Selection.activeObject, selection, path, BuildAssetBundleOptions.CollectDependencies | BuildAssetBundleOptions.CompleteAssets);

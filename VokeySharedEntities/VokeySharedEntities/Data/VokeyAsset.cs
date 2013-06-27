@@ -3,6 +3,7 @@ using System.Xml.Serialization;
 public class VokeyAsset {
     [XmlIgnoreAttribute]
     public UnityEngine.Object resource;
+    
 	[XmlAttribute("Name")]
     public string name;
 	

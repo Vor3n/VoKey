@@ -24,7 +24,7 @@ public class VokeyAssetBundle
 	/// <summary>
 	/// The resource URL.
 	/// </summary>
-	[XmlAttribute("Resource Filename")]
+	[XmlAttribute("ResourceFilename")]
     public string resourceFilename;
 	
     private Dictionary<int, VokeyAsset> containedAssets;
