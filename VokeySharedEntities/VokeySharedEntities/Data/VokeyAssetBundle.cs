@@ -97,30 +97,12 @@ public class VokeyAssetBundle
   
     public void LoadBinaryObjects(UnityEngine.Object[] binaryAssets)
   {
-    foreach (UnityEngine.Object o in binaryAssets)
-    {
-      int i = o.GetHashCode();
-      foreach (VokeyAsset va in objects)
-        {
-          if(va.hashString == i) va.loadResource(o);
-        }
+      for (int i = 0; i > binaryAssets.Length; i++)
+      {
+        objects[i].loadResource( binaryAssets[i]);
       }
         _binaryFilesLoaded = true;
     }
-  	
-	/// <summary>
-	/// Serializes a room to Xml
-	/// </summary>
-	/// <param name="r"></param>
-	/// <returns></returns>
-	public static string ToXml (VokeyAssetBundle ab)
-	{
-		System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer (typeof(VokeyAssetBundle));
-		StringBuilder sb = new StringBuilder ();
-		XmlWriter xw = XmlWriter.Create (sb);
-		x.Serialize (xw, ab);
-		return sb.ToString ();
-	}
 	
 	/// <summary>
 	/// Froms the bundle.

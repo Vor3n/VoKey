@@ -235,19 +235,24 @@ namespace Vokey
         /// <summary>
         /// Scans for assets
         /// </summary>
-        public void scanForAssets()
-        {
-
-            int numBefore = assetBundles.Count;
-            Log("location to scan: " + AssetRoot);
-            string[] xmlBundleMetaFiles = Directory.GetFiles(AssetRoot + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
-            foreach (string s in xmlBundleMetaFiles)
-            {
-                VokeyAssetBundle vob = VokeyAssetBundle.FromXml(s);
-                if (!assetBundles.Contains(vob))
-                    assetBundles.Add(vob);
-            }
-            Log("Number of assets in the bundle after scan: " + assetBundles.Count + "before was: " + numBefore);
+        public void scanForAssets ()
+				{
+					try {
+					int numBefore = assetBundles.Count;
+			            Log("location to scan: " + AssetRoot);
+			            string[] xmlBundleMetaFiles = Directory.GetFiles(AssetRoot + System.IO.Path.DirectorySeparatorChar + "AssetBundles", "vab*.xml");
+			            foreach (string s in xmlBundleMetaFiles)
+			            {
+			                VokeyAssetBundle vob = MySerializerOfItems.FromXml<VokeyAssetBundle>(new StreamReader(s).ReadToEnd ());
+			                if (!assetBundles.Contains(vob))
+			                    assetBundles.Add(vob);
+			            }
+            			Log("Number of assets in the bundle after scan: " + assetBundles.Count + "before was: " + numBefore);
+					} catch (Exception e) {
+						UnityEngine.Debug.Log(e.GetBaseException());
+					}
+					
+            
         }
 
 
