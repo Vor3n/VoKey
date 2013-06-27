@@ -7,4 +7,10 @@
 </Room><?xml version="1.0" encoding="utf-8"?>
 <Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="8296d9f8-04e5-4ed8-976f-ce3f41914ddf">
   <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="d03a6318-4afc-45ff-85b8-8ed932e3fad9">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="37d3db70-67a8-4e1a-aa80-20fff044109b">
+  <FindableObjects />
 </Room>
