@@ -1,10 +1,4 @@
-using UnityEngine;
-using System.Collections;
 using System.Xml.Serialization;
-using Thisiswhytheinternetexists;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
-using System.Runtime.InteropServices;
 [System.Serializable]
 public class VokeyAsset {
     [XmlIgnoreAttribute]
@@ -39,7 +33,8 @@ public class VokeyAsset {
     
     public void loadResource(UnityEngine.Object go)
     {
-      resource = go;
+      UnityEngine.Debug.Log("Object Name in parameter" + go.name);
+      resource = UnityEngine.Object.Instantiate(go);
     }
 	
 	/// <summary>
