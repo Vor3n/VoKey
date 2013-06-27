@@ -22,5 +22,6 @@ public class DeleteTown : MonoBehaviour {
 		GameObject TownList = GameObject.Find("TownList");
 		TownList.GetComponent<TeacherMenuTowns>().DoClear();
 		TownList.GetComponent<TeacherMenuTowns>().DoStart();
+		GameObject.Find("AddTownErrorLabel").GetComponent<UILabel>().text = "";
 	}
 }

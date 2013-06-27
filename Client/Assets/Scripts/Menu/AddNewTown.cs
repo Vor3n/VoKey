@@ -47,10 +47,20 @@ public class AddNewTown : MonoBehaviour {
 		}
 		isDone = www.isDone;
 		string response = www.text;
-		Debug.Log("addnewtownresponse: " + response);
-		GameObject TownList = GameObject.Find("TownList");
-		TownList.GetComponent<TeacherMenuTowns>().DoClear();
-		TownList.GetComponent<TeacherMenuTowns>().DoStart();
+		if (response.Equals("DUPLICATE_CLASS_NAME"))
+		{
+			Debug.Log("Classname already exists, didnt add class.");
+			//
+			GameObject.Find("AddTownErrorLabel").GetComponent<UILabel>().text = "Couldn't add town. Classname already exists";
+		}
+		else
+		{
+			GameObject.Find("AddTownErrorLabel").GetComponent<UILabel>().text = "";
+			GameObject TownList = GameObject.Find("TownList");
+			TownList.GetComponent<TeacherMenuTowns>().DoClear();
+			TownList.GetComponent<TeacherMenuTowns>().DoStart();
+		}
+
 		
     }
 	

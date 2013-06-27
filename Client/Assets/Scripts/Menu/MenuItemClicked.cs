@@ -21,7 +21,6 @@ public class MenuItemClicked : MonoBehaviour {
 		LogoutYes,
 		LogoutNo,
 		ShowClassesBack,
-		ShowStudentsBack,
 	}
 	
 	public Item item = Item.CHANGEME;
@@ -102,6 +101,7 @@ public class MenuItemClicked : MonoBehaviour {
 		{
 			try
 			{
+				GameObject.Find("AddTownErrorLabel").GetComponent<UILabel>().text = "";
 				GameObject classpanel = GameObject.Find("ShowClassesPanel");
 				classpanel.GetComponent<UIPanel>().alpha = 0f;
 				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
@@ -136,20 +136,6 @@ public class MenuItemClicked : MonoBehaviour {
 			catch {}
 		}	
 		
-		if (item == Item.ShowStudentsBack)
-		{
-			try
-			{
-				GameObject teachmenu = GameObject.Find("TeacherMainMenu");
-				teachmenu.GetComponent<UIPanel>().alpha = 1f;
-				GameObject studentpanel = GameObject.Find("ShowStudentsPanel");
-				studentpanel.GetComponent<UIPanel>().alpha = 0f;
-				GameObject StudentList = GameObject.Find("StudentList");
-				StudentList.GetComponent<TeacherMenuStudents>().DoClear();
-			}
-			catch {}
-		}
-		
 		if (item == Item.LogoutNo)
 		{
 			GameObject surepanel = GameObject.Find("LogoutSurePanel");
@@ -166,7 +152,6 @@ public class MenuItemClicked : MonoBehaviour {
 				teachmenu.GetComponent<UIPanel>().alpha = 1f;
 			}
 			catch{}
-			//surepanel.GetComponent<UIPanel>().enabled = false;
 		}	
 		
 		if (item == Item.LogoutYes)

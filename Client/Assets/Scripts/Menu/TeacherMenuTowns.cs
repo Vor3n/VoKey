@@ -9,7 +9,7 @@ public class TeacherMenuTowns : MonoBehaviour {
 	public InitializeTownItem Item;
 	public UIGrid Grid;
 	
-	public Dictionary<string, string> ItemList;
+	public SortedDictionary<string, string> ItemList;
 	List<GameObject> Children;
 	public GameObject selectedItem;
 	GameObject previouslySelected;
@@ -18,7 +18,7 @@ public class TeacherMenuTowns : MonoBehaviour {
 	// Use this for initialization
 	public void DoStart () {
 		Children = new List<GameObject>();
-		ItemList = new Dictionary<string, string>();
+		ItemList = new SortedDictionary<string, string>();
 		CreateItems(ItemList);
 		StartCoroutine(RetrieveItems());
 	}
@@ -43,17 +43,17 @@ public class TeacherMenuTowns : MonoBehaviour {
 		}
 	}
 	
-	void CreateItems(Dictionary<string,string> Items){
+	void CreateItems(SortedDictionary<string,string> Items){
 		
 		Children.ForEach(child => Destroy(child));
-		
-		foreach( KeyValuePair<string,string> IT in Items.OrderBy(key => key.Key)){
+		foreach( KeyValuePair<string,string> IT in Items){
+			Debug.Log("KEY: " + IT.Key + "\nValue: " + IT.Value);
 			GameObject obj = (GameObject) Instantiate(Item.gameObject);	
 			obj.transform.parent = Grid.gameObject.transform;
 			obj.transform.localScale = new Vector3(1,1,1);
 			obj.SetActive(true);
-			obj.GetComponent<InitializeTownItem>().InitialiseItem(IT.Value,IT.Key);
-			obj.name = IT.Value;
+			obj.GetComponent<InitializeTownItem>().InitialiseItem(IT.Key,IT.Value);
+			obj.name = IT.Key;
 			Children.Add(obj);
 		}
 		try{
@@ -94,7 +94,7 @@ public class TeacherMenuTowns : MonoBehaviour {
 		XmlNodeList List =  xml.SelectNodes("//ArrayOfTown/Town");
 		foreach( XmlNode XN in List){
 			Debug.Log("" + XN.Attributes["Name"].Value);
-			ItemList.Add(XN.Attributes["Name"].Value, XN.Attributes["ClassroomName"].Value);
+			ItemList.Add(XN.Attributes["ClassroomName"].Value, XN.Attributes["Name"].Value);
 		}
 		CreateItems(ItemList);
 	}
