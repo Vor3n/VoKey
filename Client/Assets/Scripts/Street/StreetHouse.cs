@@ -40,13 +40,25 @@ public class StreetHouse : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            // Empty current room list
+            Street.CurrentRooms = null;
+
             // Restore Meshcolliders
-            foreach (GameObject go in Street.HouseList)
+            GameObject[] objects = (GameObject[])GameObject.FindSceneObjectsOfType(typeof(GameObject));
+            foreach (GameObject go in objects)
             {
-                MeshCollider mc = go.GetComponent<MeshCollider>();
-                if (mc == null)
+                if (go.name == "RoomList" || go.name == "RoomListButton") continue;
+
+                MeshCollider m = go.GetComponent<MeshCollider>();
+                if (m != null)
                 {
-                    go.AddComponent<MeshCollider>();
+                    m.enabled = true;
+                }
+
+                BoxCollider b = go.GetComponent<BoxCollider>();
+                if (b != null)
+                {
+                    b.enabled = true;
                 }
             }
 
@@ -83,8 +95,6 @@ public class StreetHouse : MonoBehaviour
 
     void OnMouseUpAsButton()
     {
-        Debug.Log("Creating Menu");
-
         // Create Room List
         Street.CreateRoomList(House.rooms);
     }

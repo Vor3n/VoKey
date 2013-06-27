@@ -47,8 +47,6 @@ public class StreetScroll : MonoBehaviour
             if (sprite != null)
             {
                 sprite.alpha = 0.3f;
-                //originalColor = sprite.material.color;
-                //sprite.material.color += (Color.white * 2);
 
                 Moving = true;
             }
@@ -56,7 +54,6 @@ public class StreetScroll : MonoBehaviour
         else
         {
             sprite.alpha = 1f;
-            //sprite.material.color = originalColor;
 
             Moving = false;
         }
@@ -68,7 +65,7 @@ public class StreetScroll : MonoBehaviour
         switch (Direction)
         {
             case ScrollDirection.Left:
-                if(cam.transform.position.z < TerrainSize.z - 275)
+                if(cam.transform.position.z < TerrainSize.z - 1650)//275)
                 {
                     cam.transform.position += new Vector3(0, 0, 5);
                 }
@@ -81,33 +78,4 @@ public class StreetScroll : MonoBehaviour
                 break;
         }
     }
-
-    /*
-        void OnMouseEnter()
-        {
-            // Show highlight
-            UISprite sprite = gameObject.GetComponent<UISprite>();
-            Debug.Log("mouse enter sprite: " + sprite);
-            if (sprite != null)
-            {
-                sprite.material.color += Color.white;
-            }
-
-            // Start scrolling (remember to stop at bounds)
-            switch (Direction)
-            {
-                case ScrollDirection.Left:
-                    break;
-                case ScrollDirection.Right:
-                    break;
-            }
-        }
-
-        void OnMouseExit()
-        {
-            // Stop scrolling
-
-            // Remove highlight
-        }
-    */
 }

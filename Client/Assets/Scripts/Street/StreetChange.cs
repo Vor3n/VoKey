@@ -25,11 +25,6 @@ public class StreetChange : MonoBehaviour {
 
     void OnClick()
     {
-        Debug.Log("Button event: " + gameObject.name);
-        // Whch direction are we going?
-
-        // Trigger animation
-
         Camera cam = ((GameObject)GameObject.Find("Main Camera")).GetComponent<Camera>();
         switch (Direction)
         {
@@ -40,7 +35,7 @@ public class StreetChange : MonoBehaviour {
                 }
                 break;
             case StreetChangeDirection.Down:
-                if (cam.transform.position.x > 600)
+                if (cam.transform.position.x > TerrainSize.x - (Street.Streets.Count * 300))
                 {
                     cam.transform.position -= new Vector3(300, 0, 0);
                 }

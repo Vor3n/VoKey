@@ -23,14 +23,14 @@ public class LoadStreet : MonoBehaviour
         town = GetVokeyObject<Town>("town");
         if (town != null)
         {
-            //Debug.Log("Town: " + town.name + ", ID: " + town.id);
-            int counter = 0;
             foreach (VokeySharedEntities.Street s in town.streets)
             {
-                if (counter++ == 2) break;
-                Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
-                VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
-                Street.Streets.Add(street);
+                if (s.type == VokeySharedEntities.Street.StreetType.Residential)
+                {
+                    Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
+                    VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
+                    Street.Streets.Add(street);
+                }
             }
 
             // foreach street contained in town object
@@ -50,6 +50,66 @@ public class LoadStreet : MonoBehaviour
                 roadPosition.x -= Street.StreetIncrement;
             }
         }
+
+        // Request current users assignments
+        AssignmentList assignments = GetVokeyObject<AssignmentList>("assignment");
+
+        // Scale and position Sprite as background
+        UISprite backgroundSprite = ((GameObject)GameObject.Find("AssignmentListBackground")).GetComponent<UISprite>();
+        backgroundSprite.transform.localScale = new Vector3(300, assignments.TodoAssignments.Count * 45 + 45);
+
+        // Create and position labels (assignments)
+        for (int i = 0; i < assignments.TodoAssignments.Count; i++)
+        {
+            GameObject Anchor = (GameObject)GameObject.Find("AssignmentAnchor");
+            // Create the button
+            GameObject assignment = new GameObject("assignment");
+            assignment.AddComponent<BoxCollider>();
+            assignment.AddComponent<UIButton>();
+            assignment.AddComponent<UIButtonScale>();
+            assignment.AddComponent<UIButtonOffset>();
+            assignment.AddComponent<UIButtonSound>();
+            AssignmentClicked clicked = assignment.AddComponent<AssignmentClicked>();
+            clicked.assignment = assignments.TodoAssignments[i];
+            assignment.transform.parent = Anchor.transform;
+            assignment.layer = Anchor.layer;
+            assignment.transform.localScale = new Vector3(1, 1, 1);
+            assignment.transform.position = new Vector3(42, -60 - (i * 45), 1); // -15
+            assignment.transform.localPosition = assignment.transform.position;
+
+            // Create the label
+            GameObject lbl = new GameObject("assignment-label");
+            lbl.layer = Anchor.layer;
+            lbl.AddComponent<UILabel>();
+
+            UILabel label = lbl.GetComponent<UILabel>();
+            label.transform.parent = assignment.transform;
+            label.pivot = UIWidget.Pivot.TopLeft;
+            label.transform.position = new Vector3(0, 0, 1);
+            label.transform.localPosition = label.transform.position;
+            label.transform.localScale = new Vector3(28, 28, 1);
+            label.depth = 1;
+            label.text = assignments.TodoAssignments[i].name;
+            label.font = ((GameObject)Resources.Load("Atlases/Fantasy/Fantasy Font - Normal")).GetComponent<UIFont>();
+            /*
+            // Create the sprite
+            GameObject sprt = new GameObject("assignment-sprite");
+            sprt.AddComponent<UISprite>();
+
+            UISprite sprite = sprt.GetComponent<UISprite>();
+            sprite.transform.parent = assignment.transform;
+            sprite.pivot = UIWidget.Pivot.TopLeft;
+            sprite.transform.position = new Vector3(42, -15 - (i * 45), 1);
+            sprite.transform.localPosition = sprite.transform.position;
+            sprite.transform.localScale = new Vector3(label.transform. */
+
+            // Set up the box collider
+            BoxCollider box = assignment.GetComponent<BoxCollider>();
+            box.center = new Vector3(140, -15, 0); // -15
+            box.size = new Vector3(280, 28, 0);
+        }
+
+        // TODO and DONE
     }
 
     // Update is called once per frame
@@ -66,7 +126,7 @@ public class LoadStreet : MonoBehaviour
 
         while (!IsDone)
         {
-            
+
         }
 
         if (result != null && result != string.Empty)
@@ -99,33 +159,23 @@ public class LoadStreet : MonoBehaviour
             }
         }
 
-        //Debug.Log("Received Object XML");
         result = response.text;
         IsDone = response.isDone;
     }
 
     void CreateSingleStreet(Vector3 StartingCoordinates, List<House> Houses)
     {
-        //Debug.Log("Creating a Street with " + Houses.Count + " Houses");
         Quaternion rot = Quaternion.Euler(new Vector3(-90, -90, 0));
         for (int i = 0; i < Houses.Count; i++)
         {
             GameObject house = (GameObject)Instantiate(HousePrefab, StartingCoordinates + new Vector3(0, 0, i * Street.HouseIncrement), rot);
             house.name = Houses[i].name;
-            //Debug.Log("House @ " + house.transform.position);
 
             // Assign a student name to the house
             house.AddComponent<MeshCollider>();
             house.AddComponent<StreetHouse>();
             house.GetComponent<StreetHouse>().Atlas = Atlas;
             house.GetComponent<StreetHouse>().House = Houses[i];
-
-            Street.HouseList.Add(house);
-
-            //ChangeHousePartColor (house, "WaLL", new Color (0.3f, 0.3f, 0.0f));
-            //ChangeHousePartColor (house, "Door", new Color (1.0f, 0.5f, 0.0f));
-            //ChangeHousePartColor (house, "roof", new Color (123, 0.0f, 1.0f));
-            //ChangeHousePartColor (house, "windows", new Color (0.5f, 0.5f, 255, 1.0f));
         }
     }
 

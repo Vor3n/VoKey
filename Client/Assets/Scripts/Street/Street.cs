@@ -6,12 +6,13 @@ using VokeySharedEntities;
 public class Street : MonoBehaviour {
     public static List<string> studentNames = new List<string>();
     public static List<VokeySharedEntities.Street> Streets = new List<VokeySharedEntities.Street>();
-    public static List<Room> currentRooms = null;
-    public static List<GameObject> HouseList = new List<GameObject>();
+    public static List<Room> CurrentRooms = null;
+    public static Assignment CurrentAssignment = null;
     public static Vector3 StartingCoordinates = new Vector3(1793, 1, 75);
     public static Vector3 RoadCoordinates = new Vector3(1720, 1, 1000);
     public static int HouseIncrement = 50, StreetIncrement = 300;
     public static UIPanel ListRoot;
+    public static bool AssignmentOpen = false;
 
     static List<string> menuItems = new List<string>();
 
@@ -27,16 +28,26 @@ public class Street : MonoBehaviour {
 
     public static void CreateRoomList(List<Room> roomList)
     {
+        CurrentRooms = new List<Room>(roomList);
         GameObject listObject = (GameObject)GameObject.Find("RoomList");
         UIPopupList list = listObject.GetComponent<UIPopupList>();
 
         // Remove street colliders to avoid triggering house onclick through the menu
-        foreach (GameObject go in Street.HouseList)
+        GameObject[] objects = (GameObject[])GameObject.FindSceneObjectsOfType(typeof(GameObject));
+        foreach (GameObject go in objects)
         {
-            MeshCollider mc = go.GetComponent<MeshCollider>();
-            if (mc != null)
+            if (go.name == "RoomList" || go.name == "RoomListButton") continue;
+
+            MeshCollider m = go.GetComponent<MeshCollider>();
+            if (m != null)
             {
-                Object.Destroy(mc);
+                m.enabled = false;
+            }
+
+            BoxCollider b = go.GetComponent<BoxCollider>();
+            if (b != null)
+            {
+                b.enabled = false;
             }
         }
 
@@ -55,7 +66,5 @@ public class Street : MonoBehaviour {
 
 
         ListRoot.alpha = 1;
-
-        currentRooms = roomList;
     }
 }
