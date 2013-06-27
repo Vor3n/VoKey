@@ -126,7 +126,7 @@ public class FindableObject {
 	/// <summary>
 	/// The game object identifier.
 	/// </summary>
-    public System.Guid GameObjectId;
+    public string GameObjectId;
 		
     /// <summary>
     /// Constructor for a new FindableObject.
@@ -138,8 +138,9 @@ public class FindableObject {
         position = originalInstance.transform.localPosition;
         scale = originalInstance.transform.localScale;
         rotation = originalInstance.transform.localRotation;
-        GameObjectId = new System.Guid(originalInstance.name);
+        GameObjectId = friendlyName;
         id = System.Guid.NewGuid();
+		
 		
     }
 }

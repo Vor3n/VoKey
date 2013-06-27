@@ -51,12 +51,6 @@ public class GameControllerScript : MonoBehaviour {
 	{
 		WebServiceRequest r = new WebServiceRequest("rooms");
 		StartCoroutine(r.Request());
-		float elapsedTime = 0.0f;
-		while (!r.isDone)
-		{
-			elapsedTime += Time.deltaTime;
-			if (elapsedTime >= 2.0f) break;
-		}
 	}
 	
 }

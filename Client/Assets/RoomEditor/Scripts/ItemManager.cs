@@ -3,18 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
+using System;
 public class ItemManager : MonoBehaviour {
 	public InitializeItem Item;
 	public UIGrid Grid;
 	public string URL;
 	
-	public Dictionary<string, string> ItemList;
+	public Dictionary<string, KeyValuePair<string, Guid>> ItemList;
 	List<GameObject> Children;
 	
 	// Use this for initialization
 	void Start () {
 		Children = new List<GameObject>();
-		ItemList = new Dictionary<string, string>();
+		ItemList = new Dictionary<string, KeyValuePair<string, Guid>>();
 		
 	
 		CreateItems(ItemList);
@@ -23,17 +24,17 @@ public class ItemManager : MonoBehaviour {
 	}
 	
 	
-	void CreateItems(Dictionary<string,string> Items){
+	public void CreateItems(Dictionary<string,KeyValuePair<string, Guid>> Items){
 		
 		Children.ForEach(child => Destroy(child));
 
-		foreach( KeyValuePair<string,string> IT in Items){
+		foreach( KeyValuePair<string,KeyValuePair<string, Guid>> IT in Items){
 		GameObject obj = (GameObject) Instantiate(Item.gameObject);	
 			obj.transform.parent = Grid.gameObject.transform;
 			obj.transform.localScale = new Vector3(1,1,1);
 			obj.SetActive(true);
-			obj.GetComponent<InitializeItem>().InitialiseItem(IT.Value,IT.Key);
-			obj.name = IT.Value;
+			obj.GetComponent<InitializeItem>().InitialiseItem(IT.Value.Key,IT.Key, IT.Value.Value);
+			obj.name = IT.Value.Key;
 			Children.Add(obj);
 		}
 		try{
@@ -46,15 +47,15 @@ public class ItemManager : MonoBehaviour {
 	
 	public void OnSubmit(string Result){
 		Debug.Log(Result);
-		Debug.Log ("Empty:" +(Result == ""));
+		//Debug.Log ("Empty:" +(Result == ""));
 		Search(Result);
 		
 	}
 	
 	public void Search(string search){
 		if(search != ""){
-			Dictionary<string, string> NewList = new Dictionary<string, string>();
-			foreach( KeyValuePair<string,string> IT in ItemList){
+			Dictionary<string, KeyValuePair<string, Guid>> NewList = new Dictionary<string, KeyValuePair<string, Guid>>();
+			foreach( KeyValuePair<string,KeyValuePair<string, Guid>> IT in ItemList){
 				if (IT.Key.Contains(search)){
 					
 				 NewList.Add(IT.Key, IT.Value);	
@@ -74,7 +75,7 @@ public class ItemManager : MonoBehaviour {
 	public IEnumerator RetrieveItems(string url){
 		float elapsedTime = 0.0f;
 		WWW www;
-		Debug.Log("SENDING FORM");
+		//Debug.Log("SENDING FORM");
 		
 	www = new WWW(url + "/assetbundle" );
 		while(!www.isDone)
@@ -93,20 +94,14 @@ public class ItemManager : MonoBehaviour {
 		foreach( XmlNode XN in List){
 			//Debug.Log("" + XN.Attributes["Name"].Value);	
 			if(XN.Attributes["Type"].Value == "UnityEngine.GameObject"){
-				Debug.Log("" + XN.Attributes["Name"].Value);
-				ItemList.Add( XN.Attributes["Hash"].Value,XN.Attributes["Name"].Value);
+				Guid BundleId = new Guid(XN.SelectSingleNode("../..").Attributes["ModelId"].Value);
+				//Debug.Log("" + XN.Attributes["Name"].Value);
+				ItemList.Add( XN.Attributes["Hash"].Value,new KeyValuePair<string, Guid>(XN.Attributes["Name"].Value,BundleId));
 				
 	
 			}
 		}
 		CreateItems(ItemList);
-		//return "";
-			
-		/*string output;
-		if (www.responseHeaders.TryGetValue("SESSION", out output))
-		{
-			GlobalSettings.SessionID = output;
-			Debug.Log("SESSIONID: " + GlobalSettings.SessionID);
-		}*/
+	
 	}
 }

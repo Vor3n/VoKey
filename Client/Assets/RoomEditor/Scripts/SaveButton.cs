@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class SaveButton : MonoBehaviour {
 
@@ -7,6 +8,8 @@ public class SaveButton : MonoBehaviour {
 		Debug.Log("Save Changes");
 		RoomManager  RM =	(RoomManager) FindObjectOfType(typeof(RoomManager));
 		RM.SaveRoom();
+		
+	
 	}
 }
 
