@@ -13,6 +13,7 @@ namespace VokeySharedEntities
             get
             {
                 List<Assignment> done = new List<Assignment>();
+                if(_assignments == null) return done;
                 foreach(Assignment a in _assignments) if(a.completed) done.Add(a);
                 return done;
             }
@@ -24,6 +25,7 @@ namespace VokeySharedEntities
             get
             {
                 List<Assignment> todo = new List<Assignment>();
+                if(_assignments == null) return todo;
                 foreach(Assignment a in _assignments) if(!a.completed) todo.Add(a);
                 return todo;
             }

@@ -14,6 +14,7 @@ public class VokeyAssetBundle
 	/// The name.
 	/// </summary>
     public string name;
+    
 	[XmlAttribute("ModelId")]
 	/// <summary>
 	/// The model identifier.
@@ -26,6 +27,8 @@ public class VokeyAssetBundle
 	[XmlAttribute("Resource Filename")]
     public string resourceFilename;
 	
+    private Dictionary<int, VokeyAsset> containedAssets;
+  
 	/// <summary>
 	/// The list of objects inside of this VokeyAssetBundle.
 	/// </summary>
@@ -34,6 +37,16 @@ public class VokeyAssetBundle
 	public List<VokeyAsset> objects;
 	
 	public List<string> ids;
+  
+    private bool _binaryFilesLoaded = false;
+    [XmlIgnore]
+    public bool binaryFilesLoaded
+    {
+      get
+      {
+        return _binaryFilesLoaded;
+      }
+    }
 	
 	/// <summary>
 	/// Initializes a new instance of the <see cref="VokeyAssetBundle"/> class.
@@ -42,6 +55,7 @@ public class VokeyAssetBundle
 	{
 		objects = new List<VokeyAsset> ();
 		ids = new List<String> ();
+        containedAssets = new Dictionary<int, VokeyAsset>();
 	}
 	
 	/// <summary>
@@ -56,16 +70,12 @@ public class VokeyAssetBundle
 	/// <exception cref='UnityException'>
 	/// Is thrown when the unity exception.
 	/// </exception>
-	public UnityEngine.GameObject GetGameObjectById (string id)
+	public UnityEngine.GameObject GetGameObjectById (int id)
 	{
-		if (ids.Contains (id)) {
-			foreach (VokeyAsset va in objects) {
-				if (va.name == id) 
-					return (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate (va.resource); 
-			}
-		}
-		
-		throw new UnityEngine.UnityException ("Could not load asset: " + id + " from bundle " + name);
+        VokeyAsset theAsset = null;
+        containedAssets.TryGetValue(id, out theAsset);
+        if(theAsset == null) throw new UnityEngine.UnityException ("Could not load asset: " + id + " from bundle " + name);
+        return (UnityEngine.GameObject)UnityEngine.GameObject.Instantiate (theAsset.resource); 
 	}
 	
 	/// <summary>
@@ -84,7 +94,20 @@ public class VokeyAssetBundle
 		}
 		return resultObjects.ToArray();
 	}
-	
+  
+    public void LoadBinaryObjects(UnityEngine.Object[] binaryAssets)
+  {
+    foreach (UnityEngine.Object o in binaryAssets)
+    {
+      int i = o.GetHashCode();
+      foreach (VokeyAsset va in objects)
+        {
+          if(va.hashString == i) va.loadResource(o);
+        }
+      }
+        _binaryFilesLoaded = true;
+    }
+  	
 	/// <summary>
 	/// Serializes a room to Xml
 	/// </summary>
@@ -111,7 +134,6 @@ public class VokeyAssetBundle
 	public static VokeyAssetBundle FromBundle (UnityEngine.Object[] contents)
 	{
 		VokeyAssetBundle a = new VokeyAssetBundle ();
-
 		foreach (UnityEngine.Object o in contents) {
 			if (o.GetType () == typeof(UnityEngine.GameObject)) {
 				//a.ids.Add(o.GetHashCode());
@@ -121,6 +143,7 @@ public class VokeyAssetBundle
 				a.objects.Add (va);
 			} 
 		}
+        a._binaryFilesLoaded = true;
 		return a;
 	}
 	
@@ -141,36 +164,12 @@ public class VokeyAssetBundle
 		}
 		return a;
 	}
-	
-	public static string SerializeToXML(List<VokeyAssetBundle> assetList)
-	{
-		var serializer = new XmlSerializer(typeof(List<VokeyAssetBundle>));
-		string utf8;
-        using (StringWriter writer = new Utf8StringWriter())
-        {
-            serializer.Serialize(writer, assetList);
-            utf8 = writer.ToString();
-        }
-		return utf8;
-	}
-	
-	public static VokeyAssetBundle FromXml(string pathname){
-		XmlSerializer deserializer = new XmlSerializer(typeof(VokeyAssetBundle));
-		TextReader textReader = new StreamReader(pathname);
-		VokeyAssetBundle vab = (VokeyAssetBundle)deserializer.Deserialize(textReader);
-		string s = Path.GetFileName (pathname);
-		s = s.Substring (s.IndexOf ("vab_") + "_vab".Length);
-		vab.name = s.Replace ("xml", "bin");
-		textReader.Close();
-		return vab;
-	}
-	
-	public class Utf8StringWriter : StringWriter
+  
+  public class Utf8StringWriter : StringWriter
     {
         public override Encoding Encoding
         {
             get { return Encoding.UTF8; }
         }
     }
-
 }

@@ -36,6 +36,11 @@ public class VokeyAsset {
 		va.ObjectType = bj.GetType().ToString();
         return va;
     }
+    
+    public void loadResource(UnityEngine.Object go)
+    {
+      resource = go;
+    }
 	
 	/// <summary>
 	/// Serves as a hash function for a <see cref="VokeyAsset"/> object.
