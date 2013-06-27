@@ -8,6 +8,19 @@ public class GameControllerScript : MonoBehaviour {
 	
 	public string ServerURL;
 	public List<Town> towns;
+    public static string RoomToOpen
+    {
+        get
+        {
+            return roomToOpen;
+        }
+        set
+        {
+            Debug.Log("Room to open changed to: " + RoomToOpen);
+            roomToOpen = value;
+        }
+    }
+    private static string roomToOpen = string.Empty;
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this.gameObject);
@@ -19,8 +32,8 @@ public class GameControllerScript : MonoBehaviour {
 	
 	void LoginHandler(string sessionId, User.UserType usertype){
 		GlobalSettings.SessionID = sessionId;
-		GlobalSettings.usertype = usertype;
-		switch(GlobalSettings.usertype)
+		GlobalSettings.UserType = usertype;
+		switch(GlobalSettings.UserType)
 		{
 			//student
 			case User.UserType.Student:
@@ -34,6 +47,7 @@ public class GameControllerScript : MonoBehaviour {
 			break;
 		}
 		//GetAssetBundlesFromServer();
+		GetAssetBundlesFromServer();
 	}
 	
 	void LoginFailHandler(string message){

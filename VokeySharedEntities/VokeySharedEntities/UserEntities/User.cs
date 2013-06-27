@@ -51,6 +51,12 @@ namespace GuiTest
 			get;
 			set;
 		}
+        
+        [XmlElement("Assignments")]
+        public AssignmentList assignments {
+            get;
+            set;
+        }
 
 		/// <summary>
 		/// Sets the password.
@@ -94,6 +100,11 @@ namespace GuiTest
 			userHouse = new House(this);
 		}
 
+        public void addAssignment(Assignment a)
+        {
+            if(assignments == null) assignments = new AssignmentList();
+            assignments.Add(a);
+        }
 
 		public static string SerializeToXML(List<User> userList)
 		{

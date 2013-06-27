@@ -18,6 +18,10 @@ public class FileHandler : RequestHandler
             extensionMimeTypes.Add(".bin", "application/octet-stream");
             extensionMimeTypes.Add(".unity3d", "application/octet-stream");
             extensionMimeTypes.Add(".ico", "image/vnd.microsoft.icon");
+            extensionMimeTypes.Add(".css", "text/css");
+            extensionMimeTypes.Add(".jpg", "img/jpeg");
+            extensionMimeTypes.Add(".js", "text/javascript");
+            extensionMimeTypes.Add(".html", "text/html");
         }
     }
 

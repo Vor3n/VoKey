@@ -6,11 +6,11 @@ using System.Xml;
 public class RoomManager : MonoBehaviour {
 	
 	public Guid RoomID;
-	public string url;
+	public string url =GlobalSettings.serverURL;
 	Room TheRoom;
 	// Use this for initialization
 	void Start () {
-	TheRoom = new Room();
+	TheRoom = new Room("goudvis");
 	RoomID = TheRoom.id;
 	}
 	
@@ -29,7 +29,7 @@ public class RoomManager : MonoBehaviour {
 	}
 	
 	public void SaveRoom(){
-		
+		ClearItemsFromRoom();
 		 TheRoom.containedObjects = new System.Collections.Generic.List<VokeySharedEntities.FindableObject>();
 		UnityEngine.Object[] objects = FindObjectsOfType(typeof(SelectMovable));
 		foreach( UnityEngine.Object obj in objects){
@@ -38,13 +38,13 @@ public class RoomManager : MonoBehaviour {
 			
 		}
 		
-		string xml = Room.ToXml(TheRoom);
+		string xml = TheRoom.ToXml();
 		byte[] roomInfo = System.Text.Encoding.UTF8.GetBytes (xml);
 		float elapsedTime = 0.0f;
 		WWW www;
 		Debug.Log("SENDING FORM");
 		
-		www = new WWW(url + "/room/" +RoomID,roomInfo);
+		www = new WWW(url + "/room/create",roomInfo);
 		while(!www.isDone)
 		{
 			elapsedTime += Time.deltaTime;
@@ -74,16 +74,14 @@ public class RoomManager : MonoBehaviour {
 		www = new WWW(url + "/room/" +RoomID);
 		while(!www.isDone)
 		{
-			elapsedTime += Time.deltaTime;
-			if (elapsedTime >= 1.9f) break;
+			//elapsedTime += Time.deltaTime;
+			//if (elapsedTime >= 1.9f) break;
 			
 		}
 		
-		XmlDocument xml = new XmlDocument();
-		xml.LoadXml(www.text);
 		
-		return Room.FromXml(xml);
 		
+		return MySerializerOfItems.FromXml<Room>(www.text);	
 	}
 	
 	

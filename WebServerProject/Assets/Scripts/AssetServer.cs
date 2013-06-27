@@ -1,15 +1,11 @@
 using System;
 using System.Net;
 using System.IO;
-using System.Text;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Collections.Generic;
 using GuiTest;
 using System.Xml.Serialization;
 using VokeySharedEntities;
-using System.Collections.Specialized;
-using System.Linq;
 using AssemblyCSharp;
 
 namespace Vokey
@@ -42,12 +38,9 @@ namespace Vokey
 
         public enum HttpRequestType
         {
-            POST
-,
-            GET
-,
-            DELETE
-,
+            POST,
+            GET,
+            DELETE,
             PUT
         }
 
@@ -117,6 +110,8 @@ namespace Vokey
             addHandlersForType(new StreetHandler(null));
             addHandlersForType(new RoomHandler(null));
             addHandlersForType(new FileHandler(null));
+            addHandlersForType (new AssignmentHandler(null));
+            addHandlersForType(new DynamicContentHandler(null));
             assetBundles = new List<VokeyAssetBundle>();
             Users = new List<User>();
             sessions = new VokeySessionContainer();
@@ -188,7 +183,10 @@ namespace Vokey
             t1.addUser(new User("duncan", "duncan", "Duncan Jenkins", User.UserType.Student));
             t1.addUser(new User("Daniel", "Plopjes", User.UserType.Student));
             t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
-            t1.addUser(new User("student", "student", User.UserType.Student));
+            User studentUser = new User("student", "student", User.UserType.Student);
+            studentUser.addAssignment(new Assignment("Demo Assignment", "Find all the objects in the room.", Guid.NewGuid(), new List<Guid>()));
+            t1.addUser(studentUser);
+            
             t1.addUser(new User("alex", "student", "Alexander Streng", User.UserType.Student));
             t1.addUser(new User("rscheefh", "student", "Roy Scheefhals", User.UserType.Student));
             t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
@@ -258,6 +256,15 @@ namespace Vokey
             foreach (Town t in TownList) if (t.id == id) return t;
             return null;
         }
+        
+        public Guid townClassNameExists (string townClassName)
+		{
+		    foreach (Town t in TownList)
+            {
+				if(t.classroomName == townClassName) return t.id;
+            }
+            return Guid.Empty;
+		}
 
         public User getUser(Guid id)
         {
@@ -349,125 +356,6 @@ namespace Vokey
             }
             Console.WriteLine("SMACK SOMEONE WITH AN ERASER. THERE IS SOMETHING VERY WRONG.");
             return false;
-        }
-
-        public void handleComplexRequest(HttpListenerContext hlc, Dictionary<string, string> formData, VokeySession vs)
-        {
-            string requestUri = hlc.Request.Url.ToString();
-            string handleableAction = getFirstHandlableAction(hlc);
-            getInstance().Log("Handleable Action: " + handleableAction);
-            switch (handleableAction)
-            {
-                case "assetbundles":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            StreamReader reader = new StreamReader(hlc.Request.InputStream);
-                            String inputContent = reader.ReadToEnd();
-                            UnityEngine.Debug.Log("Got input data to put. " + inputContent);
-
-                            if (vs != null && vs.isValid)
-                            {
-                                UnityEngine.Debug.Log("Session is valid! " + vs.SessionHash);
-                            }
-                            else
-                            {
-                                UnityEngine.Debug.Log("Session is invalid :(! " + vs.SessionHash);
-                            }
-                            //check if we are teacher
-                            //check if it exist
-                            //store
-                            //return id
-                            break;
-                        case "GET":
-                            if (requestUri.EndsWith("/") || requestUri.EndsWith("list") || requestUri.EndsWith("list/"))
-                            {
-                                hlc.returnXmlStringToClient(getInstance().assetBundles.ToXml());
-                            }
-                            else if (requestUri.EndsWith("/file"))
-                            {
-                                MemoryStream ms = new MemoryStream();
-                                try
-                                {
-                                    using (FileStream fileStream = File.OpenRead(AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + getInstance().splitArrayFromHandlableAction(requestUri)[1]))
-                                    {
-                                        ms.SetLength(fileStream.Length);
-                                        fileStream.Read(ms.GetBuffer(), 0, (int)fileStream.Length);
-                                    }
-                                    HttpFunctions.sendFileWithContentType(hlc, "application/octet-stream", ms.ToArray());
-
-                                }
-                                catch (Exception e)
-                                {
-                                    HttpFunctions.sendTextResponse(hlc, "Unknown file: " + splitArrayFromHandlableAction(requestUri)[1]);
-                                    Console.WriteLine(e.GetBaseException());
-                                }
-                            }
-                            else if (requestUri.EndsWith("/xml"))
-                            {
-                                UnityEngine.Debug.Log("Return XML to Client");
-                            }
-                            break;
-                    }
-                    break;
-
-                case "user":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            string requestString = splitArrayFromHandlableAction(requestUri)[1];
-                            User u = null;
-                            try
-                            {
-                                if (requestString.Length == 36)
-                                {
-                                    u = getInstance().getUser(new Guid(requestString));
-                                }
-                                else
-                                {
-                                    u = getInstance().getUser(requestString);
-                                }
-                            }
-                            catch { }
-
-                            if (u != null) HttpFunctions.returnXmlStringToHttpClient(hlc, u.ToXml());
-                            else HttpFunctions.sendStandardResponse(hlc, "GUID OR USERNAME NOT FOUND", 404);
-                            break;
-                    }
-
-                    break;
-                case "town":
-                    switch (hlc.Request.HttpMethod)
-                    {
-                        case "PUT":
-                            //check whether the user putting the house is the owner
-                            //put house
-                            //return ok
-                            break;
-                        case "GET":
-                            Town t = null;
-                            try
-                            {
-                                t = getInstance().getTown(new Guid(splitArrayFromHandlableAction(requestUri)[1]));
-                            }
-                            catch { }
-                            if (t != null) HttpFunctions.returnXmlStringToHttpClient(hlc, t.ToXml());
-                            else HttpFunctions.sendStandardResponse(hlc, "TOWN NOT FOUND", 404);
-                            break;
-                    }
-
-                    break;
-                default:
-                    HttpFunctions.sendTextResponse(hlc, "Resource not found. Welcome to reality.<br />Available actions are:<br /><ul><li><a href=\"town\">View towns</a></li><li><a href=\"user\">View users</a></li></ul>", 404);
-                    break;
-            }
-
-            //We want a specific resource
         }
 
         public string getFirstHandlableAction(HttpListenerContext hlc)
