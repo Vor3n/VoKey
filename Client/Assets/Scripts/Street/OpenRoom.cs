@@ -26,6 +26,7 @@ public class OpenRoom : MonoBehaviour
 
     void OnClick()
     {
+        System.Guid roomGUID = System.Guid.Empty;
         // Set guid in global variable
         switch (OpenAs)
         {
@@ -40,6 +41,7 @@ public class OpenRoom : MonoBehaviour
                         if (room != null)
                         {
                             Debug.Log("[RoomList]Going to open room:[" + room.id + "]");
+                            roomGUID = room.id;
                         }
                         else
                         {
@@ -57,10 +59,18 @@ public class OpenRoom : MonoBehaviour
                 }
                 break;
             case OpenType.Assignment:
-                Debug.Log("[Assignment]Going to open room:[" + Street.CurrentAssignment.roomToPlayIn + "]"); 
+                Debug.Log("[Assignment]Going to open room:[" + Street.CurrentAssignment.roomToPlayIn + "]");
+                roomGUID = Street.CurrentAssignment.roomToPlayIn;
                 break;
         }
 
-        // Open the scene        
+        if (roomGUID != System.Guid.Empty)
+        {
+            GameControllerScript gcs = GameObject.Find("GameController").GetComponent<GameControllerScript>();
+            gcs.RoomToOpen = roomGUID;
+
+            // Open the scene
+            //Application.LoadLevel("something"); // UNCOMMENT TO RUN PROPERLY
+        }
     }
 }

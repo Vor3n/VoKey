@@ -8,19 +8,8 @@ public class GameControllerScript : MonoBehaviour {
 	
 	public string ServerURL;
 	public List<Town> towns;
-    public static string RoomToOpen
-    {
-        get
-        {
-            return roomToOpen;
-        }
-        set
-        {
-            Debug.Log("Room to open changed to: " + RoomToOpen);
-            roomToOpen = value;
-        }
-    }
-    private static string roomToOpen = string.Empty;
+    public System.Guid RoomToOpen;
+
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this.gameObject);
