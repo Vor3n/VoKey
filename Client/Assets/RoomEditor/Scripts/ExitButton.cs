@@ -7,4 +7,4 @@ public class ExitButton : MonoBehaviour {
 	void OnClick () {
 		Application.LoadLevel("TeacherMenu");
 	}
-	
+}
