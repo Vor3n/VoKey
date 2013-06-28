@@ -46,6 +46,14 @@ namespace VokeySharedEntities
 		id = Guid.NewGuid();
 		}
     
+    public House getHouse(Guid g)
+    {
+      foreach(House h in houses){
+        if(h.id == g) return h;
+      }
+      return null;
+    }
+    
     /// <summary>
     /// Adds a house to the street.
     /// </summary>

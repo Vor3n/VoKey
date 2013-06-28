@@ -54,7 +54,6 @@
     <Compile Include="GameEntities\Street.cs" />
     <Compile Include="Utilities\MySerializerOfLists.cs" />
     <Compile Include="Utilities\HttpListenerContextExtension.cs" />
-    <Compile Include="GameEntities\Shop.cs" />
     <Compile Include="Utilities\MySerializerOfItems.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

@@ -32,8 +32,8 @@ namespace VokeySharedEntities
     public List<Street> getFilledStreets()
 	{
 		List<Street> total = new List<Street>();
-		total.AddRange (_residentialStreets);
-		total.AddRange(_educationalStreets);
+		total.AddRange (residentialStreets);
+		total.AddRange(educationalStreets);
 		return total;
 	}
 	

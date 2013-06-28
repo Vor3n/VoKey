@@ -41,6 +41,7 @@ public class ServerScript : MonoBehaviour
         if (GUI.Button(new Rect(130, 10, 130, 20), "Ik doe niks"))
         {
 			UnityEngine.Debug.Log ("KNOPJEDRUK");
+			ws.writeUserData();
         }
     }
 }

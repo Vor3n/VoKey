@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfStreet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Street Id="d3a94e14-b5d6-425e-9a3c-31ca0603d383" Type="Educational" Name="Winkelstraat">
+    <Houses>
+      <House Name="Dierenwinkel" Description="Store to buy bakas" Id="e4897c17-84b8-4da4-8570-0e05b4c161ce" OwnerGuid="00000000-0000-0000-0000-000000000000">
+        <type>Educational</type>
+        <Rooms>
+            <Room Name="goudvis" Id="a966726a-eda0-4b40-b127-c3fc435fd98b">
+                <FindableObjects>
+                    <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                        <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                        <Scale x="0.01" y="0.01" z="0.01" />
+                        <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                    </FindableObject>
+                    <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                        <Position x="0" y="6.499998" z="-9.407635" />
+                        <Scale x="0.01" y="0.01" z="0.01" />
+                        <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                        <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                    </FindableObject>
+                    <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="-367214648">
+                        <Position x="5.4814806" y="6.5" z="-5" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="1" x="0" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="30dd8bd8-b270-4924-9abc-367ae088ab97" LinkedObject="1559558976">
+                        <Position x="0" y="6.5" z="-5" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="1" x="0" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="676009112">
+                        <Position x="0" y="6.5" z="3.473904" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                    </FindableObject>
+                </FindableObjects>
+            </Room>
+            <Room Name="ezel" Id="a966726a-eda0-4b40-b127-c3fc435fd98b">
+                <FindableObjects>
+                    <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                        <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                        <Scale x="0.01" y="0.01" z="0.01" />
+                        <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                    </FindableObject>
+                    <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                        <Position x="0" y="6.499998" z="-9.407635" />
+                        <Scale x="0.01" y="0.01" z="0.01" />
+                        <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                        <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                    </FindableObject>
+                    <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="1687548656">
+                        <Position x="5.4814806" y="6.5" z="-5" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="1" x="0" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="30dd8bd8-b270-4924-9abc-367ae088ab97" LinkedObject="1687548656">
+                        <Position x="0" y="6.5" z="-5" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="1" x="0" y="0" z="0" />
+                    </FindableObject>
+                    <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="1687548656">
+                        <Position x="0" y="6.5" z="3.473904" />
+                        <Scale x="1" y="1" z="1" />
+                        <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                    </FindableObject>
+                </FindableObjects>
+            </Room>
+        </Rooms>
+      </House>
+    </Houses>
+  </Street>
+</ArrayOfStreet>

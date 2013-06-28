@@ -86,15 +86,6 @@ namespace VokeySharedEntities
 		}
 		
 		/// <summary>
-		/// Serializes a Shop to XML
-		/// </summary>
-		/// <returns>The xml.</returns>
-		/// <param name="shopToSerialize">Shop to serialize.</param>
-		public static string ToXml(this Shop shopToSerialize){
-			return GetXml (shopToSerialize);
-		}
-		
-		/// <summary>
 		/// Serializes a findable object to XML
 		/// </summary>
 		/// <returns>The xml.</returns>
