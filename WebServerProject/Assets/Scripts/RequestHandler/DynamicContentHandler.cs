@@ -54,11 +54,17 @@ public class DynamicContentHandler : RequestHandler
 								WebCore.HttpResponsePage hrp = new WebCore.HttpResponsePage ("Hallo Wereld.");
 								hrp.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
 								Table t = new Table ();
-								t.addRow (new TableRow("tableheader", new TableCell("Key"), new TableCell("Value"))); 
-								t.addRow (new TableRow(new TableCell(new Hyperlink("#", "Unity.ShowPupil()","Full Name")), new TableCell(u.FullName))); 
+								
+								
+								TableCell tc = new TableCell("Edit User");
+								tc.Colspan = 2;
+								tc.Style = "text-align:center;";
+								
+								t.addRow (new TableRow("tableheader", tc)); 
+								t.addRow (new TableRow(new TableCell("Full Name"), new TableCell(u.FullName))); 
 								t.addRow (new TableRow(new TableCell("Username"), new TableCell(u.username)));
-								t.addRow (new TableRow(new TableCell("Assignments done:"), new TableCell("" + u.assignments.CompletedAssignments.Count)));
-								t.addRow (new TableRow(new TableCell("Assignments left:"), new TableCell("" + u.assignments.TodoAssignments.Count)));
+								t.addRow (new TableRow(new TableCell("Assignments done:"), new TableCell((u.assignments == null) ? "0" : "" + u.assignments.CompletedAssignments.Count)));
+								t.addRow (new TableRow(new TableCell("Assignments left:"), new TableCell((u.assignments == null) ? "0" : "" + u.assignments.TodoAssignments.Count)));
 							
 								hrp.AddElementToBody (t);
 								HttpFunctions.sendStandardResponse (context, hrp.getHtmlRepresentation (), 200);
@@ -77,30 +83,31 @@ public class DynamicContentHandler : RequestHandler
 								levelPrefix += "../";
 							}
 						WebCore.HttpResponsePage hrp = new WebCore.HttpResponsePage ("Hallo Wereld.");
-						hrp.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
+						hrp.AddElementToHead (new CssLinkElement(levelPrefix + "file/Welloe.css"));
 						hrp.AddElementToHead(new Javascriptlet("var townGuid = \"" + town.id.ToString() + "\""));
-						Hyperlink backButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'DeleteUser')", "Back");
-						backButton.ElementClass = "largeUiButton";
-						Hyperlink editButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Edit");
-						editButton.ElementClass = "largeUiButton";
-						Hyperlink deleteButton = new Hyperlink ("#", "Unity.invoke('SwitchCommand', 'ClassView')", "Delete");
-						deleteButton.ElementClass = "largeUiButton";
+						hrp.AddElementToHead(new Javascriptlet("var sendEditUserCommand = function(uguid){ Unity.invoke('SwitchCommand','EditUser',uguid); }"));
+						hrp.AddElementToHead(new Javascriptlet("var sendDeleteUserCommand = function(uguid, tguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, uguid); }"));
+						hrp.AddElementToHead(new Javascriptlet("var sendCloseWindowCommand = function(){ Unity.invoke('SwitchCommand','CloseWindow'); }"));
+						
+						Hyperlink closeButton = new Hyperlink ("#", "sendCloseWindowCommand()", "Back");
+						closeButton.ElementClass = "largeUiButton";
+						
 						ImageElement editUserImageElement = new ImageElement (levelPrefix + "file/user_edit.png", 16, 16, "Edit User");
 						ImageElement deleteUserImageElement = new ImageElement (levelPrefix + "file/user_delete.png", 16, 16, "Remove User");
 						
-						hrp.AddElementToBody (backButton);
-						hrp.AddElementToBody (editButton);
-						hrp.AddElementToBody (deleteButton);
-						//hrp.AddElementToBody(new FormButton("BACK", "Unity.invoke('SwitchCommand', 'ClassView')"));
+						hrp.AddElementToBody (closeButton);
 						Table t = new Table ();
-						t.addRow (new TableRow(new TableCell("Name"), new TableCell("Username"), new TableCell("Actions")/*, new TableCell("Assignments to do"), new TableCell("Assignments done")*/)); 
+						t.Width = 600;
+						TableCell tc = new TableCell("");
+						tc.Width = 40;
+						t.addRow (new TableRow("tableheader", new TableCell("Name"), new TableCell("Username"), tc/*, new TableCell("Assignments to do"), new TableCell("Assignments done")*/)); 
 						foreach (User user in town.pupils) {
 							t.addRow (new TableRow(
 							new TableCell(user.FullName), 
 							new TableCell(user.username), 
 							new TableCell(
-								new Hyperlink("#", "Unity.invoke('SwitchCommand', 'ShowUser','" + user.userGuid + "')", editUserImageElement),
-								new Hyperlink("#", "Unity.invoke('SwitchCommand','DeleteUser',townGuid,'" + user.userGuid + "')", deleteUserImageElement)
+								new Hyperlink("#", "sendEditUserCommand('" + user.userGuid + "')", editUserImageElement),
+								new Hyperlink("#", "sendDeleteUserCommand('" + user.userGuid + "', townGuid)", deleteUserImageElement)
 							)));
 						}
 						hrp.AddElementToBody (t);

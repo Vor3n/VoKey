@@ -54,7 +54,17 @@ namespace WebCore.HtmlEntities
 			get { return int.Parse(parameters["height"]); } 
 			set { parameters["height"] = "" + value; }
 		}
-        
+		
+		public string Style {
+			get {
+				string s = "";
+				if (parameters.ContainsKey ("style")) parameters.TryGetValue ("style", out s);
+				return s;
+			}
+			set {
+				parameters["style"] = value;
+			}
+		}
 		protected HtmlDocumentElementBase ()
 		{
 			setElementTags();
