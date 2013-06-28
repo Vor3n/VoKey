@@ -29,7 +29,7 @@ public class LoadWebPage : MonoBehaviour{
 		Debug.Log("DoStart Called");
 		try
 		{
-			view = UWKCore.CreateView(pagename,GlobalSettings.serverURL + page , width, height );
+			view = UWKCore.CreateView(pagename, GlobalSettings.serverURL + page , width, height );
 			view.LoadURL(GlobalSettings.serverURL + page);
 			SetProperties();
 		}
@@ -80,7 +80,8 @@ public class LoadWebPage : MonoBehaviour{
 		Debug.Log("SwitchCommand: "+ args.Args[0]);
 		switch(args.Args[0]){
 		case "EditRoom":
-			GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomGUID = args.Args[1];
+			GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen = args.Args[1];
+			GameObject.Find("GameController").GetComponent<GameControllerScript>().TownGUID = args.Args[2];
 			Application.LoadLevel("EditorFirstTest");
 			break;
 		case "CloseWindow":

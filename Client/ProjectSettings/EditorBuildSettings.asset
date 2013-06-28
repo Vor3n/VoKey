@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/TeacherMenu.unity
   - enabled: 1
     path: Assets/Scenes/StreetTest.unity
+  - enabled: 1
+    path: Assets/Scenes/EditorFirstTest.unity

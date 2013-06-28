@@ -10,6 +10,7 @@ public class GameControllerScript : MonoBehaviour {
 	public List<Town> towns;
     public System.Guid RoomToOpen;
 	public string RoomGUID;
+	public string TownGUID;
 
 	// Use this for initialization
 	void Start () {
