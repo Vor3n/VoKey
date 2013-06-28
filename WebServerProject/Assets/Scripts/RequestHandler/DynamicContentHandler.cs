@@ -53,8 +53,12 @@ public class DynamicContentHandler : RequestHandler
 						if (u != null) {
 								WebCore.HttpResponsePage hrp = new WebCore.HttpResponsePage ("Hallo Wereld.");
 								hrp.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
+								hrp.AddElementToHead(new Javascriptlet("var sendShowTownCommand = function(){ Unity.invoke('SwitchCommand','ShowTown'); }"));
 								Table t = new Table ();
 								
+								Hyperlink backButton = new Hyperlink ("#", "sendShowTownCommand()", "Back");
+								backButton.ElementClass = "largeUiButton";
+								hrp.AddElementToBody (backButton);
 								
 								TableCell tc = new TableCell("Edit User");
 								tc.Colspan = 2;
@@ -88,6 +92,7 @@ public class DynamicContentHandler : RequestHandler
 						hrp.AddElementToHead(new Javascriptlet("var sendEditUserCommand = function(uguid){ Unity.invoke('SwitchCommand','EditUser',uguid); }"));
 						hrp.AddElementToHead(new Javascriptlet("var sendDeleteUserCommand = function(uguid, tguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, uguid); }"));
 						hrp.AddElementToHead(new Javascriptlet("var sendCloseWindowCommand = function(){ Unity.invoke('SwitchCommand','CloseWindow'); }"));
+						
 						
 						Hyperlink closeButton = new Hyperlink ("#", "sendCloseWindowCommand()", "Back");
 						closeButton.ElementClass = "largeUiButton";
