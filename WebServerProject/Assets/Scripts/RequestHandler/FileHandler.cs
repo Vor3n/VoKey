@@ -32,6 +32,12 @@ public class FileHandler : RequestHandler
         if (hlc == null) FileHandler.fillDictionary();
     }
 
+	/// <summary>
+	/// Returns the file to the client.
+	/// </summary>
+	/// <param name="theContext">The context.</param>
+	/// <param name="filename">Filename of the file to return.</param>
+	/// <param name="extension">Extension of the file to return.</param>
 	public static void returnFile (HttpListenerContext theContext, string filename, string extension)
 	{
 		string mime = null;

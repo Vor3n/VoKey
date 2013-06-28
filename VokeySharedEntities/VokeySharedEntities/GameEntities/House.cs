@@ -65,6 +65,12 @@ namespace VokeySharedEntities
 		rooms.Add (new Room(shopName));
 		description = shopDescription;
 	}
+  
+      public Room getRoom(Guid id)
+    {
+      foreach (Room r in rooms){ if(r.id == id) return r; }
+      return null;
+    }
 		
     [XmlArrayAttribute("Rooms"), System.Xml.Serialization.XmlArrayItem(typeof(Room))]
 	/// <summary>

@@ -46,9 +46,6 @@ public class TownHandler : RequestHandler {
 				} catch {
 				}
 				if (t != null) {
-						UnityEngine.Debug.Log (context.Request.Url.ToString ());
-						UnityEngine.Debug.Log (Content);
-						
 						if (arguments.Length > 2) {
 								switch (arguments [2]) {
 								case "street":

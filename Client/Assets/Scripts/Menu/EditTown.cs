@@ -28,10 +28,8 @@ public class EditTown : MonoBehaviour {
 	{
 		float heightpercentage = Screen.height;
 		heightpercentage = heightpercentage/100;
-		Debug.Log("Height: " + heightpercentage);
 		float widthpercentage = Screen.width;
 		widthpercentage = widthpercentage / 100;
-		Debug.Log("Width: " + widthpercentage);
 		Debug.Log("TEACHERMENUSTUDENTS DOSTART");
 		lwp = GameObject.Find("EditTownButton").AddComponent<LoadWebPage>();
 		//lwp.enabled = true;

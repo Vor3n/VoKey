@@ -78,6 +78,8 @@ namespace Vokey
             get;
             set;
         }
+        
+        public List<Street> EducationalStreets;
 
         /// <summary>
         /// Log the specified message.
@@ -109,6 +111,7 @@ namespace Vokey
             addHandlersForType(new WelcomeHandler(null));
             addHandlersForType(new StreetHandler(null));
             addHandlersForType(new RoomHandler(null));
+            addHandlersForType (new HouseHandler(null));
             addHandlersForType(new FileHandler(null));
             addHandlersForType (new AssignmentHandler(null));
             addHandlersForType(new DynamicContentHandler(null));
@@ -156,10 +159,13 @@ namespace Vokey
             scanForAssets();
         }
 
-        void readUserData()
-        {
-            Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-            s.addHouse(new House("Baka", "Store to buy bakas"));
+        void readUserData ()
+				{
+        	
+						/*Street s = new Street("Winkelstraat", Street.StreetType.Educational);
+           
+            
+            s.addHouse(h);
 
             Town t = new Town("Lazytown", "TIV4A");
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
@@ -194,12 +200,42 @@ namespace Vokey
             TownList.Add(t1);
 
             Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
-            Users.Add(new User("pascal", "pascal", User.UserType.Teacher));
-
-            //Room r = new Room("Duncan's Living Room");
-            //Room r2 = new Room("Chillroom");
-            //Room r3 = new Room("Pascal's werkkamer");
+            Users.Add(new User("pascal", "pascal", User.UserType.Teacher));*/
+						StreamReader townReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml");
+						_townList = MySerializerOfLists.FromXml<Town> (townReader.ReadToEnd());
+						townReader.Close ();
+        	
+						StreamReader userReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "users.xml");
+						Users = MySerializerOfLists.FromXml<User> (userReader.ReadToEnd());
+						userReader.Close ();
+        	
+						StreamReader eduReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "eduStreets.xml");
+						EducationalStreets = MySerializerOfLists.FromXml<Street> (eduReader.ReadToEnd());
+						eduReader.Close ();
+        				
+        				foreach(Street s in EducationalStreets){
+							foreach (Town t in _townList) {
+								t.addStreet (s);
+							}
+							}
         }
+        public void writeUserData ()
+		{
+			StreamWriter townWriter = new StreamWriter (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml", false);
+			townWriter.Write (TownList.ToXml());
+			townWriter.Flush ();
+			townWriter.Close ();
+			
+			StreamWriter userWriter = new StreamWriter (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "users.xml", false);
+			userWriter.Write (Users.ToXml());
+			userWriter.Flush ();
+			userWriter.Close ();
+			
+			StreamWriter eduWriter = new StreamWriter (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "eduStreets.xml", false);
+			eduWriter.Write (EducationalStreets.ToXml());
+			eduWriter.Flush ();
+			eduWriter.Close ();
+		}
         /// <summary>
         /// Adds the user.
         /// </summary>
@@ -340,6 +376,11 @@ namespace Vokey
 			}
 		}
 		
+		/// <summary>
+		/// Creates a vokey session.
+		/// </summary>
+		/// <returns>The vokey session.</returns>
+		/// <param name="u">U.</param>
         public string CreateVokeySession(User u)
         {
             return sessions.CreateVokeySession(u);
