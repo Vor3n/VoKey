@@ -24,7 +24,7 @@ public class CreateObjectiveList : MonoBehaviour {
     	objectivesListHeaderLabel.text = Header;
 		objectivesListHeaderLabel.transform.parent = this.transform;
         objectivesListHeaderLabel.font = HeaderFont;
-		objectivesListHeaderLabel.transform.localPosition = new Vector3(textOffset.x, 1.29f, 1f);
+		objectivesListHeaderLabel.transform.localPosition = new Vector3(textOffset.x, -15f, 1f); //1.29f
         objectivesListHeaderLabel.MakePixelPerfect();
         if (Objectives == null) throw new UnityException("No items in the list!");
 		else Init(Objectives);
@@ -76,7 +76,7 @@ public class CreateObjectiveList : MonoBehaviour {
 			GTHeader.transform.parent = this.transform;
             GTHeader.font = ListItemFont;
             
-	    	float yPos = textOffset.y + (-i * VerticalGap);
+	    	float yPos = textOffset.y + -15 + (-i * VerticalGap);
 			GTHeader.transform.localPosition = new Vector3(textOffset.x, yPos, 1f);
             
             GTHeader.MakePixelPerfect();
