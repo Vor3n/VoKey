@@ -12,7 +12,7 @@ public class PauseMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		savedTimeScale = Time.timeScale;
+		//savedTimeScale = Time.timeScale;
 	}
 	
 	void LateUpdate () {
@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour {
 			if (!paused && playing)
 			{
 				savedTimeScale = Time.timeScale;
+                //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
 	   			Time.timeScale = 0;
 				AudioListener.pause = true;
 				GameObject PausePanel = GameObject.Find("PausePanel");
@@ -30,6 +31,8 @@ public class PauseMenu : MonoBehaviour {
 			else
 			{
 				Time.timeScale = savedTimeScale;
+                //Time.timeScale = 1;
+                //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
 	    		AudioListener.pause = false;
 				GameObject PausePanel = GameObject.Find("PausePanel");
 				PausePanel.GetComponent<UIPanel>().alpha = 0f;
