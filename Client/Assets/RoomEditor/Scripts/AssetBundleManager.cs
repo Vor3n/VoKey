@@ -84,6 +84,7 @@ public class AssetBundleManager : MonoBehaviour {
                     yield return request;
 
                     GameObject obj = request.asset as GameObject;
+					
                     Bundles[id].objects.Find(x => x.name == obj.name).resource = obj;
 
                 }
