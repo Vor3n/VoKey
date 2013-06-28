@@ -3,12 +3,14 @@ using System.Collections;
 using System;
 using VokeySharedEntities;
 using System.Xml;
+public enum RoomMode { Editor, Game}
 public class RoomManager : MonoBehaviour {
 	
 	public Guid RoomID;
 	AssetBundleManager abm;
 	public string url =GlobalSettings.serverURL;
 	Room TheRoom;
+	public RoomMode OpenAs;
 	// Use this for initialization
 	void Start () {
 		abm = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
@@ -24,12 +26,12 @@ public class RoomManager : MonoBehaviour {
 		ClearItemsFromRoom();
 		
 		TheRoom = RetrieveRoom();
-		/*
+		
 		foreach(FindableObject FO in TheRoom.containedObjects){
-			GameObject g = GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId),FO.position,FO.rotation);
+			GameObject g = (GameObject) GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId),FO.position,FO.rotation);
 			g.transform.localScale = FO.scale;
 			
-		}*/
+		}
 	}
 	
 	public void SaveRoom(){
