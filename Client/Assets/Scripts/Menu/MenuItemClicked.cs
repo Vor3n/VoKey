@@ -21,6 +21,7 @@ public class MenuItemClicked : MonoBehaviour {
 		LogoutYes,
 		LogoutNo,
 		ShowClassesBack,
+        PauseResumed
 	}
 	
 	public Item item = Item.CHANGEME;
@@ -69,6 +70,12 @@ public class MenuItemClicked : MonoBehaviour {
 				studentmenu.GetComponent<UIPanel>().alpha = 0f;
 			}
 			catch {}
+            try
+            {
+                GameObject pausemenu = GameObject.Find("PausePanel");
+                pausemenu.GetComponent<UIPanel>().alpha = 0f;
+            }
+            catch { }
 		}
 		
 		if (item == Item.Quit)
@@ -78,7 +85,7 @@ public class MenuItemClicked : MonoBehaviour {
 		
 		if (item == Item.GoToTown)
 		{
-
+            Application.LoadLevel("StreetTest");
 		}
 		
 		if (item == Item.ShowClasses)
@@ -158,5 +165,16 @@ public class MenuItemClicked : MonoBehaviour {
 		{
 			Application.LoadLevel("MainMenu");
 		}
+
+        if (item == Item.PauseResumed)
+        {
+            AudioListener.pause = false;
+            GameObject PausePanel = GameObject.Find("PausePanel");
+            PausePanel.GetComponent<UIPanel>().alpha = 0f;
+            GameObject GameController = GameObject.Find("GameController");
+            PauseMenu menu = GameController.GetComponent<PauseMenu>();
+            Time.timeScale = menu.SavedTimeScale;
+            menu.Paused = false;
+        }
 	}
 }

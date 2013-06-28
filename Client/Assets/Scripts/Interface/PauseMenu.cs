@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 	public bool playing;
-	private bool paused = false;
-	private float savedTimeScale;
+	public bool Paused = false;
+	public float SavedTimeScale;
 	// Use this for initialization
 	void Start () {
 	
@@ -18,25 +18,25 @@ public class PauseMenu : MonoBehaviour {
 	void LateUpdate () {
 		if (Input.GetKeyDown("escape")) 
 		{
-			if (!paused && playing)
+			if (!Paused && playing)
 			{
-				savedTimeScale = Time.timeScale;
+				SavedTimeScale = Time.timeScale;
                 //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
 	   			Time.timeScale = 0;
 				AudioListener.pause = true;
 				GameObject PausePanel = GameObject.Find("PausePanel");
 				PausePanel.GetComponent<UIPanel>().alpha = 1f;
-				paused = true;
+				Paused = true;
 			}
 			else
 			{
-				Time.timeScale = savedTimeScale;
+				Time.timeScale = SavedTimeScale;
                 //Time.timeScale = 1;
                 //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
 	    		AudioListener.pause = false;
 				GameObject PausePanel = GameObject.Find("PausePanel");
 				PausePanel.GetComponent<UIPanel>().alpha = 0f;
-				paused = false;
+				Paused = false;
 			}
 	    }
 	}
