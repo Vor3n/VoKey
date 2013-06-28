@@ -9,6 +9,7 @@ public class GameControllerScript : MonoBehaviour {
 	public string ServerURL;
 	public List<Town> towns;
     public System.Guid RoomToOpen;
+	public string RoomGUID;
 
 	// Use this for initialization
 	void Start () {
