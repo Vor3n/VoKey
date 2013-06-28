@@ -31,17 +31,22 @@ public class Timer : MonoBehaviour
 	void Update ()
 	{
 		if (Running) {
+			
 			if (TimeUp) {
+				
 				GameData.time += Time.deltaTime;
 			} else {
+				
 				GameData.time -= Time.deltaTime;	
 			}
 		
 			int Seconds = (int)Mathf.RoundToInt (GameData.time);
 			TimeString = TimeFormat (Seconds);
 		}
-		if(Label != null)
+		if(Label != null){
+		
 		Label.text = TimeString;
+		}
 		
 	}
 	

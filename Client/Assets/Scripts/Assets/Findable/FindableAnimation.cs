@@ -20,6 +20,11 @@ public class FindableAnimation : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+			endPoint = new Vector3 (-5, 3, -6);
+			found = false; 
+	 		inAnimPosition = false;
+ 			moveToAnimPosition = false;
+	 		soundAvailable = false;
 		
 		if ( audio != null ){
 			if ( audio.clip != null ) { 

@@ -41,7 +41,7 @@ public class CreateObjectiveList : MonoBehaviour
     /// </param>
     public void Init(string[] ItemsToFind)
     {
-
+		GameData.ItemsToFind = ItemsToFind.Length;
         Objectives = ItemsToFind;
         TextList = new UILabel[Objectives.Length];
         CreateTexts();

@@ -54,25 +54,22 @@ public class RoomManager : MonoBehaviour
                 g.AddComponent<Rigidbody>().useGravity = false;
                 g.AddComponent<SelectMovable>();
                 g.AddComponent<MeshCollider>();
-                g.transform.position = new Vector3(0, 6.5f, -5f);
+                 g.AddComponent<BoxCollider>().size = new Vector3(1/FO.scale.x,1/FO.scale.y,1/FO.scale.z);
                 g.rigidbody.freezeRotation = true;
                 g.name = FO.GameObjectId;
             }
             else
             {
                 g.AddComponent<Rigidbody>().useGravity = false;
-                g.AddComponent<BoxCollider>().size = new Vector3(1/FO.scale.x,1/FO.scale.y,1/FO.scale.z);
+                g.AddComponent<BoxCollider>().size = new Vector3(1/FO.scale.x,1/FO.scale.y,1/FO.scale.z);// Attach a collider to respond to clicking... still looking for a better solution than this.
                 g.AddComponent<Animation>().animatePhysics = false;
                 AnimationClip anim = Resources.Load("FindableClicked") as AnimationClip;
-                g.animation.AddClip(anim, "FindableClicked");
-                g.AddComponent<Animator>();
+                g.animation.AddClip(anim, "FindableClicked");               
                 FindableAnimation fa = g.AddComponent<FindableAnimation>();
                 fa.findable = true;
 				fa.ObjectName = abm.RetrieveObjectName(FO.GameObjectId);
-                g.name = FO.GameObjectId;
-                //fa.Name = FO.GameObjectId;
-
-                itemsToFind.Add(abm.RetrieveObjectName(FO.GameObjectId));
+                g.name = FO.GameObjectId;               
+                itemsToFind.Add(abm.RetrieveObjectName(FO.GameObjectId));//Make sure it appears in the list to be found.
             }
         }
 
@@ -87,16 +84,18 @@ public class RoomManager : MonoBehaviour
     /// </summary>
     public void SaveRoom()
     {
-        ClearItemsFromRoom();
+        ClearItemsFromRoom();//Clear the current items because else they will be duplicated
         TheRoom.containedObjects = new System.Collections.Generic.List<VokeySharedEntities.FindableObject>();
         UnityEngine.Object[] objects = FindObjectsOfType(typeof(SelectMovable));
         foreach (UnityEngine.Object obj in objects)
         {
+			//Add each item to the room for serialization
             SelectMovable SM = (SelectMovable)obj;
             TheRoom.AddGameObject(SM.gameObject, SM.transform.position, SM.transform.localScale);
 
         }
-
+		
+		//Serialize the room object to xml and send it to the server
         string xml = TheRoom.ToXml();
         byte[] roomInfo = System.Text.Encoding.UTF8.GetBytes(xml);
         float elapsedTime = 0.0f;
@@ -106,11 +105,10 @@ public class RoomManager : MonoBehaviour
         www = new WWW(url + "room/create", roomInfo);
         while (!www.isDone)
         {
-            elapsedTime += Time.deltaTime;
-            if (elapsedTime >= 1.9f) break;
+           
 
         }
-        Debug.Log(xml);
+        
 
 
     }
@@ -126,7 +124,7 @@ public class RoomManager : MonoBehaviour
             foreach (UnityEngine.Object obj in objects)
             {
                 SelectMovable SM = (SelectMovable)obj;
-                Destroy(SM.gameObject);
+                Destroy(SM.gameObject);//Destroy each object with component SelectMovable
 
             }
         }
