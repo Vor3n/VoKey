@@ -5,10 +5,18 @@ public class AddItem : MonoBehaviour {
 	AssetBundleManager abm;
 	public string hash;
 	
+	/// <summary>
+	/// Assigns the Assetbundlemanager
+	/// </summary>
 	void Start(){
 		abm  = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
 	}
 	
+	/// <summary>
+	/// Add a gameobject to the scene based on it's hash.
+	/// After instatiating the gameobject it attatches the needed scripts for the editor 
+	/// and sets the needed properties.
+	/// </summary>
 	void OnClick(){
 		GameObject GObj = (GameObject) GameObject.Instantiate(abm.RetrieveObject(hash));
 		GObj.AddComponent<Rigidbody>().useGravity = false;

@@ -16,6 +16,10 @@ public class LoadStreet : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Debug.Log("LoadStreet::Start");
+
+        Street.Streets.Clear();
+
         Vector3 roadPosition = Street.RoadCoordinates;
         Vector3 streetPosition = Street.StartingCoordinates;
 
@@ -25,12 +29,9 @@ public class LoadStreet : MonoBehaviour
         {
             foreach (VokeySharedEntities.Street s in town.streets)
             {
-                if (s.type == VokeySharedEntities.Street.StreetType.Residential)
-                {
-                    Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
-                    VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
-                    Street.Streets.Add(street);
-                }
+                Debug.Log("Street: " + s.name + ", ID: " + s.id + ", Houses: " + s.houses.Count);
+                VokeySharedEntities.Street street = GetVokeyObject<VokeySharedEntities.Street>("town/" + town.id + "/street/" + s.id);
+                Street.Streets.Add(street);
             }
 
             // foreach street contained in town object
@@ -108,8 +109,6 @@ public class LoadStreet : MonoBehaviour
             box.center = new Vector3(140, -15, 0); // -15
             box.size = new Vector3(280, 28, 0);
         }
-
-        // TODO and DONE
     }
 
     // Update is called once per frame

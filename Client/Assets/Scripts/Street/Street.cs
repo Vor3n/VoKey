@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using VokeySharedEntities;
 
 public class Street : MonoBehaviour {
-    public static List<string> studentNames = new List<string>();
     public static List<VokeySharedEntities.Street> Streets = new List<VokeySharedEntities.Street>();
     public static List<Room> CurrentRooms = null;
     public static Assignment CurrentAssignment = null;
@@ -12,12 +11,11 @@ public class Street : MonoBehaviour {
     public static Vector3 RoadCoordinates = new Vector3(1720, 1, 1000);
     public static int HouseIncrement = 50, StreetIncrement = 300;
     public static UIPanel ListRoot;
-    public static bool AssignmentOpen = false;
-
-    static List<string> menuItems = new List<string>();
+    public static bool Loaded = false;
 
 	// Use this for initialization
 	void Start () {
+        Debug.Log("Street::Start");
         ListRoot = ((GameObject)GameObject.Find("RoomListPanel")).GetComponent<UIPanel>();
 	}
 	
@@ -53,7 +51,6 @@ public class Street : MonoBehaviour {
 
         // Clear menu
         list.items.Clear();
-        menuItems.Clear();
 
         // Read Rooms belonging to student
         foreach (Room room in roomList)

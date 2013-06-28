@@ -13,8 +13,10 @@ public class AssignmentClicked : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        animated = false;
+        //Debug.Log("AssignmentClicked::Start");
         label = GameObject.Find("AssignmentDescriptionLabel").GetComponent<UIPanel>();
-        sprite = GameObject.Find("AssignmentDescriptionBackground").GetComponent<UISprite>();
+        sprite = GameObject.Find("AssignmentDescriptionBackground").GetComponent<UISprite>();        
     }
 
     // Update is called once per frame
@@ -27,12 +29,17 @@ public class AssignmentClicked : MonoBehaviour
                 label.alpha = 1f;
                 animated = false;
             }
+            else
+            {
+                //Debug.Log("Playing Anim");
+            }
         }
     }
 
     void OnClick()
     {
-        //Debug.Log("Assignment clicked: " + assignment.name);
+        //sprite.animation["AssignmentDescriptionOpened"].speed = 1;
+        Debug.Log("Assignment clicked: " + assignment.name);
         Street.CurrentAssignment = assignment;
 
         // Remove colliders from assignment list / houses / scroll bars

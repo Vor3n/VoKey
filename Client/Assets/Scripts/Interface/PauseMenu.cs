@@ -3,8 +3,8 @@ using System.Collections;
 
 public class PauseMenu : MonoBehaviour {
 	public bool playing;
-	private bool paused = false;
-	private float savedTimeScale;
+	public bool Paused = false;
+	public float SavedTimeScale;
 	// Use this for initialization
 	void Start () {
 	
@@ -12,29 +12,42 @@ public class PauseMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		savedTimeScale = Time.timeScale;
+		//savedTimeScale = Time.timeScale;
 	}
 	
 	void LateUpdate () {
 		if (Input.GetKeyDown("escape")) 
 		{
-			if (!paused && playing)
+			if (!Paused && playing)
 			{
-				savedTimeScale = Time.timeScale;
-	   			Time.timeScale = 0;
-				AudioListener.pause = true;
-				GameObject PausePanel = GameObject.Find("PausePanel");
-				PausePanel.GetComponent<UIPanel>().alpha = 1f;
-				paused = true;
+                Pause();
 			}
 			else
 			{
-				Time.timeScale = savedTimeScale;
-	    		AudioListener.pause = false;
-				GameObject PausePanel = GameObject.Find("PausePanel");
-				PausePanel.GetComponent<UIPanel>().alpha = 0f;
-				paused = false;
+                UnPause();
 			}
 	    }
 	}
+
+    public void Pause()
+    {
+        SavedTimeScale = Time.timeScale;
+        //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        GameObject PausePanel = GameObject.Find("PausePanel");
+        PausePanel.GetComponent<UIPanel>().alpha = 1f;
+        Paused = true;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = SavedTimeScale;
+        //Time.timeScale = 1;
+        //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
+        AudioListener.pause = false;
+        GameObject PausePanel = GameObject.Find("PausePanel");
+        PausePanel.GetComponent<UIPanel>().alpha = 0f;
+        Paused = false;
+    }
 }
