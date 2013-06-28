@@ -20,24 +20,34 @@ public class PauseMenu : MonoBehaviour {
 		{
 			if (!Paused && playing)
 			{
-				SavedTimeScale = Time.timeScale;
-                //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
-	   			Time.timeScale = 0;
-				AudioListener.pause = true;
-				GameObject PausePanel = GameObject.Find("PausePanel");
-				PausePanel.GetComponent<UIPanel>().alpha = 1f;
-				Paused = true;
+                Pause();
 			}
 			else
 			{
-				Time.timeScale = SavedTimeScale;
-                //Time.timeScale = 1;
-                //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
-	    		AudioListener.pause = false;
-				GameObject PausePanel = GameObject.Find("PausePanel");
-				PausePanel.GetComponent<UIPanel>().alpha = 0f;
-				Paused = false;
+                UnPause();
 			}
 	    }
 	}
+
+    public void Pause()
+    {
+        SavedTimeScale = Time.timeScale;
+        //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        GameObject PausePanel = GameObject.Find("PausePanel");
+        PausePanel.GetComponent<UIPanel>().alpha = 1f;
+        Paused = true;
+    }
+
+    public void UnPause()
+    {
+        Time.timeScale = SavedTimeScale;
+        //Time.timeScale = 1;
+        //Debug.Log("Timescale: " + Time.timeScale + ", " + savedTimeScale);
+        AudioListener.pause = false;
+        GameObject PausePanel = GameObject.Find("PausePanel");
+        PausePanel.GetComponent<UIPanel>().alpha = 0f;
+        Paused = false;
+    }
 }

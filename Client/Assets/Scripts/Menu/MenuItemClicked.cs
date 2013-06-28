@@ -159,6 +159,15 @@ public class MenuItemClicked : MonoBehaviour {
 				teachmenu.GetComponent<UIPanel>().alpha = 1f;
 			}
 			catch{}
+            try
+            {
+                GameObject pausemenu = GameObject.Find("PausePanel");
+                pausemenu.GetComponent<UIPanel>().alpha = 0f;
+
+                GameObject gc = GameObject.Find("GameController");
+                gc.GetComponent<PauseMenu>().UnPause();
+            }
+            catch { }
 		}	
 		
 		if (item == Item.LogoutYes)
@@ -168,13 +177,10 @@ public class MenuItemClicked : MonoBehaviour {
 
         if (item == Item.PauseResumed)
         {
-            AudioListener.pause = false;
             GameObject PausePanel = GameObject.Find("PausePanel");
             PausePanel.GetComponent<UIPanel>().alpha = 0f;
             GameObject GameController = GameObject.Find("GameController");
-            PauseMenu menu = GameController.GetComponent<PauseMenu>();
-            Time.timeScale = menu.SavedTimeScale;
-            menu.Paused = false;
+            GameController.GetComponent<PauseMenu>().UnPause();
         }
 	}
 }
