@@ -17,8 +17,9 @@ public class RoomManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		RoomID=GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen;
 		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
-        LoadRoom(Guid.Empty);
+        LoadRoom(RoomID);
     }
 
 
@@ -137,13 +138,15 @@ public class RoomManager : MonoBehaviour
     public Room RetrieveRoom()
     {
         // Use global room guid TODO
-        WWW www = new WWW(url + "room/hoer");
+        WWW www = new WWW(url + "town/");
 
         while (!www.isDone)
         {
 
         }
-		
+		XmlDocument xml = new XmlDocument();
+		xml.LoadXml(www.text);
+		string room = xml.SelectSingleNode("//Room[@Id='"+RoomID+"']").OuterXml;
         return MySerializerOfItems.FromXml<Room>(www.text);
     }
 
