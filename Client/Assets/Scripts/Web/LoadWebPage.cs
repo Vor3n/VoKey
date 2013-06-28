@@ -30,6 +30,7 @@ public class LoadWebPage : MonoBehaviour{
 		try
 		{
 			view = UWKCore.CreateView(pagename,GlobalSettings.serverURL + page , width, height );
+			view.LoadURL(GlobalSettings.serverURL + page);
 			SetProperties();
 		}
 		catch
@@ -83,12 +84,7 @@ public class LoadWebPage : MonoBehaviour{
 			Application.LoadLevel("EditorFirstTest");
 			break;
 		case "CloseWindow":
-			Destroy(lwp);
-			GameObject classesmenu = GameObject.Find("ShowClassesPanel");
-			classesmenu.GetComponent<UIPanel>().alpha = 1f;
-			GameObject TownList = GameObject.Find("TownList");
-			TownList.GetComponent<TeacherMenuTowns>().DoClear();
-			TownList.GetComponent<TeacherMenuTowns>().DoStart();
+			GameObject.Find("EditTownButton").GetComponent<EditTown>().DoClear();
 			break;
 		case "ShowUser":
 			lwp.updateviewpage("dynamic/edituser/"+args.Args[1]);
