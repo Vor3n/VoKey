@@ -17,17 +17,11 @@ public class RoomManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        if (OpenAs == RoomMode.Editor)
-        {
-            abm = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
-            TheRoom = new Room("goudvis");
-            RoomID = TheRoom.id;
-        }
-        else
-        {
-            abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
+		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
+     
+            
             LoadRoom(Guid.Empty);
-        }
+        
     }
 
 
@@ -49,10 +43,11 @@ public class RoomManager : MonoBehaviour
         TheRoom = RetrieveRoom();
 
         List<string> itemsToFind = new List<string>();
-
+		Debug.Log(abm);
         foreach (FindableObject FO in TheRoom.containedObjects)
         {
-            GameObject g = (GameObject)GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId), FO.position, FO.rotation);
+			
+            GameObject g = (GameObject)GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId), FO.position,Quaternion.identity);
             g.transform.localScale = FO.scale;
             if (OpenAs == RoomMode.Editor)
             {
@@ -66,15 +61,16 @@ public class RoomManager : MonoBehaviour
             else
             {
                 g.AddComponent<Rigidbody>().useGravity = false;
-                g.AddComponent<MeshCollider>();
+                g.AddComponent<BoxCollider>().size = new Vector3(1/FO.scale.x,1/FO.scale.y,1/FO.scale.z);
                 g.AddComponent<Animation>().animatePhysics = false;
                 AnimationClip anim = Resources.Load("FindableClicked") as AnimationClip;
                 g.animation.AddClip(anim, "FindableClicked");
                 g.AddComponent<Animator>();
                 FindableAnimation fa = g.AddComponent<FindableAnimation>();
                 fa.findable = true;
+				fa.ObjectName = abm.RetrieveObjectName(FO.GameObjectId);
                 g.name = FO.GameObjectId;
-                fa.Name = FO.GameObjectId;
+                //fa.Name = FO.GameObjectId;
 
                 itemsToFind.Add(abm.RetrieveObjectName(FO.GameObjectId));
             }
@@ -107,7 +103,7 @@ public class RoomManager : MonoBehaviour
         WWW www;
         Debug.Log("SENDING FORM");
 
-        www = new WWW(url + "/room/create", roomInfo);
+        www = new WWW(url + "room/create", roomInfo);
         while (!www.isDone)
         {
             elapsedTime += Time.deltaTime;
@@ -146,13 +142,13 @@ public class RoomManager : MonoBehaviour
     public Room RetrieveRoom()
     {
         // Use global room guid TODO
-        WWW www = new WWW(url + "room/");
+        WWW www = new WWW(url + "room/hoer");
 
         while (!www.isDone)
         {
 
         }
-
+		
         return MySerializerOfItems.FromXml<Room>(www.text);
     }
 

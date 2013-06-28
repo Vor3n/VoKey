@@ -46,7 +46,7 @@ public class AssetBundleManager : MonoBehaviour {
 		
 	}
 	
-	public string url = "http://192.168.1.114:9090/";
+	public string url = GlobalSettings.serverURL;
 	
 	public Dictionary<Guid,VokeyAssetBundle> Bundles = new Dictionary<Guid,VokeyAssetBundle>();
 	
@@ -127,6 +127,7 @@ public class AssetBundleManager : MonoBehaviour {
                 Debug.Log(VA.hashString + " - " + VA.name + " - " + VA.resource);
                 if (VA.hashString + "" == hash)
                 {
+					
                     return VA.name;
                 }
             }
@@ -136,6 +137,8 @@ public class AssetBundleManager : MonoBehaviour {
     }
 	
 	void Start(){
+		url = GlobalSettings.serverURL;
+		Bundles = new Dictionary<Guid,VokeyAssetBundle>();
 		Caching.CleanCache ();
 		BundleLoaded += HandleBundleLoaded;
 		XMLLoaded += HandleXmlLoaded;
@@ -151,7 +154,7 @@ public class AssetBundleManager : MonoBehaviour {
 				//GameObject.Instantiate(VA.resource);
 			}
 		}
-		GameObject.Find("ItemList").GetComponent<ItemManager>().LoadFromBundles();
+		//GameObject.Find("ItemList").GetComponent<ItemManager>().LoadFromBundles();
 	}
 
 	

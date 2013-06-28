@@ -3,7 +3,7 @@ using System.Collections;
 
 public class FindableAnimation : MonoBehaviour
 {
-	public string Name;
+	public string ObjectName;
 	public bool findable = false;
 	
 	private bool found = false;
@@ -20,6 +20,7 @@ public class FindableAnimation : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		
 		if ( audio != null ){
 			if ( audio.clip != null ) { 
 				soundAvailable = true;
@@ -58,7 +59,7 @@ public class FindableAnimation : MonoBehaviour
 	{
 		if ( findable ){
 			GameObject ItemList = GameObject.Find("ItemList");
-		if(ItemList.GetComponent<CreateObjectiveList>().RemoveItem(Name)){
+		if(ItemList.GetComponent<CreateObjectiveList>().RemoveItem(ObjectName)){
 			UnityEngine.Object.Destroy(this.GetComponent<Rigidbody>());
 			//start moving the object to the startpoint of the animation
 			startPoint = transform.position;

@@ -16,10 +16,10 @@ public class ItemManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Children = new List<GameObject>();
-		abm = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
+		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
 		ItemList = new Dictionary<string, KeyValuePair<string, Guid>>();
 		
-	
+		LoadFromBundles();
 	
    		
 	}
