@@ -4395,8 +4395,9 @@ GameObject:
   - 114: {fileID: 1863278540}
   - 114: {fileID: 1863278539}
   - 114: {fileID: 1863278541}
+  - 114: {fileID: 1863278542}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4491,6 +4492,18 @@ MonoBehaviour:
   playing: 1
   Paused: 0
   SavedTimeScale: 0
+--- !u!114 &1863278542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1863278534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56b1ae0d596a318409e679bfd0e51081, type: 3}
+  m_Name: 
+  url: http://192.168.1.114:9090/
+  OpenAs: 1
 --- !u!1 &1875964984
 GameObject:
   m_ObjectHideFlags: 0

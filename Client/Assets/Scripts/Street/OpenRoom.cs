@@ -70,7 +70,7 @@ public class OpenRoom : MonoBehaviour
             gcs.RoomToOpen = roomGUID;
 
             // Open the scene
-            //Application.LoadLevel("something"); // UNCOMMENT TO RUN PROPERLY
+            Application.LoadLevel("RoomTest");
         }
     }
 }

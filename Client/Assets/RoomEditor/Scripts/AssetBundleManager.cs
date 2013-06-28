@@ -107,11 +107,9 @@ public class AssetBundleManager : MonoBehaviour {
 	/// </param>
 	public GameObject RetrieveObject( string hash){
 		foreach( VokeyAssetBundle VAB in Bundles.Values){
-			Debug.Log ("Something");
 			foreach(VokeyAsset VA in VAB.objects){
 				Debug.Log(VA.hashString+" - " + VA.name + " - "+ VA.resource);
 				if(VA.hashString +"" == hash){
-					Debug.Log("GOTCHA");
 					return (GameObject)  VA.resource;	
 				}				
 			}
@@ -119,6 +117,23 @@ public class AssetBundleManager : MonoBehaviour {
 		}
 		return null;
 	}
+
+    public String RetrieveObjectName(string hash)
+    {
+        foreach (VokeyAssetBundle VAB in Bundles.Values)
+        {
+            foreach (VokeyAsset VA in VAB.objects)
+            {
+                Debug.Log(VA.hashString + " - " + VA.name + " - " + VA.resource);
+                if (VA.hashString + "" == hash)
+                {
+                    return VA.name;
+                }
+            }
+
+        }
+        return string.Empty;
+    }
 	
 	void Start(){
 		Caching.CleanCache ();
