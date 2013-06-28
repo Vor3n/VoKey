@@ -136,6 +136,7 @@ public class AssetBundleManager : MonoBehaviour {
 				//GameObject.Instantiate(VA.resource);
 			}
 		}
+		GameObject.Find("ItemList").GetComponent<ItemManager>().LoadFromBundles();
 	}
 
 	

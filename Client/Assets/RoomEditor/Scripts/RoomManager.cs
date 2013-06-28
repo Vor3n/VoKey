@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviour {
 	AssetBundleManager abm;
 	public string url =GlobalSettings.serverURL;
 	Room TheRoom;
+	
 	public RoomMode OpenAs;
 	// Use this for initialization
 	void Start () {
@@ -18,10 +19,15 @@ public class RoomManager : MonoBehaviour {
 		RoomID = TheRoom.id;
 	}
 	
-	// Update is called once per frame
-
 	
 	
+	/// <summary>
+	/// Loads the room.
+	/// And places the items in the scene along with the required scripts and properties depending on the OpenAs property.
+	/// </summary>
+	/// <param name='id'>
+	/// The Guid of the room.
+	/// </param>
 	public void LoadRoom(Guid id){
 		ClearItemsFromRoom();
 		
@@ -30,10 +36,25 @@ public class RoomManager : MonoBehaviour {
 		foreach(FindableObject FO in TheRoom.containedObjects){
 			GameObject g = (GameObject) GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId),FO.position,FO.rotation);
 			g.transform.localScale = FO.scale;
+			if(OpenAs == RoomMode.Editor){
+				g.AddComponent<Rigidbody>().useGravity = false;
+				g.AddComponent<SelectMovable>();
+				g.AddComponent<MeshCollider>();
+				g.transform.position = new Vector3(0,6.5f,-5f);
+				g.rigidbody.freezeRotation = true;
+				g.name = FO.GameObjectId;
+				
+			}else{
+				
+				
+			}
+			
 			
 		}
 	}
-	
+	/// <summary>
+	/// Sends a serialized version of the current room to the webservice where it will be saved.
+	/// </summary>
 	public void SaveRoom(){
 		ClearItemsFromRoom();
 		 TheRoom.containedObjects = new System.Collections.Generic.List<VokeySharedEntities.FindableObject>();
@@ -62,6 +83,9 @@ public class RoomManager : MonoBehaviour {
 		
 	}
 	
+	/// <summary>
+	/// Clears all the items from room.
+	/// </summary>
 	void ClearItemsFromRoom(){
 		
 		UnityEngine.Object[] objects = FindObjectsOfType(typeof(SelectMovable));
@@ -72,6 +96,12 @@ public class RoomManager : MonoBehaviour {
 		}
 	}
 	
+	/// <summary>
+	/// Retrieves the room.
+	/// </summary>
+	/// <returns>
+	/// The room.
+	/// </returns>
 	public Room RetrieveRoom(){
 		float elapsedTime = 0.0f;
 		WWW www;
