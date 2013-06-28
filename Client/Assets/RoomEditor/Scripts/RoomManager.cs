@@ -147,7 +147,8 @@ public class RoomManager : MonoBehaviour
 		XmlDocument xml = new XmlDocument();
 		xml.LoadXml(www.text);
 		string room = xml.SelectSingleNode("//Room[@Id='"+RoomID+"']").OuterXml;
-        return MySerializerOfItems.FromXml<Room>(www.text);
+		//Debug.Log(room);
+        return MySerializerOfItems.FromXml<Room>(room);
     }
 
 
