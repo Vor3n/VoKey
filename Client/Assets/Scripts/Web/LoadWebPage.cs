@@ -80,7 +80,8 @@ public class LoadWebPage : MonoBehaviour{
 		Debug.Log("SwitchCommand: "+ args.Args[0]);
 		switch(args.Args[0]){
 		case "EditRoom":
-			GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen = args.Args[1];
+			System.Guid guid = new System.Guid(args.Args[1]);
+			GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen = guid;
 			GameObject.Find("GameController").GetComponent<GameControllerScript>().TownGUID = args.Args[2];
 			Application.LoadLevel("EditorFirstTest");
 			break;

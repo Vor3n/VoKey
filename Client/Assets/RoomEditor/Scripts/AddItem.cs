@@ -9,7 +9,7 @@ public class AddItem : MonoBehaviour {
 	/// Assigns the Assetbundlemanager
 	/// </summary>
 	void Start(){
-		abm  = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
+		abm  = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
 	}
 	
 	/// <summary>
