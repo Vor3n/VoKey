@@ -32,8 +32,8 @@ public class AssetBundleManager : MonoBehaviour {
 	void HandleBundleLoaded (UnityEngine.Object[] objects, Guid id){
 		AmountBundlesToFill--;
 		try{
-			Bundles[id].LoadBinaryObjects(objects);
-			Debug.Log ("HOERTJES. HET ZIJN ER: " + objects.Length);
+			//Bundles[id].LoadBinaryObjects(objects);
+            //Debug.Log("HOERTJES. HET ZIJN ER: " + objects.Length + ", Maar we hebben:[" + Bundles[id].objects.Count + "]");
 		} catch (Exception e){
 			Debug.Log (e.GetBaseException().ToString());
 		}
@@ -62,19 +62,35 @@ public class AssetBundleManager : MonoBehaviour {
 	/// Identifier.
 	/// </param>
 	public IEnumerator DownloadBundle(Guid id){
-		
-		using (WWW www = WWW.LoadFromCacheOrDownload(url + "assetbundle/" + id.ToString("D"), 0))
+
+        using (WWW www = WWW.LoadFromCacheOrDownload(url + "file/AssetBundle.bin", 0))
         {
             yield return www;
 		//	Debug.Log (www.error);
             AssetBundle assetBundle = www.assetBundle;
 			assetBundleIsLoaded = www.isDone;
-            UnityEngine.Object[] loadedObjects = assetBundle.LoadAll();
-			
-			
-            
-			if(BundleLoaded != null)
-				BundleLoaded(loadedObjects,id);
+            if (assetBundle == null)
+            {
+                Debug.Log("Duncan: Assetbundle is null yo");
+            }
+            else
+            {
+                UnityEngine.Object[] loadedObjects = assetBundle.LoadAll(typeof(GameObject));
+
+                for (int i = 0; i < loadedObjects.Length; i++)
+                {
+                    AssetBundleRequest request = assetBundle.LoadAsync(loadedObjects[i].name, typeof(GameObject));
+
+                    yield return request;
+
+                    GameObject obj = request.asset as GameObject;
+                    Bundles[id].objects.Find(x => x.name == obj.name).resource = obj;
+
+                }
+
+                if (BundleLoaded != null)
+                    BundleLoaded(loadedObjects, id);
+            }
         }
 		
 	}
