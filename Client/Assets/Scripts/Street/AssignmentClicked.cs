@@ -13,6 +13,7 @@ public class AssignmentClicked : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        Debug.Log("AssignmentClicked::Start");
         label = GameObject.Find("AssignmentDescriptionLabel").GetComponent<UIPanel>();
         sprite = GameObject.Find("AssignmentDescriptionBackground").GetComponent<UISprite>();
     }

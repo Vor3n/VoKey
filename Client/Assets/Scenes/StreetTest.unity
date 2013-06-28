@@ -2059,7 +2059,6 @@ GameObject:
   - 124: {fileID: 1166394296}
   - 81: {fileID: 1166394295}
   - 114: {fileID: 1166394300}
-  - 114: {fileID: 1166394301}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2135,20 +2134,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1166394294}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a84bc664fcf12145a86fec23b1fec6d, type: 3}
+  m_Script: {fileID: 11500000, guid: b3c042603fcd77247b58ecea9623ae40, type: 3}
   m_Name: 
---- !u!114 &1166394301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1166394294}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cbbd87a95ed3a4f41a7f4c6b83b40eb2, type: 3}
-  m_Name: 
-  HousePrefab: {fileID: 100000, guid: 9e36211148e487f4ba8fbf9832f4a9f7, type: 2}
-  Atlas: {fileID: 11400000, guid: 79cb3b78bc92c9c4093d414d271ecadc, type: 2}
 --- !u!1 &1194881476
 GameObject:
   m_ObjectHideFlags: 0

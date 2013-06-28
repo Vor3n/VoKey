@@ -66,11 +66,24 @@ public class OpenRoom : MonoBehaviour
 
         if (roomGUID != System.Guid.Empty)
         {
-            GameControllerScript gcs = GameObject.Find("GameController").GetComponent<GameControllerScript>();
-            gcs.RoomToOpen = roomGUID;
+            GameObject go = GameObject.Find("GameController");
+            if (go != null)
+            {
+                if (go.GetComponent<Street>() != null)
+                {
+                    Destroy(go.GetComponent<Street>());
+                }
+                if (go.GetComponent<LoadStreet>() != null)
+                {
+                    Destroy(go.GetComponent<LoadStreet>());
+                }
 
-            // Open the scene
-            Application.LoadLevel("RoomTest");
+                GameControllerScript gcs = go.GetComponent<GameControllerScript>();
+                gcs.RoomToOpen = roomGUID;
+
+                // Open the scene
+                Application.LoadLevel("RoomTest");
+            }
         }
     }
 }

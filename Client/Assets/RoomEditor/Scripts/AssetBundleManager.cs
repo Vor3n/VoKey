@@ -26,7 +26,7 @@ public class AssetBundleManager : MonoBehaviour {
 		}
 		
 		
-		Debug.Log("XML LOADED:" + Bundles.Count);
+		//Debug.Log("XML LOADED:" + Bundles.Count);
 	}
 	
 	void HandleBundleLoaded (UnityEngine.Object[] objects, Guid id){
@@ -71,7 +71,7 @@ public class AssetBundleManager : MonoBehaviour {
 			assetBundleIsLoaded = www.isDone;
             if (assetBundle == null)
             {
-                Debug.Log("Duncan: Assetbundle is null yo");
+                Debug.Log("Duncan: Assetbundle is null");
             }
             else
             {
@@ -108,7 +108,7 @@ public class AssetBundleManager : MonoBehaviour {
 	public GameObject RetrieveObject( string hash){
 		foreach( VokeyAssetBundle VAB in Bundles.Values){
 			foreach(VokeyAsset VA in VAB.objects){
-				Debug.Log(VA.hashString+" - " + VA.name + " - "+ VA.resource);
+				//Debug.Log(VA.hashString+" - " + VA.name + " - "+ VA.resource);
 				if(VA.hashString +"" == hash){
 					return (GameObject)  VA.resource;	
 				}				
@@ -124,7 +124,7 @@ public class AssetBundleManager : MonoBehaviour {
         {
             foreach (VokeyAsset VA in VAB.objects)
             {
-                Debug.Log(VA.hashString + " - " + VA.name + " - " + VA.resource);
+                //Debug.Log(VA.hashString + " - " + VA.name + " - " + VA.resource);
                 if (VA.hashString + "" == hash)
                 {
 					
@@ -148,9 +148,9 @@ public class AssetBundleManager : MonoBehaviour {
 	
 	void BUNDLESLOADED(){
 		foreach(VokeyAssetBundle VAB in Bundles.Values){
-			Debug.Log (VAB.modelId+ "-"+ VAB.name );	
+			//Debug.Log (VAB.modelId+ "-"+ VAB.name );	
 			foreach(VokeyAsset VA in VAB.objects){
-				Debug.Log (VA.hashString+ "-"+ VA.name + "[" +  (VA.resource != null ? VA.resource.GetHashCode().ToString() : "empty") + "]");
+				//Debug.Log (VA.hashString+ "-"+ VA.name + "[" +  (VA.resource != null ? VA.resource.GetHashCode().ToString() : "empty") + "]");
 				//GameObject.Instantiate(VA.resource);
 			}
 		}

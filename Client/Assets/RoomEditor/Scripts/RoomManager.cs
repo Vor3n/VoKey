@@ -18,10 +18,7 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
 		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
-     
-            
-            LoadRoom(Guid.Empty);
-        
+        LoadRoom(Guid.Empty);
     }
 
 
@@ -100,7 +97,7 @@ public class RoomManager : MonoBehaviour
         byte[] roomInfo = System.Text.Encoding.UTF8.GetBytes(xml);
         float elapsedTime = 0.0f;
         WWW www;
-        Debug.Log("SENDING FORM");
+        //Debug.Log("SENDING FORM");
 
         www = new WWW(url + "room/create", roomInfo);
         while (!www.isDone)
