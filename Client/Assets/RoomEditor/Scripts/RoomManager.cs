@@ -6,12 +6,14 @@ using System.Xml;
 public class RoomManager : MonoBehaviour {
 	
 	public Guid RoomID;
+	AssetBundleManager abm;
 	public string url =GlobalSettings.serverURL;
 	Room TheRoom;
 	// Use this for initialization
 	void Start () {
-	TheRoom = new Room("goudvis");
-	RoomID = TheRoom.id;
+		abm = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
+		TheRoom = new Room("goudvis");
+		RoomID = TheRoom.id;
 	}
 	
 	// Update is called once per frame
@@ -22,10 +24,12 @@ public class RoomManager : MonoBehaviour {
 		ClearItemsFromRoom();
 		
 		TheRoom = RetrieveRoom();
-		
+		/*
 		foreach(FindableObject FO in TheRoom.containedObjects){
-			//Do stuff that adds the objects to the room...
-		}
+			GameObject g = GameObject.Instantiate(abm.RetrieveObject(FO.GameObjectId),FO.position,FO.rotation);
+			g.transform.localScale = FO.scale;
+			
+		}*/
 	}
 	
 	public void SaveRoom(){

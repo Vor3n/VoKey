@@ -105,7 +105,7 @@ public class Room {
         theObject.transform.localScale = scale;
         Quaternion rot = theObject.transform.rotation;
         theObject.transform.rotation = rot * Quaternion.Euler(rotation.x, rotation.y, rotation.z);
-        theObject.name = System.Guid.NewGuid().ToString("D");
+       
         containedObjects.Add(new FindableObject(theObject.name, theObject));
     }
 }

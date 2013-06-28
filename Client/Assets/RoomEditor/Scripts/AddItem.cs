@@ -2,14 +2,14 @@ using UnityEngine;
 using System.Collections;
 
 public class AddItem : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+	AssetBundleManager abm;
+	public string hash;
 	
+	void Start(){
+		abm  = GameObject.Find("EditorController").GetComponent<AssetBundleManager>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnClick(){
+		GameObject.Instantiate(abm.RetrieveObject(hash));
 	}
 }
