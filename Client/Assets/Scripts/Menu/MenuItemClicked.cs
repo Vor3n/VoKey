@@ -85,6 +85,7 @@ public class MenuItemClicked : MonoBehaviour {
 		
 		if (item == Item.GoToTown)
 		{
+            GameObject.Find("GameManager").GetComponent<PauseMenu>().UnPause();
             Application.LoadLevel("StreetTest");
 		}
 		
