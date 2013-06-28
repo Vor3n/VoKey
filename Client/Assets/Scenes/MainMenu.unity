@@ -1726,7 +1726,7 @@ MonoBehaviour:
   mPivot: 3
   mDepth: 5
   mFont: {fileID: 11400000, guid: 4d357aa4fae864e46b20b06e85a062e6, type: 2}
-  mText: pascal
+  mText: Username
   mMaxLineWidth: 394
   mEncoding: 0
   mMaxLineCount: 1
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   mPivot: 3
   mDepth: 7
   mFont: {fileID: 11400000, guid: 4d357aa4fae864e46b20b06e85a062e6, type: 2}
-  mText: pascal
+  mText: Password
   mMaxLineWidth: 394
   mEncoding: 0
   mMaxLineCount: 1
