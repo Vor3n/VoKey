@@ -164,7 +164,7 @@ public class DynamicContentHandler : RequestHandler
 	
 	private Table getEduRoomTable (List<House> houses)
 		{
-		currentPage.AddElementToHead(new Javascriptlet("var sendEditRoomCommand = function(tguid, rguid){ Unity.invoke('SwitchCommand','EditRoom',tguid, rguid); }"));
+		currentPage.AddElementToHead(new Javascriptlet("var sendEditRoomCommand = function(rguid, tguid){ Unity.invoke('SwitchCommand','EditRoom',rguid, tguid); }"));
 		currentPage.AddElementToHead(new Javascriptlet("var sendDeleteRoomCommand = function(tguid, rguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, rguid); }"));
 		
 				Table result = new Table ();
@@ -175,7 +175,7 @@ public class DynamicContentHandler : RequestHandler
 				result.addRow (new TableRow("tableheader", a1, a2, a3));
 				foreach (House h in houses) {
 					foreach (Room r in h.rooms) {
-						result.addRow (new TableRow(new TableCell(h.name), new TableCell(r.name), new TableCell(new Hyperlink("#", "sendEditRoomCommand(townGuid, '" + r.id + "')", getImageIconElement(levelPrefix, "user_delete.png", "Edit Room")))));
+						result.addRow (new TableRow(new TableCell(h.name), new TableCell(r.name), new TableCell(new Hyperlink("#", "sendEditRoomCommand('" + r.id + "', townGuid)", getImageIconElement(levelPrefix, "user_delete.png", "Edit Room")))));
 					}
 				}
 		return result;
