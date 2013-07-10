@@ -24,7 +24,7 @@ public class CreateObjectiveList : MonoBehaviour
         objectivesListHeaderLabel.pivot = UIWidget.Pivot.TopLeft;
         objectivesListHeaderLabel.depth = itemDepthIndex - 1;
         objectivesListHeaderLabel.text = Header;
-        objectivesListHeaderLabel.transform.parent = this.transform;
+        objectivesListHeaderLabel.transform.parent = transform.parent;
         objectivesListHeaderLabel.font = HeaderFont;
         objectivesListHeaderLabel.transform.localPosition = new Vector3(textOffset.x, -15f, 1f); //1.29f
         objectivesListHeaderLabel.MakePixelPerfect();
@@ -69,7 +69,7 @@ public class CreateObjectiveList : MonoBehaviour
             UILabel GTHeader = (UILabel)go.AddComponent(typeof(UILabel));
 
             GTHeader.pivot = UIWidget.Pivot.TopLeft;
-            GTHeader.transform.parent = this.transform;
+            GTHeader.transform.parent = transform.parent;
             GTHeader.font = ListItemFont;
 
             float yPos = textOffset.y + -15 + (-i * VerticalGap);

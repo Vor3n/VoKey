@@ -46,7 +46,6 @@ public class AssetBundleManager : MonoBehaviour {
 		
 	}
 	
-	public string url = GlobalSettings.serverURL;
 	
 	public Dictionary<Guid,VokeyAssetBundle> Bundles = new Dictionary<Guid,VokeyAssetBundle>();
 	
@@ -63,7 +62,7 @@ public class AssetBundleManager : MonoBehaviour {
 	/// </param>
 	public IEnumerator DownloadBundle(Guid id){
 
-        using (WWW www = WWW.LoadFromCacheOrDownload(url + "file/AssetBundle.bin", 0))
+        using (WWW www = WWW.LoadFromCacheOrDownload(GlobalSettings.serverURL + "file/AssetBundle.bin", 0))
         {
             yield return www;
 		//	Debug.Log (www.error);
@@ -137,7 +136,6 @@ public class AssetBundleManager : MonoBehaviour {
     }
 	
 	void Start(){
-		url = GlobalSettings.serverURL;
 		Bundles = new Dictionary<Guid,VokeyAssetBundle>();
 		Caching.CleanCache ();
 		BundleLoaded += HandleBundleLoaded;
@@ -159,7 +157,7 @@ public class AssetBundleManager : MonoBehaviour {
 
 	
 	public IEnumerator RetrieveAssetbundleXmlArray(){
-		using(WWW www = new WWW(url + "assetbundle" )) {
+		using(WWW www = new WWW(GlobalSettings.serverURL + "assetbundle" )) {
 			yield return www;
 			
 			List<VokeyAssetBundle> bundles = VokeySharedEntities.MySerializerOfLists.FromXml<VokeyAssetBundle>(www.text);
