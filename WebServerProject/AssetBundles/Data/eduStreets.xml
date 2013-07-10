@@ -27,11 +27,6 @@
                         <Scale x="1" y="1" z="1" />
                         <Rotation w="1" x="0" y="0" z="0" />
                     </FindableObject>
-                    <FindableObject Id="30dd8bd8-b270-4924-9abc-367ae088ab97" LinkedObject="1559558976">
-                        <Position x="0" y="6.5" z="-5" />
-                        <Scale x="1" y="1" z="1" />
-                        <Rotation w="1" x="0" y="0" z="0" />
-                    </FindableObject>
                     <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="676009112">
                         <Position x="0" y="6.5" z="3.473904" />
                         <Scale x="1" y="1" z="1" />

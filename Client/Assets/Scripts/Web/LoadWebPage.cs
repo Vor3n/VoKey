@@ -60,6 +60,7 @@ public class LoadWebPage : MonoBehaviour{
 	}
 	
 	
+
 	
 	// Example delegate called as a callback from Javascript on the page
 	public static void OnSwitchCommand (object sender, BridgeEventArgs args)

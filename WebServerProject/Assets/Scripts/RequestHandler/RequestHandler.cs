@@ -192,6 +192,7 @@ public class RequestHandler
     /// </summary>
     public void handleRequest()
     {
+        UnityEngine.Debug.Log(context.Request.Url.ToString());
         if (swallowsEverything) handleSimpleRequest(AssetServer.getInstance().getFirstHandlableAction(context));
         if (IsSimple) handleSimpleRequest(AssetServer.getInstance().getFirstHandlableAction(context));
         else handleComplexRequest(AssetServer.getInstance().getFirstHandlableAction(context));
