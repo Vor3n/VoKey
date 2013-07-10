@@ -10,7 +10,6 @@ public class RoomManager : MonoBehaviour
 
     public Guid RoomID;
     AssetBundleManager abm;
-    public string url = GlobalSettings.serverURL;
     Room TheRoom;
 
     public RoomMode OpenAs;
@@ -96,11 +95,10 @@ public class RoomManager : MonoBehaviour
 		//Serialize the room object to xml and send it to the server
         string xml = TheRoom.ToXml();
         byte[] roomInfo = System.Text.Encoding.UTF8.GetBytes(xml);
-        float elapsedTime = 0.0f;
         WWW www;
         //Debug.Log("SENDING FORM");
 
-        www = new WWW(url + "room/create", roomInfo);
+        www = new WWW(GlobalSettings.serverURL + "room/create", roomInfo);
         while (!www.isDone)
         {
            
@@ -138,7 +136,7 @@ public class RoomManager : MonoBehaviour
     public Room RetrieveRoom()
     {
         // Use global room guid TODO
-        WWW www = new WWW(url + "town/");
+        WWW www = new WWW(GlobalSettings.serverURL + "town/");
 
         while (!www.isDone)
         {
@@ -146,6 +144,7 @@ public class RoomManager : MonoBehaviour
         }
 		XmlDocument xml = new XmlDocument();
 		xml.LoadXml(www.text);
+		Debug.Log(www.text);
 		string room = xml.SelectSingleNode("//Room[@Id='"+RoomID+"']").OuterXml;
 		//Debug.Log(room);
         return MySerializerOfItems.FromXml<Room>(room);

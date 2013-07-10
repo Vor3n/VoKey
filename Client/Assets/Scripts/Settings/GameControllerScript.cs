@@ -6,7 +6,6 @@ using System.Collections.Generic;
 
 public class GameControllerScript : MonoBehaviour {
 	
-	public string ServerURL;
 	public List<Town> towns;
     public System.Guid RoomToOpen;
 	public string RoomGUID;
@@ -15,7 +14,14 @@ public class GameControllerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this.gameObject);
-		GlobalSettings.serverURL = ServerURL;
+		try
+		{
+			GameObject serverlabel = GameObject.Find("ServerLabel");
+			UILabel UIserverlabel = (UILabel)serverlabel.GetComponent("UILabel");
+			UIserverlabel.text = GlobalSettings.serverURL;	
+		}
+		catch
+		{}
 		Messenger.AddListener<string, User.UserType> (VokeyMessage.LOGIN_OK, LoginHandler);
 		Messenger.AddListener<string> (VokeyMessage.LOGIN_FAIL, LoginFailHandler);
 		Messenger.AddListener<string> (VokeyMessage.REQUEST_COMPLETE, RequestCompleteHandler);
@@ -38,7 +44,7 @@ public class GameControllerScript : MonoBehaviour {
 			break;
 		}
 		//GetAssetBundlesFromServer();
-		GetAssetBundlesFromServer();
+		//GetAssetBundlesFromServer();
 	}
 	
 	void LoginFailHandler(string message){

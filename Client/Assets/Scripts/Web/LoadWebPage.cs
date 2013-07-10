@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using UWK;
-using UnityEditor;
 using VokeySharedEntities;
 using System.Text;
 using GuiTest;
@@ -61,17 +60,6 @@ public class LoadWebPage : MonoBehaviour{
 	}
 	
 	
-	// Example delegate called as a callback from Javascript on the page
-	public static void OnSayHello (object sender, BridgeEventArgs args)
-	{
-		Debug.Log("ONSAYHELLO");
-		#if UNITY_EDITOR
-			if (args.Args.Length == 3 && args.Args[0] == "1" && args.Args[1] == "Testing123" && args.Args[2] == "45678")
-				EditorUtility.DisplayDialog ("Hello!", "The UWebKit JavaScript Bridge is alive and well!", "Awesome");
-			else
-				EditorUtility.DisplayDialog ("Hello!", "The UWebKit JavaScript Bridge callback was invoked, but args were wrong!", "Ok");
-		#endif
-	}
 	
 	// Example delegate called as a callback from Javascript on the page
 	public static void OnSwitchCommand (object sender, BridgeEventArgs args)
@@ -81,6 +69,7 @@ public class LoadWebPage : MonoBehaviour{
 		switch(args.Args[0]){
 		case "EditRoom":
 			GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen = new System.Guid(args.Args[1]);
+			Debug.Log("ROOM GUID PASSED ON:\n"+GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen);
 			GameObject.Find("GameController").GetComponent<GameControllerScript>().TownGUID = args.Args[2];
 			Application.LoadLevel("EditorFirstTest");
 			break;
@@ -153,8 +142,7 @@ public class LoadWebPage : MonoBehaviour{
 		
 		props = true;
 		
-		// Bind Javascript callback to Unity.SayHello js function
-		Bridge.BindCallback ("Unity", "SayHello", OnSayHello); //OnSwitchCommand	
+		// Bind Javascript callback to Unity.SayHello js function	
 		Bridge.BindCallback ("Unity", "SwitchCommand", OnSwitchCommand);
 	}
 	

@@ -159,7 +159,7 @@ public class AssetBundleManager : MonoBehaviour {
 
 	
 	public IEnumerator RetrieveAssetbundleXmlArray(){
-		using(WWW www = new WWW(url + "/assetbundle" )) {
+		using(WWW www = new WWW(url + "assetbundle" )) {
 			yield return www;
 			
 			List<VokeyAssetBundle> bundles = VokeySharedEntities.MySerializerOfLists.FromXml<VokeyAssetBundle>(www.text);

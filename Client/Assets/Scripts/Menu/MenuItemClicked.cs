@@ -49,6 +49,10 @@ public class MenuItemClicked : MonoBehaviour {
 			UILabel UIpasswordlabel = (UILabel)passwordlabel.GetComponent("UILabel");
 			string password = UIpasswordlabel.text;
 			
+			GameObject serverlabel = GameObject.Find("ServerLabel");
+			UILabel UIserverlabel = (UILabel)serverlabel.GetComponent("UILabel");
+			GlobalSettings.serverURL = UIserverlabel.text;
+			
 			Login login = new Login(username,password);
 			StartCoroutine(login.startLogin());
 		}
