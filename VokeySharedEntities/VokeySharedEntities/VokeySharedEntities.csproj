@@ -35,6 +35,9 @@
       <Package>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll</Package>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="WebCoreWebServer">
+      <HintPath>..\..\WebServerProject\Assets\Plugins\WebCoreWebServer.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -45,7 +48,6 @@
     <Compile Include="Utilities\HashStatics.cs" />
     <Compile Include="Data\VokeyAssetBundle.cs" />
     <Compile Include="Data\VokeyAsset.cs" />
-    <Compile Include="UserEntities\User.cs" />
     <Compile Include="UserEntities\VokeySession.cs" />
     <Compile Include="UserEntities\VokeySessionContainer.cs" />
     <Compile Include="GameplayEntities\Assignment.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Utilities\MySerializerOfLists.cs" />
     <Compile Include="Utilities\HttpListenerContextExtension.cs" />
     <Compile Include="Utilities\MySerializerOfItems.cs" />
+    <Compile Include="UserEntities\VokeyUser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

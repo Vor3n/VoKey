@@ -44,7 +44,7 @@ namespace VokeySharedEntities
 	{
 	}
 		
-	public House(GuiTest.User residentialHouseOwner)
+	public House(GuiTest.VokeyUser residentialHouseOwner)
 	{
 		name = residentialHouseOwner.FullName + "'s House";
 		type = HouseType.Educational;

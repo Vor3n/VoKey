@@ -20,8 +20,8 @@ namespace VokeySharedEntities
     [XmlAttribute("ClassroomName")]
     public string classroomName;
     
-    [XmlArray("Pupils"), System.Xml.Serialization.XmlArrayItem(typeof(User))]
-    public List<User> pupils;
+    [XmlArray("Pupils"), System.Xml.Serialization.XmlArrayItem(typeof(VokeyUser))]
+    public List<VokeyUser> pupils;
     
     [XmlArray("Streets"), System.Xml.Serialization.XmlArrayItem(typeof(Street))]
 	/// <summary>
@@ -49,7 +49,7 @@ namespace VokeySharedEntities
 						_residentialStreets.Add (s);
 					}
 				}
-				foreach (User p in pupils) {
+				foreach (VokeyUser p in pupils) {
 					addPupilToFirstAvaliableStreet (p);
 				}
 			}
@@ -80,7 +80,7 @@ namespace VokeySharedEntities
 		}
 	}
 	
-	public void addPupilToFirstAvaliableStreet(User pupil)
+	public void addPupilToFirstAvaliableStreet(VokeyUser pupil)
 		{
 			foreach (Street s in residentialStreets) {
 				if(s.type == Street.StreetType.Residential) {
@@ -103,7 +103,7 @@ namespace VokeySharedEntities
 	/// <param name="townName">Town name.</param>
 	/// <param name="classroomName">Classroom name.</param>
 	public Town(string townName, string classroomName) {
-		pupils =  new List<User>();
+		pupils =  new List<VokeyUser>();
 		streets = new List<Street>();
 		id = Guid.NewGuid();
 		this.classroomName = classroomName;
@@ -129,7 +129,7 @@ namespace VokeySharedEntities
     /// Adds the street.
     /// </summary>
     /// <param name="s">S.</param>
-    public void addUser(User u){
+    public void addUser(VokeyUser u){
     	u.townGuid = id;
     	pupils.Add (u);
 	}
@@ -163,7 +163,7 @@ namespace VokeySharedEntities
 	
 	public bool ContainsUser(string username)
 		{
-			foreach (User u in pupils) {
+			foreach (VokeyUser u in pupils) {
 				if(u.username == username) {
 					return true;
 				}
@@ -174,7 +174,7 @@ namespace VokeySharedEntities
         
             public bool ContainsUser(Guid id)
         {
-            foreach (User u in pupils) {
+            foreach (VokeyUser u in pupils) {
                 if(u.userGuid == id) {
                     return true;
                 }
@@ -187,8 +187,8 @@ namespace VokeySharedEntities
         /// </summary>
         /// <returns>The user.</returns>
         /// <param name="username">Username.</param>
-		public User getUser(string username){
-			foreach (User u in pupils) {
+		public VokeyUser getUser(string username){
+			foreach (VokeyUser u in pupils) {
 				if(u.username == username) {
 					return u;
 				}
@@ -204,8 +204,8 @@ namespace VokeySharedEntities
         {
             if (ContainsUser(id))
             {
-                User ux = null;
-                foreach (User u in pupils)
+                VokeyUser ux = null;
+                foreach (VokeyUser u in pupils)
                 {
                     if (u.userGuid == id)
                     {
@@ -226,8 +226,8 @@ namespace VokeySharedEntities
         /// </summary>
         /// <returns>The user.</returns>
         /// <param name="userId">User identifier.</param>
-		public User getUser(Guid userId){
-			foreach (User u in pupils) {
+		public VokeyUser getUser(Guid userId){
+			foreach (VokeyUser u in pupils) {
 				if(u.userGuid == userId) {
 					return u;
 				}

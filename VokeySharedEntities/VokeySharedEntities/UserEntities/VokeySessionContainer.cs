@@ -29,7 +29,7 @@ namespace VokeySharedEntities
 		/// </summary>
 		/// <returns>The vokey session.</returns>
 		/// <param name="u">U.</param>
-		public string CreateVokeySession (User u){
+		public string CreateVokeySession (VokeyUser u){
 			VokeySession v = new VokeySession (u);
 			sessions.Add (v.SessionHash, v);
 			return v.SessionHash;

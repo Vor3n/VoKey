@@ -7,9 +7,9 @@ using VokeySharedEntities;
 namespace GuiTest
 {
 	[System.Serializable]
-	public class User
+	public class VokeyUser : Thisiswhytheinternetexists.WebCore.User
 	{
-		public enum UserType {
+		public enum VokeyUserType {
 			[XmlEnum(Name = "Student")]
 			Student,
 			[XmlEnum(Name = "Teacher")]
@@ -26,7 +26,7 @@ namespace GuiTest
     	public string username;
 
 		[XmlAttribute("UserType")]
-		public UserType type;
+		public VokeyUserType type;
 
 		[XmlElement("PasswordHash")]
 		public string PasswordHash {
@@ -66,7 +66,7 @@ namespace GuiTest
 			PasswordHash = EncryptionUtilities.GenerateSaltedSHA1 (password);
 		}
 		
-		public User()
+		public VokeyUser() : base()
 		{
 		}
 
@@ -75,7 +75,7 @@ namespace GuiTest
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <param name="password">Password.</param>
-		public User (string username, string password, UserType userType)
+		public VokeyUser (string username, string password, VokeyUserType userType)
 		{
 			userGuid = Guid.NewGuid ();
 			type = userType;
@@ -90,7 +90,7 @@ namespace GuiTest
 		/// </summary>
 		/// <param name="username">Username.</param>
 		/// <param name="password">Password.</param>
-		public User (string username, string password, string fullName, UserType userType)
+		public VokeyUser (string username, string password, string fullName, VokeyUserType userType)
 		{
 			userGuid = Guid.NewGuid ();
 			type = userType;

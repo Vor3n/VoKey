@@ -81,7 +81,7 @@ namespace VokeySharedEntities
 		/// </summary>
 		/// <returns>The xml.</returns>
 		/// <param name="userToSerialize">User to serialize.</param>
-		public static string ToXml(this User userToSerialize){
+		public static string ToXml(this VokeyUser userToSerialize){
 			return GetXml (userToSerialize);
 		}
 		
