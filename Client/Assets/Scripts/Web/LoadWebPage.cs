@@ -102,8 +102,8 @@ public class LoadWebPage : MonoBehaviour{
 			//town guid arg1
 			//user guid arg2
 			Town t = lwp.getTown(args.Args[1]);
-			User u = t.getUser(new System.Guid(args.Args[2]));
-			Debug.Log("FULLNAME: "+u.FullName);
+			VokeyUser u = t.getUser(new System.Guid(args.Args[2]));
+			Debug.Log("FULLNAME: "+ u.FullName);
 			lwp.startUpdateTown(t.id.ToString()+"/user/delete", u.ToXml());
 			
 

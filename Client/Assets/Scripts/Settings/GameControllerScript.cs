@@ -22,22 +22,22 @@ public class GameControllerScript : MonoBehaviour {
 		}
 		catch
 		{}
-		Messenger.AddListener<string, User.UserType> (VokeyMessage.LOGIN_OK, LoginHandler);
+        Messenger.AddListener<string, VokeyUser.VokeyUserType>(VokeyMessage.LOGIN_OK, LoginHandler);
 		Messenger.AddListener<string> (VokeyMessage.LOGIN_FAIL, LoginFailHandler);
 		Messenger.AddListener<string> (VokeyMessage.REQUEST_COMPLETE, RequestCompleteHandler);
 	}
 	
-	void LoginHandler(string sessionId, User.UserType usertype){
+	void LoginHandler(string sessionId, VokeyUser.VokeyUserType usertype){
 		GlobalSettings.SessionID = sessionId;
 		GlobalSettings.UserType = usertype;
 		switch(GlobalSettings.UserType)
 		{
 			//student
-			case User.UserType.Student:
+            case VokeyUser.VokeyUserType.Student:
 				Application.LoadLevel("StreetTest");
 			break;
 			//docent
-			case User.UserType.Teacher:
+            case VokeyUser.VokeyUserType.Teacher:
 				Application.LoadLevel("TeacherMenu");
 			break;
 			default:

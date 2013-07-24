@@ -29,11 +29,11 @@ public static class GlobalSettings{
 				PlayerPrefs.SetString("SessionID", value);
 		}
 	}
-	public static User.UserType UserType
+    public static VokeyUser.VokeyUserType UserType
 	{
 		get
 		{
-			User.UserType type = (User.UserType)Enum.Parse(typeof(User.UserType), PlayerPrefs.GetString("usertype"));
+            VokeyUser.VokeyUserType type = (VokeyUser.VokeyUserType)Enum.Parse(typeof(VokeyUser.VokeyUserType), PlayerPrefs.GetString("usertype"));
 			return type;
 		}
 		set
