@@ -7,11 +7,12 @@ using GuiTest;
 using System.Xml.Serialization;
 using VokeySharedEntities;
 using AssemblyCSharp;
+using Thisiswhytheinternetexists.WebCore;
 
 namespace Vokey
 {
     [System.Serializable]
-    public class AssetServer
+    public class AssetServer : WebCoreWebServer
     {
         public bool Running
         {
@@ -442,7 +443,7 @@ namespace Vokey
                 if (t.ContainsUser(username))
                 {
                     UnityEngine.Debug.Log("Username found in town: " + t.name);
-                    User u = t.getUser(username);
+                    sUser u = t.getUser(username);
                     if (u.PasswordHash == EncryptionUtilities.GenerateSaltedSHA1(password))
                     {
                         UnityEngine.Debug.Log("Password match");

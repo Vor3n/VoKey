@@ -6,6 +6,7 @@ using VokeySharedEntities;
 using Vokey;
 using System.IO;
 using System;
+using Thisiswhytheinternetexists.WebCore;
 
 public class AssetBundleHandler : RequestHandler {
 
