@@ -18,7 +18,7 @@ public class DynamicContentHandler : RequestHandler
     public DynamicContentHandler(HttpListenerContext hlc)
         : base(hlc, acceptableCommands)
     {
-		currentPage = new WebCore.HttpResponsePage("Hallo Wereld.");
+		currentPage = new WebCore.HttpResponsePage("Hallo Wereld.", true);
     }
     
     private WebCore.HttpResponsePage currentPage;
@@ -28,8 +28,9 @@ public class DynamicContentHandler : RequestHandler
 		Debug.Log (context.Request.UserAgent);
 
 		
-		currentPage.AddElement(new CssLinkElement("../file/Welloe.css"));
+		currentPage.AddElement(new CssLinkElement("Welloe.css"));
 		Table t = new Table();
+        t.ElementClass = "table table-bordered table-hover";
 		t.addRow (new TableRow("tableheader", new TableCell("Name"), new TableCell("Username"), new TableCell("Awesomeness"))); 
 		t.addRow (new TableRow(new TableCell("Adolf"), new TableCell("Jantje"), new TableCell("Nein"))); 
 		t.addRow (new TableRow(new TableCell("Felix"), new TableCell("Mann"), new TableCell("Ja"))); 
@@ -39,7 +40,7 @@ public class DynamicContentHandler : RequestHandler
 		t.addRow (new TableRow(new TableCell("Roy"), new TableCell("Scheefhals"), new TableCell("Ja"))); 
 		t.addRow (new TableRow(new TableCell("Bak"), new TableCell("Steen"), new TableCell("Ja")));
         currentPage.AddElement(t);
-        currentPage.AddElement(new ImageElement("../file/Blue_morpho_butterfly.jpg", 807, 730, "A Butterfly"));
+        currentPage.AddElement(new ImageElement("Blue_morpho_butterfly.jpg", 807, 730, "A Butterfly"));
 		HttpFunctions.sendStandardResponse(context, currentPage.getHtmlRepresentation(), 200);
 	}
 	
