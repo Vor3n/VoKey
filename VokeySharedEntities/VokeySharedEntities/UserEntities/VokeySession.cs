@@ -10,13 +10,13 @@ namespace VokeySharedEntities
 		
 		public bool IsTeacher {
 			get {
-				return (_user.type == VokeyUser.UserType.Teacher);
+				return (_user.type == VokeyUser.VokeyUserType.Teacher);
 			}
 		}
 		
 		public bool IsStudent {
 			get {
-				return (_user.type == VokeyUser.UserType.Student);
+				return (_user.type == VokeyUser.VokeyUserType.Student);
 			}
 		}
 		

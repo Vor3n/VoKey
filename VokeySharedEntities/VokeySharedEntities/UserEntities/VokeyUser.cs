@@ -66,7 +66,7 @@ namespace GuiTest
 			PasswordHash = EncryptionUtilities.GenerateSaltedSHA1 (password);
 		}
 		
-		public VokeyUser() : base()
+		public VokeyUser()
 		{
 		}
 
