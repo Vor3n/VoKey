@@ -15,24 +15,10 @@ namespace GuiTest
 			[XmlEnum(Name = "Teacher")]
 			Teacher
 		}
-	
-		[XmlElement("VFullName")]
-		public string FullName {
-			get;
-			set;
-		}
 		
-		[XmlAttribute("VUsername")]
-    	public string username;
 
 		[XmlAttribute("UserType")]
-		public VokeyUserType type;
-
-		[XmlElement("VPasswordHash")]
-		public string PasswordHash {
-			get;
-			set;
-		}
+		public VokeyUserType vtype;
 
 		[XmlAttribute("Town")]
 		public Guid townGuid {
@@ -42,12 +28,6 @@ namespace GuiTest
 
 		[XmlElement("House")]
 		public House userHouse{
-			get;
-			set;
-		}
-
-		[XmlAttribute("VUserGuid")]
-		public Guid userGuid {
 			get;
 			set;
 		}
@@ -78,7 +58,7 @@ namespace GuiTest
 		public VokeyUser (string username, string password, VokeyUserType userType)
 		{
 			userGuid = Guid.NewGuid ();
-			type = userType;
+			vtype = userType;
 			setPassword (password);
 			FullName = username;
 			this.username = username;
@@ -93,7 +73,7 @@ namespace GuiTest
 		public VokeyUser (string username, string password, string fullName, VokeyUserType userType)
 		{
 			userGuid = Guid.NewGuid ();
-			type = userType;
+			vtype = userType;
 			setPassword (password);
 			this.username = username;
 			FullName = fullName;
