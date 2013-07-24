@@ -16,19 +16,19 @@ namespace GuiTest
 			Teacher
 		}
 	
-		[XmlElement("FullName")]
+		[XmlElement("VFullName")]
 		public string FullName {
 			get;
 			set;
 		}
 		
-		[XmlAttribute("Username")]
+		[XmlAttribute("VUsername")]
     	public string username;
 
 		[XmlAttribute("UserType")]
 		public VokeyUserType type;
 
-		[XmlElement("PasswordHash")]
+		[XmlElement("VPasswordHash")]
 		public string PasswordHash {
 			get;
 			set;
@@ -46,7 +46,7 @@ namespace GuiTest
 			set;
 		}
 
-		[XmlAttribute("UserGuid")]
+		[XmlAttribute("VUserGuid")]
 		public Guid userGuid {
 			get;
 			set;
