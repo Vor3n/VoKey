@@ -3,6 +3,7 @@ using System.Net;
 using VokeySharedEntities;
 using System.Collections.Generic;
 using Vokey;
+using Thisiswhytheinternetexists.WebCore;
 
 namespace AssemblyCSharp
 {

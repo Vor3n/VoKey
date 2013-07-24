@@ -5,8 +5,8 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using Thisiswhytheinternetexists.WebCore;
 using Vokey;
-
 /// <summary>
 /// This handler handles Favicons.
 /// </summary>
@@ -82,7 +82,6 @@ public class RoomHandler : RequestHandler
 						break;
 		 default:
 		throw new Exception("The requesthandler could not handle action " + splitArrayFromHandlableAction (context.Request.Url.ToString())[1]);
-		break;
 				}
     }
 }

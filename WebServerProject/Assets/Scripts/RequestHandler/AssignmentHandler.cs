@@ -5,6 +5,7 @@ using System.Net;
 using VokeySharedEntities;
 using Vokey;
 using GuiTest;
+using Thisiswhytheinternetexists.WebCore;
 
 public class AssignmentHandler : RequestHandler {
 
@@ -18,7 +19,7 @@ public class AssignmentHandler : RequestHandler {
 
     public override void handleSimpleRequest(string command)
     {
-	    User studentUser = new User("student", "student", User.UserType.Student);
+	    VokeyUser studentUser = new VokeyUser("student", "student", VokeyUser.VokeyUserType.Student);
 	    studentUser.addAssignment(new Assignment("Talk to to corporate", "LIKE A BOSS", new System.Guid("a966726a-eda0-4b40-b127-c3fc435fd98b"), new List<System.Guid>()));
 	    studentUser.addAssignment(new Assignment("Approve Memos", "LIKE A BOSS", new System.Guid("a966726a-eda0-4b40-b127-c3fc435fd98b"), new List<System.Guid>()));
 	    studentUser.addAssignment(new Assignment("Lead a workshop", "LIKE A BOSS", new System.Guid("a966726a-eda0-4b40-b127-c3fc435fd98b"), new List<System.Guid>()));

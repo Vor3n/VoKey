@@ -5,6 +5,7 @@ using VokeySharedEntities;
 using AssemblyCSharp;
 using System;
 using GuiTest;
+using Thisiswhytheinternetexists.WebCore;
 
 public class TownHandler : RequestHandler {
         private static string[] acceptableCommands = { "town" };
@@ -57,7 +58,7 @@ public class TownHandler : RequestHandler {
 									throw new Exception ("NOT IMPLEMENTED");
 								case "user":
 									if (arguments.Length >= 4) {
-										User sentUser = MySerializerOfItems.FromXml<User>(Content);
+                                        VokeyUser sentUser = MySerializerOfItems.FromXml<VokeyUser>(Content);
 										switch (arguments [3]) {
 											case "create":
 													t.addUser (sentUser);

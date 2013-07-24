@@ -3,11 +3,11 @@ using System.Net;
 using System.IO;
 using System.ComponentModel;
 using System.Collections.Generic;
-using GuiTest;
 using System.Xml.Serialization;
-using VokeySharedEntities;
 using AssemblyCSharp;
 using Thisiswhytheinternetexists.WebCore;
+using GuiTest;
+using VokeySharedEntities;
 
 namespace Vokey
 {
@@ -26,8 +26,6 @@ namespace Vokey
 
         public static string AssetRoot = "";
 
-        public Dictionary<string, Type> handlers;
-
         private static AssetServer myInstance;
 
         public static AssetServer getInstance()
@@ -45,12 +43,7 @@ namespace Vokey
             PUT
         }
 
-        private WebServer ws;
         private List<Town> _townList;
-        /// <summary>
-        /// Occurs a message is logged.
-        /// </summary>
-        public event Action<string> LogMessage;
 
         public List<Town> TownList
         {
@@ -64,17 +57,15 @@ namespace Vokey
 
         public List<VokeyAssetBundle> AssetBundles
         {
-            get
-            {
-                if (assetBundles == null)
-                    assetBundles = new List<VokeyAssetBundle>();
+            get { if (assetBundles == null)
+                assetBundles = new List<VokeyAssetBundle>();
                 return assetBundles;
             }
         }
 
         [XmlArray("Users")]
         [XmlArrayItem("User")]
-        public List<User> Users
+        public List<User> AssetServerUsers
         {
             get;
             set;
@@ -90,40 +81,35 @@ namespace Vokey
         /// </param>
         private void Log(string message)
         {
-            if (LogMessage != null)
-            {
-                LogMessage(DateTime.Now.ToLongTimeString() + ": " + message);
-            }
+
         }
 
         private List<VokeyAssetBundle> assetBundles;
         private BackgroundWorker scanForAssetsWorker;
-        private VokeySessionContainer sessions;
+        private VokeySessionContainer mySessions;
 
         public AssetServer()
+            : base("http://+:9090/")
         {
             myInstance = this;
             AssetRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(AssetServer)).Location) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
-            handlers = new Dictionary<string, Type>();
-
-            addHandlersForType(new SessionHandler(null));
+            //addHandlersForType(new SessionHandler(null));
             addHandlersForType(new AssetBundleHandler(null));
             addHandlersForType(new TownHandler(null));
-            addHandlersForType(new WelcomeHandler(null));
+            //addHandlersForType(new WelcomeHandler(null));
             addHandlersForType(new StreetHandler(null));
             addHandlersForType(new RoomHandler(null));
             addHandlersForType (new HouseHandler(null));
-            addHandlersForType(new FileHandler(null));
+            //addHandlersForType(new FileHandler(null));
             addHandlersForType (new AssignmentHandler(null));
             addHandlersForType(new DynamicContentHandler(null));
             assetBundles = new List<VokeyAssetBundle>();
-            Users = new List<User>();
-            sessions = new VokeySessionContainer();
+            AssetServerUsers = new List<User>();
+            mySessions = new VokeySessionContainer();
             scanForAssetsWorker = new BackgroundWorker();
             scanForAssetsWorker.DoWork += ScanForAssetsWorkerWork;
             readUserData();
             scanForAssets();
-
         }
 
         /// <summary>
@@ -135,19 +121,8 @@ namespace Vokey
             var type = rh.GetType();
             foreach (string s in rh.handlableCommands)
             {
-                handlers.Add(s, type);
+                 handlers.Add(s, type);
             }
-        }
-
-        /// <summary>
-        /// Creates a RequestHandler
-        /// </summary>
-        /// <param name="theType">The type of RequestHandler to create</param>
-        /// <param name="context">The Request to handle</param>
-        /// <returns></returns>
-        public RequestHandler createHandler(Type theType, HttpListenerContext context)
-        {
-            return (RequestHandler)Activator.CreateInstance(theType, context);
         }
 
         /// <summary>
@@ -163,18 +138,15 @@ namespace Vokey
         void readUserData ()
 				{
         	
-						/*Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-           
-            
-            s.addHouse(h);
+			Street s = new Street("Winkelstraat", Street.StreetType.Educational);
 
             Town t = new Town("Lazytown", "TIV4A");
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
             t.addStreet(new Street("Rubenslaan", Street.StreetType.Residential));
             t.addStreet(s);
 
-            t.addUser(new User("Felix", "Felix", "Felix Mann", User.UserType.Student));
-            t.addUser(new User("KimJongUn", "cd1001", "Kim Jong Un", User.UserType.Student));
+            t.addUser(new VokeyUser("Felix", "Felix", "Felix Mann", VokeyUser.VokeyUserType.Student));
+            t.addUser(new VokeyUser("KimJongUn", "cd1001", "Kim Jong Un", VokeyUser.VokeyUserType.Student));
 
             TownList.Add(t);
 
@@ -183,43 +155,44 @@ namespace Vokey
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
             t1.addStreet(s);
 
-            t1.addUser(new User("LeovM", "leooo", "Leo van Moergestel", User.UserType.Student));
-            t1.addUser(new User("MartenWensink", "mw", "Marten Wensink", User.UserType.Student));
-            t1.addUser(new User("GeraldOvink", "unityiszocool", User.UserType.Student));
-            t1.addUser(new User("dylan", "dylan", "Dylan Snel", User.UserType.Student));
-            t1.addUser(new User("duncan", "duncan", "Duncan Jenkins", User.UserType.Student));
-            t1.addUser(new User("Daniel", "Plopjes", User.UserType.Student));
-            t1.addUser(new User("LonelyIsland", "LikeABaws", User.UserType.Student));
-            User studentUser = new User("student", "student", User.UserType.Student);
+            t1.addUser(new VokeyUser("LeovM", "leooo", "Leo van Moergestel", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("MartenWensink", "mw", "Marten Wensink", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("GeraldOvink", "unityiszocool", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("dylan", "dylan", "Dylan Snel", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("duncan", "duncan", "Duncan Jenkins", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("Daniel", "Plopjes", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("LonelyIsland", "LikeABaws", VokeyUser.VokeyUserType.Student));
+            VokeyUser studentUser = new VokeyUser("student", "student", VokeyUser.VokeyUserType.Student);
             studentUser.addAssignment(new Assignment("Demo Assignment", "Find all the objects in the room.", Guid.NewGuid(), new List<Guid>()));
             t1.addUser(studentUser);
             
-            t1.addUser(new User("alex", "student", "Alexander Streng", User.UserType.Student));
-            t1.addUser(new User("rscheefh", "student", "Roy Scheefhals", User.UserType.Student));
-            t1.addUser(new User("aniek", "student", "Aniek Zandleven", User.UserType.Student));
+            t1.addUser(new VokeyUser("alex", "student", "Alexander Streng", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("rscheefh", "student", "Roy Scheefhals", VokeyUser.VokeyUserType.Student));
+            t1.addUser(new VokeyUser("aniek", "student", "Aniek Zandleven", VokeyUser.VokeyUserType.Student));
 
             TownList.Add(t1);
 
-            Users.Add(new User("teacher", "teacher", User.UserType.Teacher));
-            Users.Add(new User("pascal", "pascal", User.UserType.Teacher));*/
-						StreamReader townReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml");
+            Users.Add(new VokeyUser("teacher", "teacher", VokeyUser.VokeyUserType.Teacher));
+            Users.Add(new VokeyUser("pascal", "pascal", VokeyUser.VokeyUserType.Teacher));
+						/*StreamReader townReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml");
 						_townList = MySerializerOfLists.FromXml<Town> (townReader.ReadToEnd());
 						townReader.Close ();
         	
 						StreamReader userReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "users.xml");
-						Users = MySerializerOfLists.FromXml<User> (userReader.ReadToEnd());
+						AssetServerUsers = MySerializerOfLists.FromXml<User> (userReader.ReadToEnd());
 						userReader.Close ();
         	
 						StreamReader eduReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "eduStreets.xml");
 						EducationalStreets = MySerializerOfLists.FromXml<Street> (eduReader.ReadToEnd());
-						eduReader.Close ();
+						eduReader.Close ();*/
         				
-        				foreach(Street s in EducationalStreets){
+        				/*foreach(Street s in EducationalStreets){
 							foreach (Town t in _townList) {
 								t.addStreet (s);
 							}
-							}
+							}*/
         }
+        
         public void writeUserData ()
 		{
 			StreamWriter townWriter = new StreamWriter (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml", false);
@@ -228,7 +201,7 @@ namespace Vokey
 			townWriter.Close ();
 			
 			StreamWriter userWriter = new StreamWriter (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "users.xml", false);
-			userWriter.Write (Users.ToXml());
+			userWriter.Write (AssetServerUsers.ToXml());
 			userWriter.Flush ();
 			userWriter.Close ();
 			
@@ -237,14 +210,16 @@ namespace Vokey
 			eduWriter.Flush ();
 			eduWriter.Close ();
 		}
+
         /// <summary>
         /// Adds the user.
         /// </summary>
         /// <param name="u">The user t add.</param>
         void addUser(User u)
         {
-            Users.Add(u);
+            AssetServerUsers.Add(u);
         }
+
         /// <summary>
         /// Start this AssetServer.
         /// </summary>
@@ -254,6 +229,7 @@ namespace Vokey
             ws.LogMessage += HandleWsLogMessage;
             ws.Run();
         }
+
         /// <summary>
         /// Stop this instance of the WebServer.
         /// </summary>
@@ -261,6 +237,7 @@ namespace Vokey
         {
             ws.Stop();
         }
+
         /// <summary>
         /// Handles the ws log message.
         /// </summary>
@@ -269,6 +246,7 @@ namespace Vokey
         {
             Log(obj);
         }
+
         /// <summary>
         /// Scans for assets
         /// </summary>
@@ -314,18 +292,18 @@ namespace Vokey
             return Guid.Empty;
 		}
 
-        public User getUser(Guid id)
+        public VokeyUser getUser(Guid id)
         {
             foreach (Town t in TownList)
             {
-                foreach (User u in t.pupils)
+                foreach (VokeyUser u in t.pupils)
                 {
                     if (u.userGuid == id)
                         return u;
                 }
             }
 
-            foreach (User u in Users)
+            foreach (VokeyUser u in AssetServerUsers)
             {
                 if (u.userGuid == id) return u;
             }
@@ -347,22 +325,22 @@ namespace Vokey
             throw new Exception("Invalid street specified!");
         }
 
-        public User getUser(string username)
+        public VokeyUser getUser(string username)
         {
             foreach (Town t in TownList)
             {
-                foreach (User u in t.pupils) if (u.username == username) return u;
+                foreach (VokeyUser u in t.pupils) if (u.username == username) return u;
             }
-            foreach (User u in Users)
+            foreach (VokeyUser u in AssetServerUsers)
             {
                 if (u.username == username) return u;
             }
             return null;
         }
 
-        public VokeySession getSession(string hash)
+        public VokeySession getVokeySession(string hash)
         {
-            return sessions.getSession(hash);
+            return mySessions.getSession(hash);
         }
    
 		public void Delete<T> (Guid g)
@@ -382,9 +360,9 @@ namespace Vokey
 		/// </summary>
 		/// <returns>The vokey session.</returns>
 		/// <param name="u">U.</param>
-        public string CreateVokeySession(User u)
+        public string CreateVokeySession(VokeyUser u)
         {
-            return sessions.CreateVokeySession(u);
+            return mySessions.CreateVokeySession(u);
         }
 
         /// <summary>
@@ -411,39 +389,21 @@ namespace Vokey
             return false;
         }
 
-        public string getFirstHandlableAction(HttpListenerContext hlc)
-        {
-            if (splitArrayFromHandlableAction(hlc.Request.Url.ToString()).Length > 0)
-                return splitArrayFromHandlableAction(hlc.Request.Url.ToString())[0];
-            else return "welcome";
-        }
 
-        public string[] splitArrayFromHandlableAction(string arguments)
-        {
-            string[] requestPieces = arguments.Split('/');
-            List<string> actionPieces = new List<string>();
-            int begin = 0;
-            for (; begin < requestPieces.Length; begin++)
-                if (argumentHandleable(requestPieces[begin]))
-                    break;
-            for (; begin < requestPieces.Length; begin++)
-                actionPieces.Add(requestPieces[begin]);
-            return actionPieces.ToArray();
-        }
         /// <summary>
         /// Tries the login.
         /// </summary>
         /// <returns><c>true</c>, if login was correct, <c>false</c> otherwise.</returns>
         /// <param name="username">Username.</param>
         /// <param name="password">Password.</param>
-        public static User TryLogin(string username, string password)
+        public static VokeyUser TryVokeyLogin(string username, string password)
         {
             foreach (Town t in AssetServer.getInstance().TownList)
             {
                 if (t.ContainsUser(username))
                 {
                     UnityEngine.Debug.Log("Username found in town: " + t.name);
-                    sUser u = t.getUser(username);
+                    VokeyUser u = t.getUser(username);
                     if (u.PasswordHash == EncryptionUtilities.GenerateSaltedSHA1(password))
                     {
                         UnityEngine.Debug.Log("Password match");
@@ -452,7 +412,7 @@ namespace Vokey
                 }
             }
 
-            foreach (User u in AssetServer.getInstance().Users)
+            foreach (VokeyUser u in AssetServer.getInstance().AssetServerUsers)
             {
                 if (u.username == username)
                 {
@@ -470,38 +430,7 @@ namespace Vokey
             }
             return null;
         }
-        /// <summary>
-        /// Sends the response.
-        /// </summary>
-        /// <returns>The response.</returns>
-        /// <param name="request">Request.</param>
-        public static byte[] SendResponse(HttpListenerContext request)
-        {
-            AssetServer instance = getInstance();
-            try
-            {
-                String firstHandlableAction = instance.getFirstHandlableAction(request);
-                if (instance.handlers.ContainsKey(firstHandlableAction))
-                {
-                    Type typeOfHandler = null;
-                    instance.handlers.TryGetValue(firstHandlableAction, out typeOfHandler);
-                    RequestHandler r = instance.createHandler(typeOfHandler, request);
-                    r.handleRequest();
-                }
-                else
-                {
-                    throw new Exception("No handler defined for the action: " + firstHandlableAction);
-                }
-            }
-            catch (Exception e)
-            {
-                HttpFunctions.handleServerException(request, e);
-            }
 
-            request.Response.OutputStream.Close();
-
-            return new byte[] { 0x20 };
-        }
 
     }
 }

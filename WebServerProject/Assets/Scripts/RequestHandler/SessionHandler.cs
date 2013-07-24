@@ -7,6 +7,7 @@ using GuiTest;
 using AssemblyCSharp;
 using System;
 using VokeySharedEntities;
+using Thisiswhytheinternetexists.WebCore;
 
 public class SessionHandler : RequestHandler {
     private static string[] acceptableCommands = { "login", "logout", "session", "sessions" };
@@ -30,13 +31,13 @@ public class SessionHandler : RequestHandler {
                         string username = null, password = null;
                         formData.TryGetValue("username", out username);
                         formData.TryGetValue("password", out password);
-                        User u = AssetServer.TryLogin(username, password);
+                        VokeyUser u = AssetServer.TryVokeyLogin(username, password);
                         if (u != null)
                         {
                             string s = AssetServer.getInstance().CreateVokeySession(u);
                             UnityEngine.Debug.Log("Session created: " + s);
                             HttpFunctions.addSessionHeaderToResponse(context, s);
-                            HttpFunctions.addHeaderToResponse(context, "UserType", u.type.ToString());
+                            HttpFunctions.addHeaderToResponse(context, "UserType", u.vtype.ToString());
                             HttpFunctions.sendTextResponse(context, "OK");
                         }
                         else
@@ -52,7 +53,7 @@ public class SessionHandler : RequestHandler {
                 VokeySession v = null;
                 try
                 {
-                    v = AssetServer.getInstance().getSession(sessionHash);
+                    v = AssetServer.getInstance().getVokeySession(sessionHash);
                 }
                 catch { }
 

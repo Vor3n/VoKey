@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using AssemblyCSharp;
 using Vokey;
+using Thisiswhytheinternetexists.WebCore;
 
 public class FileHandler : RequestHandler
 {
@@ -48,10 +49,10 @@ public class FileHandler : RequestHandler
 				ms.SetLength (fileStream.Length);
 				fileStream.Read (ms.GetBuffer(), 0, (int)fileStream.Length);
 			}
-			HttpFunctions.sendFileWithContentType (theContext, mime, ms.ToArray ());
+			Thisiswhytheinternetexists.WebCore.HttpFunctions.sendFileWithContentType (theContext, mime, ms.ToArray ());
 		} catch {
 			UnityEngine.Debug.Log (filename);
-			HttpFunctions.sendStandardResponse(theContext, "FILE NOT FOUND", 404);
+            Thisiswhytheinternetexists.WebCore.HttpFunctions.sendStandardResponse(theContext, "FILE NOT FOUND", 404);
 		}
 	}
 

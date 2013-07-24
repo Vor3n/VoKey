@@ -1,13 +1,14 @@
 using UnityEngine;
 using System.Collections;
 using System.Net;
-using WebCore.HtmlEntities;
 using AssemblyCSharp;
 using System;
-using GuiTest;
 using Vokey;
 using VokeySharedEntities;
 using System.Collections.Generic;
+using Thisiswhytheinternetexists.WebCore.Entities;
+using Thisiswhytheinternetexists.WebCore;
+using GuiTest;
 
 public class DynamicContentHandler : RequestHandler
 {
@@ -27,7 +28,7 @@ public class DynamicContentHandler : RequestHandler
 		Debug.Log (context.Request.UserAgent);
 
 		
-		currentPage.AddElementToHead(new CssLinkElement("../file/Welloe.css"));
+		currentPage.AddElement(new CssLinkElement("../file/Welloe.css"));
 		Table t = new Table();
 		t.addRow (new TableRow("tableheader", new TableCell("Name"), new TableCell("Username"), new TableCell("Awesomeness"))); 
 		t.addRow (new TableRow(new TableCell("Adolf"), new TableCell("Jantje"), new TableCell("Nein"))); 
@@ -36,9 +37,9 @@ public class DynamicContentHandler : RequestHandler
 		t.addRow (new TableRow(new TableCell("Dylan"), new TableCell("Snel"), new TableCell("Ja"))); 
 		t.addRow (new TableRow(new TableCell("Duncan"), new TableCell("Jenkins"), new TableCell("Ja"))); 
 		t.addRow (new TableRow(new TableCell("Roy"), new TableCell("Scheefhals"), new TableCell("Ja"))); 
-		t.addRow (new TableRow(new TableCell("Bak"), new TableCell("Steen"), new TableCell("Ja"))); 
-		currentPage.AddElementToBody(t);
-		currentPage.AddElementToBody (new ImageElement("../file/Blue_morpho_butterfly.jpg", 807, 730, "A Butterfly"));
+		t.addRow (new TableRow(new TableCell("Bak"), new TableCell("Steen"), new TableCell("Ja")));
+        currentPage.AddElement(t);
+        currentPage.AddElement(new ImageElement("../file/Blue_morpho_butterfly.jpg", 807, 730, "A Butterfly"));
 		HttpFunctions.sendStandardResponse(context, currentPage.getHtmlRepresentation(), 200);
 	}
 	
@@ -49,19 +50,19 @@ public class DynamicContentHandler : RequestHandler
 						throw new Exception ("Not enough arguments to handle the complex request");
 				switch (arguments [1]) {
 				case "edituser":
-						User u = null;
+						VokeyUser u = null;
 						try {
 								u = AssetServer.getInstance ().getUser (new Guid(arguments[2]));
 						} catch {
 						}
 						if (u != null) {
-								currentPage.AddElementToHead (new CssLinkElement("../../file/Welloe.css"));
-								currentPage.AddElementToHead (new Javascriptlet("var sendShowTownCommand = function(){ Unity.invoke('SwitchCommand','ShowTown'); }"));
+                            currentPage.AddElement(new CssLinkElement("../../file/Welloe.css"));
+                            currentPage.AddElement(new Javascriptlet("var sendShowTownCommand = function(){ Unity.invoke('SwitchCommand','ShowTown'); }"));
 								Table t = new Table ();
 								
 								Hyperlink backButton = new Hyperlink ("#", "sendShowTownCommand()", "Back");
 								backButton.ElementClass = "largeUiButton";
-								currentPage.AddElementToBody (backButton);
+                                currentPage.AddElement(backButton);
 								
 								TableCell tc = new TableCell ("Edit User");
 								tc.Colspan = 2;
@@ -73,7 +74,7 @@ public class DynamicContentHandler : RequestHandler
 								t.addRow (new TableRow(new TableCell("Assignments done:"), new TableCell((u.assignments == null) ? "0" : "" + u.assignments.CompletedAssignments.Count)));
 								t.addRow (new TableRow(new TableCell("Assignments left:"), new TableCell((u.assignments == null) ? "0" : "" + u.assignments.TodoAssignments.Count)));
 							
-								currentPage.AddElementToBody (t);
+								currentPage.AddElement (t);
 								HttpFunctions.sendStandardResponse (context, currentPage.getHtmlRepresentation (), 200);
 						}
 						break;
@@ -88,9 +89,9 @@ public class DynamicContentHandler : RequestHandler
 							for (int i = 0; i <= numberOfArgs; i++) {
 									levelPrefix += "../";
 							}
-							currentPage.AddElementToHead (new CssLinkElement(levelPrefix + "file/Welloe.css"));
-							currentPage.AddElementToHead (new Javascriptlet("var townGuid = \"" + town.id.ToString() + "\""));
-							currentPage.AddElementToHead (new Javascriptlet("var sendCloseWindowCommand = function(){ Unity.invoke('SwitchCommand','CloseWindow'); }"));
+							currentPage.AddElement (new CssLinkElement(levelPrefix + "file/Welloe.css"));
+							currentPage.AddElement (new Javascriptlet("var townGuid = \"" + town.id.ToString() + "\""));
+							currentPage.AddElement (new Javascriptlet("var sendCloseWindowCommand = function(){ Unity.invoke('SwitchCommand','CloseWindow'); }"));
 					
 					
 					
@@ -100,7 +101,7 @@ public class DynamicContentHandler : RequestHandler
 							ImageElement editUserImageElement = new ImageElement (levelPrefix + "file/user_edit.png", 16, 16, "Edit User");
 							ImageElement deleteUserImageElement = new ImageElement (levelPrefix + "file/user_delete.png", 16, 16, "Remove User");
 					
-							currentPage.AddElementToBody (closeButton);
+							currentPage.AddElement (closeButton);
 					
 							Table usersTable = getUserTable (town.pupils);
 							List<House> eduRooms = new List<House> ();
@@ -117,7 +118,7 @@ public class DynamicContentHandler : RequestHandler
 						//rightDiv.Style = "width: 250px; float:left;";
 						DivElement containerDiv = new DivElement(leftDiv, rightDiv);
 						containerDiv.Style = "width: 800px; overflow: hidden;";
-						currentPage.AddElementToBody (containerDiv);
+						currentPage.AddElement (containerDiv);
 						HttpFunctions.sendStandardResponse (context, currentPage.getHtmlRepresentation (), 200);
 					} else {
 			            string myList = "<ul>";
@@ -135,14 +136,12 @@ public class DynamicContentHandler : RequestHandler
 	/// Returns a table of users in the provided town.
 	/// </summary>
 	/// <returns>The user table.</returns>
-	private Table getUserTable(List<User> userList){
-		currentPage.AddElementToHead(new Javascriptlet("var sendEditUserCommand = function(uguid){ Unity.invoke('SwitchCommand','EditUser',uguid); }"));
-		currentPage.AddElementToHead(new Javascriptlet("var sendDeleteUserCommand = function(uguid, tguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, uguid); }"));
+	private Table getUserTable(List<VokeyUser> userList){
+		currentPage.AddElement(new Javascriptlet("var sendEditUserCommand = function(uguid){ Unity.invoke('SwitchCommand','EditUser',uguid); }"));
+		currentPage.AddElement(new Javascriptlet("var sendDeleteUserCommand = function(uguid, tguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, uguid); }"));
 						
 		Table usersTable = new Table ();
-		usersTable.Width = 250;
 		TableCell tc = new TableCell("");
-		tc.Width = 40;
 		usersTable.addRow (new TableRow("tableheader", new TableCell("Name"), new TableCell("Username"), tc/*, new TableCell("Assignments to do"), new TableCell("Assignments done")*/)); 
 		foreach (User user in userList) {
 			usersTable.addRow (new TableRow(
@@ -164,11 +163,10 @@ public class DynamicContentHandler : RequestHandler
 	
 	private Table getEduRoomTable (List<House> houses)
 		{
-		currentPage.AddElementToHead(new Javascriptlet("var sendEditRoomCommand = function(rguid, tguid){ Unity.invoke('SwitchCommand','EditRoom',rguid, tguid); }"));
-		currentPage.AddElementToHead(new Javascriptlet("var sendDeleteRoomCommand = function(tguid, rguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, rguid); }"));
+		currentPage.AddElement(new Javascriptlet("var sendEditRoomCommand = function(rguid, tguid){ Unity.invoke('SwitchCommand','EditRoom',rguid, tguid); }"));
+		currentPage.AddElement(new Javascriptlet("var sendDeleteRoomCommand = function(tguid, rguid){ Unity.invoke('SwitchCommand','DeleteUser',tguid, rguid); }"));
 		
 				Table result = new Table ();
-				result.Width = 300;
 				TableCell a1 = new TableCell ("House name");
 				TableCell a2 = new TableCell ("Room name");
 				TableCell a3 = new TableCell ("");

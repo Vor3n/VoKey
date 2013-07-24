@@ -4,17 +4,13 @@ using Vokey;
 using VokeySharedEntities;
 using System.Collections.Generic;
 using GuiTest;
+using System;
 
 public class ServerScript : MonoBehaviour
 {
 
     public string StartStopButtonText
-    {
-        get
-        {
-            return (ws.Running) ? "Stop Webserver" : "Start Webserver";
-        }
-    }
+    { get { return (ws != null) ? ((ws.Running) ? "Stop Webserver" : "Start Webserver") : "Start Webserver"; } }
 
     private AssetServer ws;
     // Use this for initialization
@@ -27,7 +23,7 @@ public class ServerScript : MonoBehaviour
 
     void HandleLogMessage(string obj)
     {
-        Debug.Log(obj);
+        UnityEngine.Debug.Log(obj);
     }
 
     void OnGUI()
@@ -36,7 +32,11 @@ public class ServerScript : MonoBehaviour
             if (ws.Running)
                 ws.Stop();
             else
-                ws.Start();
+            {
+                try { ws.Start(); }
+                catch (UnityException e) { UnityEngine.Debug.Log(e); }
+                catch (Exception e) { UnityEngine.Debug.Log(e); }
+            }
 
         if (GUI.Button(new Rect(130, 10, 130, 20), "Ik doe niks"))
         {
