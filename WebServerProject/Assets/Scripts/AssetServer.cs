@@ -89,11 +89,11 @@ namespace Vokey
         private VokeySessionContainer mySessions;
 
         public AssetServer()
-            : base("http://+:9090/")
+            : base("http://+:9090/", false)
         {
             myInstance = this;
             AssetRoot = Path.GetDirectoryName(System.Reflection.Assembly.GetAssembly(typeof(AssetServer)).Location) + System.IO.Path.DirectorySeparatorChar + ".." + System.IO.Path.DirectorySeparatorChar + "..";
-            //addHandlersForType(new SessionHandler(null));
+            addHandlersForType(new SessionHandler(null));
             addHandlersForType(new AssetBundleHandler(null));
             addHandlersForType(new TownHandler(null));
             //addHandlersForType(new WelcomeHandler(null));
@@ -139,7 +139,25 @@ namespace Vokey
 				{
         	
 			Street s = new Street("Winkelstraat", Street.StreetType.Educational);
-
+			House h = new House("Bakery", "Bakery");
+			House h2 = new House("Supermarket", "Supermarket");
+			
+			Room r = new Room("Workfloor");
+			Room r2 = new Room("Storage");
+			h.rooms.Add(r);
+			h.rooms.Add(r2);
+			h2.rooms.Add(r);
+			s.addHouse(h);
+			s.addHouse(h2);
+			
+			Street s2 = new Street("Winkelstraat", Street.StreetType.Educational);
+			House h3 = new House("Tattoo parlor", "Tattoo parlor");
+			House h4 = new House("Barber", "Barber");
+			h3.rooms.Add(new Room("Showroom"));
+			h4.rooms.Add(new Room("Workfloor"));
+			s2.addHouse(h4);
+			s2.addHouse(h3);
+			
             Town t = new Town("Lazytown", "TIV4A");
             t.addStreet(new Street("Nijenoord", Street.StreetType.Residential));
             t.addStreet(new Street("Rubenslaan", Street.StreetType.Residential));
@@ -153,7 +171,7 @@ namespace Vokey
             Town t1 = new Town("BossTown", "TIV4B");
             t1.addStreet(new Street("Flevolaan", Street.StreetType.Residential));
             t1.addStreet(new Street("Baksteenlaan", Street.StreetType.Residential));
-            t1.addStreet(s);
+            t1.addStreet(s2);
 
             t1.addUser(new VokeyUser("LeovM", "leooo", "Leo van Moergestel", VokeyUser.VokeyUserType.Student));
             t1.addUser(new VokeyUser("MartenWensink", "mw", "Marten Wensink", VokeyUser.VokeyUserType.Student));
@@ -168,12 +186,11 @@ namespace Vokey
             
             t1.addUser(new VokeyUser("alex", "student", "Alexander Streng", VokeyUser.VokeyUserType.Student));
             t1.addUser(new VokeyUser("rscheefh", "student", "Roy Scheefhals", VokeyUser.VokeyUserType.Student));
-            t1.addUser(new VokeyUser("aniek", "student", "Aniek Zandleven", VokeyUser.VokeyUserType.Student));
 
             TownList.Add(t1);
 
-            Users.Add(new VokeyUser("teacher", "teacher", VokeyUser.VokeyUserType.Teacher));
-            Users.Add(new VokeyUser("pascal", "pascal", VokeyUser.VokeyUserType.Teacher));
+            AssetServerUsers.Add(new VokeyUser("teacher", "teacher", VokeyUser.VokeyUserType.Teacher));
+            AssetServerUsers.Add(new VokeyUser("pascal", "pascal", VokeyUser.VokeyUserType.Teacher));
 						/*StreamReader townReader = new StreamReader (AssetRoot + Path.DirectorySeparatorChar + "AssetBundles" + Path.DirectorySeparatorChar + "Data" + Path.DirectorySeparatorChar + "towns.xml");
 						_townList = MySerializerOfLists.FromXml<Town> (townReader.ReadToEnd());
 						townReader.Close ();

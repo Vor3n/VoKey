@@ -49,3 +49,9 @@ font-family:"Trebuchet MS", Helvetica, sans-serif;
 	position:relative;
 	top:1px;
 }
+
+table.table td img
+{
+	width: auto;
+	height: auto;
+}
