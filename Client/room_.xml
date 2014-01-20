@@ -223,4 +223,16 @@
 </Room><?xml version="1.0" encoding="utf-8"?>
 <Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="d6bad7fa-a82b-4cdd-8d7b-ac8f7b61e519">
   <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="99b39568-7bb6-4abe-bcaf-9b9edd4a0470">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="e20fbf13-036c-4137-a512-bfcd42ff1f6d">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="b162d88c-c75f-4624-8aee-3ad43e078a49">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="a5077683-5e8b-49e0-b031-4394902f145b">
+  <FindableObjects />
 </Room>
