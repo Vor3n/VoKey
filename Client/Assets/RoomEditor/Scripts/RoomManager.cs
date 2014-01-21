@@ -18,6 +18,7 @@ public class RoomManager : MonoBehaviour
     void Start()
     {
 		RoomID=GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen;
+		url = GameObject.Find("GameController").GetComponent<GameControllerScript>().ServerURL;
 		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();
         LoadRoom(RoomID);
     }
@@ -139,7 +140,7 @@ public class RoomManager : MonoBehaviour
     {
         // Use global room guid TODO
         WWW www = new WWW(url + "town/");
-
+		Debug.Log(url + "town/");
         while (!www.isDone)
         {
 
