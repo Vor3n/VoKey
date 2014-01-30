@@ -262,4 +262,13 @@
 </Room><?xml version="1.0" encoding="utf-8"?>
 <Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="b7bec710-569c-4642-8907-36b80d4bc6b0">
   <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="cc130abd-a28b-41ce-8efc-4946fae05690">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="c4a9d0f1-7deb-4e21-a7e9-c779fbba5cc5">
+  <FindableObjects />
+</Room><?xml version="1.0" encoding="utf-8"?>
+<Room xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="" Id="8158ac84-d365-443c-bb38-ceaf704188c1">
+  <FindableObjects />
 </Room>
