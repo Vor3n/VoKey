@@ -148,8 +148,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 221709520}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.532571793, y: .49987793, z: 0}
-  m_LocalScale: {x: 628, y: 520, z: 1}
+  m_LocalPosition: {x: -.532388687, y: .499938965, z: 0}
+  m_LocalScale: {x: 640, y: 480, z: 1}
   m_Children: []
   m_Father: {fileID: 1435751017}
 --- !u!114 &221709522
@@ -328,7 +328,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632498485}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -254.332733, y: 892.640015, z: 0}
+  m_LocalPosition: {x: -292.906921, y: 931.221497, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1974227424}
@@ -825,6 +825,7 @@ GameObject:
   - 124: {fileID: 1426986581}
   - 81: {fileID: 1426986580}
   - 45: {fileID: 1426986585}
+  - 114: {fileID: 1426986586}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -900,6 +901,17 @@ Skybox:
   m_GameObject: {fileID: 1426986579}
   m_Enabled: 1
   m_CustomSkybox: {fileID: 2100000, guid: da976b1a4f7ebb949b0f71341e4f1821, type: 2}
+--- !u!114 &1426986586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426986579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8db9126da97e4840a4015af4cd9035c, type: 3}
+  m_Name: 
+  voice_nb: 1
 --- !u!1 &1435751016
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1266,7 @@ Transform:
   m_GameObject: {fileID: 1909385570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -25.837513, y: 0, z: 0}
-  m_LocalScale: {x: .00384615385, y: .00384615385, z: .00384615385}
+  m_LocalScale: {x: .00416666688, y: .00416666688, z: .00416666688}
   m_Children:
   - {fileID: 632498486}
   m_Father: {fileID: 0}
@@ -1364,7 +1376,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1974227423}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.49961853, y: .500061035, z: 0}
+  m_LocalPosition: {x: -.499679565, y: .5, z: 0}
   m_LocalScale: {x: .999908984, y: .999908984, z: .999908984}
   m_Children:
   - {fileID: 2102167004}
