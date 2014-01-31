@@ -16,7 +16,7 @@ using System;
 using System.Collections;
 using System.Runtime.InteropServices;
 
-public class VoiceSpeaker : MonoBehaviour
+public class SayItemName : MonoBehaviour
 {
 
     [DllImport("Voice_speaker.dll", EntryPoint = "VoiceAvailable")]
@@ -78,10 +78,11 @@ public class VoiceSpeaker : MonoBehaviour
     [DllImport("Voice_speaker.dll", EntryPoint = "ResumeVoice")]
     private static extern void ResumeVoice();
 
-    public int voice_nb = 1; // 0 = David, 1 = Hazel, 2 = Emily 16Hz, 3 = Zira
+    private int voice_nb = 1; // 0 = David, 1 = Hazel, 2 = Emily 16Hz, 3 = Zira
+	public string ItemName;
 
     void Start()
-    {
+    {		
         if (VoiceAvailable() > 0)
         {
             InitVoice(); // init the engine
@@ -94,20 +95,24 @@ public class VoiceSpeaker : MonoBehaviour
 
             SetVoice(voice_nb);
             SetVoiceRate(1);
-			
-			Say("Welcome to VoKey");
-			
-			Say("Please enter your username and password to login.");
-
         }
         //Application.Quit();
     }
+	
+	void OnMouseDown()
+	{
+		if(!String.IsNullOrEmpty(ItemName)) {
+			Say(ItemName);
+		} else {
+			Debug.Log("There is no name specified for this item");	
+		}
+	}
 
     void OnDisable()
     {
         if (VoiceAvailable() > 0)
         {
-            FreeVoice();
+            //FreeVoice();
         }
     }
 }

@@ -49,6 +49,7 @@ public class FindableAnimation : MonoBehaviour
 				Debug.Log ("DONE MOVING");
 				moveToAnimPosition = false;
 				inAnimPosition = true;
+				
 				if ( soundAvailable ){
 					audio.Play();
 				}
@@ -82,6 +83,7 @@ public class FindableAnimation : MonoBehaviour
 	
 	private bool readyToAnimate(){
 		if ( inAnimPosition ){
+			
 			if ( soundAvailable ){
 				if ( !audio.isPlaying ){
 					return true;
@@ -91,6 +93,6 @@ public class FindableAnimation : MonoBehaviour
 				return true;
 			}
 		}
-		return false;
+		return false; // false if above uncommented
 	}
 }

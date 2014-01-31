@@ -67,7 +67,9 @@ public class RoomManager : MonoBehaviour
                 FindableAnimation fa = g.AddComponent<FindableAnimation>();
                 fa.findable = true;
 				fa.ObjectName = abm.RetrieveObjectName(FO.GameObjectId);
-                g.name = FO.GameObjectId;               
+                g.name = FO.GameObjectId;
+				SayItemName tts = g.AddComponent<SayItemName>();
+				tts.ItemName = abm.RetrieveObjectName(FO.GameObjectId);
                 itemsToFind.Add(abm.RetrieveObjectName(FO.GameObjectId));//Make sure it appears in the list to be found.
             }
         }
