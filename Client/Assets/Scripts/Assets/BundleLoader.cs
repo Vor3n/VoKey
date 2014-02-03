@@ -10,7 +10,7 @@ public class BundleLoader : MonoBehaviour
     public Vector3 position;
     public string roomName;
     public bool instantiateMainAsset = false;
-    private bool assetBundleIsLoaded = false;
+    //private bool assetBundleIsLoaded = false;
     // public bool unloadAfter = false;
     public IEnumerator LoadBundle()
     {
@@ -31,7 +31,7 @@ public class BundleLoader : MonoBehaviour
 
             Room r = new Room(roomName);
             int i = 0;
-            float p = 0;
+            //float p = 0;
             foreach (VokeyAsset o in ab.objects)
             {
                 if (o.GetType() == typeof(GameObject))

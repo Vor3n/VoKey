@@ -78,7 +78,7 @@ public class SelectMovable : MonoBehaviour
 	}
 	
 	void FixedUpdate(){
-		var x = DistanceFromDesiredPosition;
+		//var x = DistanceFromDesiredPosition;
 		if(desiredPositionChanged){
 			if(axisAreWithinThreshold()){
 				Debug.Log ("Values are within threshold AND the desired position WAS changed. Now stopping this madness.");
@@ -89,7 +89,7 @@ public class SelectMovable : MonoBehaviour
 				
 			}else{
 			Debug.Log ("Moving stuff");
-			Vector3 toMove = DistanceFromDesiredPosition;
+			//Vector3 toMove = DistanceFromDesiredPosition;
 			
 			rigidbody.velocity = new Vector3 (DistanceFromDesiredPosition.x, DistanceFromDesiredPosition.y, DistanceFromDesiredPosition.z);
 			}

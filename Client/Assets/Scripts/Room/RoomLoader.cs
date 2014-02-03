@@ -7,7 +7,7 @@ public class RoomLoader : MonoBehaviour
     public int version;
     public Vector3 position;
     public bool instantiateMainAsset = false;
-    private bool assetBundleIsLoaded = false;
+    //private bool assetBundleIsLoaded = false;
     // public bool unloadAfter = false;
     public IEnumerator LoadBundle()
     {

@@ -6,7 +6,7 @@ public class FindableAnimation : MonoBehaviour
 	public string ObjectName;
 	public bool findable = false;
 	
-	private bool found = false;
+	//private bool found = false;
 	private bool inAnimPosition = false;
 	private bool moveToAnimPosition = false;
 	private bool soundAvailable = false;
@@ -21,7 +21,7 @@ public class FindableAnimation : MonoBehaviour
 	void Start ()
 	{
 			endPoint = new Vector3 (-5, 3, -6);
-			found = false; 
+			//found = false; 
 	 		inAnimPosition = false;
  			moveToAnimPosition = false;
 	 		soundAvailable = false;

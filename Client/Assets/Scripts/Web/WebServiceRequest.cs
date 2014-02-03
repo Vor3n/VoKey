@@ -21,7 +21,7 @@ public class WebServiceRequest{
 	{
 		isDone = false;
 		Debug.Log("STARTING REQUEST");
-		float elapsedTime = 0.0f;
+		//kfloat elapsedTime = 0.0f;
 		Debug.Log("SENDING THING");
 		
 		byte[] b = {0x10, 0x20};

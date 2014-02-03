@@ -3,7 +3,7 @@ using System.Collections;
  
 public class OLD_PauseMenu : MonoBehaviour
 {
- 
+ /*
 	public GUISkin skin;
  
 	private float gldepth = -0.5f;
@@ -350,5 +350,5 @@ public class OLD_PauseMenu : MonoBehaviour
 	    if (IsGamePaused()) {
 	        AudioListener.pause = true;
 	    }
-	}
+	}*/
 }

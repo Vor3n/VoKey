@@ -1,7 +1,7 @@
 public sealed class VokeyMessage {
 
     private readonly string name;
-    private readonly int value;
+    //private readonly int value;
 
     public static readonly VokeyMessage LOGIN_OK = new VokeyMessage (1, "LOGIN_OK");
     public static readonly VokeyMessage LOGIN_FAIL = new VokeyMessage (2, "LOGIN_FAIL");
@@ -13,7 +13,7 @@ public sealed class VokeyMessage {
 
     private VokeyMessage(int value, string name){
         this.name = name;
-        this.value = value;
+        //this.value = value;
     }
 
     public override string ToString(){

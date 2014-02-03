@@ -176,7 +176,7 @@ public class LoadWebPage : MonoBehaviour{
 	public IEnumerator DoTownRequest(string objectxml, string URLSuffix)
 	{
 
-		bool isDone = false;
+		//bool isDone = false;
 		Debug.Log("STARTING REQUEST");
 		float elapsedTime = 0.0f;
 		Debug.Log("SENDING THING");
@@ -194,7 +194,7 @@ public class LoadWebPage : MonoBehaviour{
 			if (elapsedTime >= 2.0f) break;
 			yield return www;
 		}
-		isDone = www.isDone;
+		//isDone = www.isDone;
 		string response = www.text;
 		Debug.Log("DOTOWNREQUESTRESPONSE: "+response);
 		GameObject TownList = GameObject.Find("TownList");

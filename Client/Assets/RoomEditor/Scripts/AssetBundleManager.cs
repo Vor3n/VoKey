@@ -8,8 +8,8 @@ public class AssetBundleManager : MonoBehaviour {
 	private BundleLoader bundleLoader;
 	private int AmountBundlesToFill;
 	
-	private VokeyAssetBundle LoadedBundle = null;
-    private bool assetBundleIsLoaded = false;
+	//private VokeyAssetBundle LoadedBundle = null;
+    //private bool assetBundleIsLoaded = false;
 	private event System.Action<UnityEngine.Object[],Guid> BundleLoaded;
 	private event System.Action XMLLoaded;
 	public event System.Action AllBundlesLoaded;
@@ -68,7 +68,7 @@ public class AssetBundleManager : MonoBehaviour {
             yield return www;
 		//	Debug.Log (www.error);
             AssetBundle assetBundle = www.assetBundle;
-			assetBundleIsLoaded = www.isDone;
+			//assetBundleIsLoaded = www.isDone;
             if (assetBundle == null)
             {
                 Debug.Log("Duncan: Assetbundle is null");
@@ -147,6 +147,7 @@ public class AssetBundleManager : MonoBehaviour {
 	}
 	
 	void BUNDLESLOADED(){
+		/*
 		foreach(VokeyAssetBundle VAB in Bundles.Values){
 			//Debug.Log (VAB.modelId+ "-"+ VAB.name );	
 			foreach(VokeyAsset VA in VAB.objects){
@@ -154,6 +155,7 @@ public class AssetBundleManager : MonoBehaviour {
 				//GameObject.Instantiate(VA.resource);
 			}
 		}
+		*/
 		//GameObject.Find("ItemList").GetComponent<ItemManager>().LoadFromBundles();
 	}
 

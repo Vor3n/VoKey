@@ -22,7 +22,7 @@ public class Login{
 	{
 		Debug.Log ("Starting Login");
 		isDone = false;
-		float elapsedTime = 0.0f;
+		//float elapsedTime = 0.0f;
 		form = new WWWForm();
         form.AddField("username", username);
 		form.AddField("password",password);
