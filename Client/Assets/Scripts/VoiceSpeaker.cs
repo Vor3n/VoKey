@@ -95,10 +95,7 @@ public class VoiceSpeaker : MonoBehaviour
             SetVoice(voice_nb);
             SetVoiceRate(1);
 			
-			Say("Welcome to VoKey");
-			
-			Say("Please enter your username and password to login.");
-
+			Say("Welcome");
         }
         //Application.Quit();
     }

@@ -44,10 +44,15 @@ namespace VokeySharedEntities
 			  }*/
 			var serializer = new XmlSerializer(typeof(List<T>));
 			List<T> deserializedList;
-	        using (StringReader reader = new StringReader(xml))
-	        {
-	            deserializedList = (List<T>)serializer.Deserialize(reader);
-	        }
+			
+			if(!string.IsNullOrEmpty(xml)) {				
+		        using (StringReader reader = new StringReader(xml))
+		        {
+		            deserializedList = (List<T>)serializer.Deserialize(reader);
+		        }				
+			} else {
+				Debug.Log("XML is empty (loading list from XML");
+			}
 			return deserializedList;
 		}
 	}

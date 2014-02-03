@@ -13,10 +13,7 @@ public class AssetBundleManager : MonoBehaviour {
 	private event System.Action<UnityEngine.Object[],Guid> BundleLoaded;
 	private event System.Action XMLLoaded;
 	public event System.Action AllBundlesLoaded;
-	
-	
-	
-	
+
 	void HandleXmlLoaded ()
 	{
 		AmountBundlesToFill = Bundles.Count;
@@ -147,6 +144,7 @@ public class AssetBundleManager : MonoBehaviour {
 	}
 	
 	void BUNDLESLOADED(){
+		/*
 		foreach(VokeyAssetBundle VAB in Bundles.Values){
 			//Debug.Log (VAB.modelId+ "-"+ VAB.name );	
 			foreach(VokeyAsset VA in VAB.objects){
@@ -155,22 +153,28 @@ public class AssetBundleManager : MonoBehaviour {
 			}
 		}
 		//GameObject.Find("ItemList").GetComponent<ItemManager>().LoadFromBundles();
+		*/
 	}
 
 	
 	public IEnumerator RetrieveAssetbundleXmlArray(){
 		using(WWW www = new WWW(url + "/assetbundle" )) {
-			yield return www;
+			if(www.error != null) {
+				Debug.Log("Cannot connect to server");
+			} else {
+				yield return www;
+			}
 			
 			List<VokeyAssetBundle> bundles = VokeySharedEntities.MySerializerOfLists.FromXml<VokeyAssetBundle>(www.text);
-			
 			
 			foreach(VokeyAssetBundle bundle in bundles){
 				Bundles.Add(bundle.modelId, bundle);	
 				
 			}
-			if(XMLLoaded != null)			
-			XMLLoaded();
+			
+			if(XMLLoaded != null) {	
+				XMLLoaded();
+			}
 			
 		}
 	}

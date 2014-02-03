@@ -12,7 +12,7 @@ public class AddNewTown : MonoBehaviour {
 	
 	public IEnumerator AddTown()
 	{
-		bool isDone = false;
+		//bool isDone = false;
 		Debug.Log("STARTING REQUEST");
 		float elapsedTime = 0.0f;
 		Debug.Log("SENDING THING");
@@ -45,7 +45,7 @@ public class AddNewTown : MonoBehaviour {
 			if (elapsedTime >= 2.0f) break;
 			yield return www;
 		}
-		isDone = www.isDone;
+		//isDone = www.isDone;
 		string response = www.text;
 		if (response.Equals("DUPLICATE_CLASS_NAME"))
 		{

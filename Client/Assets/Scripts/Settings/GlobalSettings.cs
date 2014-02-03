@@ -9,7 +9,7 @@ public static class GlobalSettings{
 	{
 		get
 		{
-			return PlayerPrefs.GetString("serverURL");
+			return PlayerPrefs.GetString("serverURL"); // execute from main thread
 		}
 		set
 		{

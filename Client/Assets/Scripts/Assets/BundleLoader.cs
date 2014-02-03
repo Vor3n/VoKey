@@ -31,7 +31,7 @@ public class BundleLoader : MonoBehaviour
 
             Room r = new Room(roomName);
             int i = 0;
-            float p = 0;
+            //float p = 0;
             foreach (VokeyAsset o in ab.objects)
             {
                 if (o.GetType() == typeof(GameObject))
