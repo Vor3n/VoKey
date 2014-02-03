@@ -29,11 +29,7 @@ public class StreetScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-    }
-
-    void FixedUpdate()
-    {
+		Debug.Log("is moving: " + Moving);
         if (Moving)
         {
             MoveCamera();
@@ -42,6 +38,7 @@ public class StreetScroll : MonoBehaviour
 
     void OnHover(bool isOver)
     {
+		Debug.Log("OnHover");
         if (isOver)
         {
             if (sprite != null)
@@ -61,7 +58,9 @@ public class StreetScroll : MonoBehaviour
 
     void MoveCamera()
     {
+		Debug.Log("Moving camera on street");
         Camera cam = ((GameObject)GameObject.Find("Main Camera")).GetComponent<Camera>();
+		
         switch (Direction)
         {
             case ScrollDirection.Left:
@@ -71,7 +70,7 @@ public class StreetScroll : MonoBehaviour
                 }
                 break;
             case ScrollDirection.Right:
-                if (cam.transform.position.z > 275)
+                if (cam.transform.position.z > 225)
                 {
                     cam.transform.position += new Vector3(0, 0, -5);
                 }

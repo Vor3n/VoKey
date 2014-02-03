@@ -29,13 +29,13 @@ public class StreetChange : MonoBehaviour {
         switch (Direction)
         {
             case StreetChangeDirection.Up:
-                if (cam.transform.position.x < TerrainSize.x - 600)
+                if (cam.transform.position.x < TerrainSize.x - 1600)
                 {
                     cam.transform.position += new Vector3(300, 0, 0);
                 }
                 break;
             case StreetChangeDirection.Down:
-                if (cam.transform.position.x > TerrainSize.x - (Street.Streets.Count * 300))
+                if (cam.transform.position.x > TerrainSize.x - (7 * 300))
                 {
                     cam.transform.position -= new Vector3(300, 0, 0);
                 }
