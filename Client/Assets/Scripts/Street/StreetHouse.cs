@@ -16,7 +16,7 @@ public class StreetHouse : MonoBehaviour
         set
         {
             showLabel = value;
-            Debug.Log("ShowLabel Changed to:[" + value + "]");
+            //Debug.Log("ShowLabel Changed to:[" + value + "]");
         }
     }
     private bool showLabel = false;

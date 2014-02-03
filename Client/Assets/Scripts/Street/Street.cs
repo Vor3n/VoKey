@@ -58,7 +58,7 @@ public class Street : MonoBehaviour {
             list.items.Add(room.name);
         }
 
-        list.highlightColor = Color.blue + Color.cyan;
+        list.highlightColor = new Color(97f / 255f, 162f / 255f, 255f / 255f, 255f / 255f);
         list.selection = "Choose room..";
 
 
