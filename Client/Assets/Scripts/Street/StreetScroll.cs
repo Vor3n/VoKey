@@ -29,7 +29,6 @@ public class StreetScroll : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		Debug.Log("is moving: " + Moving);
         if (Moving)
         {
             MoveCamera();
@@ -38,7 +37,6 @@ public class StreetScroll : MonoBehaviour
 
     void OnHover(bool isOver)
     {
-		Debug.Log("OnHover");
         if (isOver)
         {
             if (sprite != null)
@@ -58,7 +56,6 @@ public class StreetScroll : MonoBehaviour
 
     void MoveCamera()
     {
-		Debug.Log("Moving camera on street");
         Camera cam = ((GameObject)GameObject.Find("Main Camera")).GetComponent<Camera>();
 		
         switch (Direction)

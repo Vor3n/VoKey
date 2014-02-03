@@ -51,4 +51,7 @@ Thumbs.db
 Client/Assets/NGUI/Examples/
 Client/Assets/NGUI/Examples.meta
 Client/.xml
-Client/Assets/uWebKit*
+Client/Assets/Editor/uWebKit/*
+Client/Assets/uWebKit/
+Client/Assets/uWebKitDocs/
+Client/Assets/uWebKitExamples/
