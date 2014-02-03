@@ -105,7 +105,19 @@ public class CreateObjectiveList : MonoBehaviour
             GT.depth = itemDepthIndex + i;
         }
     }
-
+	
+	public bool DoesItemExist(string ItemName){
+        bool result = false;
+        for (int i = 0; i < AmountToDisplay; i++)
+        {
+            if ((i + 1) > Objectives.Length) break;
+            if (Objectives[i] == ItemName)
+            {
+                result = true;
+			}
+        }
+		return result;
+	}
 
     public bool RemoveItem(string ItemName)
     {

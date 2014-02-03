@@ -65,7 +65,7 @@ public class FindableAnimation : MonoBehaviour
 	{
 		if ( findable ){
 			GameObject ItemList = GameObject.Find("ItemList");
-		if(ItemList.GetComponent<CreateObjectiveList>().RemoveItem(ObjectName)){
+		if(ItemList.GetComponent<CreateObjectiveList>().DoesItemExist(ObjectName)){
 			UnityEngine.Object.Destroy(this.GetComponent<Rigidbody>());
 			//start moving the object to the startpoint of the animation
 			startPoint = transform.position;
@@ -78,6 +78,8 @@ public class FindableAnimation : MonoBehaviour
 	
 	void MoveAnimationDone ()
 	{
+		GameObject ItemList = GameObject.Find("ItemList");
+		ItemList.GetComponent<CreateObjectiveList>().RemoveItem(ObjectName);
 		Destroy (gameObject);
 	}
 	
