@@ -3,6 +3,7 @@ using System.Collections;
 using GuiTest;
 using VokeySharedEntities;
 using System.Collections.Generic;
+using System;
 
 public class GameControllerScript : MonoBehaviour {
 	
@@ -11,6 +12,7 @@ public class GameControllerScript : MonoBehaviour {
     public System.Guid RoomToOpen;
 	public string RoomGUID;
 	public string TownGUID;
+	private static List<Action> ActionQueue;
 
 	// Use this for initialization
 	void Start () {
@@ -55,4 +57,23 @@ public class GameControllerScript : MonoBehaviour {
 		StartCoroutine(r.Request());
 	}
 	
+	public static void InvokeOnMain(Action action)
+	{
+		if(ActionQueue == null)
+		{
+			ActionQueue = new List<Action>();	
+		}
+		
+		ActionQueue.Add(action);
+	}
+	
+	void Update()
+	{
+		if(ActionQueue.Count > 0)
+		{
+			//Debug.Log("Invoking actions");
+			ActionQueue.ForEach(act => act.Invoke());
+			ActionQueue.Clear();
+		}
+	}
 }

@@ -13,7 +13,7 @@ public class ExportAssetBundles
 {
 	static ExportAssetBundles()
     {
-        Debug.Log("ExportAssetBundles is ready");
+        //Debug.Log("ExportAssetBundles is ready");
     }
 	
     [MenuItem("Assets/Build AssetBundle From Selection - Track dependencies - Vokey")]

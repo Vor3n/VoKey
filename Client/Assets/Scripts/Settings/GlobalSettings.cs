@@ -9,7 +9,14 @@ public static class GlobalSettings{
 	{
 		get
 		{
-			return PlayerPrefs.GetString("serverURL");
+			String url = "";
+			GameControllerScript.InvokeOnMain(() => url = PlayerPrefs.GetString("serverURL"));
+			if(url == null)
+			{
+				Debug.Log("url was null");
+				url = "";	
+			}
+			return url;
 		}
 		set
 		{
