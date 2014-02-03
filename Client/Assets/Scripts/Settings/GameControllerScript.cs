@@ -15,13 +15,13 @@ public class GameControllerScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		DontDestroyOnLoad(this.gameObject);
+		GlobalSettings.serverURL = ServerURL;
 		Messenger.AddListener<string, User.UserType> (VokeyMessage.LOGIN_OK, LoginHandler);
 		Messenger.AddListener<string> (VokeyMessage.LOGIN_FAIL, LoginFailHandler);
 		Messenger.AddListener<string> (VokeyMessage.REQUEST_COMPLETE, RequestCompleteHandler);
 	}
 	
 	void LoginHandler(string sessionId, User.UserType usertype){
-		GlobalSettings.serverURL = ServerURL;
 		GlobalSettings.SessionID = sessionId;
 		GlobalSettings.UserType = usertype;
 		switch(GlobalSettings.UserType)

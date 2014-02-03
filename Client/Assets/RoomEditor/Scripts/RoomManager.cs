@@ -99,7 +99,7 @@ public class RoomManager : MonoBehaviour
 		//Serialize the room object to xml and send it to the server
         string xml = TheRoom.ToXml();
         byte[] roomInfo = System.Text.Encoding.UTF8.GetBytes(xml);
-        //float elapsedTime = 0.0f;
+        float elapsedTime = 0.0f;
         WWW www;
         //Debug.Log("SENDING FORM");
 

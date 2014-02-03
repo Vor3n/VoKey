@@ -31,11 +31,11 @@ public class FindableAnimation : MonoBehaviour
 				soundAvailable = true;
 			}
 			else{
-				//Debug.LogWarning("There is no audio clip attached to the AudioSource on Findable: " + this.name);
+				Debug.LogWarning("There is no audio clip attached to the AudioSource on Findable: " + this.name);
 			}
 		}
 		else{
-			//Debug.LogWarning("There is no AudioSource component attached on the Finable : " + this.name);
+			Debug.LogWarning("There is no AudioSource component attached on the Finable : " + this.name);
 		}
 	}
 	
@@ -46,7 +46,7 @@ public class FindableAnimation : MonoBehaviour
 		if ( moveToAnimPosition){
 			transform.position = Vector3.Lerp (startPoint, endPoint, (Time.time - startTime) / duration);
 			if ( transform.position == endPoint){
-				//Debug.Log ("DONE MOVING");
+				Debug.Log ("DONE MOVING");
 				moveToAnimPosition = false;
 				inAnimPosition = true;
 				
