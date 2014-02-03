@@ -46,7 +46,7 @@ public class AssetBundleManager : MonoBehaviour {
 		
 	}
 	
-	public string url = GlobalSettings.serverURL;
+	public string url = "";
 	
 	public Dictionary<Guid,VokeyAssetBundle> Bundles = new Dictionary<Guid,VokeyAssetBundle>();
 	
@@ -71,7 +71,7 @@ public class AssetBundleManager : MonoBehaviour {
 			//assetBundleIsLoaded = www.isDone;
             if (assetBundle == null)
             {
-                Debug.Log("Duncan: Assetbundle is null");
+                Debug.Log("Assetbundle is null");
             }
             else
             {
@@ -161,19 +161,32 @@ public class AssetBundleManager : MonoBehaviour {
 
 	
 	public IEnumerator RetrieveAssetbundleXmlArray(){
-		using(WWW www = new WWW(url + "/assetbundle" )) {
-			yield return www;
-			
-			List<VokeyAssetBundle> bundles = VokeySharedEntities.MySerializerOfLists.FromXml<VokeyAssetBundle>(www.text);
-			
-			
-			foreach(VokeyAssetBundle bundle in bundles){
-				Bundles.Add(bundle.modelId, bundle);	
-				
+		WWW www = null;
+		try {
+			www = new WWW(url + "/assetbundle" );
+		} catch {
+			Debug.LogWarning("Could not connect to host");	
+		}
+		
+		if(www != null) {
+			while(!www.isDone) {
+				yield return www;
 			}
-			if(XMLLoaded != null)			
-			XMLLoaded();
-			
+				
+			try {
+				List<VokeyAssetBundle> bundles = VokeySharedEntities.MySerializerOfLists.FromXml<VokeyAssetBundle>(www.text);
+				
+				foreach(VokeyAssetBundle bundle in bundles)
+				{
+					Bundles.Add(bundle.modelId, bundle);		
+				}
+				if(XMLLoaded != null)
+				{			
+					XMLLoaded();
+				}
+			} catch {
+				Debug.LogWarning("XML Could not be parsed");
+			}
 		}
 	}
 }

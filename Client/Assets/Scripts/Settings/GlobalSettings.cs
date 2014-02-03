@@ -11,10 +11,16 @@ public static class GlobalSettings{
 		{
 			String url = "";
 			GameControllerScript.InvokeOnMain(() => url = PlayerPrefs.GetString("serverURL"));
+			
+			url = PlayerPrefs.GetString("serverURL");
+			// Wait here for answer from main thread?!?!
+			
 			if(url == null)
 			{
 				Debug.Log("url was null");
 				url = "";	
+			} else {
+				Debug.Log("URL: " + url);	
 			}
 			return url;
 		}
