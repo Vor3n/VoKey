@@ -533,7 +533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!23 &134833316
@@ -1241,7 +1241,7 @@ Transform:
   m_PrefabInternal: {fileID: 908409022}
   m_GameObject: {fileID: 278312264}
   m_LocalRotation: {x: 0, y: .795933247, z: 0, w: .605384469}
-  m_LocalPosition: {x: .868245482, y: 4.37767458, z: -4.84636545}
+  m_LocalPosition: {x: 1.67050576, y: 4.37767458, z: -5.06865597}
   m_LocalScale: {x: .199359059, y: .199359059, z: .199359059}
   m_Children:
   - {fileID: 397862308}
@@ -1275,7 +1275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!54 &278312268
@@ -1361,7 +1361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!54 &298966156
@@ -1558,7 +1558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!4 &325621897
@@ -2868,7 +2868,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!23 &676326071
@@ -4101,7 +4101,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalPosition.x
-      value: .868245482
+      value: 1.67050576
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalPosition.y
@@ -4109,7 +4109,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalPosition.z
-      value: -4.84636545
+      value: -5.06865597
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 73ae2d9786bec7d4bbe6624c6fb1c205, type: 2}
       propertyPath: m_LocalRotation.x
@@ -4964,7 +4964,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!65 &1069515873
@@ -5519,6 +5519,73 @@ MeshFilter:
   m_PrefabInternal: {fileID: 1032061143}
   m_GameObject: {fileID: 1216911722}
   m_Mesh: {fileID: 4300050, guid: 6a97bc37a25518b4fb3b6fbb64b2c9e8, type: 3}
+--- !u!1 &1217475201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1217475205}
+  - 33: {fileID: 1217475204}
+  - 23: {fileID: 1217475202}
+  - 64: {fileID: 1217475203}
+  m_Layer: 0
+  m_Name: GizmoPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1217475202
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1217475201}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!64 &1217475203
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1217475201}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &1217475204
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1217475201}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1217475205
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1217475201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -23.8888569}
+  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_Children: []
+  m_Father: {fileID: 0}
 --- !u!1 &1225054051
 GameObject:
   m_ObjectHideFlags: 0
@@ -6577,7 +6644,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!1 &1560656720
@@ -7996,7 +8063,7 @@ GameObject:
   - 64: {fileID: 1915455194}
   - 23: {fileID: 1915455193}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8455,7 +8522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .100000001
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!54 &1998461782
@@ -8682,7 +8749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cb8e68d2289c364cb89c7491e1746a6, type: 3}
   m_Name: 
   DesiredPositionForUnity: {x: 0, y: 0, z: 0}
-  desiredPositionChanged: 0
+  selectableNeedsToMove: 0
   distanceThreshold: .200000003
   DistanceFromDesiredPositionDebug: {x: 0, y: 0, z: 0}
 --- !u!54 &2054003465
@@ -8692,7 +8759,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2054003461}
   serializedVersion: 2
-  m_Mass: 3.69000006
+  m_Mass: 1
   m_Drag: 0
   m_AngularDrag: .0500000007
   m_UseGravity: 0

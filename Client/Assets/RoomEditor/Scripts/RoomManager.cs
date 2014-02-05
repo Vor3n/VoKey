@@ -17,6 +17,13 @@ public class RoomManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+		UnityEngine.Object[] objects = FindObjectsOfType(typeof(Rigidbody));
+        foreach (UnityEngine.Object obj in objects)
+        {
+			Rigidbody temp = (Rigidbody) obj;
+			temp.useGravity = false;
+			temp.isKinematic = true;
+		}
 		RoomID=GameObject.Find("GameController").GetComponent<GameControllerScript>().RoomToOpen;
 		url = GameObject.Find("GameController").GetComponent<GameControllerScript>().ServerURL;
 		abm = GameObject.Find("GameController").GetComponent<AssetBundleManager>();

@@ -18,7 +18,7 @@ public class StopThisThing : MonoBehaviour {
 		Variables.Selected.GetComponent<SelectMovable>().StopPlease();*/
 		 var x = Variables.Selected;
 		x.GetComponent<SelectMovable>().DesiredPosition = new Vector3(-5, x.transform.position.y, x.transform.position.z);
-		x.GetComponent<SelectMovable>().desiredPositionChanged = true;
+		x.GetComponent<SelectMovable>().selectableNeedsToMove = true;
 		
 	}
 }
