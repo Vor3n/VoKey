@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Translucent_Glass_Blue_
-  m_Shader: {fileID: 30, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: Room wallpaper
+  m_Shader: {fileID: 7, guid: 0000000000000000e000000000000000, type: 0}
   m_ShaderKeywords: []
   m_SavedProperties:
     serializedVersion: 2
@@ -16,12 +16,12 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
+          m_Texture: {fileID: 2800000, guid: f96ac6a3e5b58e046a1c59830b0586da, type: 3}
+          m_Scale: {x: .400000006, y: .899999976}
           m_Offset: {x: 0, y: 0}
     m_Floats: {}
     m_Colors:
       data:
         first:
           name: _Color
-        second: {r: .392156869, g: .58431375, b: .929411769, a: .121568628}
+        second: {r: 1, g: 1, b: 1, a: 1}
