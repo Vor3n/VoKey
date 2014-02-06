@@ -1,7 +1,7 @@
 /******************************************
   * uWebKit 
-  * (c) 2012 8 bit buffalo
-  * josh@uwebkit.com
+  * (c) 2013 THUNDERBEAST GAMES, LLC
+  * sales@uwebkit.com
 *******************************************/
 
 using UnityEngine;
@@ -188,7 +188,15 @@ public class UWKActivation : MonoBehaviour
 			
 			GUILayout.BeginVertical ();
 			
-			GUILayout.Space (32);
+			Color previousColor = GUI.color;
+			
+			GUI.color = Color.cyan;
+			
+			GUILayout.Label ("IMPORTANT: Please note that if you are behind a proxy, edit uWebKit/UWKConfig.cs to set proxy settings");
+			
+			GUI.color = previousColor;
+			
+			GUILayout.Space (8);			
 			
 			GUILayout.BeginHorizontal ();
 			
@@ -234,7 +242,7 @@ public class UWKActivation : MonoBehaviour
 				
 			} else {
 				GUILayout.Space (64);
-			}
+			}			
 			
 			GUILayout.BeginHorizontal ();
 			
@@ -275,7 +283,7 @@ public class UWKActivation : MonoBehaviour
 			
 			if (GUILayout.Button ("Get Trial Key", GUILayout.MaxWidth (92), GUILayout.Height (64))) {
 				
-				Application.OpenURL ("http://www.uwebkit.com/uwebkit/trial");
+				Application.OpenURL ("http://uwebkit.com/download");
 				
 			}
 			

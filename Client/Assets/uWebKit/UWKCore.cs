@@ -1,7 +1,7 @@
 /******************************************
   * uWebKit 
-  * (c) 2012 8 bit buffalo
-  * josh@uwebkit.com
+  * (c) 2013 THUNDERBEAST GAMES, LLC
+  * sales@uwebkit.com
 *******************************************/
 
 using UnityEngine;
