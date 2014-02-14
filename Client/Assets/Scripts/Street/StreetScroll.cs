@@ -61,7 +61,7 @@ public class StreetScroll : MonoBehaviour
         switch (Direction)
         {
             case ScrollDirection.Left:
-                if(cam.transform.position.z < TerrainSize.z - 1650)//275)
+                if(cam.transform.position.z < TerrainSize.z - 2650)//1650)
                 {
                     cam.transform.position += new Vector3(0, 0, 5);
                 }
