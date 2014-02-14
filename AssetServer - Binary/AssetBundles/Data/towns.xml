@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfTown xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Town Id="29594b9e-0bd0-4347-b38d-888a3d38e2ba" Name="Lazytown" ClassroomName="TIV4A">
+    <Pupils>
+      <User Username="Felix" UserType="Student" Town="29594b9e-0bd0-4347-b38d-888a3d38e2ba" UserGuid="f55db0a1-f13e-44ed-8054-d0e9fcdcee67">
+        <FullName>Felix Mann</FullName>
+        <PasswordHash>KmzBFCpNSxAw9T2PUeBr1790NFUSsnKB</PasswordHash>
+        <House Name="Felix Mann's House" Id="09802e0b-4b08-41ca-9286-548add7b0add" OwnerGuid="f55db0a1-f13e-44ed-8054-d0e9fcdcee67">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="0c485bef-9d93-4b92-a799-cd4eacfa4d05">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="KimJongUn" UserType="Student" Town="29594b9e-0bd0-4347-b38d-888a3d38e2ba" UserGuid="fc40a3b0-105a-41c7-8afe-ee7362ae3e78">
+        <FullName>Kim Jong Un</FullName>
+        <PasswordHash>v2AsLL4nfXP+Cy7Cqel/QlAmKFESsnKB</PasswordHash>
+        <House Name="Kim Jong Un's House" Id="477750a4-2ddb-41c3-ac70-fd29113fe8dc" OwnerGuid="fc40a3b0-105a-41c7-8afe-ee7362ae3e78">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="0c485bef-9d93-4b92-a799-cd4eacfa4d04">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+    </Pupils>
+    <Streets>
+      <Street Id="883a1cae-7ea6-47ce-bdbc-0bed560d2d28" Type="Residential" Name="Nijenoord">
+        <Houses />
+      </Street>
+      <Street Id="e363cbea-c0ba-49dc-8bd4-abb9527157a4" Type="Residential" Name="Rubenslaan">
+        <Houses />
+      </Street>
+      <Street Id="d3a94e14-b5d6-425e-9a3c-31ca0603d383" Type="Educational" Name="Winkelstraat">
+        <Houses>
+          <House Name="Dierenwinkel" Description="Store to buy bakas" Id="e4897c17-84b8-4da4-8570-0e05b4c161ce" OwnerGuid="00000000-0000-0000-0000-000000000000">
+            <type>Educational</type>
+            <Rooms>
+              <Room Name="goudvis" Id="a966726a-eda0-4b40-b127-c3fc435fd98c">
+                <FindableObjects>
+                  <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                    <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                  </FindableObject>
+                  <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                    <Position x="0" y="6.499998" z="-9.407635" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                    <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                  </FindableObject>
+                  <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="-367214648">
+                    <Position x="5.4814806" y="6.5" z="-5" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="676009112">
+                    <Position x="0" y="6.5" z="3.473904" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                </FindableObjects>
+              </Room>
+              <Room Name="ezel" Id="a966726a-eda0-4b40-b127-c3fc435fd98b">
+                <FindableObjects>
+                  <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                    <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                  </FindableObject>
+                  <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                    <Position x="0" y="6.499998" z="-9.407635" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                    <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                  </FindableObject>
+                  <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="1687548656">
+                    <Position x="5.4814806" y="6.5" z="-5" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="30dd8bd8-b270-4924-9abc-367ae088ab97" LinkedObject="1687548656">
+                    <Position x="0" y="6.5" z="-5" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="1687548656">
+                    <Position x="0" y="6.5" z="3.473904" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                </FindableObjects>
+              </Room>
+            </Rooms>
+          </House>
+        </Houses>
+      </Street>
+    </Streets>
+  </Town>
+  <Town Id="2ccd35f0-45be-4592-8b0a-17b41e011fa0" Name="BossTown" ClassroomName="TIV4B">
+    <Pupils>
+      <User Username="LeovM" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="18dff622-5117-4d1d-99a6-7e667680be62">
+        <FullName>Leo van Moergestel</FullName>
+        <PasswordHash>vE1v21ks5mjvvK/+NjRSQEU/QbASsnKB</PasswordHash>
+        <House Name="Leo van Moergestel's House" Id="5cec5534-3f11-4bab-a5ca-d8375d44c7d6" OwnerGuid="18dff622-5117-4d1d-99a6-7e667680be62">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="4042cb82-f7e0-45b7-9f88-66ae2712839a">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="MartenWensink" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="ede91135-0aa9-4fe0-ac1e-7ca7e7e15110">
+        <FullName>Marten Wensink</FullName>
+        <PasswordHash>yO4hQGKbsseQc5qlQySwunzjm68SsnKB</PasswordHash>
+        <House Name="Marten Wensink's House" Id="22b9bfb1-669f-47c2-8863-cf3e53401de7" OwnerGuid="ede91135-0aa9-4fe0-ac1e-7ca7e7e15110">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="85ab82c1-c506-45b4-9018-504d4a8bbcf1">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="GeraldOvink" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="c7299d5d-b30b-4910-b87b-748dcacd51a7">
+        <FullName>GeraldOvink</FullName>
+        <PasswordHash>ACYB5Pbvbr6wHPNgZbqz50dqMAESsnKB</PasswordHash>
+        <House Name="GeraldOvink's House" Id="2aa974d0-ec34-4968-b1d7-5c6c0a46789a" OwnerGuid="c7299d5d-b30b-4910-b87b-748dcacd51a7">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="9d575377-8516-4efe-b7a4-81b35343d897">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="dylan" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="fe120f46-9d0f-4e6d-b58d-cdc382ca8c0b">
+        <FullName>Dylan Snel</FullName>
+        <PasswordHash>VOxplu/sfz5NVdv+e6AewbaZZ1sSsnKB</PasswordHash>
+        <House Name="Dylan Snel's House" Id="9353f34b-fbe8-413e-994f-e65985b37499" OwnerGuid="fe120f46-9d0f-4e6d-b58d-cdc382ca8c0b">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="806dfbd3-bd4c-4605-8624-723b9c4dddd0">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="duncan" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="6f578865-efd6-4862-8ed6-ad9e60bc3cb5">
+        <FullName>Duncan Jenkins</FullName>
+        <PasswordHash>NqulXmqX6iHjnSQ+MRSLUvw7yNQSsnKB</PasswordHash>
+        <House Name="Duncan Jenkins's House" Id="961c9014-285e-495e-b0d2-af1a3495a6ef" OwnerGuid="6f578865-efd6-4862-8ed6-ad9e60bc3cb5">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="180e9ce8-49de-4898-ab6c-405ef0b98f4d">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="Daniel" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="0413a233-f9a5-4b4d-a9a1-32d123e0ce94">
+        <FullName>Daniel</FullName>
+        <PasswordHash>2di+n4gP+f/IExowJlV22bAaCdMSsnKB</PasswordHash>
+        <House Name="Daniel's House" Id="09295346-735b-41c6-8d43-c398e85caae1" OwnerGuid="0413a233-f9a5-4b4d-a9a1-32d123e0ce94">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="00106c37-3aba-48fc-a61f-6caa4776b05f">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="LonelyIsland" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="f7642ee1-589f-4d41-a2c8-4ea9eeb9fd86">
+        <FullName>LonelyIsland</FullName>
+        <PasswordHash>bF1TtZU/N1X8G3IKIZkl87UxpmcSsnKB</PasswordHash>
+        <House Name="LonelyIsland's House" Id="0234df77-540a-473f-88a5-450d456b1e98" OwnerGuid="f7642ee1-589f-4d41-a2c8-4ea9eeb9fd86">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="82f1d1b6-b997-4db4-a9e6-5f44ecdf03c3">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="student" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="eed6ed7a-34d1-4a6e-8f0e-7f8ff8cdfba5">
+        <FullName>student</FullName>
+        <PasswordHash>5PhnjQiBHQd65LO0pUJF4xQjKcUSsnKB</PasswordHash>
+        <House Name="student's House" Id="bbb965cf-a1a4-414c-89a6-e548b1c1432d" OwnerGuid="eed6ed7a-34d1-4a6e-8f0e-7f8ff8cdfba5">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="49295c4a-3ef0-4331-9dbc-a1464973634c">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+        <Assignments>
+          <Assignments>
+            <Assignment>
+              <roomToPlayIn>a966726a-eda0-4b40-b127-c3fc435fd98b</roomToPlayIn>
+              <itemsToFind />
+              <name>Demo Assignment</name>
+              <summary>Find all the objects in the room.</summary>
+              <id>ff02dbc3-6cc2-4cca-9d05-5d387815d9c0</id>
+              <completed>false</completed>
+            </Assignment>
+          </Assignments>
+        </Assignments>
+      </User>
+      <User Username="alex" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="c63f2113-2c8e-470e-80bc-b8932f2ecbfb">
+        <FullName>Alexander Streng</FullName>
+        <PasswordHash>5PhnjQiBHQd65LO0pUJF4xQjKcUSsnKB</PasswordHash>
+        <House Name="Alexander Streng's House" Id="31157c63-28f7-44e5-bc62-6821048d4a86" OwnerGuid="c63f2113-2c8e-470e-80bc-b8932f2ecbfb">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="0e922925-3d18-431c-b5e7-2a512f60ddcc">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="rscheefh" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="6ef42db0-325f-4b91-b5de-3b5fc5c8bc26">
+        <FullName>Roy Scheefhals</FullName>
+        <PasswordHash>5PhnjQiBHQd65LO0pUJF4xQjKcUSsnKB</PasswordHash>
+        <House Name="Roy Scheefhals's House" Id="098c32b6-14cc-4b92-961a-9aedbdfa0549" OwnerGuid="6ef42db0-325f-4b91-b5de-3b5fc5c8bc26">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="5a1f1d95-f423-4fb7-a680-0be17677ef41">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+      <User Username="aniek" UserType="Student" Town="2ccd35f0-45be-4592-8b0a-17b41e011fa0" UserGuid="6a33a874-66a6-4fff-b91b-9389d2371aae">
+        <FullName>Aniek Zandleven</FullName>
+        <PasswordHash>5PhnjQiBHQd65LO0pUJF4xQjKcUSsnKB</PasswordHash>
+        <House Name="Aniek Zandleven's House" Id="b7b10c9e-9bc4-43f8-8db2-f3d28248d257" OwnerGuid="6a33a874-66a6-4fff-b91b-9389d2371aae">
+          <type>Educational</type>
+          <Rooms>
+            <Room Name="Kitchen" Id="9d287f8d-d08e-43f5-870e-af0ea1ce4b5d">
+              <FindableObjects />
+            </Room>
+          </Rooms>
+        </House>
+      </User>
+    </Pupils>
+    <Streets>
+      <Street Id="062408bd-cc87-4a69-8743-b8afd7a56408" Type="Residential" Name="Flevolaan">
+        <Houses />
+      </Street>
+      <Street Id="4db2ed87-edc6-413b-b01a-ba2509cd4adc" Type="Residential" Name="Baksteenlaan">
+        <Houses />
+      </Street>
+      <Street Id="d3a94e14-b5d6-425e-9a3c-31ca0603d383" Type="Educational" Name="Winkelstraat">
+        <Houses>
+          <House Name="Dierenwinkel" Description="Store to buy bakas" Id="e4897c17-84b8-4da4-8570-0e05b4c161ce" OwnerGuid="00000000-0000-0000-0000-000000000000">
+            <type>Educational</type>
+            <Rooms>
+              <Room Name="goudvis" Id="a966726a-eda0-4b40-b127-c3fc435fd98c">
+                <FindableObjects>
+                  <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                    <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                  </FindableObject>
+                  <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                    <Position x="0" y="6.499998" z="-9.407635" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                    <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                  </FindableObject>
+                  <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="-367214648">
+                    <Position x="5.4814806" y="6.5" z="-5" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="676009112">
+                    <Position x="0" y="6.5" z="3.473904" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                </FindableObjects>
+              </Room>
+              <Room Name="ezel" Id="a966726a-eda0-4b40-b127-c3fc435fd98b">
+                <FindableObjects>
+                  <FindableObject Id="8d44d1ef-0a8d-46c7-b7cd-2b7ee5120112" LinkedObject="1687548656">
+                    <Position x="1.27219784" y="3.81677556" z="-1.075999" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="-1.25453439E-10" />
+                  </FindableObject>
+                  <FindableObject Id="06b97fe4-ecfc-4d22-88dd-d741c2ff96e2" LinkedObject="-1877452984">
+                    <Position x="0" y="6.499998" z="-9.407635" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="a032d1f7-038e-4c99-8b1b-1b2f83ea6ad3" LinkedObject="-1071974464">
+                    <Position x="-5.20374155" y="2.6878624" z="-0.302837163" />
+                    <Scale x="1" y="1" z="1" />
+                    <Rotation w="0.7071067" x="-0.707106948" y="0" z="3.576369E-11" />
+                  </FindableObject>
+                  <FindableObject Id="5b87f0bf-da4c-4907-86a7-0e947d0fe1ac" LinkedObject="1687548656">
+                    <Position x="5.4814806" y="6.5" z="-5" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="30dd8bd8-b270-4924-9abc-367ae088ab97" LinkedObject="1687548656">
+                    <Position x="0" y="6.5" z="-5" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="1" x="0" y="0" z="0" />
+                  </FindableObject>
+                  <FindableObject Id="3f27516c-acb3-489d-9a87-8266cc83174e" LinkedObject="1687548656">
+                    <Position x="0" y="6.5" z="3.473904" />
+                    <Scale x="0.01" y="0.01" z="0.01" />
+                    <Rotation w="0.70710665" x="-0.707106948" y="0" z="0" />
+                  </FindableObject>
+                </FindableObjects>
+              </Room>
+            </Rooms>
+          </House>
+        </Houses>
+      </Street>
+    </Streets>
+  </Town>
+</ArrayOfTown>

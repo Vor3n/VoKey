@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfUser xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <User Username="teacher" UserType="Teacher" Town="00000000-0000-0000-0000-000000000000" UserGuid="42580894-d507-4d1a-b6db-4336d438d5f0">
+    <FullName>teacher</FullName>
+    <PasswordHash>ezQzhmlywmQik2drD1s1+++bC/8SsnKB</PasswordHash>
+  </User>
+  <User Username="pascal" UserType="Teacher" Town="00000000-0000-0000-0000-000000000000" UserGuid="4fb9a755-24a4-4c62-bf61-bf7e71310d8c">
+    <FullName>pascal</FullName>
+    <PasswordHash>TxTzyyZ88We4uRkAeZbcRDT5368SsnKB</PasswordHash>
+  </User>
+</ArrayOfUser>
